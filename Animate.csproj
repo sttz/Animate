@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{50948672-47D3-43F1-AA84-F38AE08EB9F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sttz.Tweener</RootNamespace>
+    <AssemblyName>Animate</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ReleaseVersion>3.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <NoWarn>1591,1570</NoWarn>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="Custom" name="Build Docs" command="builddocs ${TargetFile}" workingdir="${ProjectDir}" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <GenerateDocumentation>true</GenerateDocumentation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Source\Core\Tween.cs" />
+    <Compile Include="Source\Core\TweenDefaultPlugin.cs" />
+    <Compile Include="Source\Core\TweenEngine.cs" />
+    <Compile Include="Source\Core\TweenGroup.cs" />
+    <Compile Include="Source\Core\TweenOptions.cs" />
+    <Compile Include="Source\Core\TweenPlugin.cs" />
+    <Compile Include="Source\Core\TweenPool.cs" />
+    <Compile Include="Source\Core\TweenReflection.cs" />
+    <Compile Include="Source\Plugins\TweenMaterial.cs" />
+    <Compile Include="Source\Plugins\TweenRigidbody.cs" />
+    <Compile Include="Source\Plugins\TweenSlerp.cs" />
+    <Compile Include="Source\Plugins\TweenStruct.cs" />
+    <Compile Include="Source\Animate.cs" />
+    <Compile Include="Source\Core\TweenArithmetic.cs" />
+    <Compile Include="Source\ITween.cs" />
+    <Compile Include="Source\ITweenGroup.cs" />
+    <Compile Include="Source\ITweenOptions.cs" />
+    <Compile Include="Source\Easing.cs" />
+    <Compile Include="Source\Enumerations.cs" />
+    <Compile Include="Source\TweenEventArgs.cs" />
+    <Compile Include="Source\Core\EasingImpl.cs" />
+  </ItemGroup>
+</Project>

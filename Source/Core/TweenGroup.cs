@@ -417,13 +417,8 @@ namespace Sttz.Tweener.Core {
 
 			if (tweens != null && tweens.Count > 0) {
 				// Update tweens
-				for (int i = 0; i < tweens.Count; i++) {
-					// Regroup tweens into proper update
-					if ((tweens[i].Options.TweenTiming & timing) == 0) {
-						Regroup(tweens[i]);
-						tweens.RemoveAt(i); i--;
-						continue;
-					}
+				var count = tweens.Count;
+				for (int i = 0; i < count; i++) {
 					// Update tween
 					if (!tweens[i].Internal.Update()) {
 						// Return to pool
@@ -433,7 +428,7 @@ namespace Sttz.Tweener.Core {
 							Animate.Pool.Return(tweens[i]);
 						}
 						// Remove from list
-						tweens.RemoveAt(i); i--;
+						tweens.RemoveAt(i); i--; count--;
 					}
 				}
 			}

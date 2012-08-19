@@ -87,6 +87,18 @@ namespace Sttz.Tweener.Core {
 		protected TweenPluginInfo _hookCalculateInfo;
 		protected ITweenPlugin<TValue> _hookCalculate;
 
+		// Cached (1 / _duration) for performance
+		protected float _oneOverDuration;
+		// Cached typed reference to check if Unity objects are destroyed
+		protected bool _targetIsUnityObject;
+		protected UnityEngine.Object _targetUnityObject;
+		protected bool _targetIsUnityRef;
+		protected UnityEngine.TrackedReference _targetUnityReference;
+		// Cached flag if real time should be used
+		protected bool _realTime;
+		// Cached flag if udpate event needs to be triggered
+		protected bool _triggerUpdate;
+
 		///////////////////
 		// Constructor
 
@@ -136,36 +148,7 @@ namespace Sttz.Tweener.Core {
 			return tween;
 		}
 
-		/// <summary>
-		/// Use the specified tweenMethod, target, duration, property, startValue, endValue, diffValue, plugins and parentOptions.
-		/// </summary>
-		/// <param name='tweenMethod'>
-		/// Tween method.
-		/// </param>
-		/// <param name='target'>
-		/// Target.
-		/// </param>
-		/// <param name='duration'>
-		/// Duration.
-		/// </param>
-		/// <param name='property'>
-		/// Property.
-		/// </param>
-		/// <param name='startValue'>
-		/// Start value.
-		/// </param>
-		/// <param name='endValue'>
-		/// End value.
-		/// </param>
-		/// <param name='diffValue'>
-		/// Diff value.
-		/// </param>
-		/// <param name='plugins'>
-		/// Plugins.
-		/// </param>
-		/// <param name='parentOptions'>
-		/// Parent options.
-		/// </param>
+		// Initialize an instance returned from the pool
 		public void Use(
 			TweenMethod tweenMethod,
 			object target, 
@@ -240,7 +223,11 @@ namespace Sttz.Tweener.Core {
 		public bool Validate(bool forceRender = false)
 		{
 			// Load default plugin
-			_hookGetInfo = _hookSetInfo = _hookCalculateInfo = Options.DefaultPlugin;
+			var defaultInfo = Options.DefaultPlugin;
+			if (defaultInfo.manualActivation != null) {
+				defaultInfo = defaultInfo.manualActivation(this, defaultInfo);
+			}
+			_hookGetInfo = _hookSetInfo = _hookCalculateInfo = defaultInfo;
 
 			// Register automatic plugins
 			var autoPlugins = GetAutomaticPlugins();
@@ -913,9 +900,15 @@ namespace Sttz.Tweener.Core {
 
 			// Cache most frequently used options
 			_startTime = StartTime;
-			_duration = Options.Duration;
+			_oneOverDuration = 1f / Options.Duration;
 			_easing = Options.Easing;
-			_tweenTiming = Options.TweenTiming;
+			_realTime = ((_tweenTiming & TweenTiming.RealTime) > 0);
+			_triggerUpdate = HasUpdateListeners();
+
+			_targetUnityObject = (Target as UnityEngine.Object);
+			_targetIsUnityObject = (_targetUnityObject != null);
+			_targetUnityReference = (Target as UnityEngine.TrackedReference);
+			_targetIsUnityRef = (_targetUnityReference != null);
 
 			DoOverwrite();
 			TriggerStart(this);
@@ -968,10 +961,8 @@ namespace Sttz.Tweener.Core {
 			// Check if unity object was destroyed
 			// In this case we get == null only if the target is typed
 			// to UnityEngine.Object, otherwise it will never be null.
-			if ((Target is UnityEngine.Object 
-					&& (Target as UnityEngine.Object) == null)
-			    || (Target is UnityEngine.TrackedReference
-			    	&& (Target as UnityEngine.TrackedReference) == null)) {
+			if ((_targetIsUnityObject && _targetUnityObject == null)
+					|| (_targetIsUnityRef && _targetUnityReference == null)) {
 				Fail(TweenLogLevel.Debug,
 					"Tween of {0} on {1} stopped because unity object was destroyed.",
 					_property, _target);
@@ -979,12 +970,7 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Current time
-			float time;
-			if ((_tweenTiming & TweenTiming.RealTime) == 0) {
-				time = Time.time;
-			} else {
-				time = Time.realtimeSinceStartup;
-			}
+			float time = (_realTime ? Time.realtimeSinceStartup : Time.time);
 
 			// Handle non-tweening state
 			if (_state != TweenState.Tweening) {
@@ -1019,7 +1005,7 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Update tween
-			var position = Mathf.Clamp01((time - _startTime) / _duration);
+			var position = Mathf.Clamp01((time - _startTime) * _oneOverDuration);
 			if (_easing != null) {
 				position = _easing(position);
 			}
@@ -1027,7 +1013,9 @@ namespace Sttz.Tweener.Core {
 			// Apply value
 			Value = ValueAtPosition(position);
 
-			TriggerUpdate(this);
+			if (_triggerUpdate) {
+				TriggerUpdate(this);
+			}
 
 			// Complete tween
 			if (position >= 1) {

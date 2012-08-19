@@ -404,6 +404,18 @@ namespace Sttz.Tweener.Core {
 			}
 		}
 
+		// Check if there are currently update listeners registered
+		protected bool HasUpdateListeners()
+		{
+			return (
+				UpdateEventImpl != null 
+				|| (
+					_parent != null
+					&& (_parent as TweenOptions).HasUpdateListeners()
+				)
+			);
+		}
+
 		// Called once the tween completed (or was stopped)
 		private event EventHandler<TweenEventArgs> CompleteEventImpl;
 		event EventHandler<TweenEventArgs> ITweenOptions.CompleteEvent {

@@ -23,11 +23,6 @@
     <ConsolePause>false</ConsolePause>
     <GenerateDocumentation>true</GenerateDocumentation>
     <NoWarn>1591,1570</NoWarn>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="Custom" name="Build Docs" command="builddocs ${TargetFile}" workingdir="${ProjectDir}" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>

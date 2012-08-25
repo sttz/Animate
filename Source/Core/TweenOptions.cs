@@ -355,8 +355,14 @@ namespace Sttz.Tweener.Core {
 		protected void TriggerInitialize(ITween tween, TweenEventArgs args = null)
 		{
 			if (InitializeEventImpl != null) {
-				args = new TweenEventArgs(tween, TweenEvent.Initialize);
-				InitializeEventImpl(this, args);
+				try {
+					args = new TweenEventArgs(tween, TweenEvent.Initialize);
+					InitializeEventImpl(this, args);
+				} catch (Exception e) {
+					Log(TweenLogLevel.Error, 
+						"Exception in Initialize event handler: {0}", e
+					);
+				}
 			}
 
 			if (_parent != null) {
@@ -375,8 +381,14 @@ namespace Sttz.Tweener.Core {
 		protected void TriggerStart(ITween tween, TweenEventArgs args = null)
 		{
 			if (StartEventImpl != null) {
-				args = new TweenEventArgs(tween, TweenEvent.Start);
-				StartEventImpl(this, args);
+				try {
+					args = new TweenEventArgs(tween, TweenEvent.Start);
+					StartEventImpl(this, args);
+				} catch (Exception e) {
+					Log(TweenLogLevel.Error, 
+						"Exception in Start event handler: {0}", e
+					);
+				}
 			}
 
 			if (_parent != null) {
@@ -395,8 +407,14 @@ namespace Sttz.Tweener.Core {
 		protected void TriggerUpdate(ITween tween, TweenEventArgs args = null)
 		{
 			if (UpdateEventImpl != null) {
-				args = new TweenEventArgs(tween, TweenEvent.Update);
-				UpdateEventImpl(this, args);
+				try {
+					args = new TweenEventArgs(tween, TweenEvent.Update);
+					UpdateEventImpl(this, args);
+				} catch (Exception e) {
+					Log(TweenLogLevel.Error, 
+						"Exception in Update event handler: {0}", e
+					);
+				}
 			}
 
 			if (_parent != null) {
@@ -430,8 +448,14 @@ namespace Sttz.Tweener.Core {
 			TweenEventArgs args = null
 		) {
 			if (CompleteEventImpl != null) {
-				args = new TweenEventArgs(tween, TweenEvent.Complete, null, stoppedBy);
-				CompleteEventImpl(this, args);
+				try {
+					args = new TweenEventArgs(tween, TweenEvent.Complete, null, stoppedBy);
+					CompleteEventImpl(this, args);
+				} catch (Exception e) {
+					Log(TweenLogLevel.Error, 
+						"Exception in Complete event handler: {0}", e
+					);
+				}
 			}
 
 			if (_parent != null) {
@@ -450,8 +474,14 @@ namespace Sttz.Tweener.Core {
 		protected void TriggerError(ITween tween, string error, TweenEventArgs args = null)
 		{
 			if (ErrorEventImpl != null) {
-				args = new TweenEventArgs(tween, TweenEvent.Error, error);
-				ErrorEventImpl(this, args);
+				try {
+					args = new TweenEventArgs(tween, TweenEvent.Error, error);
+					ErrorEventImpl(this, args);
+				} catch (Exception e) {
+					Log(TweenLogLevel.Error, 
+						"Exception in Error event handler: {0}", e
+					);
+				}
 			}
 
 			if (_parent != null) {

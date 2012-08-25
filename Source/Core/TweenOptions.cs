@@ -627,7 +627,7 @@ namespace Sttz.Tweener.Core {
 		// Debug
 
 		// Set overwrite settings
-		public TContainer Log(TweenLogLevel level)
+		public TContainer LogLevel(TweenLogLevel level)
 		{
 			Options.LogLevel = level;
 			return this as TContainer;

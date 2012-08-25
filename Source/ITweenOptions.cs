@@ -229,6 +229,15 @@ namespace Sttz.Tweener {
 		/// </summary>
 		/// <see cref="M:ITween.WaitForEndOfTween"/>
 		WaitForSeconds WaitForTweenDuration();
+
+		///////////////////
+		// Debugging
+
+		/// <summary>
+		/// Log level of the current scope. Only messages with equal
+		/// or higher level will be logged to the console.
+		/// </param>
+		TContainer LogLevel(TweenLogLevel level);
 	}
 
 	/// <summary>

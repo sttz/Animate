@@ -699,7 +699,7 @@ namespace Sttz.Tweener.Core {
 		{
 			if (_state >= TweenState.Complete) return false;
 
-			float startTime, duration, otherStartTime, otherDuration;
+			float startTime, duration, endTime, otherStartTime, otherDuration, otherEndTime;
 
 			// Calculate in real time if one tween is running in real time
 			if (((Options.TweenTiming | other.Options.TweenTiming) & TweenTiming.RealTime) > 0) {
@@ -720,9 +720,12 @@ namespace Sttz.Tweener.Core {
 				return false;
 			}
 
+			endTime = startTime + duration;
+			otherEndTime = otherStartTime + duration;
+
 			return (
-				startTime >= otherStartTime 
-				&& startTime < otherStartTime + otherDuration
+				(startTime >= otherStartTime && startTime < otherEndTime)
+				|| (endTime >= otherStartTime && endTime < otherEndTime)
 			);
 		}
 

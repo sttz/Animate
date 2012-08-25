@@ -338,6 +338,16 @@ namespace Sttz.Tweener.Core {
 			int i;
 			ITween other;
 
+			if (_newTweens != null) {
+				for (i = 0; i < _newTweens.Count; i++) {
+					other = _newTweens[i];
+					if (tween.Target == other.Target 
+							&& tween.Property == other.Property) {
+						other.Internal.Overwrite(tween);
+					}
+				}
+			}
+
 			if (_updateTweens != null) {
 				for (i = 0; i < _updateTweens.Count; i++) {
 					other = _updateTweens[i];

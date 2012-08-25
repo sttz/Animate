@@ -572,7 +572,7 @@ namespace Sttz.Tweener.Core {
 			get {
 				var duration = Options.Duration;
 				// Conver duration to real time
-				if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
+				if ((Options.TweenTiming & TweenTiming.RealTime) == 0) {
 					if (Time.timeScale > 0) {
 						duration /= Time.timeScale;
 					} else {
@@ -707,6 +707,7 @@ namespace Sttz.Tweener.Core {
 				duration = DurationReal;
 				otherStartTime = other.StartTimeReal;
 				otherDuration = other.DurationReal;
+
 			} else {
 				startTime = StartTime;
 				duration = Options.Duration;

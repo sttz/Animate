@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('de/d61/interface_sttz_1_1_tweener_1_1_
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A container for a group of tweens. </p>
 <p>A group can provide defaults for all tween options as well as the tween target and allows to control just that group of tweens. </p>
-<p>All the events of the group will be cleared once it's being recycled, you normally don't have to unregister event handlers you regsiter. </p>
+<p>All the events of the group will be cleared once it's being recycled, you normally don't have to unregister event handlers you register. </p>
 </div><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Inheritance diagram for Sttz.Tweener.ITweenGroup:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -194,6 +194,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa532d40022a17f2072a31aef86865d5b inherit pub_methods_interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable a plugin's automatic activation. The plugin will try to autodetect when it's needed and activate automatically. Not all plugins might support automatic activation. Usually plugins provide a <code>Automatic</code> method if they do.  <a href="#aa532d40022a17f2072a31aef86865d5b"></a><br/></td></tr>
 <tr class="memitem:ab7cc76bde40dc73e429ec323cbb562ce inherit pub_methods_interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g"><td class="memItemLeft" align="right" valign="top">WaitForSeconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#ab7cc76bde40dc73e429ec323cbb562ce">WaitForTweenDuration</a> ()</td></tr>
 <tr class="memdesc:ab7cc76bde40dc73e429ec323cbb562ce inherit pub_methods_interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a <code>WaitForSeconds</code> instruction that can be used in Unity coroutines to wait for the duration of the tween (delay + duration).  <a href="#ab7cc76bde40dc73e429ec323cbb562ce"></a><br/></td></tr>
+<tr class="memitem:afe685cfec0c84ef7c597935ce45e640c inherit pub_methods_interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe685cfec0c84ef7c597935ce45e640c"></a>
+TContainer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#afe685cfec0c84ef7c597935ce45e640c">LogLevel</a> (<a class="el" href="../../dc/dfc/namespace_sttz_1_1_tweener.html#ac618b516f57df5477653c2091d95b5a0">TweenLogLevel</a> level)</td></tr>
+<tr class="memdesc:afe685cfec0c84ef7c597935ce45e640c inherit pub_methods_interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log level of the current scope. Only messages with equal or higher level will be logged to the console. <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -217,7 +220,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add a custom tween instance. </p>
-<p>In contrast to the fluid tween factories on <code><a class="el" href="../../de/d61/interface_sttz_1_1_tweener_1_1_i_tween_group.html" title="A container for a group of tweens. ">ITweenGroup</a></code> (e.g. To/From/FromTo/By) which do not allow to set tween-specific options, addint a tween created using the methods on <a class="el" href="../../d3/d65/class_sttz_1_1_tweener_1_1_tween.html" title="Create individually configurable tweens. ">Tween</a> allows to override the group's options for an individual tween. </p>
+<p>In contrast to the fluid tween factories on <code><a class="el" href="../../de/d61/interface_sttz_1_1_tweener_1_1_i_tween_group.html" title="A container for a group of tweens. ">ITweenGroup</a></code> (e.g. To/From/FromTo/By) which do not allow to set tween-specific options, adding a tween created using the methods on <a class="el" href="../../d3/d65/class_sttz_1_1_tweener_1_1_tween.html" title="Create individually configurable tweens. ">Tween</a> allows to override the group's options for an individual tween. </p>
 <div class="fragment"><div class="line"><a class="code" href="../../d5/ddf/class_animate.html" title="Animate tweening engine. ">Animate</a>.<a class="code" href="../../d5/ddf/class_animate.html#af9eb8b406466854fa1130023a7c300fb" title="Create a new tween group with a default target. ">On</a>(target)</div>
 <div class="line">    .Ease(Easing.QuadraticOut)</div>
 <div class="line">    <span class="comment">// The tween created on the group inherits its easing</span></div>
@@ -1131,7 +1134,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li>Source/ITweenGroup.cs</li>
+<li>/Users/adrian/Desktop/Animate/Source/ITweenGroup.cs</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -1139,7 +1142,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../df/d07/namespace_sttz.html">Sttz</a></li><li class="navelem"><a class="el" href="../../dc/dfc/namespace_sttz_1_1_tweener.html">Tweener</a></li><li class="navelem"><a class="el" href="../../de/d61/interface_sttz_1_1_tweener_1_1_i_tween_group.html">ITweenGroup</a></li>
-    <li class="footer">Generated on Sun Aug 12 2012 19:39:18 for Animate by
+    <li class="footer">Generated on Sat Aug 25 2012 17:14:20 for Animate by
     <a href="http://www.doxygen.org/index.html">
     Doxygen</a> 1.8.1.2 </li>
   </ul>

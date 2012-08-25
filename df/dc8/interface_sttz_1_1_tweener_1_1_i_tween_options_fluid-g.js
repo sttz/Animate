@@ -3,6 +3,7 @@ var interface_sttz_1_1_tweener_1_1_i_tween_options_fluid_g =
     [ "Automate", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#aa532d40022a17f2072a31aef86865d5b", null ],
     [ "Delay", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#aa628cd48140aeb003e3f26272a90f151", null ],
     [ "Ease", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#ad9709796c767275e4a6a3d0ffda9c729", null ],
+    [ "LogLevel", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#afe685cfec0c84ef7c597935ce45e640c", null ],
     [ "OnComplete", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#a16659d4e48a0d0d9371920306ff66dc5", null ],
     [ "OnError", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#aeacea0f9f2b3b33800b9f8ea1a2bac80", null ],
     [ "OnInitialize", "df/dc8/interface_sttz_1_1_tweener_1_1_i_tween_options_fluid-g.html#aec15635b08c85e1da5e4e994759a6cbe", null ],

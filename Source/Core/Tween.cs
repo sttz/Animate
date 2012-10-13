@@ -193,6 +193,11 @@ namespace Sttz.Tweener.Core {
 			_property = null;
 			_memberInfo = null;
 
+			_targetIsUnityObject = false;
+			_targetIsUnityRef = false;
+			_targetUnityObject = null;
+			_targetUnityReference = null;
+
 			_startValue = default(TValue);
 			_endValue = default(TValue);
 			_diffValue = default(TValue);

@@ -171,10 +171,10 @@ public class Animate : UnityTweenEngine
 	/// <param name='template'>
 	/// Optional template providing opotions for this group.
 	/// </param>
-	public static TweenGroup On(object target, TweenTemplate template = null)
+	public static TweenGroup On(object target, ITweenTemplate template = null)
 	{
 		var parentOptions = Options;
-		if (template != null) parentOptions = template;
+		if (template != null) parentOptions = template.Options;
 
 		TweenGroup tweenGroup = null;
 		if (Pool != null) {
@@ -200,10 +200,10 @@ public class Animate : UnityTweenEngine
 	/// Optional template providing opotions for this group.
 	/// </param>
 	/// <seealso cref="Animate.On"/>
-	public static TweenGroup Group(TweenTemplate template = null)
+	public static TweenGroup Group(ITweenTemplate template = null)
 	{
 		var parentOptions = Options;
-		if (template != null) parentOptions = template;
+		if (template != null) parentOptions = template.Options;
 
 		TweenGroup tweenGroup = null;
 		if (Pool != null) {

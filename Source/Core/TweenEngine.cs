@@ -66,12 +66,9 @@ namespace Sttz.Tweener.Core {
 		protected static ITweenEngine Instance {
 			get {
 				if (System.Object.ReferenceEquals(_instance, null)) {
-					_instance = FindObjectOfType(typeof(Animate)) as Animate;
-					if (_instance == null) {
-						var go = new GameObject("Animate");
-						DontDestroyOnLoad(go);
-						_instance = go.AddComponent<Animate>();
-					}
+					var go = new GameObject("Animate");
+					DontDestroyOnLoad(go);
+					_instance = go.AddComponent<Animate>();
 				}
 				return _instance;
 			}

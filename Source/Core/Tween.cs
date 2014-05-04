@@ -927,14 +927,26 @@ namespace Sttz.Tweener.Core {
 		protected void Complete(TweenCompletedBy completedBy, bool fromOverwrite = false)
 		{
 			if (_state >= TweenState.Complete) return;
+
 			_state = TweenState.Complete;
 			_completedBy = completedBy;
 
 			// Set to start / end value
-			if (completedBy == TweenCompletedBy.Cancel) {
-				Value = ValueAtPosition(0f);
-			} else if (completedBy == TweenCompletedBy.Finish) {
-				Value = ValueAtPosition(1f);
+			if (completedBy == TweenCompletedBy.Cancel || completedBy == TweenCompletedBy.Finish) {
+				if (!_validated && !Validate())
+					return;
+
+				TValue finalValue;
+				if (completedBy == TweenCompletedBy.Cancel) {
+					finalValue = ValueAtPosition(0f);
+				} else {
+					finalValue = ValueAtPosition(1f);
+				}
+
+				if (_state == TweenState.Error)
+					return;
+
+				Value = finalValue;
 			}
 
 			// Add overwrite to cause

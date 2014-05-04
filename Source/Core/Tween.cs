@@ -1027,12 +1027,13 @@ namespace Sttz.Tweener.Core {
 
 			// Update tween
 			var position = Mathf.Clamp01((time - _startTime) * _oneOverDuration);
+			var easedPosition = position;
 			if (_easing != null) {
-				position = _easing(position);
+				easedPosition = _easing(position);
 			}
 
 			// Apply value
-			Value = ValueAtPosition(position);
+			Value = ValueAtPosition(easedPosition);
 
 			if (_triggerUpdate) {
 				TriggerUpdate(this);

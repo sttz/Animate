@@ -1047,6 +1047,11 @@ namespace Sttz.Tweener.Core {
 
 			return true;
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[Tween: {0} '{1}' on '{2}' from {3} by {4} in {5}]", _tweenMethod, _property, _target, _startValue, _diffValue, _state);
+		}
 	}
 
 }

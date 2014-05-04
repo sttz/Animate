@@ -257,7 +257,7 @@ namespace Sttz.Tweener {
 		/// <param name='period'>
 		/// Period of the elasticity (1 / period = number of swings).
 		/// </param>
-		public static EasingMethod ElasticInCustom(float amplitude = 0, float period = 0)
+		public static EasingMethod ElasticInCustom(float amplitude = ElasticDefaultAmplitude, float period = ElasticDefaultPeriod)
 		{
 			return delegate(float position) {
 				return EasingImpl.ElasticInImpl(position, amplitude, period);
@@ -273,7 +273,7 @@ namespace Sttz.Tweener {
 		/// <param name='period'>
 		/// Period of the elasticity (1 / period = number of swings).
 		/// </param>
-		public static EasingMethod ElasticOutCustom(float amplitude = 0, float period = 0)
+		public static EasingMethod ElasticOutCustom(float amplitude = ElasticDefaultAmplitude, float period = ElasticDefaultPeriod)
 		{
 			return delegate(float position) {
 				return EasingImpl.ElasticOutImpl(position, amplitude, period);
@@ -289,7 +289,7 @@ namespace Sttz.Tweener {
 		/// <param name='period'>
 		/// Period of the elasticity (1 / period = number of swings).
 		/// </param>
-		public static EasingMethod ElasticInOutCustom(float amplitude = 0, float period = 0)
+		public static EasingMethod ElasticInOutCustom(float amplitude = ElasticDefaultAmplitude, float period = ElasticDefaultPeriod)
 		{
 			return delegate(float position) {
 				return EasingImpl.ElasticInOutImpl(position, amplitude, period);

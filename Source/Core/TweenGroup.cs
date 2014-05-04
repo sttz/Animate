@@ -237,19 +237,25 @@ namespace Sttz.Tweener.Core {
 		// Run an action for all tweens in the group
 		protected void AllTweens(Func<ITween, bool> action)
 		{
-			if (_updateTweens != null) {
+			if (_newTweens != null && _newTweens.Count > 0) {
+				foreach (var tween in _newTweens) {
+					if (!action(tween)) return;
+				}
+			}
+
+			if (_updateTweens != null && _updateTweens.Count > 0) {
 				foreach (var tween in _updateTweens) {
 					if (!action(tween)) return;
 				}
 			}
 
-			if (_fixedUpdateTweens != null) {
+			if (_fixedUpdateTweens != null && _fixedUpdateTweens.Count > 0) {
 				foreach (var tween in _fixedUpdateTweens) {
 					if (!action(tween)) return;
 				}
 			}
 
-			if (_lateUpdateTweens != null) {
+			if (_lateUpdateTweens != null && _lateUpdateTweens.Count > 0) {
 				foreach (var tween in _lateUpdateTweens) {
 					if (!action(tween)) return;
 				}

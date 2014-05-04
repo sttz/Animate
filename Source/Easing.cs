@@ -186,7 +186,7 @@ namespace Sttz.Tweener {
 		/// <summary>
 		/// Elastic easing, out direction.
 		/// </summary>
-		public static EasingMethod ElasticOut = EasingImpl.ElasticInOutImpl;
+		public static EasingMethod ElasticOut = EasingImpl.ElasticOutImpl;
 		/// <summary>
 		/// Elastic easing, in-out direction.
 		/// </summary>

@@ -83,7 +83,8 @@ namespace Sttz.Tweener.Plugins {
 		// Returns if the plugin should activate automatically
 		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
 		{
-			if (tween.ValueType == typeof(Vector3)) {
+			if (tween.ValueType == typeof(Vector3)
+					&& tween.Property.EndsWith("EulerAngles", StringComparison.OrdinalIgnoreCase)) {
 				info.pluginType = typeof(TweenSlerpImplVector3);
 			} else if (tween.ValueType == typeof(Quaternion)) {
 				info.pluginType =  typeof(TweenSlerpImplQuaternion);

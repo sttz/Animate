@@ -75,7 +75,7 @@ namespace Sttz.Tweener.Core {
 			if (Animate.Pool != null
 					&& Options.Recycle != TweenRecycle.None
 					&& (Options.Recycle & TweenRecycle.Groups) > 0) {
-				Animate.Pool.Return (this);
+				Animate.Pool.Return(this);
 			}
 		}
 

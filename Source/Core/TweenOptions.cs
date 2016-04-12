@@ -364,7 +364,7 @@ namespace Sttz.Tweener.Core {
 		// Return the target to the pool
 		protected virtual void ReturnToPool()
 		{
-			throw new NotImplementedException ();
+			throw new NotImplementedException();
 		}
 
 		///////////////////

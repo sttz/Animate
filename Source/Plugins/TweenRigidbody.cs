@@ -92,9 +92,13 @@ namespace Sttz.Tweener.Plugins {
 		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
 		{
 			// Check if target is Transform and has a kinematic rigidbody
-			if (!(tween.Target is Transform)
-					|| (tween.Target as Transform).rigidbody == null
-					|| !(tween.Target as Transform).rigidbody.isKinematic) {
+			var targetTf = tween.Target as Transform;
+			if (targetTf == null) {
+				return TweenPluginInfo.None;
+			}
+
+			var targetRb = targetTf.GetComponent<Rigidbody>();
+			if (targetRb == null || !targetRb.isKinematic) {
 				return TweenPluginInfo.None;
 			}
 
@@ -108,7 +112,7 @@ namespace Sttz.Tweener.Plugins {
 				info.pluginType = null;
 			}
 
-			info.setValueUserData = (tween.Target as Transform).rigidbody;
+			info.setValueUserData = targetRb;
 			return info;
 		}
 
@@ -122,11 +126,17 @@ namespace Sttz.Tweener.Plugins {
 			public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
 			{
 				// Check if target is Transform and has a rigidbody
-				if (!(tween.Target is Transform)
-						|| (tween.Target as Transform).rigidbody == null
-						|| !(tween.Target as Transform).rigidbody.isKinematic) {
+				var targetTf = tween.Target as Transform;
+				if (targetTf == null) {
 					return string.Format(
-						"Target {0} must be a Transform and have a kinematic Rigidbody attached.",
+						"Target {0} must be a Transform with a kinematic Rigidbody attached.",
+						tween.Target);
+				}
+
+				var targetRb = targetTf.GetComponent<Rigidbody>();
+				if (targetRb == null || !targetRb.isKinematic) {
+					return string.Format(
+						"Target transform {0} must have a kinematic Rigidbody attached.",
 						tween.Target);
 				}
 
@@ -140,7 +150,7 @@ namespace Sttz.Tweener.Plugins {
 				}
 
 				// Set rigidbody as user data
-				userData = (tween.Target as Transform).rigidbody;
+				userData = targetRb;
 
 				// All ok!
 				return null;

@@ -70,6 +70,15 @@ namespace Sttz.Tweener.Core {
 			if (_lateUpdateTweens != null) _lateUpdateTweens.Clear();
 		}
 
+		protected override void ReturnToPool()
+		{
+			if (Animate.Pool != null
+					&& Options.Recycle != TweenRecycle.None
+					&& (Options.Recycle & TweenRecycle.Groups) > 0) {
+				Animate.Pool.Return (this);
+			}
+		}
+
 		// Accessor to intenral methods
 		public ITweenGroupInternal Internal {
 			get {
@@ -83,6 +92,9 @@ namespace Sttz.Tweener.Core {
 		// Add a custom tween
 		public ITweenGroup Add(ITween tween)
 		{
+			// Retain the tween until it's done
+			tween.Retain();
+
 			// Add ourself to the scope chain
 			tween.Options.Internal.ParentOptions = this;
 			// Pass engine to tween
@@ -443,7 +455,8 @@ namespace Sttz.Tweener.Core {
 								&& (tweens[i].Options.Recycle & TweenRecycle.Tweens) > 0) {
 							Animate.Pool.Return(tweens[i]);
 						}
-						// Remove from list
+						// Release & remove from list
+						tweens[i].Release();
 						tweens.RemoveAt(i); i--; count--;
 					}
 				}

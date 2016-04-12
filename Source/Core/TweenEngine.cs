@@ -100,6 +100,7 @@ namespace Sttz.Tweener.Core {
 		// Register a new tween group
 		public void RegisterGroup(TweenGroup tweenGroup)
 		{
+			tweenGroup.Retain();
 			_groups.Add(tweenGroup);
 		}
 
@@ -207,11 +208,7 @@ namespace Sttz.Tweener.Core {
 			for (int i = 0; i < _groups.Count; i++) {
 				if (!_groups[i].Update(timing)) {
 					// Return group to the pool
-					if (Pool != null 
-							&& _groups[i].Options.Recycle != TweenRecycle.None
-							&& (_groups[i].Options.Recycle & TweenRecycle.Groups) > 0) {
-						Pool.Return(_groups[i]);
-					}
+					_groups[i].Release();
 					_groups.RemoveAt(i); i--;
 				}
 			}

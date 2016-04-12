@@ -221,6 +221,16 @@ namespace Sttz.Tweener.Core {
 			_state = TweenState.Unused;
 		}
 
+		protected override void ReturnToPool()
+		{
+			// Return to pool
+			if (Animate.Pool != null
+					&& Options.Recycle != TweenRecycle.None
+					&& (Options.Recycle & TweenRecycle.Tweens) > 0) {
+				Animate.Pool.Return(this);
+			}
+		}
+
 		///////////////////
 		// Initialization
 
@@ -780,6 +790,8 @@ namespace Sttz.Tweener.Core {
 		// Coroutine implementation for WaitForEndOfTween
 		protected IEnumerator WaitFOrEndOfTWeenCoroutine()
 		{
+			Retain();
+
 			while (_state <= TweenState.Complete) {
 				if ((_tweenTiming & TweenTiming.LateUpdate) > 0) {
 					yield return new WaitForEndOfFrame();
@@ -789,6 +801,8 @@ namespace Sttz.Tweener.Core {
 					yield return null;
 				}
 			}
+
+			Release();
 		}
 
 		///////////////////

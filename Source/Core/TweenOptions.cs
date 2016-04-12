@@ -47,6 +47,8 @@ namespace Sttz.Tweener.Core {
 		protected ITweenOptions _parent;
 		// Recylce after use
 		protected TweenRecycle _recycle;
+		// Tween won't be recycled when retain count > 0
+		protected uint _retainCount;
 
 		// Duration of the tween
 		protected float _duration = float.NaN;
@@ -90,6 +92,7 @@ namespace Sttz.Tweener.Core {
 		{
 			_parent = null;
 			_recycle = TweenRecycle.Undefined;
+			_retainCount = 0;
 			_duration = float.NaN;
 			_easing = null;
 			_tweenTiming = TweenTiming.Undefined;
@@ -341,6 +344,29 @@ namespace Sttz.Tweener.Core {
 			}
 		}
 
+		// Retain count
+		uint ITweenOptions.RetainCount {
+			get {
+				return _retainCount;
+			}
+			set {
+				if (_retainCount == value)
+					return;
+
+				_retainCount = value;
+
+				if (_retainCount == 0) {
+					ReturnToPool();
+				}
+			}
+		}
+
+		// Return the target to the pool
+		protected virtual void ReturnToPool()
+		{
+			throw new NotImplementedException ();
+		}
+
 		///////////////////
 		// Events
 
@@ -572,6 +598,20 @@ namespace Sttz.Tweener.Core {
 		public TContainer Recycle(TweenRecycle recycle)
 		{
 			Options.Recycle = recycle;
+			return this as TContainer;
+		}
+
+		// Set overwrite settings
+		public TContainer Retain()
+		{
+			Options.RetainCount += 1;
+			return this as TContainer;
+		}
+
+		// Set overwrite settings
+		public TContainer Release()
+		{
+			Options.RetainCount -= 1;
 			return this as TContainer;
 		}
 

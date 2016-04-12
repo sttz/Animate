@@ -31,6 +31,10 @@ namespace Sttz.Tweener {
 		/// Recycling of tweens and groups.
 		/// </summary>
 		TweenRecycle Recycle { get; set; }
+		/// <summary>
+		/// Retain count, target won't be recycled when RetainCount > 0.
+		/// </summary>
+		uint RetainCount { get; set; }
 
 		/// <summary>
 		/// Duration of the tween in seconds.
@@ -171,6 +175,15 @@ namespace Sttz.Tweener {
 		/// Enable or disable recycling of tweens or groups.
 		/// </summary>
 		TContainer Recycle(TweenRecycle recycle);
+		/// <summary>
+		/// Retain the target, make sure to call <see cref="Release"/> to
+		/// allow the target to be recycled.
+		/// </summary>
+		TContainer Retain();
+		/// <summary>
+		/// Decrease the retain count by one.
+		/// </summary>
+		TContainer Release();
 
 		///////////////////
 		// Events

@@ -543,16 +543,16 @@ namespace Sttz.Tweener {
 		/// </summary>
 		float StartTime { get; }
 		/// <summary>
-		/// Time time the tween was started, in real time (unaffected by
+		/// Time time the tween was started, in unscaled time (unaffected by
 		/// <c>Time.timeScale</c>).
 		/// </summary>
-		float StartTimeReal { get; }
+		float StartTimeUnscaled { get; }
 		/// <summary>
-		/// Time duration of the tween, in real time (unaffected by
+		/// Time duration of the tween, in unscaled time (unaffected by
 		/// <c>Time.timeScale</c>).
 		/// </summary>
 		/// <seealso cref="ITweenOptions.Duration"/>
-		float DurationReal { get; }
+		float DurationUnscaled { get; }
 
 		///////////////////
 		// Validate

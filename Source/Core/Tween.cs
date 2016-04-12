@@ -65,7 +65,9 @@ namespace Sttz.Tweener.Core {
 		protected TweenCompletedBy _completedBy;
 		// Time the tween was created (Time.time)
 		protected float _creationTime;
-		// Time the tween was created (Time.realtimeSinceStartup)
+		// Time the tween was created (Time.unscaledTime)
+		protected float _creationTimeUnscaled;
+		// Time the tween was created (Time.realTimeSinceStartup)
 		protected float _creationTimeReal;
 		// Cached start time
 		protected float _startTime;
@@ -94,8 +96,8 @@ namespace Sttz.Tweener.Core {
 		protected UnityEngine.Object _targetUnityObject;
 		protected bool _targetIsUnityRef;
 		protected UnityEngine.TrackedReference _targetUnityReference;
-		// Cached flag if real time should be used
-		protected bool _realTime;
+		// Cached teen timing value
+		protected TweenTiming _timing;
 		// Cached flag if udpate event needs to be triggered
 		protected bool _triggerUpdate;
 
@@ -179,6 +181,7 @@ namespace Sttz.Tweener.Core {
 
 			// Set creation time
 			_creationTime = Time.time;
+			_creationTimeUnscaled = Time.unscaledTime;
 			_creationTimeReal = Time.realtimeSinceStartup;
 		}
 
@@ -205,6 +208,7 @@ namespace Sttz.Tweener.Core {
 			_error = null;
 			_completedBy = TweenCompletedBy.Undefined;
 			_creationTime = 0;
+			_creationTimeUnscaled = 0;
 			_creationTimeReal = 0;
 			_startTime = 0;
 			_validated = false;
@@ -542,7 +546,9 @@ namespace Sttz.Tweener.Core {
 		// Target object of the tween
 		public float CreationTime {
 			get {
-				if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
+				if ((Options.TweenTiming & TweenTiming.UnscaledTime) > 0) {
+					return _creationTimeUnscaled;
+				} else if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
 					return _creationTimeReal;
 				} else {
 					return _creationTime;
@@ -562,15 +568,15 @@ namespace Sttz.Tweener.Core {
 			}
 		}
 
-		// Time the tween will start or has started in real time (unaffected by Time.timeScale)
-		public float StartTimeReal {
+		// Time the tween will start or has started in unscaled time (unaffected by Time.timeScale)
+		public float StartTimeUnscaled {
 			get {
-				// Creation time in real time
-				var startTime = _creationTimeReal;
-				// Start delay (convert to real time if necessary)
+				// Creation time in unscaled time
+				var startTime = _creationTimeUnscaled;
+				// Start delay (convert to unscaled time if necessary)
 				var startDelay = Options.StartDelay;
 				if (!float.IsNaN(startDelay)) {
-					if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
+					if ((Options.TweenTiming & (TweenTiming.UnscaledTime | TweenTiming.RealTime)) > 0) {
 						startTime += startDelay;
 					} else {
 						if (Time.timeScale > 0) {
@@ -582,12 +588,12 @@ namespace Sttz.Tweener.Core {
 			}
 		}
 
-		// Duration of the tween in real time (unaffected by Time.timeScale)
-		public float DurationReal {
+		// Duration of the tween in unscaled time (unaffected by Time.timeScale)
+		public float DurationUnscaled {
 			get {
 				var duration = Options.Duration;
-				// Conver duration to real time
-				if ((Options.TweenTiming & TweenTiming.RealTime) == 0) {
+				// Conver duration to unscaled time
+				if ((Options.TweenTiming & (TweenTiming.UnscaledTime | TweenTiming.RealTime)) == 0) {
 					if (Time.timeScale > 0) {
 						duration /= Time.timeScale;
 					} else {
@@ -601,7 +607,9 @@ namespace Sttz.Tweener.Core {
 		// Time based on the timing
 		public float TweenTime {
 			get {
-				if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
+				if ((Options.TweenTiming & TweenTiming.UnscaledTime) > 0) {
+					return Time.unscaledTime;
+				} else if ((Options.TweenTiming & TweenTiming.RealTime) > 0) {
 					return Time.realtimeSinceStartup;
 				} else {
 					return Time.time;
@@ -716,12 +724,12 @@ namespace Sttz.Tweener.Core {
 
 			float startTime, duration, endTime, otherStartTime, otherDuration, otherEndTime;
 
-			// Calculate in real time if one tween is running in real time
-			if (((Options.TweenTiming | other.Options.TweenTiming) & TweenTiming.RealTime) > 0) {
-				startTime = StartTimeReal;
-				duration = DurationReal;
-				otherStartTime = other.StartTimeReal;
-				otherDuration = other.DurationReal;
+			// Calculate in unscaled time if one tween is running in unscaled or real time
+			if (((Options.TweenTiming | other.Options.TweenTiming) & (TweenTiming.UnscaledTime | TweenTiming.RealTime)) > 0) {
+				startTime = StartTimeUnscaled;
+				duration = DurationUnscaled;
+				otherStartTime = other.StartTimeUnscaled;
+				otherDuration = other.DurationUnscaled;
 
 			} else {
 				startTime = StartTime;
@@ -792,10 +800,10 @@ namespace Sttz.Tweener.Core {
 		{
 			Retain();
 
-			while (_state <= TweenState.Complete) {
-				if ((_tweenTiming & TweenTiming.LateUpdate) > 0) {
+			while (_state < TweenState.Complete) {
+				if ((_timing & TweenTiming.LateUpdate) > 0) {
 					yield return new WaitForEndOfFrame();
-				} else if ((_tweenTiming & TweenTiming.FixedUpdate) > 0) {
+				} else if ((_timing & TweenTiming.FixedUpdate) > 0) {
 					yield return new WaitForFixedUpdate();
 				} else {
 					yield return null;
@@ -925,7 +933,7 @@ namespace Sttz.Tweener.Core {
 			_startTime = StartTime;
 			_oneOverDuration = 1f / Options.Duration;
 			_easing = Options.Easing;
-			_realTime = ((_tweenTiming & TweenTiming.RealTime) > 0);
+			_timing = Options.TweenTiming;
 			_triggerUpdate = HasUpdateListeners();
 
 			_targetUnityObject = (Target as UnityEngine.Object);
@@ -1005,7 +1013,7 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Current time
-			float time = (_realTime ? Time.realtimeSinceStartup : Time.time);
+			float time = TweenTime;
 
 			// Handle non-tweening state
 			if (_state != TweenState.Tweening) {

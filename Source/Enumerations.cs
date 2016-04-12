@@ -158,20 +158,30 @@ namespace Sttz.Tweener {
 		/// Use Unity's default time (i.e. <c>Time.time</c>). Tweens running with
 		/// the default time are affected by <c>Time.timeScale</c>.
 		/// </summary>
-		/// /// <remarks>
-		/// Only one of <see cref="DefaultTime"/> or <see cref="RealTime"/>
-		/// can be set at a time.
+		/// <remarks>
+		/// Only one of <see cref="DefaultTime"/>, <see cref="UnscaledTime"/> 
+		/// or <see cref="RealTime"/> can be set at a time.
 		/// </remarks>
 		DefaultTime = 16,
 		/// <summary>
-		/// Use Unity's real time (i.e. <c>Time.realtimeSinceStartup</c>. Tweens
-		/// running with real time are unaffected by <c>Time.timeScale</c>.
+		/// Use Unity's unscaled time (i.e. <c>Time.unscaledTime</c>. Tweens
+		/// running with unscaled time are unaffected by <c>Time.timeScale</c>.
 		/// </summary>
 		/// <remarks>
-		/// Only one of <see cref="DefaultTime"/> or <see cref="RealTime"/>
-		/// can be set at a time.
+		/// Only one of <see cref="DefaultTime"/>, <see cref="UnscaledTime"/> 
+		/// or <see cref="RealTime"/> can be set at a time.
 		/// </remarks>
-		RealTime = 32,
+		UnscaledTime = 32,
+		/// <summary>
+		/// Use Unity's real time (i.e. <c>Time.realTimeSinceStartup</c>. Tweens
+		/// running with real time are unaffected by <c>Time.timeScale</c> or 
+		/// Unity being paused in the background.
+		/// </summary>
+		/// <remarks>
+		/// Only one of <see cref="DefaultTime"/>, <see cref="UnscaledTime"/> 
+		/// or <see cref="RealTime"/> can be set at a time.
+		/// </remarks>
+		RealTime = 64,
 
 		/// <summary>
 		/// Default preset. Update tweens during the update loop and use 
@@ -184,11 +194,11 @@ namespace Sttz.Tweener {
 		/// </summary>
 		Physics = FixedUpdate | DefaultTime,
 		/// <summary>
-		/// Menu preset. Update tweens during the update loop and use real time.
+		/// Menu preset. Update tweens during the update loop and use unscaled time.
 		/// This allows tweening while the game is paused by seetting 
 		/// <c>Time.timeScale</c> to <c>0</c>.
 		/// </summary>
-		Menu = Update | RealTime
+		Menu = Update | UnscaledTime
 	}
 
 	/// <summary>

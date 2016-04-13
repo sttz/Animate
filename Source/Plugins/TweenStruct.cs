@@ -20,7 +20,7 @@ namespace Sttz.Tweener.Plugins {
 	/// <para>
 	/// E.g. Unity's Vector3 and Quaternion types are value types. Trying to
 	/// tween a property on Vector3 or Quaternion will produce an error in
-	/// Animate. If it proceeded, Animeate would only update it's copy but would
+	/// Animate. If it proceeded, Animate would only update its copy but would
 	/// never actually update the value on the target object.
 	/// </para>
 	/// <para>
@@ -32,7 +32,7 @@ namespace Sttz.Tweener.Plugins {
 	/// the tween. In this case, the TweenStruct plugin can be used.
 	/// </para>
 	/// <code>
-	/// // If possible, tween whole struct:
+	/// // If possible, tween the whole struct:
 	/// Animate.To(transform, 2f, "position", Vector3.zero);
 	/// 
 	/// // Explicit usage, only tween the x value:

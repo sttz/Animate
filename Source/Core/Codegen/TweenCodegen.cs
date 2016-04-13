@@ -1,9 +1,130 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Diagnostics;
 
-namespace Sttz.Tweener.Core {
+/* Runtime code generation helper methods / classes
+ * Since AOT targets don't support codegen, everything
+ * is collected here so it can be easily excluded.
+ */
+
+namespace Sttz.Tweener.Core.Codegen {
+
+	/// <summary>
+	/// Tween reflection.
+	/// </summary>
+	public static class TweenCodegen
+	{
+		// Binding flags used to look for properties
+		private static BindingFlags bindingFlags =
+			  BindingFlags.Public
+			| BindingFlags.NonPublic
+			| BindingFlags.Instance
+			| BindingFlags.Static;
+
+		// Delegate use to create IL set handler
+		public delegate void SetHandler<TTarget, TValue>(ref TTarget target, TValue value);
+
+		// Enable caching for generated setters
+		public static bool enableCaching = true;
+
+		// Cached set handlers
+		// Handlers are stored with a string concatenated from the two 
+		// argument types and the two actual actual types, separated by ;
+		// e.g. TTarget;TValue;declaringType;valueType
+		private static Dictionary<string, object> cachedHandlers
+			 = new Dictionary<string, object>();
+
+		// Method to generate set handler
+		public static SetHandler<TTarget, TValue> GenerateSetMethod<TTarget, TValue>(MemberInfo info)
+		{
+			// Get type info
+			PropertyInfo pInfo = null;
+			FieldInfo fInfo = null;
+			Type valueType = null;
+			Type declaringType = info.DeclaringType;
+
+			if (info is PropertyInfo) {
+				pInfo = info as PropertyInfo;
+				valueType = pInfo.PropertyType;
+			} else {
+				fInfo = info as FieldInfo;
+				valueType = fInfo.FieldType;
+			}
+
+			// Return cached setter if enabled and existing
+			string identifier = null;
+			if (enableCaching) {
+				identifier = string.Format("{0};{1};{2};{3}",
+					typeof(TValue).FullName, typeof(TTarget).FullName,
+					declaringType.FullName, info.Name);
+				if (cachedHandlers.ContainsKey(identifier)) {
+					return (SetHandler<TTarget, TValue>)cachedHandlers[identifier];
+				}
+			}
+
+			// Create setter type
+			var args = new Type[] { typeof(TTarget).MakeByRefType(), typeof(TValue) };
+			var setterType = typeof(SetHandler<,>).MakeGenericType(
+				new Type[] { typeof(TTarget), typeof(TValue) }
+			);
+
+			// Create setter
+			var dynamicSet = new DynamicMethod(
+				"SetHandler", typeof(void), args, typeof(TTarget), true
+			);
+			var setGenerator = dynamicSet.GetILGenerator();
+
+			// Generate method body
+			setGenerator.Emit(OpCodes.Ldarg_0);
+			setGenerator.Emit(OpCodes.Ldind_Ref);
+			if (!typeof(TTarget).IsValueType && declaringType.IsValueType) {
+				setGenerator.Emit(OpCodes.Unbox, declaringType);
+			}
+			setGenerator.Emit(OpCodes.Ldarg_1);
+			if (!typeof(TValue).IsValueType && valueType.IsValueType) {
+				setGenerator.Emit(OpCodes.Unbox_Any, valueType);
+			}
+			if (pInfo != null) {
+				setGenerator.Emit(OpCodes.Callvirt, pInfo.GetSetMethod(true));
+			} else {
+				setGenerator.Emit(OpCodes.Stfld, fInfo);
+			}
+			setGenerator.Emit(OpCodes.Ret);
+
+			// Return delegate
+			var setter = (SetHandler<TTarget, TValue>)dynamicSet.CreateDelegate(setterType);
+
+			// Cache setter if enabled
+			if (enableCaching) {
+				cachedHandlers[identifier] = setter;
+			}
+
+			return setter;
+		}
+
+		// Find a member on the target type
+		public static MemberInfo FindMember(Type type, string name)
+		{
+			MemberInfo info = type.GetProperty(name, bindingFlags);
+			if (info == null) {
+				info = type.GetField(name, bindingFlags);
+			}
+			return info;
+		}
+
+		// Type of property or field
+		public static Type MemberType(MemberInfo member)
+		{
+			if (member is PropertyInfo) {
+				return (member as PropertyInfo).PropertyType;
+			} else {
+				return (member as FieldInfo).FieldType;
+			}
+		}
+	}
 
 	/* Code taken from Stackoverflow:
 	 * http://stackoverflow.com/a/756979/202741
@@ -22,7 +143,8 @@ namespace Sttz.Tweener.Core {
 	/// <typeparam name="TRight">The type of the right operand.</typeparam>
 	/// <typeparam name="TResult">The type of the result value.</typeparam>
 	/// <remarks>Inspired by Keith Farmer's code on CodeProject:<br/>http://www.codeproject.com/KB/cs/genericoperators.aspx</remarks>
-	public static class Operator<TLeft, TRight, TResult> {
+	public static class Operator<TLeft, TRight, TResult>
+	{
 		private static BinaryOperator<TLeft, TRight, TResult> addition;
 		private static BinaryOperator<TLeft, TRight, TResult> bitwiseAnd;
 		private static BinaryOperator<TLeft, TRight, TResult> bitwiseOr;
@@ -164,7 +286,8 @@ namespace Sttz.Tweener.Core {
 			}
 		}
 
-		private static BinaryOperator<TLeft, TRight, TResult> CreateOperator(string operatorName, OpCode opCode) {
+		private static BinaryOperator<TLeft, TRight, TResult> CreateOperator(string operatorName, OpCode opCode)
+		{
 			if (operatorName == null) {
 				throw new ArgumentNullException("operatorName");
 			}
@@ -174,16 +297,16 @@ namespace Sttz.Tweener.Core {
 			Type leftType = typeof(TLeft);
 			Type rightType = typeof(TRight);
 			MethodInfo operatorMethod = LookupOperatorMethod(ref leftType, operatorName, ref isPrimitive, out isLeftNullable) ??
-						    LookupOperatorMethod(ref rightType, operatorName, ref isPrimitive, out isRightNullable);
+							LookupOperatorMethod(ref rightType, operatorName, ref isPrimitive, out isRightNullable);
 			DynamicMethod method = new DynamicMethod(string.Format("{0}:{1}:{2}:{3}", operatorName, typeof(TLeft).FullName, typeof(TRight).FullName, typeof(TResult).FullName), typeof(TResult),
-								 new Type[] {typeof(TLeft), typeof(TRight)});
+								 new Type[] { typeof(TLeft), typeof(TRight) });
 			Debug.WriteLine(method.Name, "Generating operator method");
 			ILGenerator generator = method.GetILGenerator();
 			if (isPrimitive) {
 				Debug.WriteLine("Primitives using opcode", "Emitting operator code");
 				generator.Emit(OpCodes.Ldarg_0);
 				if (isLeftNullable) {
-					generator.EmitCall(OpCodes.Call, typeof(TLeft).GetMethod("op_Explicit", BindingFlags.Public|BindingFlags.Static), null);
+					generator.EmitCall(OpCodes.Call, typeof(TLeft).GetMethod("op_Explicit", BindingFlags.Public | BindingFlags.Static), null);
 				}
 				IlTypeHelper.ILType stackType = IlTypeHelper.EmitWidening(generator, IlTypeHelper.GetILType(leftType), IlTypeHelper.GetILType(rightType));
 				generator.Emit(OpCodes.Ldarg_1);
@@ -197,7 +320,7 @@ namespace Sttz.Tweener.Core {
 				} else {
 					Type resultType = typeof(TResult);
 					if (IsNullable(ref resultType)) {
-						generator.Emit(OpCodes.Newobj, typeof(TResult).GetConstructor(new Type[] {resultType}));
+						generator.Emit(OpCodes.Newobj, typeof(TResult).GetConstructor(new Type[] { resultType }));
 					} else {
 						IlTypeHelper.EmitExplicit(generator, stackType, IlTypeHelper.GetILType(resultType));
 					}
@@ -212,8 +335,8 @@ namespace Sttz.Tweener.Core {
 				} else if (!typeof(TResult).IsAssignableFrom(operatorMethod.ReturnType)) {
 					Debug.WriteLine("Conversion to return type", "Emitting operator code");
 					generator.Emit(OpCodes.Ldtoken, typeof(TResult));
-					generator.EmitCall(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] {typeof(RuntimeTypeHandle)}), null);
-					generator.EmitCall(OpCodes.Call, typeof(Convert).GetMethod("ChangeType", new Type[] {typeof(object), typeof(Type)}), null);
+					generator.EmitCall(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }), null);
+					generator.EmitCall(OpCodes.Call, typeof(Convert).GetMethod("ChangeType", new Type[] { typeof(object), typeof(Type) }), null);
 				}
 			} else {
 				Debug.WriteLine("Throw NotSupportedException", "Emitting operator code");
@@ -223,7 +346,8 @@ namespace Sttz.Tweener.Core {
 			return (BinaryOperator<TLeft, TRight, TResult>)method.CreateDelegate(typeof(BinaryOperator<TLeft, TRight, TResult>));
 		}
 
-		private static bool IsNullable(ref Type type) {
+		private static bool IsNullable(ref Type type)
+		{
 			if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(Nullable<>))) {
 				type = type.GetGenericArguments()[0];
 				return true;
@@ -231,28 +355,29 @@ namespace Sttz.Tweener.Core {
 			return false;
 		}
 
-		private static MethodInfo LookupOperatorMethod(ref Type type, string operatorName, ref bool isPrimitive, out bool isNullable) {
+		private static MethodInfo LookupOperatorMethod(ref Type type, string operatorName, ref bool isPrimitive, out bool isNullable)
+		{
 			isNullable = IsNullable(ref type);
 			if (!type.IsPrimitive) {
 				isPrimitive = false;
-				foreach (MethodInfo methodInfo in type.GetMethods(BindingFlags.Static|BindingFlags.Public)) {
+				foreach (MethodInfo methodInfo in type.GetMethods(BindingFlags.Static | BindingFlags.Public)) {
 					if (methodInfo.Name == operatorName) {
 						bool isMatch = true;
 						foreach (ParameterInfo parameterInfo in methodInfo.GetParameters()) {
 							switch (parameterInfo.Position) {
-							case 0:
-								if (parameterInfo.ParameterType != typeof(TLeft)) {
+								case 0:
+									if (parameterInfo.ParameterType != typeof(TLeft)) {
+										isMatch = false;
+									}
+									break;
+								case 1:
+									if (parameterInfo.ParameterType != typeof(TRight)) {
+										isMatch = false;
+									}
+									break;
+								default:
 									isMatch = false;
-								}
-								break;
-							case 1:
-								if (parameterInfo.ParameterType != typeof(TRight)) {
-									isMatch = false;
-								}
-								break;
-							default:
-								isMatch = false;
-								break;
+									break;
 							}
 						}
 						if (isMatch) {
@@ -267,9 +392,11 @@ namespace Sttz.Tweener.Core {
 		}
 	}
 
-	internal static class IlTypeHelper {
+	internal static class IlTypeHelper
+	{
 		[Flags]
-		public enum ILType {
+		public enum ILType
+		{
 			None = 0,
 			Unsigned = 1,
 			B8 = 2,
@@ -278,18 +405,19 @@ namespace Sttz.Tweener.Core {
 			B64 = 16,
 			Real = 32,
 			I1 = B8, // 2
-			U1 = B8|Unsigned, // 3
+			U1 = B8 | Unsigned, // 3
 			I2 = B16, // 4
-			U2 = B16|Unsigned, // 5
+			U2 = B16 | Unsigned, // 5
 			I4 = B32, // 8
-			U4 = B32|Unsigned, // 9
+			U4 = B32 | Unsigned, // 9
 			I8 = B64, //16
-			U8 = B64|Unsigned, //17
-			R4 = B32|Real, //40
-			R8 = B64|Real //48
+			U8 = B64 | Unsigned, //17
+			R4 = B32 | Real, //40
+			R8 = B64 | Real //48
 		}
 
-		public static ILType GetILType(Type type) {
+		public static ILType GetILType(Type type)
+		{
 			if (type == null) {
 				throw new ArgumentNullException("type");
 			}
@@ -329,33 +457,35 @@ namespace Sttz.Tweener.Core {
 			return ILType.None;
 		}
 
-		public static Type GetPrimitiveType(ILType iLType) {
+		public static Type GetPrimitiveType(ILType iLType)
+		{
 			switch (iLType) {
-			case ILType.R8:
-				return typeof(double);
-			case ILType.R4:
-				return typeof(float);
-			case ILType.U8:
-				return typeof(ulong);
-			case ILType.I8:
-				return typeof(long);
-			case ILType.U4:
-				return typeof(uint);
-			case ILType.I4:
-				return typeof(int);
-			case ILType.U2:
-				return typeof(short);
-			case ILType.I2:
-				return typeof(ushort);
-			case ILType.U1:
-				return typeof(byte);
-			case ILType.I1:
-				return typeof(sbyte);
+				case ILType.R8:
+					return typeof(double);
+				case ILType.R4:
+					return typeof(float);
+				case ILType.U8:
+					return typeof(ulong);
+				case ILType.I8:
+					return typeof(long);
+				case ILType.U4:
+					return typeof(uint);
+				case ILType.I4:
+					return typeof(int);
+				case ILType.U2:
+					return typeof(short);
+				case ILType.I2:
+					return typeof(ushort);
+				case ILType.U1:
+					return typeof(byte);
+				case ILType.I1:
+					return typeof(sbyte);
 			}
 			throw new ArgumentOutOfRangeException("iLType");
 		}
 
-		public static ILType EmitWidening(ILGenerator generator, ILType onStackIL, ILType otherIL) {
+		public static ILType EmitWidening(ILGenerator generator, ILType onStackIL, ILType otherIL)
+		{
 			if (generator == null) {
 				throw new ArgumentNullException("generator");
 			}
@@ -367,67 +497,68 @@ namespace Sttz.Tweener.Core {
 			}
 			if ((onStackIL < otherIL) && (onStackIL != ILType.R4)) {
 				switch (otherIL) {
-				case ILType.R4:
-				case ILType.R8:
-					if ((onStackIL&ILType.Unsigned) == ILType.Unsigned) {
-						generator.Emit(OpCodes.Conv_R_Un);
-					} else if (onStackIL != ILType.R4) {
-						generator.Emit(OpCodes.Conv_R8);
-					} else {
-						return ILType.R4;
-					}
-					return ILType.R8;
-				case ILType.U8:
-				case ILType.I8:
-					if ((onStackIL&ILType.Unsigned) == ILType.Unsigned) {
-						generator.Emit(OpCodes.Conv_U8);
-						return ILType.U8;
-					}
-					if (onStackIL != ILType.I8) {
-						generator.Emit(OpCodes.Conv_I8);
-					}
-					return ILType.I8;
+					case ILType.R4:
+					case ILType.R8:
+						if ((onStackIL & ILType.Unsigned) == ILType.Unsigned) {
+							generator.Emit(OpCodes.Conv_R_Un);
+						} else if (onStackIL != ILType.R4) {
+							generator.Emit(OpCodes.Conv_R8);
+						} else {
+							return ILType.R4;
+						}
+						return ILType.R8;
+					case ILType.U8:
+					case ILType.I8:
+						if ((onStackIL & ILType.Unsigned) == ILType.Unsigned) {
+							generator.Emit(OpCodes.Conv_U8);
+							return ILType.U8;
+						}
+						if (onStackIL != ILType.I8) {
+							generator.Emit(OpCodes.Conv_I8);
+						}
+						return ILType.I8;
 				}
 			}
 			return onStackIL;
 		}
 
-		public static void EmitExplicit(ILGenerator generator, ILType onStackIL, ILType otherIL) {
+		public static void EmitExplicit(ILGenerator generator, ILType onStackIL, ILType otherIL)
+		{
 			if (otherIL != onStackIL) {
 				switch (otherIL) {
-				case ILType.I1:
-					generator.Emit(OpCodes.Conv_I1);
-					break;
-				case ILType.I2:
-					generator.Emit(OpCodes.Conv_I2);
-					break;
-				case ILType.I4:
-					generator.Emit(OpCodes.Conv_I4);
-					break;
-				case ILType.I8:
-					generator.Emit(OpCodes.Conv_I8);
-					break;
-				case ILType.U1:
-					generator.Emit(OpCodes.Conv_U1);
-					break;
-				case ILType.U2:
-					generator.Emit(OpCodes.Conv_U2);
-					break;
-				case ILType.U4:
-					generator.Emit(OpCodes.Conv_U4);
-					break;
-				case ILType.U8:
-					generator.Emit(OpCodes.Conv_U8);
-					break;
-				case ILType.R4:
-					generator.Emit(OpCodes.Conv_R4);
-					break;
-				case ILType.R8:
-					generator.Emit(OpCodes.Conv_R8);
-					break;
+					case ILType.I1:
+						generator.Emit(OpCodes.Conv_I1);
+						break;
+					case ILType.I2:
+						generator.Emit(OpCodes.Conv_I2);
+						break;
+					case ILType.I4:
+						generator.Emit(OpCodes.Conv_I4);
+						break;
+					case ILType.I8:
+						generator.Emit(OpCodes.Conv_I8);
+						break;
+					case ILType.U1:
+						generator.Emit(OpCodes.Conv_U1);
+						break;
+					case ILType.U2:
+						generator.Emit(OpCodes.Conv_U2);
+						break;
+					case ILType.U4:
+						generator.Emit(OpCodes.Conv_U4);
+						break;
+					case ILType.U8:
+						generator.Emit(OpCodes.Conv_U8);
+						break;
+					case ILType.R4:
+						generator.Emit(OpCodes.Conv_R4);
+						break;
+					case ILType.R8:
+						generator.Emit(OpCodes.Conv_R8);
+						break;
 				}
 			}
 		}
 	}
-
 }
+

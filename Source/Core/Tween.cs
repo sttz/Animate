@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Sttz.Tweener.Core.Codegen;
 
 namespace Sttz.Tweener.Core {
 
@@ -662,7 +663,7 @@ namespace Sttz.Tweener.Core {
 			get {
 				// Try to get member
 				if (_memberInfo == null) {
-					_memberInfo = TweenReflection.FindMember(_target.GetType(), _property);
+					_memberInfo = TweenCodegen.FindMember(_target.GetType(), _property);
 				}
 				return _memberInfo;
 			}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 using Sttz.Tweener;
 using Sttz.Tweener.Core;
+using Sttz.Tweener.Core.Codegen;
+
 namespace Sttz.Tweener {
 
 	// TODO: Group events
@@ -164,7 +166,7 @@ namespace Sttz.Tweener {
 			Options.TweenTiming = TweenTiming.Default;
 			Options.OverwriteSettings = TweenOverwrite.Default;
 
-			Options.DefaultPlugin = TweenDefaultPlugin.Use();
+			Options.DefaultPlugin = TweenCodegenPlugin.Use();
 			Options.Recycle = TweenRecycle.All;
 			Pool = new TweenPool();
 		}

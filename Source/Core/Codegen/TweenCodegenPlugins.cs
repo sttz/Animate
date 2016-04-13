@@ -3,18 +3,18 @@ using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 
-namespace Sttz.Tweener.Core {
+namespace Sttz.Tweener.Core.Codegen {
 
 	/// <summary>
 	/// Tween default plugin.
 	/// </summary>
-	public class TweenDefaultPlugin
+	public class TweenCodegenPlugin
 	{
 		// Return the plugin info structure
 		public static TweenPluginInfo Use()
 		{
 			return new TweenPluginInfo() {
-				pluginType = typeof(TweenDefaultPlugin<>),
+				pluginType = typeof(TweenCodegenPlugin<>),
 				hooks = 
 					  TweenPluginHook.GetValueWeak
 					| TweenPluginHook.SetValueWeak
@@ -60,7 +60,7 @@ namespace Sttz.Tweener.Core {
 					);
 				}
 				// Check types match
-				var memberType = TweenReflection.MemberType(tween.Internal.MemberInfo);
+				var memberType = TweenCodegen.MemberType(tween.Internal.MemberInfo);
 				if (memberType != tween.ValueType) {
 					return string.Format(
 						"Mismatching types: Property type is {0} but tween type is {1} "
@@ -85,7 +85,7 @@ namespace Sttz.Tweener.Core {
 			// Generate set handler
 			} if (hook == TweenPluginHook.SetValue) {
 				try {
-					userData = TweenReflection.GenerateSetMethod<object, TValue>(tween.Internal.MemberInfo);
+					userData = TweenCodegen.GenerateSetMethod<object, TValue>(tween.Internal.MemberInfo);
 				} catch (Exception e) {
 					return string.Format(
 						"Failed to generate setter method for tween of {0} on {1}: {2}.",
@@ -117,14 +117,14 @@ namespace Sttz.Tweener.Core {
 		// Set the value of a plugin property
 		public override void SetValue(object target, string property, TValue value, ref object userData)
 		{
-			(userData as TweenReflection.SetHandler<object, TValue>)(ref target, value);
+			(userData as TweenCodegen.SetHandler<object, TValue>)(ref target, value);
 		}
 	}
 
 	/// <summary>
 	/// Generic calculation implementation for default plugin.
 	/// </summary>
-	public class TweenDefaultPlugin<TValue> : TweenAccessorPlugin<TValue>
+	public class TweenCodegenPlugin<TValue> : TweenAccessorPlugin<TValue>
 	{
 		///////////////////
 		// General
@@ -173,7 +173,7 @@ namespace Sttz.Tweener.Core {
 		// Set the value of a plugin property
 		public override void SetValue(object target, string property, TValue value, ref object userData)
 		{
-			(userData as TweenReflection.SetHandler<object, TValue>)(ref target, value);
+			(userData as TweenCodegen.SetHandler<object, TValue>)(ref target, value);
 		}
 
 		///////////////////

@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 
 using Sttz.Tweener.Core;
+using Sttz.Tweener.Core.Codegen;
 
 namespace Sttz.Tweener.Plugins {
 
@@ -126,7 +127,7 @@ namespace Sttz.Tweener.Plugins {
 				nestedProperty = parts[1];
 
 				// Look for struct
-				member = TweenReflection.FindMember(tween.Target.GetType(), structProperty);
+				member = TweenCodegen.FindMember(tween.Target.GetType(), structProperty);
 			}
 
 			if (member == null) {
@@ -134,13 +135,13 @@ namespace Sttz.Tweener.Plugins {
 			}
 
 			// Check type
-			var memberType = TweenReflection.MemberType(member);
+			var memberType = TweenCodegen.MemberType(member);
 			if (!memberType.IsValueType) {
 				return TweenPluginInfo.None;
 			}
 
 			// Look for struct value
-			var nestedMember = TweenReflection.FindMember(memberType, nestedProperty);
+			var nestedMember = TweenCodegen.FindMember(memberType, nestedProperty);
 			if (nestedMember == null) {
 				return TweenPluginInfo.None;
 			}
@@ -171,9 +172,9 @@ namespace Sttz.Tweener.Plugins {
 			// Arguments
 			public TweenStructArguments arguments;
 			// Handler to set struct on target
-			public TweenReflection.SetHandler<object, object> setter;
+			public TweenCodegen.SetHandler<object, object> setter;
 			// Setter for value on struct
-			public TweenReflection.SetHandler<object, TValue> nestedSetter;
+			public TweenCodegen.SetHandler<object, TValue> nestedSetter;
 		}
 
 		// Plugin implementation
@@ -194,7 +195,7 @@ namespace Sttz.Tweener.Plugins {
 				}
 
 				// Check type
-				var memberType = TweenReflection.MemberType(data.arguments.nestedMemberInfo);
+				var memberType = TweenCodegen.MemberType(data.arguments.nestedMemberInfo);
 				if (memberType != tween.ValueType) {
 					return string.Format(
 						"Mismatching types: Property type is {0} but tween type is {1} "
@@ -206,8 +207,8 @@ namespace Sttz.Tweener.Plugins {
 				// Generate setters
 				if (hook == TweenPluginHook.SetValue) {
 					try {
-						data.setter = TweenReflection.GenerateSetMethod<object, object>(data.arguments.memberInfo);
-						data.nestedSetter = TweenReflection.GenerateSetMethod<object, TValue>(data.arguments.nestedMemberInfo);
+						data.setter = TweenCodegen.GenerateSetMethod<object, object>(data.arguments.memberInfo);
+						data.nestedSetter = TweenCodegen.GenerateSetMethod<object, TValue>(data.arguments.nestedMemberInfo);
 					} catch (Exception e) {
 						return string.Format(
 							"Failed to generate setter methods for tween of {0} on {1}: {2}.",

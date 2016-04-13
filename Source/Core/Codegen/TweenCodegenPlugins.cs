@@ -50,17 +50,19 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Initialize
 		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
 		{
+			var memberInfo = TweenCodegen.FindMember(tween.Target.GetType(), tween.Property);
+
 			// Get / Set need MemberInfo
 			if ((hook == TweenPluginHook.GetValue 
 					|| hook == TweenPluginHook.SetValue)) {
-				if (tween.Internal.MemberInfo == null) {
+				if (memberInfo == null) {
 					return string.Format(
 						"Property {0} on {1} could not be found.",
 						tween.Property, tween.Target
 					);
 				}
 				// Check types match
-				var memberType = TweenCodegen.MemberType(tween.Internal.MemberInfo);
+				var memberType = TweenCodegen.MemberType(memberInfo);
 				if (memberType != tween.ValueType) {
 					return string.Format(
 						"Mismatching types: Property type is {0} but tween type is {1} "
@@ -80,12 +82,12 @@ namespace Sttz.Tweener.Core.Codegen {
 
 			// Set member info to userData for get hook
 			if (hook == TweenPluginHook.GetValue) {
-				userData = tween.Internal.MemberInfo;
+				userData = memberInfo;
 
 			// Generate set handler
 			} if (hook == TweenPluginHook.SetValue) {
 				try {
-					userData = TweenCodegen.GenerateSetMethod<object, TValue>(tween.Internal.MemberInfo);
+					userData = TweenCodegen.GenerateSetMethod<object, TValue>(memberInfo);
 				} catch (Exception e) {
 					return string.Format(
 						"Failed to generate setter method for tween of {0} on {1}: {2}.",

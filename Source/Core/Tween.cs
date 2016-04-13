@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using Sttz.Tweener.Core.Codegen;
 
 namespace Sttz.Tweener.Core {
 
@@ -14,8 +11,6 @@ namespace Sttz.Tweener.Core {
 	{
 		// Tween engine used by the tween
 		ITweenEngine TweenEngine { get; set; }
-		// Member info of the target property (if one exists)
-		MemberInfo MemberInfo { get; }
 
 		// Method of tween (To, From, FromTo, By)
 		TweenMethod TweenMethod { get; set; }
@@ -48,8 +43,6 @@ namespace Sttz.Tweener.Core {
 		protected object _target;
 		// Property on the tween to animate
 		protected string _property;
-		// Member info of the target property (if one exists)
-		protected MemberInfo _memberInfo;
 
 		// First value (To, From, By)
 		protected TValue _startValue;
@@ -195,7 +188,6 @@ namespace Sttz.Tweener.Core {
 			_tweenMethod = TweenMethod.To;
 			_target = null;
 			_property = null;
-			_memberInfo = null;
 
 			_targetIsUnityObject = false;
 			_targetIsUnityRef = false;
@@ -655,17 +647,6 @@ namespace Sttz.Tweener.Core {
 			}
 			set {
 				_property = value;
-			}
-		}
-
-		// Target member info, if property exists
-		public MemberInfo MemberInfo {
-			get {
-				// Try to get member
-				if (_memberInfo == null) {
-					_memberInfo = TweenCodegen.FindMember(_target.GetType(), _property);
-				}
-				return _memberInfo;
 			}
 		}
 

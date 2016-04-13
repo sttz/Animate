@@ -113,7 +113,6 @@ namespace Sttz.Tweener.Plugins {
 			// Manual activation path
 			if (info.getValueUserData is string) {
 				structProperty = tween.Property;
-				member = tween.Internal.MemberInfo;
 				nestedProperty = (info.getValueUserData as string);
 			
 			// Automatic activation path
@@ -125,11 +124,10 @@ namespace Sttz.Tweener.Plugins {
 				}
 				structProperty = parts[0];
 				nestedProperty = parts[1];
-
-				// Look for struct
-				member = TweenCodegen.FindMember(tween.Target.GetType(), structProperty);
 			}
 
+			// Look for struct
+			member = TweenCodegen.FindMember(tween.Target.GetType(), structProperty);
 			if (member == null) {
 				return TweenPluginInfo.None;
 			}

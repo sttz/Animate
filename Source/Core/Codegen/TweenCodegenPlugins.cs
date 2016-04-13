@@ -6,43 +6,26 @@ using UnityEngine;
 namespace Sttz.Tweener.Core.Codegen {
 
 	/// <summary>
-	/// Tween default plugin.
+	/// Default accessor plugin using code generation.
 	/// </summary>
-	public class TweenCodegenPlugin
+	public static class TweenCodegenAccessorPlugin
 	{
 		// Return the plugin info structure
 		public static TweenPluginInfo Use()
 		{
-			return new TweenPluginInfo() {
-				pluginType = typeof(TweenCodegenPlugin<>),
-				hooks = 
+			return new TweenPluginInfo {
+				pluginType = typeof(TweenCodegenAccessorPlugin<>),
+				hooks =
 					  TweenPluginHook.GetValueWeak
 					| TweenPluginHook.SetValueWeak
-					| TweenPluginHook.CalculateValueWeak,
-				manualActivation = ManualActivation
 			};
-		}
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			// Swap in specialized plugin versions
-			if (tween.ValueType == typeof(float)) {
-				info.pluginType = typeof(TweenDefaultPluginFloat);
-			} else if (tween.ValueType == typeof(Vector3)) {
-				info.pluginType = typeof(TweenDefaultPluginVector3);
-			} else if (tween.ValueType == typeof(Color)) {
-				info.pluginType = typeof(TweenDefaultPluginColor);
-			}
-
-			return info;
 		}
 	}
 
 	/// <summary>
 	/// Base class for the default plugin, providing generic get/set implementations.
 	/// </summary>
-	public class TweenAccessorPlugin<TValue> : TweenPlugin<TValue>
+	public class TweenCodegenAccessorPlugin<TValue> : TweenPlugin<TValue>
 	{
 		///////////////////
 		// General
@@ -124,9 +107,40 @@ namespace Sttz.Tweener.Core.Codegen {
 	}
 
 	/// <summary>
+	/// Default arithmetic plugin using code generation.
+	/// </summary>
+	public static class TweenCodegenArithmeticPlugin
+	{
+		// Return the plugin info structure
+		public static TweenPluginInfo Use()
+		{
+			return new TweenPluginInfo {
+				pluginType = typeof(TweenCodegenArithmeticPlugin<>),
+				hooks = TweenPluginHook.CalculateValueWeak,
+				manualActivation = ManualActivation
+			};
+		}
+
+		// Callback for manual activation
+		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
+		{
+			// Swap in specialized plugin versions
+			if (tween.ValueType == typeof(float)) {
+				info.pluginType = typeof(TweenDefaultPluginFloat);
+			} else if (tween.ValueType == typeof(Vector3)) {
+				info.pluginType = typeof(TweenDefaultPluginVector3);
+			} else if (tween.ValueType == typeof(Color)) {
+				info.pluginType = typeof(TweenDefaultPluginColor);
+			}
+
+			return info;
+		}
+	}
+
+	/// <summary>
 	/// Generic calculation implementation for default plugin.
 	/// </summary>
-	public class TweenCodegenPlugin<TValue> : TweenAccessorPlugin<TValue>
+	public class TweenCodegenArithmeticPlugin<TValue> : TweenPlugin<TValue>
 	{
 		///////////////////
 		// General
@@ -134,9 +148,6 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Initialize
 		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
 		{
-			var error = base.Initialize(tween, hook, ref userData);
-			if (error != null) return error;
-
 			// Check if calculation is possible
 			if (hook == TweenPluginHook.CalculateValue) {
 				try {
@@ -154,28 +165,6 @@ namespace Sttz.Tweener.Core.Codegen {
 			}
 
 			return null;
-		}
-
-		///////////////////
-		// Get Value Hook
-
-		// Get the value of a plugin property
-		public override TValue GetValue(object target, string property, ref object userData)
-		{
-			if (userData is PropertyInfo) {
-				return (TValue)(userData as PropertyInfo).GetValue(target, null);
-			} else {
-				return (TValue)(userData as FieldInfo).GetValue(target);
-			}
-		}
-
-		///////////////////
-		// Set Value Hook
-
-		// Set the value of a plugin property
-		public override void SetValue(object target, string property, TValue value, ref object userData)
-		{
-			(userData as TweenCodegen.SetHandler<object, TValue>)(ref target, value);
 		}
 
 		///////////////////
@@ -204,7 +193,7 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// <summary>
 	/// Specialized implementation of default plugin for Vector3.
 	/// </summary>
-	public class TweenDefaultPluginFloat : TweenAccessorPlugin<float>
+	public class TweenDefaultPluginFloat : TweenPlugin<float>
 	{
 		///////////////////
 		// Calculate Value Hook
@@ -231,7 +220,7 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// <summary>
 	/// Specialized implementation of default plugin for Vector3.
 	/// </summary>
-	public class TweenDefaultPluginVector3 : TweenAccessorPlugin<Vector3>
+	public class TweenDefaultPluginVector3 : TweenPlugin<Vector3>
 	{
 		///////////////////
 		// Calculate Value Hook
@@ -258,7 +247,7 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// <summary>
 	/// Specialized implementation of default plugin for Vector3.
 	/// </summary>
-	public class TweenDefaultPluginColor : TweenAccessorPlugin<Color>
+	public class TweenDefaultPluginColor : TweenPlugin<Color>
 	{
 		///////////////////
 		// Calculate Value Hook

@@ -104,13 +104,11 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// General
 
-		// Indicates the plugin wants to get the property value
-		public TweenPluginHook Hooks { get; protected set; }
-
 		// Initialize the plugin for the given tween,
 		// returns null on success or an error message on failure.
-		public virtual string Initialize(ITween tween, TweenPluginHook hook, ref object userData) {
-			throw new NotImplementedException();
+		public virtual string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+		{
+			return null;
 		}
 
 		///////////////////

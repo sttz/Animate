@@ -90,10 +90,14 @@ namespace Sttz.Tweener {
 		event EventHandler<TweenEventArgs> ErrorEvent;
 
 		/// <summary>
-		/// Default plugin used if no other plugin is used or automatically
-		/// activated.
+		/// Default plugin used to get/set the target value if no other plugin
+		/// is used or automatically activated.
 		/// </summary>
-		TweenPluginInfo DefaultPlugin { get; set; }
+		TweenPluginInfo DefaultAccessorPlugin { get; set; }
+		/// <summary>
+		/// Gets or sets the default arithmetic plugin.
+		/// </summary>
+		TweenPluginInfo DefaultArithmeticPlugin { get; set; }
 
 		/// <summary>
 		/// Enable a plugin's automatic activation. The plugin will try

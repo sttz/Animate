@@ -62,8 +62,9 @@ namespace Sttz.Tweener.Core {
 		// Overwrite setting
 		protected TweenOverwrite _overwrite;
 
-		// The default plugin, handling basic operation
-		protected TweenPluginInfo _defaultPlugin;
+		// The default plugins, handling basic operation
+		protected TweenPluginInfo _defaultAccessorPlugin;
+		protected TweenPluginInfo _defaultArithmeticPlugin;
 
 		// Automatic plugins
 		protected Dictionary<TweenPluginInfo, bool> _autoPlugins;
@@ -98,7 +99,8 @@ namespace Sttz.Tweener.Core {
 			_tweenTiming = TweenTiming.Undefined;
 			_startDelay = float.NaN;
 			_overwrite = TweenOverwrite.Undefined;
-			_defaultPlugin = default(TweenPluginInfo);
+			_defaultAccessorPlugin = default(TweenPluginInfo);
+			_defaultArithmeticPlugin = default(TweenPluginInfo);
 			_autoPlugins = null;
 			_logLevel = TweenLogLevel.Undefined;
 
@@ -118,19 +120,35 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Plugins
 
-		// The default plugin, handling basic operation
-		TweenPluginInfo ITweenOptions.DefaultPlugin {
+		// The default accessor plugin, handling basic get/set operations
+		TweenPluginInfo ITweenOptions.DefaultAccessorPlugin {
 			get {
-				if (_defaultPlugin.pluginType != null) {
-					return _defaultPlugin;
+				if (_defaultAccessorPlugin.pluginType != null) {
+					return _defaultAccessorPlugin;
 				} else if (_parent != null) {
-					return _parent.DefaultPlugin;
+					return _parent.DefaultAccessorPlugin;
 				} else {
 					return TweenPluginInfo.None;
 				}
 			}
 			set {
-				_defaultPlugin = value;
+				_defaultAccessorPlugin = value;
+			}
+		}
+
+		// The default arithmetic plugin, handling basic math operations
+		TweenPluginInfo ITweenOptions.DefaultArithmeticPlugin {
+			get {
+				if (_defaultArithmeticPlugin.pluginType != null) {
+					return _defaultArithmeticPlugin;
+				} else if (_parent != null) {
+					return _parent.DefaultArithmeticPlugin;
+				} else {
+					return TweenPluginInfo.None;
+				}
+			}
+			set {
+				_defaultArithmeticPlugin = value;
 			}
 		}
 

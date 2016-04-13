@@ -235,11 +235,17 @@ namespace Sttz.Tweener.Core {
 		public bool Validate(bool forceRender = false)
 		{
 			// Load default plugin
-			var defaultInfo = Options.DefaultPlugin;
-			if (defaultInfo.manualActivation != null) {
-				defaultInfo = defaultInfo.manualActivation(this, defaultInfo);
+			var defaultAccessorInfo = Options.DefaultAccessorPlugin;
+			if (defaultAccessorInfo.manualActivation != null) {
+				defaultAccessorInfo = defaultAccessorInfo.manualActivation(this, defaultAccessorInfo);
 			}
-			_hookGetInfo = _hookSetInfo = _hookCalculateInfo = defaultInfo;
+			_hookGetInfo = _hookSetInfo = defaultAccessorInfo;
+
+			var defaultArithmeticInfo = Options.DefaultArithmeticPlugin;
+			if (defaultArithmeticInfo.manualActivation != null) {
+				defaultArithmeticInfo = defaultArithmeticInfo.manualActivation(this, defaultArithmeticInfo);
+			}
+			_hookCalculateInfo = defaultArithmeticInfo;
 
 			// Register automatic plugins
 			var autoPlugins = GetAutomaticPlugins();

@@ -166,7 +166,8 @@ namespace Sttz.Tweener {
 			Options.TweenTiming = TweenTiming.Default;
 			Options.OverwriteSettings = TweenOverwrite.Default;
 
-			Options.DefaultPlugin = TweenCodegenPlugin.Use();
+			Options.DefaultAccessorPlugin = TweenCodegenPlugin.Use();
+			Options.DefaultArithmeticPlugin = TweenCodegenPlugin.Use();
 			Options.Recycle = TweenRecycle.All;
 			Pool = new TweenPool();
 		}

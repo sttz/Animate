@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Sttz.Tweener.Core;
 using Sttz.Tweener.Core.Codegen;
+using Sttz.Tweener.Core.Reflection;
 
 namespace Sttz.Tweener.Plugins {
 
@@ -127,19 +128,19 @@ namespace Sttz.Tweener.Plugins {
 			}
 
 			// Look for struct
-			member = TweenCodegen.FindMember(tween.Target.GetType(), structProperty);
+			member = TweenReflection.FindMember(tween.Target.GetType(), structProperty);
 			if (member == null) {
 				return TweenPluginInfo.None;
 			}
 
 			// Check type
-			var memberType = TweenCodegen.MemberType(member);
+			var memberType = TweenReflection.MemberType(member);
 			if (!memberType.IsValueType) {
 				return TweenPluginInfo.None;
 			}
 
 			// Look for struct value
-			var nestedMember = TweenCodegen.FindMember(memberType, nestedProperty);
+			var nestedMember = TweenReflection.FindMember(memberType, nestedProperty);
 			if (nestedMember == null) {
 				return TweenPluginInfo.None;
 			}
@@ -193,7 +194,7 @@ namespace Sttz.Tweener.Plugins {
 				}
 
 				// Check type
-				var memberType = TweenCodegen.MemberType(data.arguments.nestedMemberInfo);
+				var memberType = TweenReflection.MemberType(data.arguments.nestedMemberInfo);
 				if (memberType != tween.ValueType) {
 					return string.Format(
 						"Mismatching types: Property type is {0} but tween type is {1} "

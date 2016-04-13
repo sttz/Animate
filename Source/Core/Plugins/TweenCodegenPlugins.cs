@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
+using Sttz.Tweener.Core.Reflection;
 
 namespace Sttz.Tweener.Core.Codegen {
 
@@ -33,34 +34,40 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Initialize
 		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
 		{
-			var memberInfo = TweenCodegen.FindMember(tween.Target.GetType(), tween.Property);
+			if (hook != TweenPluginHook.GetValue && hook != TweenPluginHook.SetValue) {
+				return string.Format(
+					"TweenCodegenAccessorPlugin only supports GetValue and SetValue hooks (got {0}).",
+					hook
+				);
+			}
+
+			var memberInfo = TweenReflection.FindMember(tween.Target.GetType(), tween.Property);
 
 			// Get / Set need MemberInfo
-			if ((hook == TweenPluginHook.GetValue 
-					|| hook == TweenPluginHook.SetValue)) {
-				if (memberInfo == null) {
-					return string.Format(
-						"Property {0} on {1} could not be found.",
-						tween.Property, tween.Target
-					);
-				}
-				// Check types match
-				var memberType = TweenCodegen.MemberType(memberInfo);
-				if (memberType != tween.ValueType) {
-					return string.Format(
-						"Mismatching types: Property type is {0} but tween type is {1} "
-						+ "for tween of {2} on {3}.",
-						memberType, tween.ValueType, tween.Property, tween.Target
-					);
-				}
-				// Check target isn't a value type
-				if (tween.Target.GetType().IsValueType) {
-					return string.Format(
-						"Cannot tween property {0} on value type {1}, " +
-						"maybe use TweenStruct plugin?",
-						tween.Property, tween.Target
-					);
-				}
+			if (memberInfo == null) {
+				return string.Format(
+					"Property {0} on {1} could not be found.",
+					tween.Property, tween.Target
+				);
+			}
+
+			// Check types match
+			var memberType = TweenReflection.MemberType(memberInfo);
+			if (memberType != tween.ValueType) {
+				return string.Format(
+					"Mismatching types: Property type is {0} but tween type is {1} "
+					+ "for tween of {2} on {3}.",
+					memberType, tween.ValueType, tween.Property, tween.Target
+				);
+			}
+
+			// Check target isn't a value type
+			if (tween.Target.GetType().IsValueType) {
+				return string.Format(
+					"Cannot tween property {0} on value type {1}, " +
+					"maybe use TweenStruct plugin?",
+					tween.Property, tween.Target
+				);
 			}
 
 			// Set member info to userData for get hook
@@ -68,7 +75,7 @@ namespace Sttz.Tweener.Core.Codegen {
 				userData = memberInfo;
 
 			// Generate set handler
-			} if (hook == TweenPluginHook.SetValue) {
+			} else if (hook == TweenPluginHook.SetValue) {
 				try {
 					userData = TweenCodegen.GenerateSetMethod<object, TValue>(memberInfo);
 				} catch (Exception e) {
@@ -77,7 +84,7 @@ namespace Sttz.Tweener.Core.Codegen {
 						tween.Property, tween.Target, e
 					);
 				}
-			
+
 			}
 
 			return null;
@@ -148,20 +155,25 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Initialize
 		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
 		{
+			if (hook != TweenPluginHook.CalculateValue) {
+				return string.Format(
+					"TweenCodegenArithmeticPlugin only supports the CalculateValue hook (got {0}).",
+					hook
+				);
+			}
+
 			// Check if calculation is possible
-			if (hook == TweenPluginHook.CalculateValue) {
-				try {
-					Operator<TValue, TValue, TValue>.Addition(default(TValue), default(TValue));
-					Operator<TValue, TValue, TValue>.Subtraction(default(TValue), default(TValue));
-					Operator<TValue, float, TValue>.Multiply(default(TValue), 0.5f);
-				} catch {
-					return string.Format(
-						"Property {0} on {1} cannot bet tweened, "
-						+ "type {2} does not support addition, "
-						+ "subtraction or multiplication.",
-						tween.Property, tween.Target, typeof(TValue)
-					);
-				}
+			try {
+				Operator<TValue, TValue, TValue>.Addition(default(TValue), default(TValue));
+				Operator<TValue, TValue, TValue>.Subtraction(default(TValue), default(TValue));
+				Operator<TValue, float, TValue>.Multiply(default(TValue), 0.5f);
+			} catch {
+				return string.Format(
+					"Property {0} on {1} cannot bet tweened, "
+					+ "type {2} does not support addition, "
+					+ "subtraction or multiplication.",
+					tween.Property, tween.Target, typeof(TValue)
+				);
 			}
 
 			return null;

@@ -17,13 +17,6 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// </summary>
 	public static class TweenCodegen
 	{
-		// Binding flags used to look for properties
-		private static BindingFlags bindingFlags =
-			  BindingFlags.Public
-			| BindingFlags.NonPublic
-			| BindingFlags.Instance
-			| BindingFlags.Static;
-
 		// Delegate use to create IL set handler
 		public delegate void SetHandler<TTarget, TValue>(ref TTarget target, TValue value);
 
@@ -103,26 +96,6 @@ namespace Sttz.Tweener.Core.Codegen {
 			}
 
 			return setter;
-		}
-
-		// Find a member on the target type
-		public static MemberInfo FindMember(Type type, string name)
-		{
-			MemberInfo info = type.GetProperty(name, bindingFlags);
-			if (info == null) {
-				info = type.GetField(name, bindingFlags);
-			}
-			return info;
-		}
-
-		// Type of property or field
-		public static Type MemberType(MemberInfo member)
-		{
-			if (member is PropertyInfo) {
-				return (member as PropertyInfo).PropertyType;
-			} else {
-				return (member as FieldInfo).FieldType;
-			}
 		}
 	}
 

@@ -7,3 +7,6 @@ TestResults
 
 # MonoDevelop user prefs
 *.userprefs
+
+# Unity meta files
+*.meta

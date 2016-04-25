@@ -378,6 +378,23 @@ namespace Sttz.Tweener {
 		ITweenGroup By<TValue>(object target, float duration, string property, TValue byValue, params TweenPluginInfo[] plugins);
 
 		///////////////////
+		// Group properties
+
+		/// <summary>
+		/// Default target object of the group.
+		/// </summary>
+		object DefaultTarget { get; }
+
+		/// <summary>
+		/// Tpye of the default target object of the group.
+		/// </summary>
+		/// <remarks>
+		/// This is the type of the generic parameter used when creating
+		/// the group, not the actual type of the default target object.
+		/// </remarks>
+		Type DefaultTargetType { get; }
+
+		///////////////////
 		// Validate
 
 		/// <summary>

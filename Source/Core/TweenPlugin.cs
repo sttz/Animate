@@ -3,45 +3,39 @@ using System.Text.RegularExpressions;
 
 namespace Sttz.Tweener.Core {
 
-	// Tween plugin hooks
 	[Flags]
-	public enum TweenPluginHook {
+	public enum TweenPluginType
+	{
 		None = 0,
-		// Get Value hook
-		GetValue = 2,
-		GetValueWeak = (GetValue | 4),
-		// Set Value hook
-		SetValue = 8,
-		SetValueWeak = (SetValue | 16),
-		// Calcualte value hook
-		CalculateValue = 32,
-		CalculateValueWeak = (CalculateValue | 64)
+		Getter = 1<<0,
+		Setter = 1<<1,
+		Arithmetic = 1<<2
 	}
 
 	/// <summary>
 	/// I tween plugin.
 	/// </summary>
-	public interface ITweenPlugin<TValue>
+	public interface ITweenPlugin
 	{
 		// Initialize the plugin for the given tween,
 		// returns null on success or an error message on failure.
-		string Initialize(ITween tween, TweenPluginHook hook, ref object userData);
+		string Initialize(ITween tween, TweenPluginType initForType, ref object userData);
+	}
 
-		///////////////////
-		// Get Hook
-
+	public interface ITweenGetterPlugin<TTarget, TValue> : ITweenPlugin
+	{
 		// Get the value of a plugin property
-		TValue GetValue(object target, string property, ref object userData);
+		TValue GetValue(TTarget target, string property, ref object userData);
+	}
 
-		///////////////////
-		// Set Hook
-
+	public interface ITweenSetterPlugin<TTarget, TValue> : ITweenPlugin
+	{
 		// Set the value of a plugin property
-		void SetValue(object target, string property, TValue value, ref object userData);
+		void SetValue(TTarget target, string property, TValue value, ref object userData);
+	}
 
-		///////////////////
-		// Calculate Hook
-
+	public interface ITweenArithmeticPlugin<TValue> : ITweenPlugin
+	{
 		// Return the difference between start and end
 		TValue DiffValue(TValue start, TValue end, ref object userData);
 		// Return the end value
@@ -87,67 +81,13 @@ namespace Sttz.Tweener.Core {
 		public static readonly TweenPluginInfo None;
 
 		public Type pluginType;
-		public TweenPluginHook hooks;
+		public TweenPluginType hooks;
+		public bool canBeOverwritten;
 		public TweenPluginDelegate manualActivation;
 		public TweenPluginDelegate autoActivation;
 
 		public object getValueUserData;
 		public object setValueUserData;
 		public object calculateValueUserData;
-	}
-
-	/// <summary>
-	/// Abstract base class for tween plugins.
-	/// </summary>
-	public abstract class TweenPlugin<TValue> : ITweenPlugin<TValue>
-	{
-		///////////////////
-		// General
-
-		// Initialize the plugin for the given tween,
-		// returns null on success or an error message on failure.
-		public virtual string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
-		{
-			return null;
-		}
-
-		///////////////////
-		// Get Hook
-
-		// Get the value of a plugin property
-		public virtual TValue GetValue(object target, string property, ref object userData)
-		{
-			throw new NotImplementedException();
-		}
-
-		///////////////////
-		// Set Hook
-
-		// Set the value of a plugin property
-		public virtual void SetValue(object target, string property, TValue value, ref object userData)
-		{
-			throw new NotImplementedException();
-		}
-
-		///////////////////
-		// Calcualte Hook
-
-		// Return the difference between start and end
-		public virtual TValue DiffValue(TValue start, TValue end, ref object userData)
-		{
-			throw new NotImplementedException();
-		}
-
-		// Return the end value
-		public virtual TValue EndValue(TValue start, TValue diff, ref object userData)
-		{
-			throw new NotImplementedException();
-		}
-
-		// Return the value at the current position
-		public virtual TValue ValueAtPosition(TValue start, TValue end, TValue diff, float position, ref object userData)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

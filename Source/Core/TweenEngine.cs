@@ -12,9 +12,9 @@ namespace Sttz.Tweener.Core {
 	public interface ITweenEngine
 	{
 		// Default group used for sinlge tweens
-		TweenGroup SinglesGroup { get; }
+		TweenGroup<object> SinglesGroup { get; }
 		// Register a new group with the engine
-		void RegisterGroup(TweenGroup tweenGroup);
+		void RegisterGroup(ITweenGroup tweenGroup);
 
 		// Check if any tween exists on the engine
 		bool Has(object target, string property = null);
@@ -78,18 +78,18 @@ namespace Sttz.Tweener.Core {
 		// Fields
 
 		// Tween groups
-		protected List<TweenGroup> _groups = new List<TweenGroup>();
+		protected List<ITweenGroup> _groups = new List<ITweenGroup>();
 		// Group used for single tweens, e.g. Animate.To()
-		protected TweenGroup _singlesGroup;
+		protected TweenGroup<object> _singlesGroup;
 
 		///////////////////
 		// Methods
 
 		// Add a tween to default group
-		public TweenGroup SinglesGroup {
+		public TweenGroup<object> SinglesGroup {
 			get {
 				if (_singlesGroup == null) {
-					_singlesGroup = new TweenGroup();
+					_singlesGroup = new TweenGroup<object>();
 					_singlesGroup.Use(null, Options, this);
 					_singlesGroup.Options.Recycle = TweenRecycle.Tweens;
 				}
@@ -98,7 +98,7 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Register a new tween group
-		public void RegisterGroup(TweenGroup tweenGroup)
+		public void RegisterGroup(ITweenGroup tweenGroup)
 		{
 			tweenGroup.Retain();
 			_groups.Add(tweenGroup);
@@ -176,7 +176,7 @@ namespace Sttz.Tweener.Core {
 		public void Overwrite(ITween tween)
 		{
 			foreach (var tweenGroup in _groups) {
-				tweenGroup.Overwrite(tween);
+				tweenGroup.Internal.Overwrite(tween);
 			}
 		}
 
@@ -206,7 +206,7 @@ namespace Sttz.Tweener.Core {
 		{
 			// Update groups and remove invalid ones
 			for (int i = 0; i < _groups.Count; i++) {
-				if (!_groups[i].Update(timing)) {
+				if (!_groups[i].Internal.Update(timing)) {
 					// Return group to the pool
 					_groups[i].Release();
 					_groups.RemoveAt(i); i--;

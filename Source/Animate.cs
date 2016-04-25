@@ -5,6 +5,8 @@ using UnityEngine;
 using Sttz.Tweener;
 using Sttz.Tweener.Core;
 using Sttz.Tweener.Core.Codegen;
+using Sttz.Tweener.Core.Reflection;
+using Sttz.Tweener.Core.Static;
 
 namespace Sttz.Tweener {
 
@@ -184,16 +186,17 @@ namespace Sttz.Tweener {
 		/// <param name='template'>
 		/// Optional template providing opotions for this group.
 		/// </param>
-		public static TweenGroup On(object target, ITweenTemplate template = null)
+		public static TweenGroup<TTarget> On<TTarget>(TTarget target, ITweenTemplate template = null)
+			where TTarget : class
 		{
 			var parentOptions = Options;
 			if (template != null) parentOptions = template.Options;
 
-			TweenGroup tweenGroup = null;
+			TweenGroup<TTarget> tweenGroup = null;
 			if (Pool != null) {
-				tweenGroup = Pool.GetGroup();
+				tweenGroup = Pool.GetGroup<TTarget>();
 			} else {
-				tweenGroup = new TweenGroup();
+				tweenGroup = new TweenGroup<TTarget>();
 			}
 			tweenGroup.Use(target, parentOptions, Instance);
 
@@ -213,16 +216,16 @@ namespace Sttz.Tweener {
 		/// Optional template providing opotions for this group.
 		/// </param>
 		/// <seealso cref="Animate.On"/>
-		public static TweenGroup Group(ITweenTemplate template = null)
+		public static TweenGroup<object> Group(ITweenTemplate template = null)
 		{
 			var parentOptions = Options;
 			if (template != null) parentOptions = template.Options;
 
-			TweenGroup tweenGroup = null;
+			TweenGroup<object> tweenGroup = null;
 			if (Pool != null) {
-				tweenGroup = Pool.GetGroup();
+				tweenGroup = Pool.GetGroup<object>();
 			} else {
-				tweenGroup = new TweenGroup();
+				tweenGroup = new TweenGroup<object>();
 			}
 			tweenGroup.Use(null, parentOptions, Instance);
 			tweenGroup.Options.Recycle = TweenRecycle.Tweens;
@@ -273,10 +276,12 @@ namespace Sttz.Tweener {
 		/// </typeparam>
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.To<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.To<TValue>"/>
-		public static Tween<TValue> To<TValue>(
-			object target, float duration, string property, TValue toValue, 
+		public static Tween<TTarget, TValue> To<TTarget, TValue>(
+			TTarget target, float duration, string property, TValue toValue, 
 			params TweenPluginInfo[] plugins
-		) {
+		)
+			where TTarget : class
+		{
 			var tween = Tween.To(target, duration, property, toValue, plugins);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
@@ -308,10 +313,12 @@ namespace Sttz.Tweener {
 		/// </typeparam>
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.From<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.From<TValue>"/>
-		public static Tween<TValue> From<TValue>(
-			object target, float duration, string property, TValue fromValue, 
+		public static Tween<TTarget, TValue> From<TTarget, TValue>(
+			TTarget target, float duration, string property, TValue fromValue, 
 			params TweenPluginInfo[] plugins
-		) {
+		)
+			where TTarget : class
+		{
 			var tween = Tween.From(target, duration, property, fromValue, plugins);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
@@ -347,10 +354,12 @@ namespace Sttz.Tweener {
 		/// </typeparam>
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.FromTo<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.FromTo<TValue>"/>
-		public static Tween<TValue> FromTo<TValue>(
-			object target, float duration, string property, TValue fromValue, TValue toValue, 
+		public static Tween<TTarget, TValue> FromTo<TTarget, TValue>(
+			TTarget target, float duration, string property, TValue fromValue, TValue toValue, 
 			params TweenPluginInfo[] plugins
-		) {
+		)
+			where TTarget : class
+		{
 			var tween = Tween.FromTo(target, duration, property, fromValue, toValue, plugins);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
@@ -382,10 +391,12 @@ namespace Sttz.Tweener {
 		/// </typeparam>
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.By<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.By<TValue>"/>
-		public static Tween<TValue> By<TValue>(
-			object target, float duration, string property, TValue byValue, 
+		public static Tween<TTarget, TValue> By<TTarget, TValue>(
+			TTarget target, float duration, string property, TValue byValue, 
 			params TweenPluginInfo[] plugins
-		) {
+		)
+			where TTarget : class
+		{
 			var tween = Tween.By(target, duration, property, byValue, plugins);
 			Instance.SinglesGroup.Add(tween);
 			return tween;

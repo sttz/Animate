@@ -273,10 +273,10 @@ namespace Sttz.Tweener.Core.Codegen {
 							LookupOperatorMethod(ref rightType, operatorName, ref isPrimitive, out isRightNullable);
 			DynamicMethod method = new DynamicMethod(string.Format("{0}:{1}:{2}:{3}", operatorName, typeof(TLeft).FullName, typeof(TRight).FullName, typeof(TResult).FullName), typeof(TResult),
 								 new Type[] { typeof(TLeft), typeof(TRight) });
-			Debug.WriteLine(method.Name, "Generating operator method");
+			//Debug.WriteLine(method.Name, "Generating operator method");
 			ILGenerator generator = method.GetILGenerator();
 			if (isPrimitive) {
-				Debug.WriteLine("Primitives using opcode", "Emitting operator code");
+				//Debug.WriteLine("Primitives using opcode", "Emitting operator code");
 				generator.Emit(OpCodes.Ldarg_0);
 				if (isLeftNullable) {
 					generator.EmitCall(OpCodes.Call, typeof(TLeft).GetMethod("op_Explicit", BindingFlags.Public | BindingFlags.Static), null);
@@ -299,20 +299,20 @@ namespace Sttz.Tweener.Core.Codegen {
 					}
 				}
 			} else if (operatorMethod != null) {
-				Debug.WriteLine("Call to static operator method", "Emitting operator code");
+				//Debug.WriteLine("Call to static operator method", "Emitting operator code");
 				generator.Emit(OpCodes.Ldarg_0);
 				generator.Emit(OpCodes.Ldarg_1);
 				generator.EmitCall(OpCodes.Call, operatorMethod, null);
 				if (typeof(TResult).IsPrimitive && operatorMethod.ReturnType.IsPrimitive) {
 					IlTypeHelper.EmitExplicit(generator, IlTypeHelper.GetILType(operatorMethod.ReturnType), IlTypeHelper.GetILType(typeof(TResult)));
 				} else if (!typeof(TResult).IsAssignableFrom(operatorMethod.ReturnType)) {
-					Debug.WriteLine("Conversion to return type", "Emitting operator code");
+					//Debug.WriteLine("Conversion to return type", "Emitting operator code");
 					generator.Emit(OpCodes.Ldtoken, typeof(TResult));
 					generator.EmitCall(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }), null);
 					generator.EmitCall(OpCodes.Call, typeof(Convert).GetMethod("ChangeType", new Type[] { typeof(object), typeof(Type) }), null);
 				}
 			} else {
-				Debug.WriteLine("Throw NotSupportedException", "Emitting operator code");
+				//Debug.WriteLine("Throw NotSupportedException", "Emitting operator code");
 				generator.ThrowException(typeof(NotSupportedException));
 			}
 			generator.Emit(OpCodes.Ret);

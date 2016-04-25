@@ -21,7 +21,8 @@ namespace Sttz.Tweener.Core {
 	/// <summary>
 	/// Group of tweens, sharing options
 	/// </summary>
-	public class TweenGroup : TweenOptionsFluid<ITweenGroup>, ITweenGroup, ITweenGroupInternal
+	public class TweenGroup<TTarget> : TweenOptionsFluid<ITweenGroup>, ITweenGroup, ITweenGroupInternal
+		where TTarget : class
 	{
 		///////////////////
 		// Fields
@@ -35,7 +36,7 @@ namespace Sttz.Tweener.Core {
 		// Instance currently in use?
 		protected bool _inUse;
 		// Default target that used for tweens in this group
-		protected object _defaultTarget;
+		protected TTarget _defaultTarget;
 		// Tweening engine
 		protected ITweenEngine _engine;
 
@@ -43,7 +44,7 @@ namespace Sttz.Tweener.Core {
 		// Constructor
 
 		// Initialize a new or pooled intance
-		public void Use(object target, ITweenOptions parentOptions, ITweenEngine engine)
+		public void Use(TTarget target, ITweenOptions parentOptions, ITweenEngine engine)
 		{
 			if (_inUse) {
 				throw new Exception("TweenGroup instance already in use.");
@@ -83,6 +84,23 @@ namespace Sttz.Tweener.Core {
 		public ITweenGroupInternal Internal {
 			get {
 				return this;
+			}
+		}
+
+		///////////////////
+		// Properties
+
+		// The default target of the group
+		public object DefaultTarget {
+			get {
+				return _defaultTarget;
+			}
+		}
+
+		// The type of the default target
+		public Type DefaultTargetType {
+			get {
+				return typeof(TTarget);
 			}
 		}
 

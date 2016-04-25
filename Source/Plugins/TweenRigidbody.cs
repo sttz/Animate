@@ -65,7 +65,7 @@ namespace Sttz.Tweener.Plugins {
 			// Generic plugin type
 			pluginType = typeof(TweenRigidbody),
 			// Plugin needs to set the value
-			hooks = TweenPluginHook.SetValue,
+			hooks = TweenPluginType.Setter,
 			// Choose proper type for manual activation
 			manualActivation = ManualActivation,
 			// Enable automatic activation
@@ -105,9 +105,9 @@ namespace Sttz.Tweener.Plugins {
 			// Supported properties on Transform
 			if (tween.Property == "position" 
 					|| tween.Property == "eulerAngles") {
-				info.pluginType = typeof(TweenRigidbodyImplVector3);
+				info.pluginType = typeof(TweenRigidbodyImplVector3<>);
 			} else if (tween.Property == "rotation") {
-				info.pluginType = typeof(TweenRigidbodyImplQuaternion);
+				info.pluginType = typeof(TweenRigidbodyImplQuaternion<>);
 			} else {
 				info.pluginType = null;
 			}
@@ -120,10 +120,10 @@ namespace Sttz.Tweener.Plugins {
 		// Implementation
 
 		// Open generic implementation
-		private class TweenRigidbodyImpl<TValue> : TweenPlugin<TValue>
+		private class TweenRigidbodyImpl
 		{
 			// Initialize
-			public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 			{
 				// Check if target is Transform and has a rigidbody
 				var targetTf = tween.Target as Transform;
@@ -158,10 +158,12 @@ namespace Sttz.Tweener.Plugins {
 		}
 
 		// Vector3 implementation
-		private class TweenRigidbodyImplVector3 : TweenRigidbodyImpl<Vector3>
+		private class TweenRigidbodyImplVector3<TTarget> : TweenRigidbodyImpl,
+			ITweenSetterPlugin<TTarget, Vector3>
+			where TTarget : class
 		{
 			// Write value to material
-			public override void SetValue(object target, string property, Vector3 value, ref object userData)
+			public void SetValue(TTarget target, string property, Vector3 value, ref object userData)
 			{
 				var rigidbody = (userData as Rigidbody);
 				if (property == "position") {
@@ -173,10 +175,12 @@ namespace Sttz.Tweener.Plugins {
 		}
 
 		// Quaternion implementation
-		private class TweenRigidbodyImplQuaternion : TweenRigidbodyImpl<Quaternion>
+		private class TweenRigidbodyImplQuaternion<TTarget> : TweenRigidbodyImpl,
+			ITweenSetterPlugin<TTarget, Quaternion>
+			where TTarget : class
 		{
 			// Write value to material
-			public override void SetValue(object target, string property, Quaternion value, ref object userData)
+			public void SetValue(TTarget target, string property, Quaternion value, ref object userData)
 			{
 				(userData as Rigidbody).MoveRotation(value);
 			}

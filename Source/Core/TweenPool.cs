@@ -3,20 +3,24 @@ using System.Collections.Generic;
 
 namespace Sttz.Tweener.Core {
 
+	using TypePair = KeyValuePair<Type, Type>;
+
 	// Tween pool interface
 	public interface ITweenPool
 	{
 		// Get a tween instance from the pool
-		Tween<TValue> GetTween<TValue>();
+		Tween<TTarget, TValue> GetTween<TTarget, TValue>()
+			where TTarget : class;
 		// Return a tween instance to the pool
 		// The instance will be reset before adding it
 		void Return(ITween tween);
 
 		// Get a group instance from the pool
-		TweenGroup GetGroup();
+		TweenGroup<TTarget> GetGroup<TTarget>()
+			where TTarget : class;
 		// Return a group to the pool
 		// The instance will be reset before adding it
-		void Return(TweenGroup tweenGroup);
+		void Return(ITweenGroup tweenGroup);
 	};
 
 	/// <summary>
@@ -28,53 +32,69 @@ namespace Sttz.Tweener.Core {
 		// Fields
 
 		// Pooled TweenGroup instances
-		protected Queue<TweenGroup> _groups
-			= new Queue<TweenGroup>();
+		protected Dictionary<Type, Queue<ITweenGroup>> _groups
+			= new Dictionary<Type, Queue<ITweenGroup>>();
 		// Pooled Tween<T> instances by type
-		protected Dictionary<Type, Queue<ITween>> _tweens
-			= new Dictionary<Type, Queue<ITween>>();
+		protected Dictionary<TypePair, Queue<ITween>> _tweens
+			= new Dictionary<TypePair, Queue<ITween>>();
 
 		///////////////////
 		// Pooling
 
 		// Get a tween from the pool, create a new once if necessary
-		public Tween<TValue> GetTween<TValue>()
+		public Tween<TTarget, TValue> GetTween<TTarget, TValue>()
+			where TTarget : class
 		{
-			if (!_tweens.ContainsKey(typeof(TValue)) 
-					|| _tweens[typeof(TValue)].Count == 0) {
-				return new Tween<TValue>();
-			} else {
-				return _tweens[typeof(TValue)].Dequeue() as Tween<TValue>;
+			var key = new TypePair(typeof(TTarget), typeof(TValue));
+
+			Queue<ITween> queue;
+			if (!_tweens.TryGetValue(key, out queue) || queue.Count == 0) {
+				return new Tween<TTarget, TValue>();
 			}
+
+			return (Tween<TTarget, TValue>)queue.Dequeue();
 		}
 
 		// Return a tween
 		public void Return(ITween tween)
 		{
-			if (!_tweens.ContainsKey(tween.ValueType)) {
-				_tweens[tween.ValueType] = new Queue<ITween>();
+			var key = new TypePair(tween.TargetType, tween.ValueType);
+
+			Queue<ITween> queue;
+			if (!_tweens.TryGetValue(key, out queue)) {
+				_tweens[key] = queue = new Queue<ITween>();
 			}
 
 			tween.Internal.Reset();
 
-			_tweens[tween.ValueType].Enqueue(tween);
+			queue.Enqueue(tween);
 		}
 
 		// Get a group from the pool, create a new once if necessary
-		public TweenGroup GetGroup()
+		public TweenGroup<TTarget> GetGroup<TTarget>()
+			where TTarget : class
 		{
-			if (_groups.Count == 0) {
-				return new TweenGroup();
-			} else {
-				return _groups.Dequeue();;
+			Queue<ITweenGroup> queue;
+			if (!_groups.TryGetValue(typeof(TTarget), out queue) || queue.Count == 0) {
+				return new TweenGroup<TTarget>();
 			}
+
+			return (TweenGroup<TTarget>)queue.Dequeue();
 		}
 
 		// Return a tween
-		public void Return(TweenGroup tweenGroup)
+		public void Return(ITweenGroup tweenGroup)
 		{
-			tweenGroup.Reset();
-			_groups.Enqueue(tweenGroup);
+			var key = tweenGroup.DefaultTargetType;
+
+			Queue<ITweenGroup> queue;
+			if (!_groups.TryGetValue(key, out queue)) {
+				_groups[key] = queue = new Queue<ITweenGroup>();
+			}
+
+			tweenGroup.Internal.Reset();
+
+			queue.Enqueue(tweenGroup);
 		}
 	}
 }

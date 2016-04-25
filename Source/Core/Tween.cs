@@ -29,7 +29,8 @@ namespace Sttz.Tweener.Core {
 	}
 
 	// Single tween
-	public class Tween<TValue> : TweenOptionsFluid<ITween>, ITween, ITweenInternal
+	public class Tween<TTarget, TValue> : TweenOptionsFluid<ITween>, ITween, ITweenInternal
+		where TTarget : class
 	{
 		///////////////////
 		// Fields
@@ -40,7 +41,7 @@ namespace Sttz.Tweener.Core {
 		// Tweening method
 		protected TweenMethod _tweenMethod;
 		// Target object of the tween
-		protected object _target;
+		protected TTarget _target;
 		// Property on the tween to animate
 		protected string _property;
 
@@ -75,13 +76,13 @@ namespace Sttz.Tweener.Core {
 
 		// Plugin hook to get value
 		protected TweenPluginInfo _hookGetInfo;
-		protected ITweenPlugin<TValue> _hookGet;
+		protected ITweenGetterPlugin<TTarget, TValue> _hookGet;
 		// Plugin hook to set value
 		protected TweenPluginInfo _hookSetInfo;
-		protected ITweenPlugin<TValue> _hookSet;
+		protected ITweenSetterPlugin<TTarget, TValue> _hookSet;
 		// Plugin hook to calculate value
 		protected TweenPluginInfo _hookCalculateInfo;
-		protected ITweenPlugin<TValue> _hookCalculate;
+		protected ITweenArithmeticPlugin<TValue> _hookCalculate;
 
 		// Cached (1 / _duration) for performance
 		protected float _oneOverDuration;
@@ -100,9 +101,9 @@ namespace Sttz.Tweener.Core {
 
 		// Constructor, using of the Tween.* static methods
 		// is strongly encouraged.
-		public static Tween<TValue> Create(
+		public static Tween<TTarget, TValue> Create(
 			TweenMethod tweenMethod,
-			object target, 
+			TTarget target, 
 			float duration,
 			string property, 
 			TValue startValue,
@@ -128,11 +129,11 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Get instance from pool or create new one
-			Tween<TValue> tween = null;
+			Tween<TTarget, TValue> tween = null;
 			if (Animate.Pool != null) {
-				tween = Animate.Pool.GetTween<TValue>();
+				tween = Animate.Pool.GetTween<TTarget, TValue>();
 			} else {
-				tween = new Tween<TValue>();
+				tween = new Tween<TTarget, TValue>();
 			}
 
 			// Setup instance
@@ -147,7 +148,7 @@ namespace Sttz.Tweener.Core {
 		// Initialize an instance returned from the pool
 		public void Use(
 			TweenMethod tweenMethod,
-			object target, 
+			TTarget target, 
 			float duration,
 			string property,
 			TValue startValue,
@@ -250,11 +251,13 @@ namespace Sttz.Tweener.Core {
 			// Register automatic plugins
 			var autoPlugins = GetAutomaticPlugins();
 			foreach (var pluginInfo in autoPlugins) {
-				// Check plugin type
-				if (!PluginCheckType(pluginInfo)) continue;
 				// Check if plugin should be registered
 				var data = pluginInfo.autoActivation(this, pluginInfo);
 				if (data.pluginType == null) continue;
+				// Check plugin type
+				if (!PluginCheckType(data)) {
+					continue;
+				}
 				// Try to register plugin
 				if (!RegisterPlugin(data, false)) {
 					// Automatic plugins are optional
@@ -312,9 +315,9 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Load plugins
-			_hookGet = GetPlugin(_hookGetInfo);
-			_hookSet = GetPlugin(_hookSetInfo);
-			_hookCalculate = GetPlugin(_hookCalculateInfo);
+			_hookGet = GetPlugin<ITweenGetterPlugin<TTarget, TValue>>(_hookGetInfo);
+			_hookSet = GetPlugin<ITweenSetterPlugin<TTarget, TValue>>(_hookSetInfo);
+			_hookCalculate = GetPlugin<ITweenArithmeticPlugin<TValue>>(_hookCalculateInfo);
 			if (_hookGet == null || _hookSet == null || _hookCalculate == null) return false;
 
 			Log(TweenLogLevel.Debug, 
@@ -325,19 +328,20 @@ namespace Sttz.Tweener.Core {
 			// Initialize plugins
 			string error;
 
-			error = _hookGet.Initialize(this, TweenPluginHook.GetValue, ref _hookGetInfo.getValueUserData);
+			// TODO: Combine init?
+			error = _hookGet.Initialize(this, TweenPluginType.Getter, ref _hookGetInfo.getValueUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookGet, error);
 				return false;
 			}
 
-			error = _hookSet.Initialize(this, TweenPluginHook.SetValue, ref _hookSetInfo.setValueUserData);
+			error = _hookSet.Initialize(this, TweenPluginType.Setter, ref _hookSetInfo.setValueUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookSet, error);
 				return false;
 			}
 
-			error = _hookCalculate.Initialize(this, TweenPluginHook.CalculateValue, ref _hookCalculateInfo.calculateValueUserData);
+			error = _hookCalculate.Initialize(this, TweenPluginType.Arithmetic, ref _hookCalculateInfo.calculateValueUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookCalculate, error);
 				return false;
@@ -357,38 +361,61 @@ namespace Sttz.Tweener.Core {
 		// Check if the plugin type is compatible
 		protected bool PluginCheckType(TweenPluginInfo info)
 		{
-			// No type given
-			if (info.pluginType == null) {
+			// No plugin type set
+			if (info.pluginType == null)
 				return false;
-			// If it's open type, assume we can close it
-			} else if (info.pluginType.ContainsGenericParameters) {
-				return true;
-			}
 
 			// Look for ITweenPlugin interface and check its type parameter
 			var interfaces = info.pluginType.GetInterfaces();
 			foreach (var iface in interfaces) {
-				if (iface.GetGenericTypeDefinition() == typeof(ITweenPlugin<>)) {
-					// Check type argument of interface
-					if (iface.GetGenericArguments()[0] == typeof(TValue)) {
-						return true;
-					} else {
-						return false;
-					}
+				if (!iface.IsGenericType)
+					continue;
+
+				var genericType = iface.GetGenericTypeDefinition();
+
+				if (genericType == typeof(ITweenGetterPlugin<,>)
+				    	|| genericType == typeof(ITweenSetterPlugin<,>)) {
+					var args = iface.GetGenericArguments();
+					return (
+						GenericArgumentIsCompatible(args[0], typeof(TTarget))
+						&& GenericArgumentIsCompatible(args[1], typeof(TValue))
+					);
+				
+				} else if (genericType == typeof(ITweenArithmeticPlugin<>)) {
+					var args = iface.GetGenericArguments();
+					return GenericArgumentIsCompatible(args[0], typeof(TValue));
 				}
 			}
 
-			// Type does not implement ITweenPlugin!
+			// Type does not implement matching interface
+			return false;
+		}
+
+		protected bool GenericArgumentIsCompatible(Type argument, Type compatibleTo)
+		{
+			// Unassigned generic type, assume we can assign it
+			if (argument.IsGenericParameter) {
+				return true;
+			}
+			// Otherwise require the type to match exactly
+			if (argument == compatibleTo) {
+				return true;
+			}
+
 			return false;
 		}
 
 		// Get a shared plugin instance
-		protected ITweenPlugin<TValue> GetPlugin(TweenPluginInfo info)
+		protected TPlugin GetPlugin<TPlugin>(TweenPluginInfo info)
 		{
 			// Get closed type
 			var type = info.pluginType;
 			if (type.ContainsGenericParameters) {
-				type = type.MakeGenericType(typeof(TValue));
+				if (type.GetGenericArguments().Length == 1) {
+					type = type.MakeGenericType(typeof(TValue));
+				} else {
+					type = type.MakeGenericType(typeof(TTarget), typeof(TValue));
+				}
 			}
 			
 			// Create new instance
@@ -398,7 +425,7 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Return existing instance
-			return _sharedPlugins[type] as ITweenPlugin<TValue>;
+			return (TPlugin)_sharedPlugins[type];
 		}
 
 		// Register plugins
@@ -407,11 +434,11 @@ namespace Sttz.Tweener.Core {
 			int getHook = 0, setHook = 0, calcHook = 0;
 
 			// Check if hooks are available, automatic plugins fail silently
-			if ((info.hooks & TweenPluginHook.GetValue) > 0) {
+			if ((info.hooks & TweenPluginType.Getter) > 0) {
 				if (_hookGetInfo.pluginType == null) {
 					getHook = 1;
 				} else {
-					getHook = CheckHook(_hookGetInfo.hooks, info.hooks, TweenPluginHook.GetValue);
+					getHook = CheckHook(_hookGetInfo, info, TweenPluginType.Getter);
 					if (getHook == -1) {
 						RegisterPluginError(fail, 
 							"GetValueHook required by {0} already used by {1}.",
@@ -421,11 +448,11 @@ namespace Sttz.Tweener.Core {
 				}
 			}
 
-			if ((info.hooks & TweenPluginHook.SetValue) > 0) {
+			if ((info.hooks & TweenPluginType.Setter) > 0) {
 				if (_hookSetInfo.pluginType == null) {
 					setHook = 1;
 				} else {
-					setHook = CheckHook(_hookSetInfo.hooks, info.hooks, TweenPluginHook.SetValue);
+					setHook = CheckHook(_hookSetInfo, info, TweenPluginType.Setter);
 					if (setHook == -1) {
 						RegisterPluginError(fail, 
 							"SetValueHook required by {0} already used by {1}.",
@@ -435,11 +462,11 @@ namespace Sttz.Tweener.Core {
 				}
 			}
 
-			if ((info.hooks & TweenPluginHook.CalculateValue) > 0) {
+			if ((info.hooks & TweenPluginType.Arithmetic) > 0) {
 				if (_hookCalculateInfo.pluginType == null) {
 					calcHook = 1;
 				} else {
-					calcHook = CheckHook(_hookCalculateInfo.hooks, info.hooks, TweenPluginHook.CalculateValue);
+					calcHook = CheckHook(_hookCalculateInfo, info, TweenPluginType.Arithmetic);
 					if (calcHook == -1) {
 						RegisterPluginError(fail, 
 							"CalculateValueHook required by {0} already used by {1}.",
@@ -477,30 +504,20 @@ namespace Sttz.Tweener.Core {
 
 		// Check a single combination of hook flags
 		// Returns: 1 = overwrite, 0 = don't overwrite, -1 = error
-		protected int CheckHook(TweenPluginHook one, TweenPluginHook two, TweenPluginHook flag)
+		protected int CheckHook(TweenPluginInfo one, TweenPluginInfo two, TweenPluginType checkHook)
 		{
 			// weak <- weak		true
 			// weak <- strong	true
 			// strong <- weak	false
 			// strong <- strong	error
 
-			// Determine weak flag
-			TweenPluginHook flagWeak;
-			if (flag == TweenPluginHook.GetValue) {
-				flagWeak = TweenPluginHook.GetValueWeak;
-			} else if (flag == TweenPluginHook.SetValue) {
-				flagWeak = TweenPluginHook.SetValueWeak;
-			} else {
-				flagWeak = TweenPluginHook.CalculateValueWeak;
-			}
-
 			// Check if flag is set in both masks
-			if ((one & two & flag) > 0) {
+			if ((one.hooks & two.hooks & checkHook) > 0) {
 				// One is weak: Always overwrite
-				if ((one & flagWeak) == flagWeak) {
+				if (one.canBeOverwritten) {
 					return 1;
 				// Two is weak: Don't overwrite
-				} else if ((two & flagWeak) == flagWeak) {
+				} else if (two.canBeOverwritten) {
 					return 0;
 				// Two is strong: Error
 				} else {
@@ -637,12 +654,29 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Target object of the tween
-		public object Target {
+		public TTarget Target {
 			get {
 				return _target;
 			}
 			set {
 				_target = value;
+			}
+		}
+
+		// Target object of the tween
+		object ITween.Target {
+			get {
+				return _target;
+			}
+		}
+
+		// Target object of the tween
+		object ITweenInternal.Target {
+			get {
+				return _target;
+			}
+			set {
+				_target = (TTarget)value;
 			}
 		}
 
@@ -653,6 +687,13 @@ namespace Sttz.Tweener.Core {
 			}
 			set {
 				_property = value;
+			}
+		}
+
+		// Target of tween
+		public Type TargetType {
+			get {
+				return typeof(TTarget);
 			}
 		}
 

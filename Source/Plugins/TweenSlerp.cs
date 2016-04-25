@@ -56,9 +56,9 @@ namespace Sttz.Tweener.Plugins {
 		// Default plugin info
 		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
 			// Generic plugin type
-			pluginType = typeof(TweenSlerpImpl<>),
+			pluginType = typeof(TweenSlerpImpl),
 			// Plugin needs to calculate the value
-			hooks = TweenPluginHook.CalculateValue,
+			hooks = TweenPluginType.Arithmetic,
 			// Delegate to select proper plugin type for manual mode
 			manualActivation = ManualActivation,
 			// Enable automatic activation
@@ -99,11 +99,11 @@ namespace Sttz.Tweener.Plugins {
 		// Generial
 
 		// Tween Slerp base implementation
-		private class TweenSlerpImpl<TValue> : TweenPlugin<TValue>
+		private class TweenSlerpImpl
 		{
 			// Initialize the plugin for the given tween,
 			// returns null on success or an error message on failure.
-			public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 			{
 				// Check for correct value
 				if (tween.ValueType != typeof(Vector3) 
@@ -115,44 +115,50 @@ namespace Sttz.Tweener.Plugins {
 
 				return null;
 			}
-
-			// Return the difference between start and end
-			public override TValue DiffValue(TValue start, TValue end, ref object userData)
-			{
-				// Slerp doesn't need diff, skip it...
-				return default(TValue);
-			}
 		}
 
 		// Vector3 implementation
-		private class TweenSlerpImplVector3 : TweenSlerpImpl<Vector3>
+		private class TweenSlerpImplVector3 : TweenSlerpImpl, ITweenArithmeticPlugin<Vector3>
 		{
 			// Return the end value
-			public override Vector3 EndValue(Vector3 start, Vector3 diff, ref object userData)
+			public Vector3 EndValue(Vector3 start, Vector3 diff, ref object userData)
 			{
 				return start + diff;
 			}
 
 			// Return the value at the current position
-			public override Vector3 ValueAtPosition(Vector3 start, Vector3 end, Vector3 diff, float position, ref object userData)
+			public Vector3 ValueAtPosition(Vector3 start, Vector3 end, Vector3 diff, float position, ref object userData)
 			{
 				return Vector3.Slerp(start, end, position);
+			}
+
+			// Return the difference between start and end
+			public Vector3 DiffValue(Vector3 start, Vector3 end, ref object userData)
+			{
+				// Slerp doesn't need diff, skip it...
+				return default(Vector3);
 			}
 		}
 
 		// Quaternion implementation
-		private class TweenSlerpImplQuaternion : TweenSlerpImpl<Quaternion>
+		private class TweenSlerpImplQuaternion : TweenSlerpImpl, ITweenArithmeticPlugin<Quaternion>
 		{
 			// Return the end value
-			public override Quaternion EndValue(Quaternion start, Quaternion diff, ref object userData)
+			public Quaternion EndValue(Quaternion start, Quaternion diff, ref object userData)
 			{
 				return start * diff;
 			}
 
 			// Return the value at the current position
-			public override Quaternion ValueAtPosition(Quaternion start, Quaternion end, Quaternion diff, float position, ref object userData)
+			public Quaternion ValueAtPosition(Quaternion start, Quaternion end, Quaternion diff, float position, ref object userData)
 			{
 				return Quaternion.Slerp(start, end, position);
+			}
+			// Return the difference between start and end
+			public Quaternion DiffValue(Quaternion start, Quaternion end, ref object userData)
+			{
+				// Slerp doesn't need diff, skip it...
+				return default(Quaternion);
 			}
 		}
 

@@ -78,9 +78,9 @@ namespace Sttz.Tweener.Plugins {
 		// Default plugin info
 		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
 			// Generic plugin type
-			pluginType = typeof(TweenMaterialImpl<>),
+			pluginType = typeof(TweenMaterialImpl),
 			// Plugin needs to set and get the value
-			hooks = TweenPluginHook.GetValue | TweenPluginHook.SetValue,
+			hooks = TweenPluginType.Getter | TweenPluginType.Setter,
 			// Enable automatic activation
 			autoActivation = ShouldActivate,
 			// Manual activation
@@ -91,7 +91,7 @@ namespace Sttz.Tweener.Plugins {
 		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
 		{
 			// Auto-detect property type
-			if (info.pluginType == typeof(TweenMaterialImpl<>)) {
+			if (info.pluginType == typeof(TweenMaterialImpl)) {
 				info = ShouldActivate(tween, info);
 			}
 
@@ -202,13 +202,13 @@ namespace Sttz.Tweener.Plugins {
 		/// <summary>
 		/// Tween material properties.
 		/// </summary>
-		private class TweenMaterialImpl<TValue> : TweenPlugin<TValue>
+		private class TweenMaterialImpl
 		{
 			///////////////////
 			// General
 
 			// Initialize
-			public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 			{
 				// Make sure we get a material
 				if (!(tween.Target is Material)) {
@@ -234,61 +234,64 @@ namespace Sttz.Tweener.Plugins {
 		/// <summary>
 		/// Tween material properties.
 		/// </summary>
-		private class TweenMaterialImplColor : TweenMaterialImpl<Color>
+		private class TweenMaterialImplColor : TweenMaterialImpl,
+			ITweenGetterPlugin<Material, Color>, ITweenSetterPlugin<Material, Color>
 		{
 			// Read value from material
-			public override Color GetValue(object target, string property, ref object userData)
+			public Color GetValue(Material target, string property, ref object userData)
 			{
-				return (target as Material).GetColor(property);
+				return target.GetColor(property);
 			}
 
 			// Write value to material
-			public override void SetValue(object target, string property, Color value, ref object userData)
+			public void SetValue(Material target, string property, Color value, ref object userData)
 			{
-				(target as Material).SetColor(property, value);
+				target.SetColor(property, value);
 			}
 		}
 
 		/// <summary>
 		/// Tween material properties.
 		/// </summary>
-		private class TweenMaterialImplVector : TweenMaterialImpl<Vector2>
+		private class TweenMaterialImplVector : TweenMaterialImpl,
+			ITweenGetterPlugin<Material, Vector2>, ITweenSetterPlugin<Material, Vector2>
 		{
 			// Read value from material
-			public override Vector2 GetValue(object target, string property, ref object userData)
+			public Vector2 GetValue(Material target, string property, ref object userData)
 			{
-				return (target as Material).GetVector(property);
+				return target.GetVector(property);
 			}
 
 			// Write value to material
-			public override void SetValue(object target, string property, Vector2 value, ref object userData)
+			public void SetValue(Material target, string property, Vector2 value, ref object userData)
 			{
-				(target as Material).SetVector(property, value);
+				target.SetVector(property, value);
 			}
 		}
 
 		/// <summary>
 		/// Tween material properties.
 		/// </summary>
-		private class TweenMaterialImplTexture : TweenMaterialImpl<Vector2>
+		private class TweenMaterialImplTexture : TweenMaterialImpl,
+			ITweenGetterPlugin<Material, Vector2>, ITweenSetterPlugin<Material, Vector2>
 		{
 			// Read value from material
-			public override Vector2 GetValue(object target, string property, ref object userData)
+			public Vector2 GetValue(Material target, string property, ref object userData)
 			{
 				if ((PropertyType)userData == PropertyType.TextureOffset) {
-					return (target as Material).GetTextureOffset(property);
+					return target.GetTextureOffset(property);
 				} else {
-					return (target as Material).GetTextureScale(property);
+					return target.GetTextureScale(property);
 				}
 			}
 
 			// Write value to material
-			public override void SetValue(object target, string property, Vector2 value, ref object userData)
+			public void SetValue(Material target, string property, Vector2 value, ref object userData)
 			{
 				if ((PropertyType)userData == PropertyType.TextureOffset) {
-					(target as Material).SetTextureOffset(property, value);
+					target.SetTextureOffset(property, value);
 				} else {
-					(target as Material).SetTextureScale(property, value);
+					target.SetTextureScale(property, value);
 				}
 			}
 		}
@@ -296,18 +299,19 @@ namespace Sttz.Tweener.Plugins {
 		/// <summary>
 		/// Tween material properties.
 		/// </summary>
-		private class TweenMaterialImplFloat : TweenMaterialImpl<float>
+		private class TweenMaterialImplFloat : TweenMaterialImpl,
+			ITweenGetterPlugin<Material, float>, ITweenSetterPlugin<Material, float>
 		{
 			// Read value from material
-			public override float GetValue(object target, string property, ref object userData)
+			public float GetValue(Material target, string property, ref object userData)
 			{
-				return (target as Material).GetFloat(property);
+				return target.GetFloat(property);
 			}
 
 			// Write value to material
-			public override void SetValue(object target, string property, float value, ref object userData)
+			public void SetValue(Material target, string property, float value, ref object userData)
 			{
-				(target as Material).SetFloat(property, value);
+				target.SetFloat(property, value);
 			}
 		}
 	}

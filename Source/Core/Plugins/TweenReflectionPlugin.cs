@@ -48,10 +48,11 @@ namespace Sttz.Tweener.Core.Reflection
 		public static TweenPluginInfo Use()
 		{
 			return new TweenPluginInfo {
-				pluginType = typeof(TweenReflectionAccessorPlugin<>),
+				pluginType = typeof(TweenReflectionAccessorPlugin<,>),
+				canBeOverwritten = true,
 				hooks =
-					  TweenPluginHook.GetValueWeak
-					| TweenPluginHook.SetValueWeak
+					  TweenPluginType.Getter
+					| TweenPluginType.Setter
 			};
 		}
 	}
@@ -59,21 +60,16 @@ namespace Sttz.Tweener.Core.Reflection
 	/// <summary>
 	/// Base class for the default plugin, providing generic get/set implementations.
 	/// </summary>
-	public class TweenReflectionAccessorPlugin<TValue> : TweenPlugin<TValue>
+	public class TweenReflectionAccessorPlugin<TTarget, TValue>
+		: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
+		where TTarget : class
 	{
 		///////////////////
 		// General
 
 		// Initialize
-		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 		{
-			if (hook != TweenPluginHook.GetValue && hook != TweenPluginHook.SetValue) {
-				return string.Format(
-					"TweenReflectionAccessorPlugin only supports GetValue and SetValue hooks (got {0}).",
-					hook
-				);
-			}
-
 			var memberInfo = TweenReflection.FindMember(tween.Target.GetType(), tween.Property);
 
 			// Get / Set need MemberInfo
@@ -109,7 +105,7 @@ namespace Sttz.Tweener.Core.Reflection
 		// Get Value Hook
 
 		// Get the value of a plugin property
-		public override TValue GetValue(object target, string property, ref object userData)
+		public TValue GetValue(TTarget target, string property, ref object userData)
 		{
 			if (userData is PropertyInfo) {
 				return (TValue)(userData as PropertyInfo).GetValue(target, null);
@@ -122,7 +118,7 @@ namespace Sttz.Tweener.Core.Reflection
 		// Set Value Hook
 
 		// Set the value of a plugin property
-		public override void SetValue(object target, string property, TValue value, ref object userData)
+		public void SetValue(TTarget target, string property, TValue value, ref object userData)
 		{
 			if (userData is PropertyInfo) {
 				(userData as PropertyInfo).SetValue(target, value, null);
@@ -147,7 +143,8 @@ namespace Sttz.Tweener.Core.Reflection
 		{
 			return new TweenPluginInfo {
 				pluginType = typeof(TweenReflectionArithmeticPlugin<>),
-				hooks = TweenPluginHook.CalculateValueWeak,
+				hooks = TweenPluginType.Arithmetic,
+				canBeOverwritten = true,
 				manualActivation = ManualActivation
 			};
 		}
@@ -168,7 +165,7 @@ namespace Sttz.Tweener.Core.Reflection
 	/// <summary>
 	/// Calculation implementation using reflection.
 	/// </summary>
-	public class TweenReflectionArithmeticPlugin<TValue> : TweenPlugin<TValue>
+	public class TweenReflectionArithmeticPlugin<TValue> : ITweenArithmeticPlugin<TValue>
 	{
 		///////////////////
 		// General
@@ -196,15 +193,8 @@ namespace Sttz.Tweener.Core.Reflection
 		}
 
 		// Initialize
-		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 		{
-			if (hook != TweenPluginHook.CalculateValue) {
-				return string.Format(
-					"TweenCodegenArithmeticPlugin only supports the CalculateValue hook (got {0}).",
-					hook
-				);
-			}
-
 			// Look for necessary op_* methods
 			var data = new TweenReflectionUserData();
 			data.opAddition = GetOperatorMethod(tween.ValueType, "op_Addition");
@@ -228,19 +218,19 @@ namespace Sttz.Tweener.Core.Reflection
 		// Calculate Value Hook
 
 		// Return the difference between start and end
-		public override TValue DiffValue(TValue start, TValue end, ref object userData)
+		public TValue DiffValue(TValue start, TValue end, ref object userData)
 		{
 			return (TValue)((TweenReflectionUserData)userData).opSubtraction.Invoke(null, new object[] { end, start });
 		}
 
 		// Return the end value
-		public override TValue EndValue(TValue start, TValue diff, ref object userData)
+		public TValue EndValue(TValue start, TValue diff, ref object userData)
 		{
 			return (TValue)((TweenReflectionUserData)userData).opAddition.Invoke(null, new object[] { start, diff });
 		}
 
 		// Return the value at the current position
-		public override TValue ValueAtPosition(TValue start, TValue end, TValue diff, float position, ref object userData)
+		public TValue ValueAtPosition(TValue start, TValue end, TValue diff, float position, ref object userData)
 		{
 			var data = (TweenReflectionUserData)userData;
 			var offset = data.opMultiply.Invoke(null, new object[] { diff, position });

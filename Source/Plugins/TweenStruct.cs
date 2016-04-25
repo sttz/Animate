@@ -80,9 +80,9 @@ namespace Sttz.Tweener.Plugins {
 		// Default plugin info
 		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
 			// Generic plugin type
-			pluginType = typeof(TweenStructImpl<>),
+			pluginType = typeof(TweenStructImpl<,>),
 			// Plugin needs to get and set the value
-			hooks = TweenPluginHook.GetValue | TweenPluginHook.SetValue,
+			hooks = TweenPluginType.Getter | TweenPluginType.Setter,
 			// Delegate to select proper plugin type for manual mode
 			manualActivation = ManualActivation,
 			// Enable automatic activation
@@ -166,31 +166,33 @@ namespace Sttz.Tweener.Plugins {
 		}
 
 		// User data
-		private class TweenStructUserData<TValue>
+		private class TweenStructUserData<TTarget, TValue>
 		{
 			// Arguments
 			public TweenStructArguments arguments;
 			// Handler to set struct on target
-			public TweenCodegen.SetHandler<object, object> setter;
+			public TweenCodegen.SetHandler<TTarget, object> setter;
 			// Setter for value on struct
 			public TweenCodegen.SetHandler<object, TValue> nestedSetter;
 		}
 
 		// Plugin implementation
-		private class TweenStructImpl<TValue> : TweenPlugin<TValue>
+		private class TweenStructImpl<TTarget, TValue>
+			: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
+			where TTarget : class
 		{
 			// Initialize
-			public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 			{
-				TweenStructUserData<TValue> data = null;
+				TweenStructUserData<TTarget, TValue> data = null;
 
 				// Initialize user data
 				if (userData is TweenStructArguments) {
-					data = new TweenStructUserData<TValue>();
+					data = new TweenStructUserData<TTarget, TValue>();
 					data.arguments = (userData as TweenStructArguments);
 					userData = data;
 				} else {
-					data = userData as TweenStructUserData<TValue>;
+					data = userData as TweenStructUserData<TTarget, TValue>;
 				}
 
 				// Check type
@@ -204,9 +206,9 @@ namespace Sttz.Tweener.Plugins {
 				}
 
 				// Generate setters
-				if (hook == TweenPluginHook.SetValue) {
+				if (initForType == TweenPluginType.Setter) {
 					try {
-						data.setter = TweenCodegen.GenerateSetMethod<object, object>(data.arguments.memberInfo);
+						data.setter = TweenCodegen.GenerateSetMethod<TTarget, object>(data.arguments.memberInfo);
 						data.nestedSetter = TweenCodegen.GenerateSetMethod<object, TValue>(data.arguments.nestedMemberInfo);
 					} catch (Exception e) {
 						return string.Format(
@@ -223,9 +225,9 @@ namespace Sttz.Tweener.Plugins {
 			// Get Value Hook
 
 			// Get the value of a plugin property
-			public override TValue GetValue(object target, string property, ref object userData)
+			public TValue GetValue(TTarget target, string property, ref object userData)
 			{
-				var data = (userData as TweenStructUserData<TValue>);
+				var data = (userData as TweenStructUserData<TTarget, TValue>);
 
 				// Get struct
 				object value = null;
@@ -249,9 +251,9 @@ namespace Sttz.Tweener.Plugins {
 			// Set Value Hook
 
 			// Set the value of a plugin property
-			public override void SetValue(object target, string property, TValue value, ref object userData)
+			public void SetValue(TTarget target, string property, TValue value, ref object userData)
 			{
-				var data = (userData as TweenStructUserData<TValue>);
+				var data = (userData as TweenStructUserData<TTarget, TValue>);
 
 				// Get struct
 				object structValue = null;

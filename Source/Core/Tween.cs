@@ -502,7 +502,7 @@ namespace Sttz.Tweener.Core {
 				// Two is weak: Don't overwrite
 				} else if ((two & flagWeak) == flagWeak) {
 					return 0;
-				// Two is string: Error
+				// Two is strong: Error
 				} else {
 					return -1;
 				}

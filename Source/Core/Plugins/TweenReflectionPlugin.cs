@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
+using Sttz.Tweener.Core.Static;
 
 namespace Sttz.Tweener.Core.Reflection
 {
@@ -128,6 +129,122 @@ namespace Sttz.Tweener.Core.Reflection
 			} else {
 				(userData as FieldInfo).SetValue(target, value);
 			}
+		}
+	}
+
+	/// <summary>
+	/// Default arithmetic plugin using reflection.
+	/// </summary>
+	/// <remarks>
+	/// Due to limitations in C#, this plugin only works with custom types
+	/// and not with C#'s built-in basic types. The plugin relies on
+	/// TweenStaticArithmeticPlugin to provide the arithmetic for those types.
+	/// </remarks>
+	public static class TweenReflectionArithmeticPlugin
+	{
+		// Return the plugin info structure
+		public static TweenPluginInfo Use()
+		{
+			return new TweenPluginInfo {
+				pluginType = typeof(TweenReflectionArithmeticPlugin<>),
+				hooks = TweenPluginHook.CalculateValueWeak,
+				manualActivation = ManualActivation
+			};
+		}
+
+		// Callback for manual activation
+		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
+		{
+			// Use the static plugin if possible
+			var staticPlugin = TweenStaticArithmeticPlugin.GetImplementationForValueType(tween.ValueType);
+			if (staticPlugin != null) {
+				info.pluginType = staticPlugin;
+			}
+
+			return info;
+		}
+	}
+
+	/// <summary>
+	/// Calculation implementation using reflection.
+	/// </summary>
+	public class TweenReflectionArithmeticPlugin<TValue> : TweenPlugin<TValue>
+	{
+		///////////////////
+		// General
+
+		// User data
+		private class TweenReflectionUserData
+		{
+			public MethodInfo opAddition;
+			public MethodInfo opSubtraction;
+			public MethodInfo opMultiply;
+		}
+
+		public MethodInfo GetOperatorMethod(Type type, string name, Type secondArgumentType = null)
+		{
+			if (secondArgumentType == null)
+				secondArgumentType = typeof(TValue);
+
+			return type.GetMethod(
+				name,
+				BindingFlags.Static | BindingFlags.Public,
+				null,
+				new Type[] { typeof(TValue), secondArgumentType },
+				null
+			);
+		}
+
+		// Initialize
+		public override string Initialize(ITween tween, TweenPluginHook hook, ref object userData)
+		{
+			if (hook != TweenPluginHook.CalculateValue) {
+				return string.Format(
+					"TweenCodegenArithmeticPlugin only supports the CalculateValue hook (got {0}).",
+					hook
+				);
+			}
+
+			// Look for necessary op_* methods
+			var data = new TweenReflectionUserData();
+			data.opAddition = GetOperatorMethod(tween.ValueType, "op_Addition");
+			data.opSubtraction = GetOperatorMethod(tween.ValueType, "op_Subtraction");
+			data.opMultiply = GetOperatorMethod(tween.ValueType, "op_Multiply", typeof(float));
+
+			if (data.opAddition == null || data.opSubtraction == null || data.opMultiply == null) {
+				return string.Format(
+					"Property {0} on {1} cannot bet tweened, "
+					+ "type {2} does not support addition, "
+					+ "subtraction or multiplication.",
+					tween.Property, tween.Target, typeof(TValue)
+				);
+			}
+
+			userData = data;
+			return null;
+		}
+
+		///////////////////
+		// Calculate Value Hook
+
+		// Return the difference between start and end
+		public override TValue DiffValue(TValue start, TValue end, ref object userData)
+		{
+			return (TValue)((TweenReflectionUserData)userData).opSubtraction.Invoke(null, new object[] { end, start });
+		}
+
+		// Return the end value
+		public override TValue EndValue(TValue start, TValue diff, ref object userData)
+		{
+			return (TValue)((TweenReflectionUserData)userData).opAddition.Invoke(null, new object[] { start, diff });
+		}
+
+		// Return the value at the current position
+		public override TValue ValueAtPosition(TValue start, TValue end, TValue diff, float position, ref object userData)
+		{
+			var data = (TweenReflectionUserData)userData;
+			var offset = data.opMultiply.Invoke(null, new object[] { diff, position });
+			return (TValue)data.opAddition.Invoke(null, new object[] { start, offset });
 		}
 	}
 }

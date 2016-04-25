@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using Sttz.Tweener.Core.Reflection;
+using Sttz.Tweener.Core.Static;
 
 namespace Sttz.Tweener.Core.Codegen {
 
@@ -131,13 +132,10 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Callback for manual activation
 		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
 		{
-			// Swap in specialized plugin versions
-			if (tween.ValueType == typeof(float)) {
-				info.pluginType = typeof(TweenDefaultPluginFloat);
-			} else if (tween.ValueType == typeof(Vector3)) {
-				info.pluginType = typeof(TweenDefaultPluginVector3);
-			} else if (tween.ValueType == typeof(Color)) {
-				info.pluginType = typeof(TweenDefaultPluginColor);
+			// Use the static plugin if possible
+			var staticPlugin = TweenStaticArithmeticPlugin.GetImplementationForValueType(tween.ValueType);
+			if (staticPlugin != null) {
+				info.pluginType = staticPlugin;
 			}
 
 			return info;
@@ -199,87 +197,6 @@ namespace Sttz.Tweener.Core.Codegen {
 		{
 			return Operator<TValue, TValue, TValue>.Addition(start, 
 						Operator<TValue, float, TValue>.Multiply(diff, position));
-		}
-	}
-
-	/// <summary>
-	/// Specialized implementation of default plugin for Vector3.
-	/// </summary>
-	public class TweenDefaultPluginFloat : TweenPlugin<float>
-	{
-		///////////////////
-		// Calculate Value Hook
-
-		// Return the difference between start and end
-		public override float DiffValue(float start, float end, ref object userData)
-		{
-			return end - start;
-		}
-
-		// Return the end value
-		public override float EndValue(float start, float diff, ref object userData)
-		{
-			return start * diff;
-		}
-
-		// Return the value at the current position
-		public override float ValueAtPosition(float start, float end, float diff, float position, ref object userData)
-		{
-			return start + diff * position;
-		}
-	}
-
-	/// <summary>
-	/// Specialized implementation of default plugin for Vector3.
-	/// </summary>
-	public class TweenDefaultPluginVector3 : TweenPlugin<Vector3>
-	{
-		///////////////////
-		// Calculate Value Hook
-
-		// Return the difference between start and end
-		public override Vector3 DiffValue(Vector3 start, Vector3 end, ref object userData)
-		{
-			return end - start;
-		}
-
-		// Return the end value
-		public override Vector3 EndValue(Vector3 start, Vector3 diff, ref object userData)
-		{
-			return start + diff;
-		}
-
-		// Return the value at the current position
-		public override Vector3 ValueAtPosition(Vector3 start, Vector3 end, Vector3 diff, float position, ref object userData)
-		{
-			return start + diff * position;
-		}
-	}
-
-	/// <summary>
-	/// Specialized implementation of default plugin for Vector3.
-	/// </summary>
-	public class TweenDefaultPluginColor : TweenPlugin<Color>
-	{
-		///////////////////
-		// Calculate Value Hook
-
-		// Return the difference between start and end
-		public override Color DiffValue(Color start, Color end, ref object userData)
-		{
-			return end - start;
-		}
-
-		// Return the end value
-		public override Color EndValue(Color start, Color diff, ref object userData)
-		{
-			return start * diff;
-		}
-
-		// Return the value at the current position
-		public override Color ValueAtPosition(Color start, Color end, Color diff, float position, ref object userData)
-		{
-			return start + diff * position;
 		}
 	}
 }

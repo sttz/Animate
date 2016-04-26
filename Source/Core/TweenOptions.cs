@@ -12,8 +12,6 @@ namespace Sttz.Tweener.Core {
 		ITweenOptions ParentOptions { get; set; }
 		// Log a message
 		void Log(TweenLogLevel level, string message, params object[] args);
-		// Collect all automatic plugins
-		HashSet<TweenPluginInfo> GetAutomaticPlugins(HashSet<TweenPluginInfo> current = null);
 	}
 
 	/// <summary>
@@ -62,13 +60,6 @@ namespace Sttz.Tweener.Core {
 		// Overwrite setting
 		protected TweenOverwrite _overwrite;
 
-		// The default plugins, handling basic operation
-		protected TweenPluginInfo _defaultAccessorPlugin;
-		protected TweenPluginInfo _defaultArithmeticPlugin;
-
-		// Automatic plugins
-		protected Dictionary<TweenPluginInfo, bool> _autoPlugins;
-
 		// Log level of current scope
 		protected TweenLogLevel _logLevel;
 
@@ -99,9 +90,6 @@ namespace Sttz.Tweener.Core {
 			_tweenTiming = TweenTiming.Undefined;
 			_startDelay = float.NaN;
 			_overwrite = TweenOverwrite.Undefined;
-			_defaultAccessorPlugin = default(TweenPluginInfo);
-			_defaultArithmeticPlugin = default(TweenPluginInfo);
-			_autoPlugins = null;
 			_logLevel = TweenLogLevel.Undefined;
 
 			ResetEvents();
@@ -115,88 +103,6 @@ namespace Sttz.Tweener.Core {
 			UpdateEventImpl = null;
 			CompleteEventImpl = null;
 			ErrorEventImpl = null;
-		}
-
-		///////////////////
-		// Plugins
-
-		// The default accessor plugin, handling basic get/set operations
-		TweenPluginInfo ITweenOptions.DefaultAccessorPlugin {
-			get {
-				if (_defaultAccessorPlugin.pluginType != null) {
-					return _defaultAccessorPlugin;
-				} else if (_parent != null) {
-					return _parent.DefaultAccessorPlugin;
-				} else {
-					return TweenPluginInfo.None;
-				}
-			}
-			set {
-				_defaultAccessorPlugin = value;
-			}
-		}
-
-		// The default arithmetic plugin, handling basic math operations
-		TweenPluginInfo ITweenOptions.DefaultArithmeticPlugin {
-			get {
-				if (_defaultArithmeticPlugin.pluginType != null) {
-					return _defaultArithmeticPlugin;
-				} else if (_parent != null) {
-					return _parent.DefaultArithmeticPlugin;
-				} else {
-					return TweenPluginInfo.None;
-				}
-			}
-			set {
-				_defaultArithmeticPlugin = value;
-			}
-		}
-
-		// Register an automatic plugin
-		void ITweenOptions.SetAutomatic(TweenPluginInfo plugin, bool enable)
-		{
-			// Check for auto activation delegate
-			if (plugin.autoActivation == null) {
-				Log(TweenLogLevel.Error,
-				    "Plugin {0} does not provide automation.", plugin.pluginType);
-				return;
-			}
-
-			// Initialize plugin dictionary
-			if (_autoPlugins == null) {
-				_autoPlugins = new Dictionary<TweenPluginInfo, bool>();
-			}
-
-			// Set enabled state
-			_autoPlugins[plugin] = enable;
-		}
-
-		// Get all automatic plugins registered in the current scope
-		public HashSet<TweenPluginInfo> GetAutomaticPlugins(
-			HashSet<TweenPluginInfo> current = null
-		) {
-			// Top instance creates hash set
-			if (current == null) {
-				current = new HashSet<TweenPluginInfo>();
-			}
-
-			// Let parents recursively add their instances
-			if (_parent != null) {
-				_parent.Internal.GetAutomaticPlugins(current);
-			}
-
-			// Remove disabled and add enabled instances from current scope
-			if (_autoPlugins != null) {
-				foreach (var pair in _autoPlugins) {
-					if (pair.Value) {
-						current.Add(pair.Key);
-					} else {
-						current.Remove(pair.Key);
-					}
-				}
-			}
-
-			return current;
 		}
 
 		///////////////////
@@ -668,16 +574,6 @@ namespace Sttz.Tweener.Core {
 		public TContainer OnError(EventHandler<TweenEventArgs> handler)
 		{
 			Options.ErrorEvent += handler;
-			return this as TContainer;
-		}
-
-		///////////////////
-		// Plugins
-
-		// Make a plugin automatic (or revert)
-		public TContainer Automate(TweenPluginInfo plugin, bool enable = true)
-		{
-			Options.SetAutomatic(plugin, enable);
 			return this as TContainer;
 		}
 

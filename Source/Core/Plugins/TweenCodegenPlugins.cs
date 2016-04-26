@@ -12,16 +12,10 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// </summary>
 	public static class TweenCodegenAccessorPlugin
 	{
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
 		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenCodegenAccessorPlugin<,>),
-				canBeOverwritten = true,
-				hooks =
-					TweenPluginType.Getter
-					| TweenPluginType.Setter
-			};
+			return TweenCodegenAccessorPlugin<TTarget, TValue>.Load(tween);
 		}
 	}
 
@@ -32,6 +26,18 @@ namespace Sttz.Tweener.Core.Codegen {
 		: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
 		where TTarget : class
 	{
+		///////////////////
+		// Usage
+
+		static TweenCodegenAccessorPlugin<TTarget, TValue> _sharedInstance
+			= new TweenCodegenAccessorPlugin<TTarget, TValue>();
+
+		public static bool Load(Tween<TTarget, TValue> tween)
+		{
+			tween.LoadPlugin(_sharedInstance, weak: true);
+			return true;
+		}
+
 		///////////////////
 		// General
 
@@ -115,27 +121,13 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// </summary>
 	public static class TweenCodegenArithmeticPlugin
 	{
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
-		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenCodegenArithmeticPlugin<>),
-				canBeOverwritten = true,
-				hooks = TweenPluginType.Arithmetic,
-				manualActivation = ManualActivation
-			};
-		}
+		///////////////////
+		// Usage
 
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
 		{
-			// Use the static plugin if possible
-			var staticPlugin = TweenStaticArithmeticPlugin.GetImplementationForValueType(tween.ValueType);
-			if (staticPlugin != null) {
-				info.pluginType = staticPlugin;
-			}
-
-			return info;
+			return TweenCodegenArithmeticPlugin<TValue>.Load(tween);
 		}
 	}
 
@@ -144,6 +136,25 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// </summary>
 	public class TweenCodegenArithmeticPlugin<TValue> : ITweenArithmeticPlugin<TValue>
 	{
+		///////////////////
+		// Usage
+
+		static TweenCodegenArithmeticPlugin<TValue> _sharedInstance
+			= new TweenCodegenArithmeticPlugin<TValue>();
+
+		public static bool Load<TTarget>(Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			// Use the static plugin if possible
+			if (TweenStaticArithmeticPlugin.Load(tween)) {
+				return true;
+			}
+
+			// Fall back to the reflection plugin
+			tween.LoadPlugin(_sharedInstance, weak: true);
+			return true;
+		}
+
 		///////////////////
 		// General
 

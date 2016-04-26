@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Sttz.Tweener.Core.Codegen;
+using Sttz.Tweener.Plugins;
 
 namespace Sttz.Tweener.Core {
 
@@ -11,6 +13,9 @@ namespace Sttz.Tweener.Core {
 	/// </summary>
 	public interface ITweenEngine
 	{
+		void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class;
+
 		// Default group used for sinlge tweens
 		TweenGroup<object> SinglesGroup { get; }
 		// Register a new group with the engine
@@ -63,7 +68,7 @@ namespace Sttz.Tweener.Core {
 
 		// Singleton
 		private static ITweenEngine _instance;
-		protected static ITweenEngine Instance {
+		internal static ITweenEngine Instance {
 			get {
 				if (System.Object.ReferenceEquals(_instance, null)) {
 					var go = new GameObject("Animate");
@@ -85,6 +90,12 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Methods
 
+		public virtual void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			// NOP
+		}
+
 		// Add a tween to default group
 		public TweenGroup<object> SinglesGroup {
 			get {
@@ -100,7 +111,7 @@ namespace Sttz.Tweener.Core {
 		// Register a new tween group
 		public void RegisterGroup(ITweenGroup tweenGroup)
 		{
-			tweenGroup.Retain();
+			tweenGroup.Options.RetainCount++;
 			_groups.Add(tweenGroup);
 		}
 
@@ -208,7 +219,7 @@ namespace Sttz.Tweener.Core {
 			for (int i = 0; i < _groups.Count; i++) {
 				if (!_groups[i].Internal.Update(timing)) {
 					// Return group to the pool
-					_groups[i].Release();
+					_groups[i].Options.RetainCount--;
 					_groups.RemoveAt(i); i--;
 				}
 			}

@@ -90,31 +90,6 @@ namespace Sttz.Tweener {
 		event EventHandler<TweenEventArgs> ErrorEvent;
 
 		/// <summary>
-		/// Default plugin used to get/set the target value if no other plugin
-		/// is used or automatically activated.
-		/// </summary>
-		TweenPluginInfo DefaultAccessorPlugin { get; set; }
-		/// <summary>
-		/// Gets or sets the default arithmetic plugin.
-		/// </summary>
-		TweenPluginInfo DefaultArithmeticPlugin { get; set; }
-
-		/// <summary>
-		/// Enable a plugin's automatic activation. The plugin will try
-		/// to autodetect when it's needed and activate automatically.
-		/// Not all plugins might support automatic activation. Usually
-		/// plugins provide a <c>Automatic</c> method if they do.
-		/// </summary>
-		/// <param name='plugin'>
-		/// Plugin to enable automatic activation for. Use the plugin's
-		/// <c>Automatic</c> method, e.g. <see cref="M:TweenSctruct.Automatic"/>.
-		/// </param>
-		/// <param name='enable'>
-		/// Set to false to disable a plugin's automatic activation.
-		/// </param>
-		void SetAutomatic(TweenPluginInfo plugin, bool enable = true);
-
-		/// <summary>
 		/// Log level of the current scope. Only messages with equal
 		/// or higher level will be logged to the console.
 		/// </summary>
@@ -137,16 +112,6 @@ namespace Sttz.Tweener {
 	/// </remarks>
 	public interface ITweenOptionsFluid<TContainer>
 	{
-		///////////////////
-		// Options
-
-		/// <summary>
-		/// Access the tween's options. All options can also be set 
-		/// using the fluid interface methods on 
-		/// <see cref="ITweenOptionsFluid<TContainer>"/>.
-		/// </summary>
-		ITweenOptions Options { get; }
-
 		///////////////////
 		// Properties
 
@@ -219,24 +184,6 @@ namespace Sttz.Tweener {
 		TContainer OnError(EventHandler<TweenEventArgs> handler);
 
 		///////////////////
-		// Plugins
-
-		/// <summary>
-		/// Enable a plugin's automatic activation. The plugin will try
-		/// to autodetect when it's needed and activate automatically.
-		/// Not all plugins might support automatic activation. Usually
-		/// plugins provide a <c>Automatic</c> method if they do.
-		/// </summary>
-		/// <param name='plugin'>
-		/// Plugin to enable automatic activation for. Use the plugin's
-		/// <c>Automatic</c> method, e.g. <see cref="M:TweenSctruct.Automatic"/>.
-		/// </param>
-		/// <param name='enable'>
-		/// Set to false to disable a plugin's automatic activation.
-		/// </param>
-		TContainer Automate(TweenPluginInfo plugin, bool enable = true);
-
-		///////////////////
 		// Coroutines
 
 		/// <summary>
@@ -267,6 +214,17 @@ namespace Sttz.Tweener {
 	/// options but the group's and tween's options can still override the
 	/// template's.
 	/// </remarks>
-	public interface ITweenTemplate : ITweenOptionsFluid<ITweenTemplate> { }
+	public interface ITweenTemplate : ITweenOptionsFluid<ITweenTemplate>
+	{
+		///////////////////
+		// Options
+
+		/// <summary>
+		/// Access the tween's options. All options can also be set 
+		/// using the fluid interface methods on 
+		/// <see cref="ITweenOptionsFluid<TContainer>"/>.
+		/// </summary>
+		ITweenOptions Options { get; }
+	}
 
 }

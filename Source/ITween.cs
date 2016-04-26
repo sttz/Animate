@@ -79,15 +79,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.To<TValue>"/>
 		/// <seealso cref="ITweenGroup.To<TValue>"/>
 		public static Tween<TTarget, TValue> To<TTarget, TValue>(
-			TTarget target, string property, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, string property, TValue toValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.To, 
 				target, float.NaN, property, 
-				default(TValue), toValue, default(TValue), 
-				plugins
+				default(TValue), toValue, default(TValue)
 			);
 		}
 
@@ -118,15 +116,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.To<TValue>"/>
 		/// <seealso cref="ITweenGroup.To<TValue>"/>
 		public static Tween<TTarget, TValue> To<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue toValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.To, 
 				target, duration, property, 
-				default(TValue), toValue, default(TValue), 
-				plugins
+				default(TValue), toValue, default(TValue)
 			);
 		}
 
@@ -189,15 +185,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.From<TValue>"/>
 		/// <seealso cref="ITweenGroup.From<TValue>"/>
 		public static Tween<TTarget, TValue> From<TTarget, TValue>(
-			TTarget target, string property, TValue fromValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, string property, TValue fromValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.From, 
 				target, float.NaN, property, 
-				fromValue, default(TValue), default(TValue), 
-				plugins
+				fromValue, default(TValue), default(TValue)
 			);
 		}
 
@@ -228,15 +222,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.From<TValue>"/>
 		/// <seealso cref="ITweenGroup.From<TValue>"/>
 		public static Tween<TTarget, TValue> From<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue fromValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue fromValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.From, 
 				target, duration, property, 
-				fromValue, default(TValue), default(TValue), 
-				plugins
+				fromValue, default(TValue), default(TValue)
 			);
 		}
 
@@ -307,15 +299,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.FromTo<TValue>"/>
 		/// <seealso cref="ITweenGroup.FromTo<TValue>"/>
 		public static Tween<TTarget, TValue> FromTo<TTarget, TValue>(
-			TTarget target, string property, TValue fromValue, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, string property, TValue fromValue, TValue toValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.FromTo, 
 				target, float.NaN, property, 
-				fromValue, toValue, default(TValue), 
-				plugins
+				fromValue, toValue, default(TValue)
 			);
 		}
 
@@ -350,15 +340,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.FromTo<TValue>"/>
 		/// <seealso cref="ITweenGroup.FromTo<TValue>"/>
 		public static Tween<TTarget, TValue> FromTo<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue fromValue, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue fromValue, TValue toValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.FromTo, 
 				target, duration, property, 
-				fromValue, toValue, default(TValue), 
-				plugins
+				fromValue, toValue, default(TValue)
 			);
 		}
 
@@ -421,15 +409,13 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.By<TValue>"/>
 		/// <seealso cref="ITweenGroup.By<TValue>"/>
 		public static Tween<TTarget, TValue> By<TTarget, TValue>(
-			TTarget target, string property, TValue byValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, string property, TValue byValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.By, 
 				target, float.NaN, property, 
-				default(TValue), default(TValue), byValue, 
-				plugins
+				default(TValue), default(TValue), byValue
 			);
 		}
 
@@ -460,21 +446,25 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.By<TValue>"/>
 		/// <seealso cref="ITweenGroup.By<TValue>"/>
 		public static Tween<TTarget, TValue> By<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue byValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue byValue
 		)
 			where TTarget : class
 		{
 			return Tween<TTarget, TValue>.Create(TweenMethod.By, 
 				target, duration, property, 
-				default(TValue), default(TValue), byValue, 
-				plugins
+				default(TValue), default(TValue), byValue
 			);
 		}
 	}
 
 	///////////////////
 	// ITween
+
+	public interface ITween<TTarget, TValue> : ITween
+		where TTarget : class
+	{
+
+	}
 
 	/// <summary>
 	/// Individual tween.
@@ -500,8 +490,18 @@ namespace Sttz.Tweener {
 	/// you normally don't have to unregister event handlers you register.
 	/// </para>
 	/// </remarks>
-	public interface ITween : ITweenOptionsFluid<ITween>
+	public interface ITween
 	{
+		///////////////////
+		// Options
+
+		/// <summary>
+		/// Access the tween's options. All options can also be set 
+		/// using the fluid interface methods on 
+		/// <see cref="ITweenOptionsFluid<TContainer>"/>.
+		/// </summary>
+		ITweenOptions Options { get; }
+
 		///////////////////
 		// Tween properties
 

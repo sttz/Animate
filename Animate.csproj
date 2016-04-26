@@ -50,7 +50,9 @@
     <Compile Include="Source\Core\Plugins\TweenCodegen.cs" />
     <Compile Include="Source\Core\Plugins\TweenCodegenPlugins.cs" />
     <Compile Include="Source\Core\Plugins\TweenReflectionPlugin.cs" />
-    <Compile Include="Source\Core\Plugins\TweenStaticPlugin.cs" />
+    <Compile Include="Source\Core\Plugins\TweenStaticPlugins.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="Source\Core\Plugins\TweenStaticUnityPlugins.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEditor">

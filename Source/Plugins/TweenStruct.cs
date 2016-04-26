@@ -49,79 +49,26 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		/// <summary>
-		/// TweenPluginInfo that can be used for automatic activation.
-		/// </summary>
-		/// <seealso cref="ITweenOptions.SetAutomatic"/>
-		/// <seealso cref="ITweenOptionsFluid<TContainer>.Automate"/>
-		public static TweenPluginInfo Automatic()
-		{
-			return DefaultInfo;
-		}
-
-		/// <summary>
-		/// Use the TweenStruct plugin for the current tween.
-		/// </summary>
-		/// <param name='property'>
-		/// Name of the property on the struct. If you don't set the property
-		/// here, you need to use the "struct.property" syntax for the tween's
-		/// property.
-		/// </param>
-		public static TweenPluginInfo Use(string property = null)
-		{
-			var info = DefaultInfo;
-			info.getValueUserData = info.setValueUserData = property;
-			return info;
-		}
-
-		///////////////////
-		// Activation
-
-		// Default plugin info
-		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
-			// Generic plugin type
-			pluginType = typeof(TweenStructImpl<,>),
-			// Plugin needs to get and set the value
-			hooks = TweenPluginType.Getter | TweenPluginType.Setter,
-			// Delegate to select proper plugin type for manual mode
-			manualActivation = ManualActivation,
-			// Enable automatic activation
-			autoActivation = ShouldActivate
-		};
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			info = ShouldActivate(tween, info);
-
-			if (info.pluginType == null) {
-				tween.Internal.Log(TweenLogLevel.Error,
-					"TweenStruct: Struct or struct property could not be found "
-					+ "for tween of {0} on {1}.",
-					tween.Property, tween.Target);
-			}
-
-			return info;
-		}
-
-		// Returns if the plugin should activate automatically
-		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(
+			Tween<TTarget, TValue> tween, bool automatic = false, string property = null
+		)
+			where TTarget : class
 		{
 			string structProperty = null;
 			string nestedProperty = null;
 			MemberInfo member;
 
 			// Manual activation path
-			if (info.getValueUserData is string) {
+			if (property != null) {
 				structProperty = tween.Property;
-				nestedProperty = (info.getValueUserData as string);
-			
+				nestedProperty = property;
+
 			// Automatic activation path
 			} else {
 				// Split path, e.g. "struct.property"
 				var parts = tween.Property.Split('.');
 				if (parts.Length != 2) {
-					return TweenPluginInfo.None;
+					return false;
 				}
 				structProperty = parts[0];
 				nestedProperty = parts[1];
@@ -130,27 +77,46 @@ namespace Sttz.Tweener.Plugins {
 			// Look for struct
 			member = TweenReflection.FindMember(tween.Target.GetType(), structProperty);
 			if (member == null) {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// Check type
 			var memberType = TweenReflection.MemberType(member);
 			if (!memberType.IsValueType) {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// Look for struct value
 			var nestedMember = TweenReflection.FindMember(memberType, nestedProperty);
 			if (nestedMember == null) {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// So far ok!
-			info.getValueUserData = info.setValueUserData = new TweenStructArguments() {
+			var userData = new TweenStructArguments() {
 				memberInfo = member,
 				nestedMemberInfo = nestedMember
 			};
-			return info;
+			var instance = TweenStructImpl<TTarget, TValue>.sharedInstance;
+
+			// Set plugin type to use
+			tween.LoadPlugin(instance, weak: automatic, userData: userData);
+			return true;
+		}
+
+		public static Tween<TTarget, TValue> PluginRigidbody<TTarget, TValue>(
+			this Tween<TTarget, TValue> tween, string property = null
+		)
+			where TTarget : class
+		{
+			if (!Load(tween)) {
+				tween.PluginError("TweenMaterial",
+					"TweenStruct: Struct or struct property could not be found "
+					+ "for tween of {0} on {1}.",
+					tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////
@@ -181,6 +147,9 @@ namespace Sttz.Tweener.Plugins {
 			: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
 			where TTarget : class
 		{
+			internal static TweenStructImpl<TTarget, TValue> sharedInstance
+				= new TweenStructImpl<TTarget, TValue>();
+
 			// Initialize
 			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 			{

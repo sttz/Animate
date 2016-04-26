@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Sttz.Tweener.Core {
 
@@ -29,7 +31,7 @@ namespace Sttz.Tweener.Core {
 	}
 
 	// Single tween
-	public class Tween<TTarget, TValue> : TweenOptionsFluid<ITween>, ITween, ITweenInternal
+	public class Tween<TTarget, TValue> : TweenOptionsFluid<Tween<TTarget, TValue>>, ITween, ITweenInternal
 		where TTarget : class
 	{
 		///////////////////
@@ -44,6 +46,8 @@ namespace Sttz.Tweener.Core {
 		protected TTarget _target;
 		// Property on the tween to animate
 		protected string _property;
+		// Options parsed from the property
+		protected string _options;
 
 		// First value (To, From, By)
 		protected TValue _startValue;
@@ -71,17 +75,17 @@ namespace Sttz.Tweener.Core {
 		// Have values already been prepared?
 		protected bool _valuesPrepared;
 
-		// Plugins requested to be activated for this tween
-		protected TweenPluginInfo[] _plugins;
-
 		// Plugin hook to get value
-		protected TweenPluginInfo _hookGetInfo;
+		protected bool _hookGetWeak;
+		protected object _hookGetUserData;
 		protected ITweenGetterPlugin<TTarget, TValue> _hookGet;
 		// Plugin hook to set value
-		protected TweenPluginInfo _hookSetInfo;
+		protected bool _hookSetWeak;
+		protected object _hookSetUserData;
 		protected ITweenSetterPlugin<TTarget, TValue> _hookSet;
 		// Plugin hook to calculate value
-		protected TweenPluginInfo _hookCalculateInfo;
+		protected bool _hookCalculateWeak;
+		protected object _hookCalculateUserData;
 		protected ITweenArithmeticPlugin<TValue> _hookCalculate;
 
 		// Cached (1 / _duration) for performance
@@ -109,7 +113,6 @@ namespace Sttz.Tweener.Core {
 			TValue startValue,
 			TValue endValue,
 			TValue diffValue,
-			TweenPluginInfo[] plugins,
 			ITweenOptions parentOptions = null
 		) {
 			// Basic sanity checks
@@ -140,7 +143,7 @@ namespace Sttz.Tweener.Core {
 			tween.Use(
 				tweenMethod, target, duration, property, 
 				startValue, endValue, diffValue, 
-				plugins, parentOptions
+				parentOptions
 			);
 			return tween;
 		}
@@ -154,7 +157,6 @@ namespace Sttz.Tweener.Core {
 			TValue startValue,
 			TValue endValue,
 			TValue diffValue,
-			TweenPluginInfo[] plugins,
 			ITweenOptions parentOptions
 		) {
 			if (_state != TweenState.Unused) {
@@ -171,7 +173,6 @@ namespace Sttz.Tweener.Core {
 			_startValue = startValue;
 			_endValue = endValue;
 			_diffValue = diffValue;
-			_plugins = plugins;
 			_parent = parentOptions;
 
 			// Set creation time
@@ -189,6 +190,7 @@ namespace Sttz.Tweener.Core {
 			_tweenMethod = TweenMethod.To;
 			_target = null;
 			_property = null;
+			_options = null;
 
 			_targetIsUnityObject = false;
 			_targetIsUnityRef = false;
@@ -208,13 +210,15 @@ namespace Sttz.Tweener.Core {
 			_validated = false;
 			_valuesPrepared = false;
 
-			_plugins = null;
+			_hookGetWeak = false;
+			_hookGetUserData = null;
 			_hookGet = null;
-			_hookGetInfo = default(TweenPluginInfo);
+			_hookSetWeak = false;
+			_hookSetUserData = null;
 			_hookSet = null;
-			_hookSetInfo = default(TweenPluginInfo);
+			_hookCalculateWeak = false;
+			_hookCalculateUserData = null;
 			_hookCalculate = null;
-			_hookCalculateInfo = default(TweenPluginInfo);
 
 			_state = TweenState.Unused;
 		}
@@ -235,76 +239,7 @@ namespace Sttz.Tweener.Core {
 		// Validate the tween early, optionally forcing a render of the tween
 		public bool Validate(bool forceRender = false)
 		{
-			// Load default plugin
-			var defaultAccessorInfo = Options.DefaultAccessorPlugin;
-			if (defaultAccessorInfo.manualActivation != null) {
-				defaultAccessorInfo = defaultAccessorInfo.manualActivation(this, defaultAccessorInfo);
-			}
-			_hookGetInfo = _hookSetInfo = defaultAccessorInfo;
-
-			var defaultArithmeticInfo = Options.DefaultArithmeticPlugin;
-			if (defaultArithmeticInfo.manualActivation != null) {
-				defaultArithmeticInfo = defaultArithmeticInfo.manualActivation(this, defaultArithmeticInfo);
-			}
-			_hookCalculateInfo = defaultArithmeticInfo;
-
-			// Register automatic plugins
-			var autoPlugins = GetAutomaticPlugins();
-			foreach (var pluginInfo in autoPlugins) {
-				// Check if plugin should be registered
-				var data = pluginInfo.autoActivation(this, pluginInfo);
-				if (data.pluginType == null) continue;
-				// Check plugin type
-				if (!PluginCheckType(data)) {
-					continue;
-				}
-				// Try to register plugin
-				if (!RegisterPlugin(data, false)) {
-					// Automatic plugins are optional
-					continue;
-				}
-			}
-
-			// Register manual plugins
-			if (_plugins != null) {
-				foreach (var pluginInfo in _plugins) {
-					var data = pluginInfo;
-					// Let plugin choose concrete type
-					if (data.manualActivation != null) {
-						data = data.manualActivation(this, data);
-					}
-					// Plugin manual activation failed
-					if (data.pluginType == null) {
-						// TODO: Error message from plugin
-						Fail("Plugin {0} failed to activate.",  pluginInfo.pluginType);
-						return false;
-					}
-					// Validate type
-					if (!PluginCheckType(data)) {
-						Fail("Plugin {0} cannot handle tween type {1} of property {2} on {3}.",
-						     data.pluginType, typeof(TValue), _property, _target);
-						return false;
-					}
-					if (!RegisterPlugin(data, true)) {
-						// Manual plugins are required
-						return false;
-					}
-				}
-			}
-
 			// Check conditions
-			if (_hookGetInfo.pluginType == null) {
-				Fail("No plugin registered for get value hook on tween of {0} on {1}.", _property, _target);
-				return false;
-			}
-			if (_hookSetInfo.pluginType == null) {
-				Fail("No plugin registered for set value hook on tween of {0} on {1}.", _property, _target);
-				return false;
-			}
-			if (_hookCalculateInfo.pluginType == null) {
-				Fail("No plugin registered for calculate value hook on tween of {0} on {1}.", _property, _target);
-				return false;
-			}
 			if (float.IsNaN(Options.Duration)) {
 				Fail("Duration not set for tween of {0} on {1}.", _property, _target);
 				return false;
@@ -315,33 +250,40 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Load plugins
-			_hookGet = GetPlugin<ITweenGetterPlugin<TTarget, TValue>>(_hookGetInfo);
-			_hookSet = GetPlugin<ITweenSetterPlugin<TTarget, TValue>>(_hookSetInfo);
-			_hookCalculate = GetPlugin<ITweenArithmeticPlugin<TValue>>(_hookCalculateInfo);
-			if (_hookGet == null || _hookSet == null || _hookCalculate == null) return false;
+			// TODO: Make this independent of UnityTweenEngine
+			UnityTweenEngine.Instance.LoadPlugins(this);
 
-			Log(TweenLogLevel.Debug, 
-			    "Tweening {0} on {1} with {2}, {3} and {4}.",
-			    _property, _target, _hookGet, _hookSet, _hookCalculate
+			if (_state == TweenState.Error)
+				return false;
+
+			if (_hookGet == null || _hookSet == null || _hookCalculate == null) {
+				Fail("Missing plugins: Getter = {0}, Setter = {1}, Arithmetic = {2}",
+					_hookGet, _hookSet, _hookCalculate);
+				return false;
+			}
+
+			Log(TweenLogLevel.Debug,
+				"Tweening {0} on {1} with {2}, {3} and {4}.",
+				_property, _target, _hookGet, _hookSet, _hookCalculate
 			);
 
 			// Initialize plugins
 			string error;
 
 			// TODO: Combine init?
-			error = _hookGet.Initialize(this, TweenPluginType.Getter, ref _hookGetInfo.getValueUserData);
+			error = _hookGet.Initialize(this, TweenPluginType.Getter, ref _hookGetUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookGet, error);
 				return false;
 			}
 
-			error = _hookSet.Initialize(this, TweenPluginType.Setter, ref _hookSetInfo.setValueUserData);
+			error = _hookSet.Initialize(this, TweenPluginType.Setter, ref _hookSetUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookSet, error);
 				return false;
 			}
 
-			error = _hookCalculate.Initialize(this, TweenPluginType.Arithmetic, ref _hookCalculateInfo.calculateValueUserData);
+			error = _hookCalculate.Initialize(this, TweenPluginType.Arithmetic, ref _hookCalculateUserData);
 			if (error != null) {
 				Fail("{0}: {1}", _hookCalculate, error);
 				return false;
@@ -358,175 +300,137 @@ namespace Sttz.Tweener.Core {
 			return true;
 		}
 
-		// Check if the plugin type is compatible
-		protected bool PluginCheckType(TweenPluginInfo info)
+		///////////////////
+		// Plugin API
+
+		// Regex used to parse options from property string
+		// for automatic plugins.
+		private static readonly Regex OptionsRegex = new Regex(
+			@"^:(?<options>\w+):(?<property>.*)$",
+			RegexOptions.ExplicitCapture
+		);
+
+		public string PropertyOptions {
+			get {
+				if (_options == null) {
+					// Try to parse options from property
+					var match = OptionsRegex.Match(_property);
+					if (!match.Success) {
+						_options = "";
+					} else {
+						// Remove options from tween property
+						_property = match.Groups["property"].Value;
+						_options = match.Groups["options"].Value;
+					}
+				}
+				return _options;
+			}
+		}
+
+		public bool LoadPlugin(ITweenPlugin plugin, bool weak, object userData = null)
 		{
-			// No plugin type set
-			if (info.pluginType == null)
+			if (_state >= TweenState.Complete || plugin == null) {
 				return false;
+			}
 
-			// Look for ITweenPlugin interface and check its type parameter
-			var interfaces = info.pluginType.GetInterfaces();
-			foreach (var iface in interfaces) {
-				if (!iface.IsGenericType)
-					continue;
-
-				var genericType = iface.GetGenericTypeDefinition();
-
-				if (genericType == typeof(ITweenGetterPlugin<,>)
-				    	|| genericType == typeof(ITweenSetterPlugin<,>)) {
-					var args = iface.GetGenericArguments();
-					return (
-						GenericArgumentIsCompatible(args[0], typeof(TTarget))
-						&& GenericArgumentIsCompatible(args[1], typeof(TValue))
-					);
+			var getterPlugin = plugin as ITweenGetterPlugin<TTarget, TValue>;
+			if (getterPlugin != null) {
+				var action = GetPluginOverride(_hookGetWeak || _hookGet == null, weak);
+				if (action == 1) {
+					_hookGet = getterPlugin;
+					_hookGetWeak = weak;
+					_hookGetUserData = userData;
 				
-				} else if (genericType == typeof(ITweenArithmeticPlugin<>)) {
-					var args = iface.GetGenericArguments();
-					return GenericArgumentIsCompatible(args[0], typeof(TValue));
-				}
-			}
-
-			// Type does not implement matching interface
-			return false;
-		}
-
-		protected bool GenericArgumentIsCompatible(Type argument, Type compatibleTo)
-		{
-			// Unassigned generic type, assume we can assign it
-			if (argument.IsGenericParameter) {
-				return true;
-			}
-			// Otherwise require the type to match exactly
-			if (argument == compatibleTo) {
-				return true;
-			}
-
-			return false;
-		}
-
-		// Get a shared plugin instance
-		protected TPlugin GetPlugin<TPlugin>(TweenPluginInfo info)
-		{
-			// Get closed type
-			var type = info.pluginType;
-			if (type.ContainsGenericParameters) {
-				if (type.GetGenericArguments().Length == 1) {
-					type = type.MakeGenericType(typeof(TValue));
-				} else {
-					type = type.MakeGenericType(typeof(TTarget), typeof(TValue));
-				}
-			}
-			
-			// Create new instance
-			if (!_sharedPlugins.ContainsKey(type)) {
-				var instance = Activator.CreateInstance(type);
-				_sharedPlugins[type] = instance;
-			}
-
-			// Return existing instance
-			return (TPlugin)_sharedPlugins[type];
-		}
-
-		// Register plugins
-		protected bool RegisterPlugin(TweenPluginInfo info, bool fail)
-		{
-			int getHook = 0, setHook = 0, calcHook = 0;
-
-			// Check if hooks are available, automatic plugins fail silently
-			if ((info.hooks & TweenPluginType.Getter) > 0) {
-				if (_hookGetInfo.pluginType == null) {
-					getHook = 1;
-				} else {
-					getHook = CheckHook(_hookGetInfo, info, TweenPluginType.Getter);
-					if (getHook == -1) {
-						RegisterPluginError(fail, 
-							"GetValueHook required by {0} already used by {1}.",
-							info.pluginType, _hookGetInfo.pluginType);
+				} else if (action == -1) {
+					var error = string.Format(
+						"Load plugin: Getter hook required by {0} already used by {1}.",
+						plugin.GetType().Name, _hookGet.GetType().Name
+					);
+					if (weak) {
+						Log(TweenLogLevel.Debug, error);
+					} else {
+						Fail(error);
 						return false;
 					}
 				}
 			}
 
-			if ((info.hooks & TweenPluginType.Setter) > 0) {
-				if (_hookSetInfo.pluginType == null) {
-					setHook = 1;
-				} else {
-					setHook = CheckHook(_hookSetInfo, info, TweenPluginType.Setter);
-					if (setHook == -1) {
-						RegisterPluginError(fail, 
-							"SetValueHook required by {0} already used by {1}.",
-							info.pluginType, _hookSetInfo.pluginType);
+			var setterPlugin = plugin as ITweenSetterPlugin<TTarget, TValue>;
+			if (setterPlugin != null) {
+				var action = GetPluginOverride(_hookSetWeak || _hookSet == null, weak);
+				if (action == 1) {
+					_hookSet = setterPlugin;
+					_hookSetWeak = weak;
+					_hookSetUserData = userData;
+
+				} else if (action == -1) {
+					var error = string.Format(
+						"Load Plugin: Setter hook required by {0} already used by {1}.",
+						plugin.GetType().Name, _hookSet.GetType().Name
+					);
+					if (weak) {
+						Log(TweenLogLevel.Debug, error);
+					} else {
+						Fail(error);
 						return false;
 					}
 				}
 			}
 
-			if ((info.hooks & TweenPluginType.Arithmetic) > 0) {
-				if (_hookCalculateInfo.pluginType == null) {
-					calcHook = 1;
-				} else {
-					calcHook = CheckHook(_hookCalculateInfo, info, TweenPluginType.Arithmetic);
-					if (calcHook == -1) {
-						RegisterPluginError(fail, 
-							"CalculateValueHook required by {0} already used by {1}.",
-							info.pluginType, _hookCalculateInfo.pluginType);
+			var arithmeticPlugin = plugin as ITweenArithmeticPlugin<TValue>;
+			if (arithmeticPlugin != null) {
+				var action = GetPluginOverride(_hookCalculateWeak || _hookCalculate == null, weak);
+				if (action == 1) {
+					_hookCalculate = arithmeticPlugin;
+					_hookCalculateWeak = weak;
+					_hookCalculateUserData = userData;
+
+				} else if (action == -1) {
+					var error = string.Format(
+						"Load Plugin: Arithmetic hook required by {0} already used by {1}.",
+						plugin.GetType().Name, _hookCalculate.GetType().Name
+					);
+					if (weak) {
+						Log(TweenLogLevel.Debug, error);
+					} else {
+						Fail(error);
 						return false;
 					}
 				}
 			}
 
-			// Plugin doesn't want any hooks
-			if (getHook != 1 && setHook != 1 && calcHook != 1) return true;
-
-			// Register hooks
-			if (getHook == 1) {
-				_hookGetInfo = info;
-			}
-			if (setHook == 1) {
-				_hookSetInfo = info;
-			}
-			if (calcHook == 1) {
-				_hookCalculateInfo = info;
-			}
 			return true;
 		}
 
-		// Plugin error that optionally fails
-		protected void RegisterPluginError(bool fail, string message, params object[] args)
+		public void PluginError(string pluginName, string format, params object[] args)
 		{
-			if (!fail) {
-				Log(TweenLogLevel.Debug, message, args);
-			} else {
-				Fail(message, args);
-			}
+			if (_state == TweenState.Error) return;
+
+			Fail(
+				"Error from plugin {0}: {1}", 
+			    pluginName, string.Format(format, args)
+			);
 		}
 
 		// Check a single combination of hook flags
 		// Returns: 1 = overwrite, 0 = don't overwrite, -1 = error
-		protected int CheckHook(TweenPluginInfo one, TweenPluginInfo two, TweenPluginType checkHook)
+		protected int GetPluginOverride(bool installedWeak, bool overwriterWeak)
 		{
 			// weak <- weak		true
 			// weak <- strong	true
 			// strong <- weak	false
 			// strong <- strong	error
 
-			// Check if flag is set in both masks
-			if ((one.hooks & two.hooks & checkHook) > 0) {
-				// One is weak: Always overwrite
-				if (one.canBeOverwritten) {
-					return 1;
-				// Two is weak: Don't overwrite
-				} else if (two.canBeOverwritten) {
-					return 0;
-				// Two is strong: Error
-				} else {
-					return -1;
-				}
+			// Installed is weak: Always overwrite
+			if (installedWeak) {
+				return 1;
+			// Overwriter is weak: Don't overwrite
+			} else if (overwriterWeak) {
+				return 0;
+			// Two is strong: Error
+			} else {
+				return -1;
 			}
-
-			// No conflicting flags: All ok
-			return 1;
 		}
 
 		///////////////////
@@ -850,7 +754,7 @@ namespace Sttz.Tweener.Core {
 		public TValue Value {
 			get {
 				try {
-					return _hookGet.GetValue(_target, _property, ref _hookGetInfo.getValueUserData);
+					return _hookGet.GetValue(_target, _property, ref _hookGetUserData);
 				} catch (Exception e) {
 					Fail("Tween stopped because of exception: {0}", e);
 					return default(TValue);
@@ -858,7 +762,7 @@ namespace Sttz.Tweener.Core {
 			}
 			set {
 				try {
-					_hookSet.SetValue(_target, _property, value, ref _hookSetInfo.setValueUserData);
+					_hookSet.SetValue(_target, _property, value, ref _hookSetUserData);
 				} catch (Exception e) {
 					Fail("Tween stopped because of exception: {0}", e);
 				}
@@ -919,15 +823,15 @@ namespace Sttz.Tweener.Core {
 			try {
 				if (_tweenMethod == TweenMethod.To) {
 					_startValue = Value;
-					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateInfo.calculateValueUserData);
+					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateUserData);
 				} else if (_tweenMethod == TweenMethod.From) {
 					_endValue = Value;
-					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateInfo.calculateValueUserData);
+					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateUserData);
 				} else if (_tweenMethod == TweenMethod.FromTo) {
-					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateInfo.calculateValueUserData);
+					_diffValue = _hookCalculate.DiffValue(_startValue, _endValue, ref _hookCalculateUserData);
 				} else if (_tweenMethod == TweenMethod.By) {
 					_startValue = Value;
-					_endValue = _hookCalculate.EndValue(_startValue, _diffValue, ref _hookCalculateInfo.calculateValueUserData);
+					_endValue = _hookCalculate.EndValue(_startValue, _diffValue, ref _hookCalculateUserData);
 				}
 			} catch (Exception e) {
 				Fail("Tween stopped because of exception: {0}", e);
@@ -1019,7 +923,7 @@ namespace Sttz.Tweener.Core {
 				return _hookCalculate.ValueAtPosition(
 					_startValue, _endValue, _diffValue,
 					position,
-					ref _hookCalculateInfo.calculateValueUserData
+					ref _hookCalculateUserData
 				);
 			} catch (Exception e) {
 				Fail("Tween stopped because of exception: {0}", e);

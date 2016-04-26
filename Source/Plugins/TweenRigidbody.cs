@@ -39,81 +39,48 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		/// <summary>
-		/// TweenPluginInfo that can be used for automatic activation.
-		/// </summary>
-		/// <seealso cref="ITweenOptions.SetAutomatic"/>
-		/// <seealso cref="ITweenOptionsFluid<TContainer>.Automate"/>
-		public static TweenPluginInfo Automatic()
-		{
-			return DefaultInfo;
-		}
-
-		/// <summary>
-		/// Use the TweenRigidbody plugin for the current tween.
-		/// </summary>
-		public static TweenPluginInfo Use()
-		{
-			return DefaultInfo;
-		}
-
-		///////////////////
-		// Activation
-
-		// Default plugin info
-		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
-			// Generic plugin type
-			pluginType = typeof(TweenRigidbody),
-			// Plugin needs to set the value
-			hooks = TweenPluginType.Setter,
-			// Choose proper type for manual activation
-			manualActivation = ManualActivation,
-			// Enable automatic activation
-			autoActivation = ShouldActivate
-		};
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			info = ShouldActivate(tween, info);
-
-			if (info.pluginType == null) {
-				tween.Internal.Log(TweenLogLevel.Error,
-					"TweenRigidbody: Tween property can only be 'position', "
-					+ "'rotation' or 'eulerAngles' on a Transform with a "
-					+ "kinematic Rigidbody, got {0} on {1}.",
-					tween.Property, tween.Target);
-			}
-
-			return info;
-		}
-
-		// Returns if the plugin should activate automatically
-		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = false)
+			where TTarget : class
 		{
 			// Check if target is Transform and has a kinematic rigidbody
 			var targetTf = tween.Target as Transform;
 			if (targetTf == null) {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			var targetRb = targetTf.GetComponent<Rigidbody>();
 			if (targetRb == null || !targetRb.isKinematic) {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// Supported properties on Transform
-			if (tween.Property == "position" 
+			ITweenPlugin instance;
+			if (tween.Property == "position"
 					|| tween.Property == "eulerAngles") {
-				info.pluginType = typeof(TweenRigidbodyImplVector3<>);
+				instance = TweenRigidbodyImplVector3<TTarget>.sharedInstance;
 			} else if (tween.Property == "rotation") {
-				info.pluginType = typeof(TweenRigidbodyImplQuaternion<>);
+				instance = TweenRigidbodyImplQuaternion<TTarget>.sharedInstance;
 			} else {
-				info.pluginType = null;
+				return false;
 			}
 
-			info.setValueUserData = targetRb;
-			return info;
+			// Set plugin type to use
+			tween.LoadPlugin(instance, weak: automatic);
+			return true;
+		}
+
+		public static Tween<TTarget, TValue> PluginRigidbody<TTarget, TValue>(this Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			if (!Load(tween)) {
+				tween.PluginError("TweenMaterial",
+					"TweenRigidbody: Tween property can only be 'position', "
+					+ "'rotation' or 'eulerAngles' on a Transform with a "
+					+ "kinematic Rigidbody, got {0} on {1}.",
+					tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////
@@ -162,7 +129,9 @@ namespace Sttz.Tweener.Plugins {
 			ITweenSetterPlugin<TTarget, Vector3>
 			where TTarget : class
 		{
-			// Write value to material
+			internal static TweenRigidbodyImplVector3<TTarget> sharedInstance
+				= new TweenRigidbodyImplVector3<TTarget>();
+
 			public void SetValue(TTarget target, string property, Vector3 value, ref object userData)
 			{
 				var rigidbody = (userData as Rigidbody);
@@ -179,7 +148,9 @@ namespace Sttz.Tweener.Plugins {
 			ITweenSetterPlugin<TTarget, Quaternion>
 			where TTarget : class
 		{
-			// Write value to material
+			internal static TweenRigidbodyImplQuaternion<TTarget> sharedInstance
+				= new TweenRigidbodyImplQuaternion<TTarget>();
+
 			public void SetValue(TTarget target, string property, Quaternion value, ref object userData)
 			{
 				(userData as Rigidbody).MoveRotation(value);

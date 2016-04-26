@@ -38,113 +38,54 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		/// <summary>
-		/// TweenPluginInfo that can be used for automatic activation.
-		/// </summary>
-		/// <seealso cref="ITweenOptions.SetAutomatic"/>
-		/// <seealso cref="ITweenOptionsFluid<TContainer>.Automate"/>
-		public static TweenPluginInfo Automatic()
-		{
-			return DefaultInfo;
-		}
-
-		/// <summary>
-		/// Use the TweenMaterial plugin for the current tween.
-		/// </summary>
-		/// <param name='type'>
-		/// Optionally specify the type of the property to override auto-detection.
-		/// </param>
-		public static TweenPluginInfo Use(PropertyType type = PropertyType.Undefined)
-		{
-			var info = DefaultInfo;
-
-			// Forced property type
-			if (type != PropertyType.Undefined) {
-				// Insert proper implementation type
-				info.pluginType = typeToPluginType[type];
-				// Pass on type as user data
-				info.getValueUserData = type;
-				info.setValueUserData = type;
-				// Disable auto-activation since this is a typed sub-class
-				info.autoActivation = null;
-			}
-
-			return info;
-		}
-
-		///////////////////
-		// Activation
-
-		// Default plugin info
-		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
-			// Generic plugin type
-			pluginType = typeof(TweenMaterialImpl),
-			// Plugin needs to set and get the value
-			hooks = TweenPluginType.Getter | TweenPluginType.Setter,
-			// Enable automatic activation
-			autoActivation = ShouldActivate,
-			// Manual activation
-			manualActivation = ManualActivation
-		};
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			// Auto-detect property type
-			if (info.pluginType == typeof(TweenMaterialImpl)) {
-				info = ShouldActivate(tween, info);
-			}
-
-			// Print error if activation failed
-			if (info.pluginType == null) {
-				tween.Internal.Log(TweenLogLevel.Error,
-					"Could not activate tween material plugin for tween of {0} on {1}.",
-					tween.Property, tween.Target);
-			}
-
-			return info;
-		}
-
-		// Returns if the plugin should activate automatically
-		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(
+			Tween<TTarget, TValue> tween, bool automatic = false, PropertyType forceType = PropertyType.Undefined
+		)
+			where TTarget : class
 		{
 			// Check if target is Material
 			if (!(tween.Target is Material)) {
-				return TweenPluginInfo.None;
-			}
-
-			// Get option, removes it from the property for chek below
-			var option = TweenPluginInfo.GetOption(tween);
-
-			// Only activate for properties starting with an underscore
-			if (tween.Property[0] != '_') {
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// Since we cannot get the type of a material property
 			// from unity, we have to get it as parameter or
 			// assume it from the tween type
-			PropertyType type = PropertyType.Color;
+			var type = PropertyType.Color;
 
-			// Validate and parse option
-			if (option != null) {
-				if (!validOptions.Contains(option, StringComparer.OrdinalIgnoreCase)) {
-					tween.Internal.Log(TweenLogLevel.Warning,
-						"TweenMaterial: Invalid property type option '{0}'.", option);
-					return TweenPluginInfo.None;
-				}
-				type = (PropertyType)Enum.Parse(typeof(PropertyType), option, true);
-			
-			// Assume property type based on input type
+			// Property type has been forced
+			if (forceType != PropertyType.Undefined) {
+				type = forceType;
+
 			} else {
-				if (tween.ValueType == typeof(Color)) {
-					type = PropertyType.Color;
-				} else if (tween.ValueType == typeof(Vector4)) {
-					type = PropertyType.Vector;
-				} else if (tween.ValueType == typeof(Vector2)) {
-					type = PropertyType.TextureOffset;
-				} else if (tween.ValueType == typeof(float)) {
-					type = PropertyType.Float;
+				// Get option, removes it from the property for chek below
+				var option = tween.PropertyOptions;
+
+				// Only activate for properties starting with an underscore
+				if (tween.Property[0] != '_') {
+					return false;
+				}
+
+				// Validate and parse option
+				if (option != string.Empty) {
+					if (!validOptions.Contains(option, StringComparer.OrdinalIgnoreCase)) {
+						tween.Internal.Log(TweenLogLevel.Warning,
+							"TweenMaterial: Invalid property type option '{0}'.", option);
+						return false;
+					}
+					type = (PropertyType)Enum.Parse(typeof(PropertyType), option, true);
+
+				// Assume property type based on input type
+				} else {
+					if (tween.ValueType == typeof(Color)) {
+						type = PropertyType.Color;
+					} else if (tween.ValueType == typeof(Vector4)) {
+						type = PropertyType.Vector;
+					} else if (tween.ValueType == typeof(Vector2)) {
+						type = PropertyType.TextureOffset;
+					} else if (tween.ValueType == typeof(float)) {
+						type = PropertyType.Float;
+					}
 				}
 			}
 
@@ -153,13 +94,26 @@ namespace Sttz.Tweener.Plugins {
 				tween.Internal.Log(TweenLogLevel.Warning,
 					"TweenMaterial: Invalid value type '{0}' for property type {1}.",
 					tween.ValueType, type);
-				return TweenPluginInfo.None;
+				return false;
 			}
 
 			// Set plugin type to use
-			info.pluginType = typeToPluginType[type];
-			info.getValueUserData = info.setValueUserData = type;
-			return info;
+			tween.LoadPlugin(typeToPluginInstance[type], weak: automatic, userData: type);
+			return true;
+		}
+
+		public static Tween<TTarget, TValue> PluginMaterial<TTarget, TValue>(
+			this Tween<TTarget, TValue> tween, PropertyType type = PropertyType.Undefined
+		)
+			where TTarget : class
+		{
+			if (!Load(tween, false, type)) {
+				tween.PluginError("TweenMaterial",
+					"Could not activate tween material plugin for tween of {0} on {1}.",
+					tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////
@@ -181,7 +135,7 @@ namespace Sttz.Tweener.Plugins {
 
 		// Mapping of property type to value type
 		private static Dictionary<PropertyType, Type> typeToValueType
-			= new Dictionary<PropertyType, Type>() {
+			= new Dictionary<PropertyType, Type> {
 			{ PropertyType.Color, typeof(Color) },
 			{ PropertyType.Vector, typeof(Vector4) },
 			{ PropertyType.TextureOffset, typeof(Vector2) },
@@ -190,13 +144,13 @@ namespace Sttz.Tweener.Plugins {
 		};
 
 		// Mapping of property type to plugin type
-		private static Dictionary<PropertyType, Type> typeToPluginType
-			= new Dictionary<PropertyType, Type>() {
-			{ PropertyType.Color, typeof(TweenMaterialImplColor) },
-			{ PropertyType.Vector, typeof(TweenMaterialImplVector) },
-			{ PropertyType.TextureOffset, typeof(TweenMaterialImplTexture) },
-			{ PropertyType.TextureScale, typeof(TweenMaterialImplTexture) },
-			{ PropertyType.Float, typeof(TweenMaterialImplFloat) }
+		private static Dictionary<PropertyType, ITweenPlugin> typeToPluginInstance
+			= new Dictionary<PropertyType, ITweenPlugin> {
+			{ PropertyType.Color, new TweenMaterialImplColor() },
+			{ PropertyType.Vector, new TweenMaterialImplVector() },
+			{ PropertyType.TextureOffset, new TweenMaterialImplTexture() },
+			{ PropertyType.TextureScale, new TweenMaterialImplTexture() },
+			{ PropertyType.Float, new TweenMaterialImplFloat() }
 		};
 
 		/// <summary>

@@ -32,71 +32,38 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		/// <summary>
-		/// TweenPluginInfo that can be used for automatic activation.
-		/// </summary>
-		/// <seealso cref="ITweenOptions.SetAutomatic"/>
-		/// <seealso cref="ITweenOptionsFluid<TContainer>.Automate"/>
-		public static TweenPluginInfo Automatic()
-		{
-			return DefaultInfo;
-		}
-
-		/// <summary>
-		/// Use the TweenSlerp plugin for the current tween.
-		/// </summary>
-		public static TweenPluginInfo Use()
-		{
-			return DefaultInfo;
-		}
-
-		///////////////////
-		// Activation
-
-		// Default plugin info
-		private static TweenPluginInfo DefaultInfo = new TweenPluginInfo() {
-			// Generic plugin type
-			pluginType = typeof(TweenSlerpImpl),
-			// Plugin needs to calculate the value
-			hooks = TweenPluginType.Arithmetic,
-			// Delegate to select proper plugin type for manual mode
-			manualActivation = ManualActivation,
-			// Enable automatic activation
-			autoActivation = ShouldActivate
-		};
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			info = ShouldActivate(tween, info);
-
-			if (info.pluginType == null) {
-				tween.Internal.Log(TweenLogLevel.Error,
-					"TweenSlerp: Tween value needs to be either Vector3 or Quaternion,"
-					+ " got {0} for {1} on {2}",
-					tween.ValueType, tween.Property, tween.Target);
-			}
-
-			return info;
-		}
-
-		// Returns if the plugin should activate automatically
-		private static TweenPluginInfo ShouldActivate(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = false)
+			where TTarget : class
 		{
 			if (tween.ValueType == typeof(Vector3)
 					&& tween.Property.EndsWith("EulerAngles", StringComparison.OrdinalIgnoreCase)) {
-				info.pluginType = typeof(TweenSlerpImplVector3);
+				tween.LoadPlugin(sharedVector3Plugin, weak: automatic);
 			} else if (tween.ValueType == typeof(Quaternion)) {
-				info.pluginType =  typeof(TweenSlerpImplQuaternion);
+				tween.LoadPlugin(sharedQuaternionPlugin, weak: automatic);
 			} else {
-				info.pluginType = null;
+				return false;
 			}
 
-			return info;
+			return true;
+		}
+
+		public static Tween<TTarget, TValue> PluginSlerp<TTarget, TValue>(this Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			if (!Load(tween)) {
+				tween.PluginError("TweenSlerp",
+				    "Tween value needs to be either Vector3 or Quaternion, got {0} for {1} on {2}",
+					tween.ValueType, tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////
 		// Generial
+
+		static TweenSlerpImplVector3 sharedVector3Plugin = new TweenSlerpImplVector3();
+		static TweenSlerpImplQuaternion sharedQuaternionPlugin = new TweenSlerpImplQuaternion();
 
 		// Tween Slerp base implementation
 		private class TweenSlerpImpl

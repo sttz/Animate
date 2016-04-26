@@ -7,6 +7,7 @@ using Sttz.Tweener.Core;
 using Sttz.Tweener.Core.Codegen;
 using Sttz.Tweener.Core.Reflection;
 using Sttz.Tweener.Core.Static;
+using Sttz.Tweener.Plugins;
 
 namespace Sttz.Tweener {
 
@@ -168,10 +169,29 @@ namespace Sttz.Tweener {
 			Options.TweenTiming = TweenTiming.Default;
 			Options.OverwriteSettings = TweenOverwrite.Default;
 
-			Options.DefaultAccessorPlugin = TweenCodegenAccessorPlugin.Use();
-			Options.DefaultArithmeticPlugin = TweenCodegenArithmeticPlugin.Use();
 			Options.Recycle = TweenRecycle.All;
 			Pool = new TweenPool();
+		}
+
+		override public void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		{
+			base.LoadPlugins(tween);
+
+			// Default Plugins
+			TweenStaticAccessorPlugin.Load(tween);
+			TweenStaticArithmeticPlugin.Load(tween);
+
+			//TweenReflectionAccessorPlugin.Load(tween);
+			//TweenReflectionArithmeticPlugin.Load(tween);
+
+			//TweenCodegenAccessorPlugin.Load(tween);
+			//TweenCodegenArithmeticPlugin.Load(tween);
+
+			// Unity integration for static plugins
+			TweenStaticUnityPlugin.Load();
+
+			// Automatic plugins
+			TweenSlerp.Load(tween, automatic: true);
 		}
 
 		///////////////////
@@ -277,12 +297,11 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.To<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.To<TValue>"/>
 		public static Tween<TTarget, TValue> To<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue toValue
 		)
 			where TTarget : class
 		{
-			var tween = Tween.To(target, duration, property, toValue, plugins);
+			var tween = Tween.To(target, duration, property, toValue);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
 		}
@@ -314,12 +333,11 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.From<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.From<TValue>"/>
 		public static Tween<TTarget, TValue> From<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue fromValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue fromValue
 		)
 			where TTarget : class
 		{
-			var tween = Tween.From(target, duration, property, fromValue, plugins);
+			var tween = Tween.From(target, duration, property, fromValue);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
 		}
@@ -355,12 +373,11 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.FromTo<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.FromTo<TValue>"/>
 		public static Tween<TTarget, TValue> FromTo<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue fromValue, TValue toValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue fromValue, TValue toValue
 		)
 			where TTarget : class
 		{
-			var tween = Tween.FromTo(target, duration, property, fromValue, toValue, plugins);
+			var tween = Tween.FromTo(target, duration, property, fromValue, toValue);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
 		}
@@ -392,12 +409,11 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITweenGroup.By<TValue>"/>
 		/// <seealso cref="Sttz.Tweener.Tween.By<TValue>"/>
 		public static Tween<TTarget, TValue> By<TTarget, TValue>(
-			TTarget target, float duration, string property, TValue byValue, 
-			params TweenPluginInfo[] plugins
+			TTarget target, float duration, string property, TValue byValue
 		)
 			where TTarget : class
 		{
-			var tween = Tween.By(target, duration, property, byValue, plugins);
+			var tween = Tween.By(target, duration, property, byValue);
 			Instance.SinglesGroup.Add(tween);
 			return tween;
 		}

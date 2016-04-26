@@ -39,21 +39,12 @@ namespace Sttz.Tweener.Core.Reflection
 		}
 	}
 
-	/// <summary>
-	/// Default accessor plugin using code generation.
-	/// </summary>
 	public static class TweenReflectionAccessorPlugin
 	{
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
 		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenReflectionAccessorPlugin<,>),
-				canBeOverwritten = true,
-				hooks =
-					  TweenPluginType.Getter
-					| TweenPluginType.Setter
-			};
+			return TweenReflectionAccessorPlugin<TTarget, TValue>.Load(tween);
 		}
 	}
 
@@ -64,6 +55,18 @@ namespace Sttz.Tweener.Core.Reflection
 		: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
 		where TTarget : class
 	{
+		///////////////////
+		// Usage
+
+		static TweenReflectionAccessorPlugin<TTarget, TValue> _sharedInstance
+			= new TweenReflectionAccessorPlugin<TTarget, TValue>();
+
+		public static bool Load(Tween<TTarget, TValue> tween)
+		{
+			tween.LoadPlugin(_sharedInstance, weak: true);
+			return true;
+		}
+
 		///////////////////
 		// General
 
@@ -138,27 +141,13 @@ namespace Sttz.Tweener.Core.Reflection
 	/// </remarks>
 	public static class TweenReflectionArithmeticPlugin
 	{
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
-		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenReflectionArithmeticPlugin<>),
-				hooks = TweenPluginType.Arithmetic,
-				canBeOverwritten = true,
-				manualActivation = ManualActivation
-			};
-		}
+		///////////////////
+		// Usage
 
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
 		{
-			// Use the static plugin if possible
-			var staticPlugin = TweenStaticArithmeticPlugin.GetImplementationForValueType(tween.ValueType);
-			if (staticPlugin != null) {
-				info.pluginType = staticPlugin;
-			}
-
-			return info;
+			return TweenReflectionArithmeticPlugin<TValue>.Load(tween);
 		}
 	}
 
@@ -167,6 +156,25 @@ namespace Sttz.Tweener.Core.Reflection
 	/// </summary>
 	public class TweenReflectionArithmeticPlugin<TValue> : ITweenArithmeticPlugin<TValue>
 	{
+		///////////////////
+		// Usage
+
+		static TweenReflectionArithmeticPlugin<TValue> _sharedInstance
+			= new TweenReflectionArithmeticPlugin<TValue>();
+
+		public static bool Load<TTarget>(Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			// Use the static plugin if possible
+			if (TweenStaticArithmeticPlugin.Load(tween)) {
+				return true;
+			}
+
+			// Fall back to the reflection plugin
+			tween.LoadPlugin(_sharedInstance, weak: true);
+			return true;
+		}
+
 		///////////////////
 		// General
 

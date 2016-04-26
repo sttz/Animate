@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace Sttz.Tweener.Core.Static
@@ -9,20 +8,22 @@ namespace Sttz.Tweener.Core.Static
 	/// </summary>
 	public static class TweenStaticAccessorPlugin
 	{
+		///////////////////
+		// Usage
+
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			return TweenStaticAccessorPlugin<TTarget, TValue>.Load(tween);
+		}
+
+		///////////////////
+		// Internals
+
 		public delegate TValue GetAccessor<TTarget, TValue>(TTarget target)
 			where TTarget : class;
 		public delegate void SetAccessor<TTarget, TValue>(TTarget target, TValue value)
 			where TTarget : class;
-
-		static TweenStaticAccessorPlugin()
-		{
-			Teach("rotation",
-				 (Transform tf) => tf.rotation,
-				 (tf, value) => tf.rotation = value);
-			Teach("position",
-				 (Transform tf) => tf.position,
-				 (tf, value) => tf.position = value);
-		}
 
 		/// <summary>
 		/// Teach the static accessor plugin to access a property on a type.
@@ -63,25 +64,27 @@ namespace Sttz.Tweener.Core.Static
 		}
 
 		static Dictionary<string, object> accessors = new Dictionary<string, object>();
-
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
-		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenStaticAccessorPlugin<,>),
-				canBeOverwritten = true,
-				hooks = TweenPluginType.Getter | TweenPluginType.Setter
-			};
-		}
 	}
 
 	/// <summary>
 	/// Default accessor plugin using precompiled methods.
 	/// </summary>
-	public class TweenStaticAccessorPlugin<TTarget, TValue> 
-		: ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
+	public class TweenStaticAccessorPlugin<TTarget, TValue> :
+		ITweenGetterPlugin<TTarget, TValue>, ITweenSetterPlugin<TTarget, TValue>
 		where TTarget : class
 	{
+		///////////////////
+		// Usage
+
+		static TweenStaticAccessorPlugin<TTarget, TValue> _sharedInstance
+			= new TweenStaticAccessorPlugin<TTarget, TValue>();
+
+		public static bool Load(Tween<TTarget, TValue> tween)
+		{
+			tween.LoadPlugin(_sharedInstance, weak: true);
+			return true;
+		}
+
 		///////////////////
 		// General
 
@@ -125,41 +128,44 @@ namespace Sttz.Tweener.Core.Static
 	/// </summary>
 	public static class TweenStaticArithmeticPlugin
 	{
-		static Dictionary<Type, Type> supportedTypes = new Dictionary<Type, Type>() {
-			{ typeof(float), typeof(TweenStaticArithmeticPluginFloat) },
-			{ typeof(Vector3), typeof(TweenStaticArithmeticPluginVector3) },
-			{ typeof(Color), typeof(TweenStaticArithmeticPluginColor) }
+		///////////////////
+		// Usage
+
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+			where TTarget : class
+		{
+			var sharedInstance = GetImplementationForValueType(tween.ValueType);
+
+			if (sharedInstance != null) {
+				tween.LoadPlugin(sharedInstance, weak: true);
+				return true;
+			}
+
+			return false;
+		}
+
+		///////////////////
+		// Internals
+
+		static Dictionary<Type, ITweenPlugin> supportedTypes = new Dictionary<Type, ITweenPlugin>() {
+			{ typeof(float), new TweenStaticArithmeticPluginFloat() }
 		};
-
-		// Return the plugin info structure
-		public static TweenPluginInfo Use()
-		{
-			return new TweenPluginInfo {
-				pluginType = typeof(TweenStaticArithmeticPlugin),
-				canBeOverwritten = true,
-				hooks = TweenPluginType.Arithmetic,
-				manualActivation = ManualActivation
-			};
-		}
-
-		// Callback for manual activation
-		private static TweenPluginInfo ManualActivation(ITween tween, TweenPluginInfo info)
-		{
-			var pluginType = GetImplementationForValueType(tween.ValueType);
-			info.pluginType = pluginType;
-			return info;
-		}
 
 		public static bool SupportsType(Type type)
 		{
 			return supportedTypes.ContainsKey(type);
 		}
 
-		public static Type GetImplementationForValueType(Type type)
+		public static void RegisterSupport(Type type, ITweenPlugin plugin)
 		{
-			Type pluginType = null;
-			if (supportedTypes.TryGetValue(type, out pluginType)) {
-				return pluginType;
+			supportedTypes[type] = plugin;
+		}
+
+		public static ITweenPlugin GetImplementationForValueType(Type type)
+		{
+			ITweenPlugin instance = null;
+			if (supportedTypes.TryGetValue(type, out instance)) {
+				return instance;
 			} else {
 				return null;
 			}
@@ -167,7 +173,40 @@ namespace Sttz.Tweener.Core.Static
 	}
 
 	/// <summary>
-	/// Specialized implementation of arithmetic plugin for Vector3.
+	/// Specialized implementation of arithmetic plugin for int.
+	/// </summary>
+	public class TweenStaticArithmeticPluginInt : ITweenArithmeticPlugin<int>
+	{
+		// Initialize
+		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
+		{
+			return null;
+		}
+
+		///////////////////
+		// Calculate Value Hook
+
+		// Return the difference between start and end
+		public int DiffValue(int start, int end, ref object userData)
+		{
+			return end - start;
+		}
+
+		// Return the end value
+		public int EndValue(int start, int diff, ref object userData)
+		{
+			return start * diff;
+		}
+
+		// Return the value at the current position
+		public int ValueAtPosition(int start, int end, int diff, float position, ref object userData)
+		{
+			return start + (int)(diff * position);
+		}
+	}
+
+	/// <summary>
+	/// Specialized implementation of arithmetic plugin for float.
 	/// </summary>
 	public class TweenStaticArithmeticPluginFloat : ITweenArithmeticPlugin<float>
 	{
@@ -200,9 +239,9 @@ namespace Sttz.Tweener.Core.Static
 	}
 
 	/// <summary>
-	/// Specialized implementation of arithmetic plugin for Vector3.
+	/// Specialized implementation of arithmetic plugin for double.
 	/// </summary>
-	public class TweenStaticArithmeticPluginVector3 : ITweenArithmeticPlugin<Vector3>
+	public class TweenStaticArithmeticPluginDouble : ITweenArithmeticPlugin<double>
 	{
 		// Initialize
 		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
@@ -214,52 +253,19 @@ namespace Sttz.Tweener.Core.Static
 		// Calculate Value Hook
 
 		// Return the difference between start and end
-		public Vector3 DiffValue(Vector3 start, Vector3 end, ref object userData)
+		public double DiffValue(double start, double end, ref object userData)
 		{
 			return end - start;
 		}
 
 		// Return the end value
-		public Vector3 EndValue(Vector3 start, Vector3 diff, ref object userData)
-		{
-			return start + diff;
-		}
-
-		// Return the value at the current position
-		public Vector3 ValueAtPosition(Vector3 start, Vector3 end, Vector3 diff, float position, ref object userData)
-		{
-			return start + diff * position;
-		}
-	}
-
-	/// <summary>
-	/// Specialized implementation of arithmetic plugin for Vector3.
-	/// </summary>
-	public class TweenStaticArithmeticPluginColor : ITweenArithmeticPlugin<Color>
-	{
-		// Initialize
-		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
-		{
-			return null;
-		}
-
-		///////////////////
-		// Calculate Value Hook
-
-		// Return the difference between start and end
-		public Color DiffValue(Color start, Color end, ref object userData)
-		{
-			return end - start;
-		}
-
-		// Return the end value
-		public Color EndValue(Color start, Color diff, ref object userData)
+		public double EndValue(double start, double diff, ref object userData)
 		{
 			return start * diff;
 		}
 
 		// Return the value at the current position
-		public Color ValueAtPosition(Color start, Color end, Color diff, float position, ref object userData)
+		public double ValueAtPosition(double start, double end, double diff, float position, ref object userData)
 		{
 			return start + diff * position;
 		}

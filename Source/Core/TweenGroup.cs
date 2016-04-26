@@ -21,7 +21,7 @@ namespace Sttz.Tweener.Core {
 	/// <summary>
 	/// Group of tweens, sharing options
 	/// </summary>
-	public class TweenGroup<TTarget> : TweenOptionsFluid<ITweenGroup>, ITweenGroup, ITweenGroupInternal
+	public class TweenGroup<TTarget> : TweenOptionsFluid<TweenGroup<TTarget>>, ITweenGroup, ITweenGroupInternal
 		where TTarget : class
 	{
 		///////////////////
@@ -108,10 +108,10 @@ namespace Sttz.Tweener.Core {
 		// Add Tween
 
 		// Add a custom tween
-		public ITweenGroup Add(ITween tween)
+		public TweenGroup<TTarget> Add(ITween tween)
 		{
 			// Retain the tween until it's done
-			tween.Retain();
+			tween.Options.RetainCount++;
 
 			// Add ourself to the scope chain
 			tween.Options.Internal.ParentOptions = this;
@@ -157,108 +157,96 @@ namespace Sttz.Tweener.Core {
 		// To
 
 		// Add a To tween to the group
-		public ITweenGroup To<T>(
-			string property, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> To<T>(
+			string property, T toValue
 		) {
-			return Add(Tween.To(_defaultTarget, float.NaN, property, toValue, plugins));
+			return Add(Tween.To(_defaultTarget, float.NaN, property, toValue));
 		}
 
 		// Add a To tween to the group
-		public ITweenGroup To<T>(
-			float duration, string property, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> To<T>(
+			float duration, string property, T toValue
 		) {
-			return Add(Tween.To(_defaultTarget, duration, property, toValue, plugins));
+			return Add(Tween.To(_defaultTarget, duration, property, toValue));
 		}
 
 		// Add a To tween to the group
-		public ITweenGroup To<T>(
-			object target, float duration, string property, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> To<T>(
+			object target, float duration, string property, T toValue
 		) {
-			return Add(Tween.To(target, duration, property, toValue, plugins));
+			return Add(Tween.To(target, duration, property, toValue));
 		}
 
 		///////////////////
 		// From
 
 		// Add a From tween to the group
-		public ITweenGroup From<T>(
-			string property, T fromValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> From<T>(
+			string property, T fromValue
 		) {
-			return Add(Tween.From(_defaultTarget, float.NaN, property, fromValue, plugins));
+			return Add(Tween.From(_defaultTarget, float.NaN, property, fromValue));
 		}
 
 		// Add a From tween to the group
-		public ITweenGroup From<T>(
-			float duration, string property, T fromValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> From<T>(
+			float duration, string property, T fromValue
 		) {
-			return Add(Tween.From(_defaultTarget, duration, property, fromValue, plugins));
+			return Add(Tween.From(_defaultTarget, duration, property, fromValue));
 		}
 
 		// Add a From tween to the group
-		public ITweenGroup From<T>(
-			object target, float duration, string property, T fromValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> From<T>(
+			object target, float duration, string property, T fromValue
 		) {
-			return Add(Tween.From(target, duration, property, fromValue, plugins));
+			return Add(Tween.From(target, duration, property, fromValue));
 		}
 
 		///////////////////
 		// FromTo
 
 		// Add a FromTo tween to the group
-		public ITweenGroup FromTo<T>(
-			string property, T fromValue, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> FromTo<T>(
+			string property, T fromValue, T toValue
 		) {
-			return Add(Tween.FromTo(_defaultTarget, float.NaN, property, fromValue, toValue, plugins));
+			return Add(Tween.FromTo(_defaultTarget, float.NaN, property, fromValue, toValue));
 		}
 
 		// Add a FromTo tween to the group
-		public ITweenGroup FromTo<T>(
-			float duration, string property, T fromValue, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> FromTo<T>(
+			float duration, string property, T fromValue, T toValue
 		) {
-			return Add(Tween.FromTo(_defaultTarget, duration, property, fromValue, toValue, plugins));
+			return Add(Tween.FromTo(_defaultTarget, duration, property, fromValue, toValue));
 		}
 
 		// Add a FromTo tween to the group
-		public ITweenGroup FromTo<T>(
-			object target, float duration, string property, T fromValue, T toValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> FromTo<T>(
+			object target, float duration, string property, T fromValue, T toValue
 		) {
-			return Add(Tween.FromTo(target, duration, property, fromValue, toValue, plugins));
+			return Add(Tween.FromTo(target, duration, property, fromValue, toValue));
 		}
 
 		///////////////////
 		// By
 
 		// Add a By tween to the group
-		public ITweenGroup By<T>(
-			string property, T byValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> By<T>(
+			string property, T byValue
 		) {
-			return Add(Tween.By(_defaultTarget, float.NaN, property, byValue, plugins));
+			return Add(Tween.By(_defaultTarget, float.NaN, property, byValue));
 		}
 
 		// Add a By tween to the group
-		public ITweenGroup By<T>(
-			float duration, string property, T byValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> By<T>(
+			float duration, string property, T byValue
 		) {
-			return Add(Tween.By(_defaultTarget, duration, property, byValue, plugins));
+			return Add(Tween.By(_defaultTarget, duration, property, byValue));
 		}
 
 		// Add a By tween to the group
-		public ITweenGroup By<T>(
-			object target, float duration, string property, T byValue, 
-			params TweenPluginInfo[] plugins
+		public TweenGroup<TTarget> By<T>(
+			object target, float duration, string property, T byValue
 		) {
-			return Add(Tween.By(target, duration, property, byValue, plugins));
+			return Add(Tween.By(target, duration, property, byValue));
 		}
 
 		///////////////////
@@ -474,7 +462,7 @@ namespace Sttz.Tweener.Core {
 							Animate.Pool.Return(tweens[i]);
 						}
 						// Release & remove from list
-						tweens[i].Release();
+						tweens[i].Options.RetainCount--;
 						tweens.RemoveAt(i); i--; count--;
 					}
 				}

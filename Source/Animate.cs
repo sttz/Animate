@@ -154,7 +154,7 @@ namespace Sttz.Tweener {
 		// Configure global default
 		static Animate()
 		{
-			Options.Easing = Easing.QuadraticIn;
+			Options.Easing = Easing.QuadraticOut;
 			Options.LogLevel = TweenLogLevel.Warning;
 
 			Options.TweenTiming = TweenTiming.Default;

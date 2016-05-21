@@ -298,8 +298,8 @@ namespace Sttz.Tweener.Core {
 				return false;
 
 			if (_hookGet == null || _hookSet == null || _hookCalculate == null) {
-				Fail("Missing plugins: Getter = {0}, Setter = {1}, Arithmetic = {2}",
-					_hookGet, _hookSet, _hookCalculate);
+				Fail("Missing plugins for tween of {0}  on {1}: Getter = {2}, Setter = {3}, Arithmetic = {4}",
+					_property, _target, _hookGet, _hookSet, _hookCalculate);
 				return false;
 			}
 

@@ -41,10 +41,19 @@ namespace Sttz.Tweener.Core.Reflection
 
 	public static class TweenReflectionAccessorPlugin
 	{
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			return TweenReflectionAccessorPlugin<TTarget, TValue>.Load(tween);
+			return TweenReflectionAccessorPlugin<TTarget, TValue>.Load(tween, automatic: automatic);
+		}
+
+		public static Tween<TTarget, TValue> PluginReflectionAccessor<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			Load(tween, automatic: false);
+			return tween;
 		}
 	}
 
@@ -61,9 +70,10 @@ namespace Sttz.Tweener.Core.Reflection
 		static TweenReflectionAccessorPlugin<TTarget, TValue> _sharedInstance
 			= new TweenReflectionAccessorPlugin<TTarget, TValue>();
 
-		public static bool Load(Tween<TTarget, TValue> tween)
+		public static bool Load(Tween<TTarget, TValue> tween, bool automatic = true)
 		{
-			tween.LoadPlugin(_sharedInstance, weak: true);
+			if (tween == null) return false;
+			tween.LoadPlugin(_sharedInstance, weak: automatic);
 			return true;
 		}
 
@@ -144,10 +154,26 @@ namespace Sttz.Tweener.Core.Reflection
 		///////////////////
 		// Usage
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			return TweenReflectionArithmeticPlugin<TValue>.Load(tween);
+			return TweenReflectionArithmeticPlugin<TValue>.Load(tween, automatic: automatic);
+		}
+
+		public static Tween<TTarget, TValue> PluginReflectionArithmetic<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			if (!Load(tween, automatic: false)) {
+				tween.PluginError("PluginReflectionArithmetic",
+				    "Cannot tween value {0} ({0} on {1}): TweenReflectionArithmeticPlugin " +
+					"only supports non-basic types with op_Addition, op_Subtraction and op_Multiply " +
+				    "operator overloads.",
+					tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 	}
 
@@ -162,16 +188,28 @@ namespace Sttz.Tweener.Core.Reflection
 		static TweenReflectionArithmeticPlugin<TValue> _sharedInstance
 			= new TweenReflectionArithmeticPlugin<TValue>();
 
-		public static bool Load<TTarget>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
+			if (tween == null) return false;
+
 			// Use the static plugin if possible
 			if (TweenStaticArithmeticPlugin.Load(tween)) {
 				return true;
 			}
 
+			// Look for necessary op_* methods
+			var data = new TweenReflectionUserData ();
+			data.opAddition = GetOperatorMethod(tween.ValueType, "op_Addition");
+			data.opSubtraction = GetOperatorMethod(tween.ValueType, "op_Subtraction");
+			data.opMultiply = GetOperatorMethod(tween.ValueType, "op_Multiply", typeof (float));
+
+			if (data.opAddition == null || data.opSubtraction == null || data.opMultiply == null) {
+				return false;
+			}
+
 			// Fall back to the reflection plugin
-			tween.LoadPlugin(_sharedInstance, weak: true);
+			tween.LoadPlugin(_sharedInstance, weak: automatic, userData: data);
 			return true;
 		}
 
@@ -186,7 +224,7 @@ namespace Sttz.Tweener.Core.Reflection
 			public MethodInfo opMultiply;
 		}
 
-		public MethodInfo GetOperatorMethod(Type type, string name, Type secondArgumentType = null)
+		public static MethodInfo GetOperatorMethod(Type type, string name, Type secondArgumentType = null)
 		{
 			if (secondArgumentType == null)
 				secondArgumentType = typeof(TValue);
@@ -203,22 +241,6 @@ namespace Sttz.Tweener.Core.Reflection
 		// Initialize
 		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 		{
-			// Look for necessary op_* methods
-			var data = new TweenReflectionUserData();
-			data.opAddition = GetOperatorMethod(tween.ValueType, "op_Addition");
-			data.opSubtraction = GetOperatorMethod(tween.ValueType, "op_Subtraction");
-			data.opMultiply = GetOperatorMethod(tween.ValueType, "op_Multiply", typeof(float));
-
-			if (data.opAddition == null || data.opSubtraction == null || data.opMultiply == null) {
-				return string.Format(
-					"Property {0} on {1} cannot bet tweened, "
-					+ "type {2} does not support addition, "
-					+ "subtraction or multiplication.",
-					tween.Property, tween.Target, typeof(TValue)
-				);
-			}
-
-			userData = data;
 			return null;
 		}
 

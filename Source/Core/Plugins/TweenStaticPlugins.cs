@@ -11,10 +11,25 @@ namespace Sttz.Tweener.Core.Static
 		///////////////////
 		// Usage
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			return TweenStaticAccessorPlugin<TTarget, TValue>.Load(tween);
+			return TweenStaticAccessorPlugin<TTarget, TValue>.Load(tween, automatic: automatic);
+		}
+
+		public static Tween<TTarget, TValue> PluginStaticAccessor<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			if (!TweenStaticAccessorPlugin<TTarget, TValue>.Load(tween, automatic: false)) {
+				tween.PluginError("PluginStaticAccessor",
+					"Cannot tween property {0} on {1}, use TweenStaticAccessorPlugin.Teach() " +
+					"to add support for more properties and targets.",
+					tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////
@@ -79,9 +94,16 @@ namespace Sttz.Tweener.Core.Static
 		static TweenStaticAccessorPlugin<TTarget, TValue> _sharedInstance
 			= new TweenStaticAccessorPlugin<TTarget, TValue>();
 
-		public static bool Load(Tween<TTarget, TValue> tween)
+		public static bool Load(Tween<TTarget, TValue> tween, bool automatic = true)
 		{
-			tween.LoadPlugin(_sharedInstance, weak: true);
+			if (tween == null) return false;
+
+			var accessor = TweenStaticAccessorPlugin.GetAccessorPair<TTarget, TValue> (tween.Property);
+			if (accessor.getter == null || accessor.setter == null) {
+				return false;
+			}
+
+			tween.LoadPlugin(_sharedInstance, weak: automatic, userData: accessor);
 			return true;
 		}
 
@@ -91,16 +113,6 @@ namespace Sttz.Tweener.Core.Static
 		// Initialize
 		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 		{
-			var accessor = TweenStaticAccessorPlugin.GetAccessorPair<TTarget, TValue>(tween.Property);
-			if (accessor.getter == null || accessor.setter == null) {
-				return string.Format(
-					"Cannot tween property {0} on {1}, use TweenStaticAccessorPlugin.Teach() " +
-					"to add support for more properties and targets.",
-					tween.Property, tween.Target
-				);
-			}
-
-			userData = accessor;
 			return null;
 		}
 
@@ -131,17 +143,35 @@ namespace Sttz.Tweener.Core.Static
 		///////////////////
 		// Usage
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			var sharedInstance = GetImplementationForValueType(tween.ValueType);
+			if (tween == null) return false;
 
+			var sharedInstance = GetImplementationForValueType(tween.ValueType);
 			if (sharedInstance != null) {
-				tween.LoadPlugin(sharedInstance, weak: true);
+				tween.LoadPlugin(sharedInstance, weak: automatic);
+				return true;
+			}
 				return true;
 			}
 
 			return false;
+		}
+
+		public static Tween<TTarget, TValue> PluginStaticArithmetic<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			if (!Load(tween, automatic: false)) {
+				tween.PluginError("PluginStaticAccessor",
+				    "Cannot tween value {0} ({0} on {1}), use TweenStaticArithmeticPlugin.RegisterSupport() " +
+					"to add a new ITweenPlugin supporting this type.",
+					typeof(TValue).Name, tween.Property, tween.Target
+				);
+			}
+			return tween;
 		}
 
 		///////////////////

@@ -12,10 +12,19 @@ namespace Sttz.Tweener.Core.Codegen {
 	/// </summary>
 	public static class TweenCodegenAccessorPlugin
 	{
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			return TweenCodegenAccessorPlugin<TTarget, TValue>.Load(tween);
+			return TweenCodegenAccessorPlugin<TTarget, TValue>.Load(tween, automatic: automatic);
+		}
+
+		public static Tween<TTarget, TValue> PluginCodegenAccessor<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			Load(tween, automatic: false);
+			return tween;
 		}
 	}
 
@@ -32,9 +41,10 @@ namespace Sttz.Tweener.Core.Codegen {
 		static TweenCodegenAccessorPlugin<TTarget, TValue> _sharedInstance
 			= new TweenCodegenAccessorPlugin<TTarget, TValue>();
 
-		public static bool Load(Tween<TTarget, TValue> tween)
+		public static bool Load(Tween<TTarget, TValue> tween, bool automatic = true)
 		{
-			tween.LoadPlugin(_sharedInstance, weak: true);
+			if (tween == null) return false;
+			tween.LoadPlugin(_sharedInstance, weak: automatic);
 			return true;
 		}
 
@@ -124,10 +134,26 @@ namespace Sttz.Tweener.Core.Codegen {
 		///////////////////
 		// Usage
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
-			return TweenCodegenArithmeticPlugin<TValue>.Load(tween);
+			return TweenCodegenArithmeticPlugin<TValue>.Load(tween, automatic: automatic);
+		}
+
+		public static Tween<TTarget, TValue> PluginCodegenArithmetic<TTarget, TValue> (
+			this Tween<TTarget, TValue> tween
+		)
+			where TTarget : class
+		{
+			if (!Load(tween, automatic: false)) {
+				tween.PluginError("CodegenArithmetic",
+					"Property {0} on {1} cannot bet tweened, "
+					+ "type {2} does not support addition, "
+					+ "subtraction or multiplication.",
+					tween.Property, tween.Target, typeof (TValue)
+				);
+			}
+			return tween;
 		}
 	}
 
@@ -142,16 +168,30 @@ namespace Sttz.Tweener.Core.Codegen {
 		static TweenCodegenArithmeticPlugin<TValue> _sharedInstance
 			= new TweenCodegenArithmeticPlugin<TValue>();
 
-		public static bool Load<TTarget>(Tween<TTarget, TValue> tween)
+		public static bool Load<TTarget>(Tween<TTarget, TValue> tween, bool automatic = true)
 			where TTarget : class
 		{
+			if (tween == null) return false;
+
 			// Use the static plugin if possible
 			if (TweenStaticArithmeticPlugin.Load(tween)) {
 				return true;
 			}
 
+			// Check if calculation is possible
+			try {
+				Operator<TValue, TValue, TValue>.Addition (default (TValue), default (TValue));
+				Operator<TValue, TValue, TValue>.Subtraction (default (TValue), default (TValue));
+				Operator<TValue, float, TValue>.Multiply (default (TValue), 0.5f);
+			} catch (Exception e) {
+				tween.Internal.Log(TweenLogLevel.Debug, 
+				    "Codegen arithmetic encountered exception: {0}", e
+                );
+				return false;
+			}
+
 			// Fall back to the reflection plugin
-			tween.LoadPlugin(_sharedInstance, weak: true);
+			tween.LoadPlugin(_sharedInstance, weak: automatic);
 			return true;
 		}
 
@@ -161,20 +201,6 @@ namespace Sttz.Tweener.Core.Codegen {
 		// Initialize
 		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
 		{
-			// Check if calculation is possible
-			try {
-				Operator<TValue, TValue, TValue>.Addition(default(TValue), default(TValue));
-				Operator<TValue, TValue, TValue>.Subtraction(default(TValue), default(TValue));
-				Operator<TValue, float, TValue>.Multiply(default(TValue), 0.5f);
-			} catch (Exception e) {
-				return string.Format(
-					"Property {0} on {1} cannot bet tweened, "
-					+ "type {2} does not support addition, "
-					+ "subtraction or multiplication. ({3})",
-					tween.Property, tween.Target, typeof(TValue), e.Message
-				);
-			}
-
 			return null;
 		}
 

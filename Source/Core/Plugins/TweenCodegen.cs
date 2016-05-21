@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !ENABLE_IL2CPP
+
+using System;
 using System.Collections.Generic;
 
 using System.Reflection;
@@ -535,3 +537,4 @@ namespace Sttz.Tweener.Core.Codegen {
 	}
 }
 
+#endif

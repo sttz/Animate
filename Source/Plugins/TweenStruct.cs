@@ -1,3 +1,6 @@
+// TODO: Fix TweenStruct for il2cpp platforms
+#if !ENABLE_IL2CPP
+
 using System;
 using System.Reflection;
 
@@ -54,6 +57,8 @@ namespace Sttz.Tweener.Plugins {
 		)
 			where TTarget : class
 		{
+			if (tween == null) return false;
+
 			string structProperty = null;
 			string nestedProperty = null;
 			MemberInfo member;
@@ -242,3 +247,5 @@ namespace Sttz.Tweener.Plugins {
 
 	}
 }
+
+#endif

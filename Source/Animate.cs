@@ -1,13 +1,4 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Sttz.Tweener;
 using Sttz.Tweener.Core;
-using Sttz.Tweener.Core.Codegen;
-using Sttz.Tweener.Core.Reflection;
-using Sttz.Tweener.Core.Static;
-using Sttz.Tweener.Plugins;
 
 namespace Sttz.Tweener {
 
@@ -171,27 +162,6 @@ namespace Sttz.Tweener {
 
 			Options.Recycle = TweenRecycle.All;
 			Pool = new TweenPool();
-		}
-
-		override public void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
-		{
-			base.LoadPlugins(tween);
-
-			// Default Plugins
-			TweenStaticAccessorPlugin.Load(tween);
-			TweenStaticArithmeticPlugin.Load(tween);
-
-			//TweenReflectionAccessorPlugin.Load(tween);
-			//TweenReflectionArithmeticPlugin.Load(tween);
-
-			//TweenCodegenAccessorPlugin.Load(tween);
-			//TweenCodegenArithmeticPlugin.Load(tween);
-
-			// Unity integration for static plugins
-			TweenStaticUnityPlugin.Load();
-
-			// Automatic plugins
-			TweenSlerp.Load(tween, automatic: true);
 		}
 
 		///////////////////

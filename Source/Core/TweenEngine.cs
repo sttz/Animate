@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Sttz.Tweener.Core.Codegen;
-using Sttz.Tweener.Plugins;
 
 namespace Sttz.Tweener.Core {
 
@@ -13,9 +10,6 @@ namespace Sttz.Tweener.Core {
 	/// </summary>
 	public interface ITweenEngine
 	{
-		void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
-			where TTarget : class;
-
 		// Default group used for sinlge tweens
 		TweenGroup<object> SinglesGroup { get; }
 		// Register a new group with the engine
@@ -56,12 +50,13 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Pooling
 
+		// TODO: Switch this back to ITweenPool when IL2CPP allows it
 		/// <summary>
 		/// Global pool manager. Set to null to disable pooling globally.
 		/// You can also disable pooling by setting the AfterUse option 
 		/// in any scope, which can be re-enabled at a lower scope.
 		/// </summary>
-		public static ITweenPool Pool { get; set; }
+		public static TweenPool Pool { get; set; }
 
 		///////////////////
 		// Singleton
@@ -89,12 +84,6 @@ namespace Sttz.Tweener.Core {
 
 		///////////////////
 		// Methods
-
-		public virtual void LoadPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween)
-			where TTarget : class
-		{
-			// NOP
-		}
 
 		// Add a tween to default group
 		public TweenGroup<object> SinglesGroup {

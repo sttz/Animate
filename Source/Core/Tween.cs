@@ -1,8 +1,15 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
+using Sttz.Tweener.Core.Reflection;
+using Sttz.Tweener.Core.Static;
+using Sttz.Tweener.Plugins;
+
+#if !ENABLE_IL2CPP
+using Sttz.Tweener.Core.Codegen;
+#endif
 
 namespace Sttz.Tweener.Core {
 
@@ -34,6 +41,40 @@ namespace Sttz.Tweener.Core {
 	public class Tween<TTarget, TValue> : TweenOptionsFluid<Tween<TTarget, TValue>>, ITween, ITweenInternal
 		where TTarget : class
 	{
+		///////////////////
+		// Plugin Configuration
+
+		// TODO: Make this more flexible when IL2CPP allows it
+		protected void LoadPlugins()
+		{
+			// The order matters here, plugins loaded later
+			// can override plugins loaded earlier.
+
+			// Note that if a plugin is loaded strongly, an error
+			// will be triggered. Therefore all plugins loaded here
+			// should be loaded weakly, to avoid situation where
+			// a tween cannot be loaded. Only plugins the user
+			// explicitly loaded should fail with an error.
+
+			// Unity integration for static plugins
+			TweenStaticUnityPlugin.Load();
+
+			// Default Plugins
+			TweenStaticAccessorPlugin.Load(this);
+			TweenStaticArithmeticPlugin.Load(this);
+
+			#if !ENABLE_IL2CPP
+			//TweenCodegenAccessorPlugin.Load(this);
+			//TweenCodegenArithmeticPlugin.Load(this);
+			#else
+			//TweenReflectionAccessorPlugin.Load(this);
+			//TweenReflectionArithmeticPlugin.Load(this);
+			#endif
+
+			// Automatic plugins
+			TweenSlerp.Load(this, automatic: true);
+		}
+
 		///////////////////
 		// Fields
 
@@ -251,7 +292,7 @@ namespace Sttz.Tweener.Core {
 
 			// Load plugins
 			// TODO: Make this independent of UnityTweenEngine
-			UnityTweenEngine.Instance.LoadPlugins(this);
+			LoadPlugins();
 
 			if (_state == TweenState.Error)
 				return false;

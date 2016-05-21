@@ -153,6 +153,11 @@ namespace Sttz.Tweener.Core.Static
 				tween.LoadPlugin(sharedInstance, weak: automatic);
 				return true;
 			}
+
+			var ops = GetOperations<TValue>();
+			if (ops.diff != null && ops.end != null && ops.valueAt != null) {
+				sharedInstance = TweenStaticArithmeticPlugin<TTarget, TValue>._sharedInstance;
+				tween.LoadPlugin(sharedInstance, weak: automatic, userData: ops);
 				return true;
 			}
 
@@ -199,6 +204,88 @@ namespace Sttz.Tweener.Core.Static
 			} else {
 				return null;
 			}
+		}
+
+		///////////////////
+		// Teaching
+
+		public delegate TValue DiffValue<TValue>(TValue start, TValue end);
+		public delegate TValue EndValue<TValue>(TValue start, TValue diff);
+		public delegate TValue ValueAtPosition<TValue>(TValue start, TValue end, TValue diff, float position);
+
+		/// <summary>
+		/// Teach the static arithmetic plugin to calculate a property of a type.
+		/// </summary>
+		public static void Teach<TValue>(
+			DiffValue<TValue> diff, EndValue<TValue> end, ValueAtPosition<TValue> valueAt
+		) {
+			operations[typeof(TValue).FullName] = new Operations<TValue> {
+				diff = diff,
+				end = end,
+				valueAt = valueAt
+			};
+		}
+
+		internal static Operations<TValue> GetOperations<TValue>()
+		{
+			object ops;
+			if (operations.TryGetValue(typeof(TValue).FullName, out ops)) {
+				return (Operations<TValue>)ops;
+			} else {
+				return default(Operations<TValue>);
+			}
+		}
+
+		internal struct Operations<TValue>
+		{
+			public DiffValue<TValue> diff;
+			public EndValue<TValue> end;
+			public ValueAtPosition<TValue> valueAt;
+		}
+
+		static Dictionary<string, object> operations = new Dictionary<string, object>();
+	}
+
+	/// <summary>
+	/// Default arithmetic plugin using precompiled methods.
+	/// </summary>
+	public class TweenStaticArithmeticPlugin<TTarget, TValue> : ITweenArithmeticPlugin<TValue>
+		where TTarget : class
+	{
+		///////////////////
+		// Usage
+
+		internal static TweenStaticArithmeticPlugin<TTarget, TValue> _sharedInstance
+			= new TweenStaticArithmeticPlugin<TTarget, TValue>();
+
+		///////////////////
+		// General
+
+		// Initialize
+		public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
+		{
+			return null;
+		}
+
+		///////////////////
+		// Calculate Value Hook
+
+		// Return the difference between start and end
+		public TValue DiffValue(TValue start, TValue end, ref object userData)
+		{
+			return ((TweenStaticArithmeticPlugin.Operations<TValue>)userData).diff(start, end);
+		}
+
+		// Return the end value
+		public TValue EndValue(TValue start, TValue diff, ref object userData)
+		{
+			return ((TweenStaticArithmeticPlugin.Operations<TValue>)userData).end(start, diff);
+		}
+
+		// Return the value at the current position
+		public TValue ValueAtPosition(TValue start, TValue end, TValue diff, float position, ref object userData)
+		{
+			return ((TweenStaticArithmeticPlugin.Operations<TValue>)userData).valueAt(start, end, diff, position);
 		}
 	}
 

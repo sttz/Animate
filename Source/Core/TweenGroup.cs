@@ -455,12 +455,6 @@ namespace Sttz.Tweener.Core {
 				for (int i = 0; i < count; i++) {
 					// Update tween
 					if (!tweens[i].Internal.Update()) {
-						// Return to pool
-						if (Animate.Pool != null 
-								&& tweens[i].Options.Recycle != TweenRecycle.None
-								&& (tweens[i].Options.Recycle & TweenRecycle.Tweens) > 0) {
-							Animate.Pool.Return(tweens[i]);
-						}
 						// Release & remove from list
 						tweens[i].Options.RetainCount--;
 						tweens.RemoveAt(i); i--; count--;

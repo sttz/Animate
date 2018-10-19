@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Sttz.Tweener.Core.Static
 {
@@ -20,11 +21,44 @@ namespace Sttz.Tweener.Core.Static
 
 			// Transform
 			TweenStaticAccessorPlugin.Teach("rotation",
-				 (Transform tf) => tf.rotation,
-				 (tf, value) => tf.rotation = value);
+				(Transform tf) => tf.rotation,
+				(tf, value) => tf.rotation = value);
+			TweenStaticAccessorPlugin.Teach("localRotation",
+				(Transform tf) => tf.localRotation,
+				(tf, value) => tf.localRotation = value);
+			TweenStaticAccessorPlugin.Teach("eulerAngles",
+				(Transform tf) => tf.eulerAngles,
+				(tf, value) => tf.eulerAngles = value);
+			TweenStaticAccessorPlugin.Teach("localEulerAngles",
+				(Transform tf) => tf.localEulerAngles,
+				(tf, value) => tf.localEulerAngles = value);
+			TweenStaticAccessorPlugin.Teach("localScale",
+				(Transform tf) => tf.localScale,
+				(tf, value) => tf.localScale = value);
 			TweenStaticAccessorPlugin.Teach("position",
-				 (Transform tf) => tf.position,
-				 (tf, value) => tf.position = value);
+				(Transform tf) => tf.position,
+				(tf, value) => tf.position = value);
+			TweenStaticAccessorPlugin.Teach("localPosition",
+				(Transform tf) => tf.localPosition,
+				(tf, value) => tf.localPosition = value);
+
+			TweenStaticAccessorPlugin.Teach("anchoredPosition",
+				(RectTransform tf) => tf.anchoredPosition,
+				(tf, value) => tf.anchoredPosition = value);
+
+			TweenStaticAccessorPlugin.Teach("color",
+			    (Graphic t) => t.color,
+				(t, value) => t.color = value);
+			TweenStaticAccessorPlugin.Teach("color",
+				(Material t) => t.color,
+				(t, value) => t.color = value);
+
+			TweenStaticAccessorPlugin.Teach("weight",
+				(AnimationState tf) => tf.weight,
+				(tf, value) => tf.weight = value);
+			TweenStaticAccessorPlugin.Teach("alpha",
+				(CanvasGroup tf) => tf.alpha,
+				(tf, value) => tf.alpha = value);
 
 			// ------ Arithmetic -------
 

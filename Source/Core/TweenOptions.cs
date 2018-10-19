@@ -542,38 +542,93 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Events
 
-		// Set overwrite settings
 		public TContainer OnInitialize(EventHandler<TweenEventArgs> handler)
 		{
 			Options.InitializeEvent += handler;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
+		public TContainer OnInitialize(Action handler)
+		{
+			Options.InitializeEvent += (sender, args) => handler();
+			return this as TContainer;
+		}
+
+		public TContainer OnInitialize(Action<TweenEventArgs> handler)
+		{
+			Options.InitializeEvent += (sender, args) => handler(args);
+			return this as TContainer;
+		}
+
 		public TContainer OnStart(EventHandler<TweenEventArgs> handler)
 		{
 			Options.StartEvent += handler;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
+		public TContainer OnStart(Action handler)
+		{
+			Options.StartEvent += (sender, args) => handler();
+			return this as TContainer;
+		}
+
+		public TContainer OnStart(Action<TweenEventArgs> handler)
+		{
+			Options.StartEvent += (sender, args) => handler(args);
+			return this as TContainer;
+		}
+
 		public TContainer OnUpdate(EventHandler<TweenEventArgs> handler)
 		{
 			Options.UpdateEvent += handler;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
+		public TContainer OnUpdate(Action handler)
+		{
+			Options.UpdateEvent += (sender, args) => handler();
+			return this as TContainer;
+		}
+
+		public TContainer OnUpdate(Action<TweenEventArgs> handler)
+		{
+			Options.UpdateEvent += (sender, args) => handler(args);
+			return this as TContainer;
+		}
+
 		public TContainer OnComplete(EventHandler<TweenEventArgs> handler)
 		{
 			Options.CompleteEvent += handler;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
+		public TContainer OnComplete(Action handler)
+		{
+			Options.CompleteEvent += (sender, args) => handler();
+			return this as TContainer;
+		}
+
+		public TContainer OnComplete(Action<TweenEventArgs> handler)
+		{
+			Options.CompleteEvent += (sender, args) => handler(args);
+			return this as TContainer;
+		}
+
 		public TContainer OnError(EventHandler<TweenEventArgs> handler)
 		{
 			Options.ErrorEvent += handler;
+			return this as TContainer;
+		}
+
+		public TContainer OnError(Action handler)
+		{
+			Options.ErrorEvent += (sender, args) => handler();
+			return this as TContainer;
+		}
+
+		public TContainer OnError(Action<TweenEventArgs> handler)
+		{
+			Options.ErrorEvent += (sender, args) => handler(args);
 			return this as TContainer;
 		}
 

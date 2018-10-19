@@ -162,14 +162,20 @@ namespace Sttz.Tweener {
 		/// after it was created or when calling <see cref="M:ITween.Validate"/>.)
 		/// </summary>
 		TContainer OnInitialize(EventHandler<TweenEventArgs> handler);
+		TContainer OnInitialize(Action<TweenEventArgs> handler);
+		TContainer OnInitialize(Action handler);
 		/// <summary>
 		/// Event triggered when the tween starts (e.g. after the start delay).
 		/// </summary>
 		TContainer OnStart(EventHandler<TweenEventArgs> handler);
+		TContainer OnStart(Action<TweenEventArgs> handler);
+		TContainer OnStart(Action handler);
 		/// <summary>
 		/// Event triggered every time the tween updates.
 		/// </summary>
 		TContainer OnUpdate(EventHandler<TweenEventArgs> handler);
+		TContainer OnUpdate(Action<TweenEventArgs> handler);
+		TContainer OnUpdate(Action handler);
 		/// <summary>
 		/// Event triggered when the tween completes (either normally or
 		/// by being stopped or overwritten, check 
@@ -177,11 +183,15 @@ namespace Sttz.Tweener {
 		/// what completed the tween.
 		/// </summary>
 		TContainer OnComplete(EventHandler<TweenEventArgs> handler);
+		TContainer OnComplete(Action<TweenEventArgs> handler);
+		TContainer OnComplete(Action handler);
 		/// <summary>
 		/// Triggered when an error occurs. <see cref="TweenEventArgs.Error"/>
 		/// and <see cref="ITween.Error"/> contain a description of the error.
 		/// </summary>
 		TContainer OnError(EventHandler<TweenEventArgs> handler);
+		TContainer OnError(Action<TweenEventArgs> handler);
+		TContainer OnError(Action handler);
 
 		///////////////////
 		// Coroutines

@@ -39,9 +39,10 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = false)
-			where TTarget : class
+		public static bool Load(ITween tween, bool weak = true)
 		{
+			if (tween == null) return false;
+
 			// Check if target is Transform and has a kinematic rigidbody
 			var targetTf = tween.Target as Transform;
 			if (targetTf == null) {
@@ -57,23 +58,23 @@ namespace Sttz.Tweener.Plugins {
 			ITweenPlugin instance;
 			if (tween.Property == "position"
 					|| tween.Property == "eulerAngles") {
-				instance = TweenRigidbodyImplVector3<TTarget>.sharedInstance;
+				instance = TweenRigidbodyImplVector3.sharedInstance;
 			} else if (tween.Property == "rotation") {
-				instance = TweenRigidbodyImplQuaternion<TTarget>.sharedInstance;
+				instance = TweenRigidbodyImplQuaternion.sharedInstance;
 			} else {
 				return false;
 			}
 
 			// Set plugin type to use
-			tween.LoadPlugin(instance, weak: automatic);
+			tween.Internal.LoadPlugin(instance, weak: weak);
 			return true;
 		}
 
 		public static Tween<TTarget, TValue> PluginRigidbody<TTarget, TValue>(this Tween<TTarget, TValue> tween)
 			where TTarget : class
 		{
-			if (!Load(tween)) {
-				tween.PluginError("TweenMaterial",
+			if (!Load(tween, weak: false)) {
+				tween.PluginError("TweenRigidbody",
 					"TweenRigidbody: Tween property can only be 'position', "
 					+ "'rotation' or 'eulerAngles' on a Transform with a "
 					+ "kinematic Rigidbody, got {0} on {1}.",
@@ -87,7 +88,7 @@ namespace Sttz.Tweener.Plugins {
 		// Implementation
 
 		// Open generic implementation
-		private class TweenRigidbodyImpl
+		public class TweenRigidbodyImpl
 		{
 			// Initialize
 			public string Initialize(ITween tween, TweenPluginType initForType, ref object userData)
@@ -125,14 +126,13 @@ namespace Sttz.Tweener.Plugins {
 		}
 
 		// Vector3 implementation
-		private class TweenRigidbodyImplVector3<TTarget> : TweenRigidbodyImpl,
-			ITweenSetterPlugin<TTarget, Vector3>
-			where TTarget : class
+		private class TweenRigidbodyImplVector3 : TweenRigidbodyImpl,
+			ITweenSetterPlugin<Transform, Vector3>
 		{
-			internal static TweenRigidbodyImplVector3<TTarget> sharedInstance
-				= new TweenRigidbodyImplVector3<TTarget>();
+			internal static TweenRigidbodyImplVector3 sharedInstance
+				= new TweenRigidbodyImplVector3();
 
-			public void SetValue(TTarget target, string property, Vector3 value, ref object userData)
+			public void SetValue(Transform target, string property, Vector3 value, ref object userData)
 			{
 				var rigidbody = (userData as Rigidbody);
 				if (property == "position") {
@@ -144,14 +144,13 @@ namespace Sttz.Tweener.Plugins {
 		}
 
 		// Quaternion implementation
-		private class TweenRigidbodyImplQuaternion<TTarget> : TweenRigidbodyImpl,
-			ITweenSetterPlugin<TTarget, Quaternion>
-			where TTarget : class
+		private class TweenRigidbodyImplQuaternion : TweenRigidbodyImpl,
+			ITweenSetterPlugin<Transform, Quaternion>
 		{
-			internal static TweenRigidbodyImplQuaternion<TTarget> sharedInstance
-				= new TweenRigidbodyImplQuaternion<TTarget>();
+			internal static TweenRigidbodyImplQuaternion sharedInstance
+				= new TweenRigidbodyImplQuaternion();
 
-			public void SetValue(TTarget target, string property, Quaternion value, ref object userData)
+			public void SetValue(Transform target, string property, Quaternion value, ref object userData)
 			{
 				(userData as Rigidbody).MoveRotation(value);
 			}

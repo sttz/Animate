@@ -41,10 +41,10 @@ namespace Sttz.Tweener.Core.Reflection
 
 	public static class TweenReflectionAccessorPlugin
 	{
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool weak = true)
 			where TTarget : class
 		{
-			return TweenReflectionAccessorPlugin<TTarget, TValue>.Load(tween, automatic: automatic);
+			return TweenReflectionAccessorPlugin<TTarget, TValue>.Load(tween, weak: weak);
 		}
 
 		public static Tween<TTarget, TValue> PluginReflectionAccessor<TTarget, TValue> (
@@ -52,7 +52,7 @@ namespace Sttz.Tweener.Core.Reflection
 		)
 			where TTarget : class
 		{
-			Load(tween, automatic: false);
+			Load(tween, weak: false);
 			return tween;
 		}
 	}
@@ -70,10 +70,10 @@ namespace Sttz.Tweener.Core.Reflection
 		static TweenReflectionAccessorPlugin<TTarget, TValue> _sharedInstance
 			= new TweenReflectionAccessorPlugin<TTarget, TValue>();
 
-		public static bool Load(Tween<TTarget, TValue> tween, bool automatic = true)
+		public static bool Load(Tween<TTarget, TValue> tween, bool weak)
 		{
 			if (tween == null) return false;
-			tween.LoadPlugin(_sharedInstance, weak: automatic);
+			tween.LoadPlugin(_sharedInstance, weak: weak);
 			return true;
 		}
 
@@ -154,10 +154,10 @@ namespace Sttz.Tweener.Core.Reflection
 		///////////////////
 		// Usage
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = true)
+		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool weak = true)
 			where TTarget : class
 		{
-			return TweenReflectionArithmeticPlugin<TValue>.Load(tween, automatic: automatic);
+			return TweenReflectionArithmeticPlugin<TValue>.Load(tween, weak: weak);
 		}
 
 		public static Tween<TTarget, TValue> PluginReflectionArithmetic<TTarget, TValue> (
@@ -165,7 +165,7 @@ namespace Sttz.Tweener.Core.Reflection
 		)
 			where TTarget : class
 		{
-			if (!Load(tween, automatic: false)) {
+			if (!Load(tween, weak: false)) {
 				tween.PluginError("PluginReflectionArithmetic",
 				    "Cannot tween value {0} ({0} on {1}): TweenReflectionArithmeticPlugin " +
 					"only supports non-basic types with op_Addition, op_Subtraction and op_Multiply " +
@@ -188,7 +188,7 @@ namespace Sttz.Tweener.Core.Reflection
 		static TweenReflectionArithmeticPlugin<TValue> _sharedInstance
 			= new TweenReflectionArithmeticPlugin<TValue>();
 
-		public static bool Load<TTarget>(Tween<TTarget, TValue> tween, bool automatic = true)
+		public static bool Load<TTarget>(Tween<TTarget, TValue> tween, bool weak)
 			where TTarget : class
 		{
 			if (tween == null) return false;
@@ -209,7 +209,7 @@ namespace Sttz.Tweener.Core.Reflection
 			}
 
 			// Fall back to the reflection plugin
-			tween.LoadPlugin(_sharedInstance, weak: automatic, userData: data);
+			tween.LoadPlugin(_sharedInstance, weak: weak, userData: data);
 			return true;
 		}
 

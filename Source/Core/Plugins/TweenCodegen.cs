@@ -15,8 +15,12 @@ using System.Diagnostics;
 namespace Sttz.Tweener.Core.Codegen {
 
 	/// <summary>
-	/// Tween reflection.
+	/// Tweening helper methods for code generation.
 	/// </summary>
+	/// <remarks>
+	/// These helper methods are not available with AOT compilation
+	/// or .Net Standard.
+	/// </remraks>
 	public static class TweenCodegen
 	{
 		// Delegate use to create IL set handler

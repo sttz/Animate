@@ -1,16 +1,17 @@
+using System;
 using Sttz.Tweener.Core;
+using Sttz.Tweener.Plugins;
 
 namespace Sttz.Tweener {
 
 	// TODO: Group events
-	// TODO: Handlers without parameters?
 
 	/// @mainpage
 	/// <summary>
 	/// Animate Tweening Engine.
 	/// </summary>
 	/// <remarks>
-	/// <para>version 3.0.0 beta 2</para>
+	/// <para>version 3.0.0 beta 3</para>
 	/// <para>
 	/// Animate is a high-performance generalized tweening engine written in C#
 	/// and optimized to use in the Unity game engine.
@@ -137,32 +138,83 @@ namespace Sttz.Tweener {
 	/// <summary>
 	/// Animate tweening engine.
 	/// </summary>
-	public class Animate : UnityTweenEngine
+	public static class Animate
 	{
 		/// <summary>
 		/// Animate version string.
 		/// </summary>
-		public const string Version = "3.0.0b2";
+		public const string Version = "3.0.0b3";
 		/// <summary>
 		/// Animate version number.
 		/// </summary>
-		public const int VersionNumber = 3002;
+		public const int VersionNumber = 3003;
 
 		///////////////////
 		// Configuration
 
-		// Configure global default
-		static Animate()
-		{
-			Options.Easing = Easing.QuadraticOut;
-			Options.LogLevel = TweenLogLevel.Warning;
+		/// <summary>
+		/// Default tween engine factory method.
+		/// </summary>
+		public static readonly Func<ITweenEngine> DefaultEngineFactory = () => {
+			var engine = UnityTweenEngine.Create();
 
-			Options.TweenTiming = TweenTiming.Default;
-			Options.OverwriteSettings = TweenOverwrite.Default;
+			// Uncomment this line if you want to use reflection / codegen
+			// codegen is not available with IL2CPP or .Net Standard
+			//engine.EnableReflection = true;
 
-			Options.Recycle = TweenRecycle.All;
-			Pool = new TweenPool();
+			// Recycle tweens and groups
+			engine.Options.Recycle = TweenRecycle.All;
+			engine.Pool = new TweenPool();
+
+			// Default settings
+			engine.Options.Easing = Easing.QuadraticOut;
+			engine.Options.LogLevel = TweenLogLevel.Warning;
+
+			engine.Options.TweenTiming = TweenTiming.Default;
+			engine.Options.OverwriteSettings = TweenOverwrite.Default;
+
+			// Plugins loaded automatically
+			engine.AddDefaultPlugin(TweenSlerp.Load);
+			//engine.AddDefaultPlugin(TweenRigidbody.Load);
+			//engine.AddDefaultPlugin(TweenMaterial.Load);
+
+			return engine;
+		};
+
+		/// <summary>
+		/// The factory method used to create the tween engine.
+		/// </summary>
+		/// <remarks>
+		/// Set this property with your custom factory to use a custom engine.
+		/// </remarks>
+		public static Func<ITweenEngine> EngineFactory {
+			get {
+				return _engineFactory;
+			}
+			set {
+				if (_engine != null) {
+					Engine.Options.Internal.Log(
+						TweenLogLevel.Warning, 
+						"Setting EngineFactory when Engine has already been created has no effect."
+					);
+				}
+				_engineFactory = value;
+			}
 		}
+		private static Func<ITweenEngine> _engineFactory = DefaultEngineFactory;
+
+		/// <summary>
+		/// The tween engine used.
+		/// </summary>
+		public static ITweenEngine Engine {
+			get {
+				if (_engine == null) {
+					_engine = EngineFactory();
+				}
+				return _engine;
+			}
+		}
+		private static ITweenEngine _engine;
 
 		///////////////////
 		// Main Methods
@@ -179,16 +231,16 @@ namespace Sttz.Tweener {
 		public static TweenGroup<TTarget> On<TTarget>(TTarget target, ITweenTemplate template = null)
 			where TTarget : class
 		{
-			var parentOptions = Options;
+			var parentOptions = Engine.Options;
 			if (template != null) parentOptions = template.Options;
 
 			TweenGroup<TTarget> tweenGroup = null;
-			if (Pool != null) {
-				tweenGroup = Pool.GetGroup<TTarget>();
+			if (Engine.Pool != null) {
+				tweenGroup = Engine.Pool.GetGroup<TTarget>();
 			} else {
 				tweenGroup = new TweenGroup<TTarget>();
 			}
-			tweenGroup.Use(target, parentOptions, Instance);
+			tweenGroup.Use(target, parentOptions, Engine);
 
 			return tweenGroup;
 		}
@@ -208,16 +260,16 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Animate.On"/>
 		public static TweenGroup<object> Group(ITweenTemplate template = null)
 		{
-			var parentOptions = Options;
+			var parentOptions = Engine.Options;
 			if (template != null) parentOptions = template.Options;
 
 			TweenGroup<object> tweenGroup = null;
-			if (Pool != null) {
-				tweenGroup = Pool.GetGroup<object>();
+			if (Engine.Pool != null) {
+				tweenGroup = Engine.Pool.GetGroup<object>();
 			} else {
 				tweenGroup = new TweenGroup<object>();
 			}
-			tweenGroup.Use(null, parentOptions, Instance);
+			tweenGroup.Use(null, parentOptions, Engine);
 			tweenGroup.Options.Recycle = TweenRecycle.Tweens;
 
 			return tweenGroup;
@@ -234,7 +286,7 @@ namespace Sttz.Tweener {
 		/// </remarks>
 		public static ITweenTemplate Template()
 		{
-			return new TweenTemplate(Options);
+			return new TweenTemplate(Engine.Options);
 		}
 
 		///////////////////
@@ -272,7 +324,7 @@ namespace Sttz.Tweener {
 			where TTarget : class
 		{
 			var tween = Tween.To(target, duration, property, toValue);
-			Instance.SinglesGroup.Add(tween);
+			Engine.SinglesGroup.Add(tween);
 			return tween;
 		}
 
@@ -308,7 +360,7 @@ namespace Sttz.Tweener {
 			where TTarget : class
 		{
 			var tween = Tween.From(target, duration, property, fromValue);
-			Instance.SinglesGroup.Add(tween);
+			Engine.SinglesGroup.Add(tween);
 			return tween;
 		}
 
@@ -348,7 +400,7 @@ namespace Sttz.Tweener {
 			where TTarget : class
 		{
 			var tween = Tween.FromTo(target, duration, property, fromValue, toValue);
-			Instance.SinglesGroup.Add(tween);
+			Engine.SinglesGroup.Add(tween);
 			return tween;
 		}
 
@@ -384,7 +436,7 @@ namespace Sttz.Tweener {
 			where TTarget : class
 		{
 			var tween = Tween.By(target, duration, property, byValue);
-			Instance.SinglesGroup.Add(tween);
+			Engine.SinglesGroup.Add(tween);
 			return tween;
 		}
 
@@ -407,7 +459,7 @@ namespace Sttz.Tweener {
 		/// </param>
 		public static bool Has(object target, string property = null)
 		{
-			return Instance.Has(target, property);
+			return Engine.Has(target, property);
 		}
 
 		/// <summary>
@@ -424,7 +476,7 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITween.Stop"/>
 		public static void Stop(object target, string property = null)
 		{
-			Instance.Stop(target, property);
+			Engine.Stop(target, property);
 		}
 
 		/// <summary>
@@ -441,7 +493,7 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITween.Finish"/>
 		public static void Finish(object target, string property = null)
 		{
-			Instance.Finish(target, property);
+			Engine.Finish(target, property);
 		}
 
 		/// <summary>
@@ -458,7 +510,7 @@ namespace Sttz.Tweener {
 		/// <seealso cref="Sttz.Tweener.ITween.Cancel"/>
 		public static void Cancel(object target, string property = null)
 		{
-			Instance.Cancel(target, property);
+			Engine.Cancel(target, property);
 		}
 	}
 }

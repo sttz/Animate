@@ -32,14 +32,23 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, bool automatic = false)
-			where TTarget : class
+		/// <summary>
+		/// TweenSlerp plugin loader.
+		/// </summary>
+		/// <remarks>
+		/// Use this method together with <see cref="ITweenEngine.AddDefaultPlugin"/> to 
+		/// load this plugin for all tweens. For individual tweens, use the
+		/// <see cref="TweenSlerp.PluginSlerp"/> extension methods instead.
+		/// </remarks>
+		public static bool Load(ITween tween, bool weak = true) 
 		{
+			if (tween == null) return false;
+
 			if (tween.ValueType == typeof(Vector3)
-					&& tween.Property.EndsWith("EulerAngles", StringComparison.OrdinalIgnoreCase)) {
-				tween.LoadPlugin(sharedVector3Plugin, weak: automatic);
+					&& (!weak || tween.Property.EndsWith("EulerAngles", StringComparison.OrdinalIgnoreCase))) {
+				tween.Internal.LoadPlugin(sharedVector3Plugin, weak: weak);
 			} else if (tween.ValueType == typeof(Quaternion)) {
-				tween.LoadPlugin(sharedQuaternionPlugin, weak: automatic);
+				tween.Internal.LoadPlugin(sharedQuaternionPlugin, weak: weak);
 			} else {
 				return false;
 			}
@@ -47,14 +56,26 @@ namespace Sttz.Tweener.Plugins {
 			return true;
 		}
 
-		public static Tween<TTarget, TValue> PluginSlerp<TTarget, TValue>(this Tween<TTarget, TValue> tween)
+		/// <summary>
+		/// Use the TweenSlerp plugin on the current tween.
+		/// </summary>
+		public static Tween<TTarget, Quaternion> PluginSlerp<TTarget>(this Tween<TTarget, Quaternion> tween)
 			where TTarget : class
 		{
-			if (!Load(tween)) {
-				tween.PluginError("TweenSlerp",
-				    "Tween value needs to be either Vector3 or Quaternion, got {0} for {1} on {2}",
-					tween.ValueType, tween.Property, tween.Target
-				);
+			if (!Load(tween, weak: false)) {
+				tween.PluginError("TweenSlerp", "Plugin could not be loaded");
+			}
+			return tween;
+		}
+
+		/// <summary>
+		/// Use the TweenSlerp plugin on the current tween.
+		/// </summary>
+		public static Tween<TTarget, Vector3> PluginSlerp<TTarget>(this Tween<TTarget, Vector3> tween)
+			where TTarget : class
+		{
+			if (!Load(tween, weak: false)) {
+				tween.PluginError("TweenSlerp", "Plugin could not be loaded");
 			}
 			return tween;
 		}

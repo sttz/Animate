@@ -38,11 +38,15 @@ namespace Sttz.Tweener.Plugins {
 		///////////////////
 		// Plugin Use
 
-		public static bool Load<TTarget, TValue>(
-			Tween<TTarget, TValue> tween, bool automatic = false, PropertyType forceType = PropertyType.Undefined
-		)
-			where TTarget : class
+		public static bool Load(ITween tween, bool weak = true)
 		{
+			return Load(tween, weak, PropertyType.Undefined);
+		}
+
+		public static bool Load(ITween tween, bool weak, PropertyType forceType)
+		{
+			if (tween == null) return false;
+
 			// Check if target is Material
 			if (!(tween.Target is Material)) {
 				return false;
@@ -59,7 +63,7 @@ namespace Sttz.Tweener.Plugins {
 
 			} else {
 				// Get option, removes it from the property for chek below
-				var option = tween.PropertyOptions;
+				var option = tween.Internal.PropertyOptions;
 
 				// Only activate for properties starting with an underscore
 				if (tween.Property[0] != '_') {
@@ -98,7 +102,7 @@ namespace Sttz.Tweener.Plugins {
 			}
 
 			// Set plugin type to use
-			tween.LoadPlugin(typeToPluginInstance[type], weak: automatic, userData: type);
+			tween.Internal.LoadPlugin(typeToPluginInstance[type], weak: weak, userData: type);
 			return true;
 		}
 

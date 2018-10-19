@@ -73,10 +73,10 @@ namespace Sttz.Tweener.Core {
 
 		protected override void ReturnToPool()
 		{
-			if (Animate.Pool != null
+			if (_engine.Pool != null
 					&& Options.Recycle != TweenRecycle.None
 					&& (Options.Recycle & TweenRecycle.Groups) > 0) {
-				Animate.Pool.Return(this);
+				_engine.Pool.Return(this);
 			}
 		}
 
@@ -171,9 +171,9 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Add a To tween to the group
-		public TweenGroup<TTarget> To<T>(
-			object target, float duration, string property, T toValue
-		) {
+		public TweenGroup<TTarget> To<TT, TV>(
+			TT target, float duration, string property, TV toValue
+		) where TT : class {
 			return Add(Tween.To(target, duration, property, toValue));
 		}
 
@@ -195,9 +195,9 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Add a From tween to the group
-		public TweenGroup<TTarget> From<T>(
-			object target, float duration, string property, T fromValue
-		) {
+		public TweenGroup<TTarget> From<TT, TV>(
+			TT target, float duration, string property, TV fromValue
+		) where TT : class {
 			return Add(Tween.From(target, duration, property, fromValue));
 		}
 
@@ -219,9 +219,9 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Add a FromTo tween to the group
-		public TweenGroup<TTarget> FromTo<T>(
-			object target, float duration, string property, T fromValue, T toValue
-		) {
+		public TweenGroup<TTarget> FromTo<TT, TV>(
+			TT target, float duration, string property, TV fromValue, TV toValue
+		) where TT : class {
 			return Add(Tween.FromTo(target, duration, property, fromValue, toValue));
 		}
 
@@ -243,9 +243,9 @@ namespace Sttz.Tweener.Core {
 		}
 
 		// Add a By tween to the group
-		public TweenGroup<TTarget> By<T>(
-			object target, float duration, string property, T byValue
-		) {
+		public TweenGroup<TTarget> By<TT, TV>(
+			TT target, float duration, string property, TV byValue
+		) where TT : class {
 			return Add(Tween.By(target, duration, property, byValue));
 		}
 

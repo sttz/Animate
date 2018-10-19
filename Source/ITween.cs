@@ -20,41 +20,6 @@ namespace Sttz.Tweener {
 		///////////////////
 		// To
 
-		// TODO: Possible to bring this method back with proper typing?
-		/// <summary>
-		/// Create a new To tween that will inherit the group's
-		/// target and duration.
-		/// </summary>
-		/// <param name='property'>
-		/// The name of the property to tween on the target.
-		/// </param>
-		/// <param name='toValue'>
-		/// The target value you want to tween the property to. 
-		/// The type of this value has to exactly match the property's type.
-		/// </param>
-		/// <param name='plugins'>
-		/// Plugins you want to use with this tween. Call the plugin's <c>Use()</c>
-		/// method with the appropriate options (e.g. <c>MyPlugin.Use(option)</c>).
-		/// </param>
-		/// <typeparam name='TValue'>
-		/// The value type of the tween. Has to match the target property
-		/// type's value exactly.
-		/// </typeparam>
-		/// <seealso cref="Animate.To<TValue>"/>
-		/// <seealso cref="ITweenGroup.To<TValue>"/>
-		/*public static Tween<TTarget, TValue> To<TTarget, TValue>(
-			string property, TValue toValue, 
-			params TweenPluginInfo[] plugins
-		) 
-			where TTarget : class
-		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.To, 
-				null, float.NaN, property, 
-				default(TValue), toValue, default(TValue), 
-				plugins
-			);
-		}*/
-
 		/// <summary>
 		/// Create a new To tween that will inherit the group's target.
 		/// </summary>
@@ -83,7 +48,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.To, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.To, 
 				target, float.NaN, property, 
 				default(TValue), toValue, default(TValue)
 			);
@@ -120,7 +85,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.To, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.To, 
 				target, duration, property, 
 				default(TValue), toValue, default(TValue)
 			);
@@ -128,38 +93,6 @@ namespace Sttz.Tweener {
 
 		///////////////////
 		// From
-
-		/// <summary>
-		/// Create a new From tween that will inherit the group's 
-		/// target and duration.
-		/// </summary>
-		/// <param name='property'>
-		/// The name of the property to tween on the target.
-		/// </param>
-		/// <param name='fromValue'>
-		/// The target value you want to tween the property from, to its current value. 
-		/// The type of this value has to exactly match the property's type.
-		/// </param>
-		/// <param name='plugins'>
-		/// Plugins you want to use with this tween. Call the plugin's <c>Use()</c>
-		/// method with the appropriate options (e.g. <c>MyPlugin.Use(option)</c>).
-		/// </param>
-		/// <typeparam name='TValue'>
-		/// The value type of the tween. Has to match the target property
-		/// type's value exactly.
-		/// </typeparam>
-		/// <seealso cref="Animate.From<TValue>"/>
-		/// <seealso cref="ITweenGroup.From<TValue>"/>
-		/*public static Tween<TValue> From<TValue>(
-			string property, TValue fromValue, 
-			params TweenPluginInfo[] plugins
-		) {
-			return Tween<TValue>.Create(TweenMethod.From, 
-				null, float.NaN, property, 
-				fromValue, default(TValue), default(TValue), 
-				plugins
-			);
-		}*/
 
 		/// <summary>
 		/// Create a new From tween that will inherit the group's target.
@@ -189,7 +122,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.From, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.From, 
 				target, float.NaN, property, 
 				fromValue, default(TValue), default(TValue)
 			);
@@ -226,7 +159,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.From, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.From, 
 				target, duration, property, 
 				fromValue, default(TValue), default(TValue)
 			);
@@ -234,42 +167,6 @@ namespace Sttz.Tweener {
 
 		///////////////////
 		// FromTo
-
-		/// <summary>
-		/// Create a new FromTo tween that will inherit the group's 
-		/// target and duration.
-		/// </summary>
-		/// <param name='property'>
-		/// The name of the property to tween on the target.
-		/// </param>
-		/// <param name='fromValue'>
-		/// The value you want to tween the property from. 
-		/// The type of this value has to exactly match the property's type.
-		/// </param>
-		/// <param name='toValue'>
-		/// The value you want to tween the property to. 
-		/// The type of this value has to exactly match the property's type.
-		/// </param>
-		/// <param name='plugins'>
-		/// Plugins you want to use with this tween. Call the plugin's <c>Use()</c>
-		/// method with the appropriate options (e.g. <c>MyPlugin.Use(option)</c>).
-		/// </param>
-		/// <typeparam name='TValue'>
-		/// The value type of the tween. Has to match the target property
-		/// type's value exactly.
-		/// </typeparam>
-		/// <seealso cref="Animate.FromTo<TValue>"/>
-		/// <seealso cref="ITweenGroup.FromTo<TValue>"/>
-		/*public static Tween<TValue> FromTo<TValue>(
-			string property, TValue fromValue, TValue toValue, 
-			params TweenPluginInfo[] plugins
-		) {
-			return Tween<TValue>.Create(TweenMethod.FromTo, 
-				null, float.NaN, property, 
-				fromValue, toValue, default(TValue), 
-				plugins
-			);
-		}*/
 
 		/// <summary>
 		/// Create a new FromTo tween that will inherit the group's target.
@@ -303,7 +200,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.FromTo, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.FromTo, 
 				target, float.NaN, property, 
 				fromValue, toValue, default(TValue)
 			);
@@ -344,7 +241,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.FromTo, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.FromTo, 
 				target, duration, property, 
 				fromValue, toValue, default(TValue)
 			);
@@ -352,38 +249,6 @@ namespace Sttz.Tweener {
 
 		///////////////////
 		// By
-
-		/// <summary>
-		/// Create a new By tween that will inherit the group's 
-		/// target and duration.
-		/// </summary>
-		/// <param name='property'>
-		/// The name of the property to tween on the target.
-		/// </param>
-		/// <param name='byValue'>
-		/// The target value you want to tween the property by, starting from its current value. 
-		/// The type of this value has to exactly match the property's type.
-		/// </param>
-		/// <param name='plugins'>
-		/// Plugins you want to use with this tween. Call the plugin's <c>Use()</c>
-		/// method with the appropriate options (e.g. <c>MyPlugin.Use(option)</c>).
-		/// </param>
-		/// <typeparam name='TValue'>
-		/// The value type of the tween. Has to match the target property
-		/// type's value exactly.
-		/// </typeparam>
-		/// <seealso cref="Animate.By<TValue>"/>
-		/// <seealso cref="ITweenGroup.By<TValue>"/>
-		/*public static Tween<TValue> By<TValue>(
-			string property, TValue byValue, 
-			params TweenPluginInfo[] plugins
-		) {
-			return Tween<TValue>.Create(TweenMethod.By, 
-				null, float.NaN, property, 
-				default(TValue), default(TValue), byValue, 
-				plugins
-			);
-		}*/
 
 		/// <summary>
 		/// Create a new By tween that will inherit the group's target.
@@ -413,7 +278,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.By, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.By, 
 				target, float.NaN, property, 
 				default(TValue), default(TValue), byValue
 			);
@@ -450,7 +315,7 @@ namespace Sttz.Tweener {
 		)
 			where TTarget : class
 		{
-			return Tween<TTarget, TValue>.Create(TweenMethod.By, 
+			return Animate.Engine.Create<TTarget, TValue>(TweenMethod.By, 
 				target, duration, property, 
 				default(TValue), default(TValue), byValue
 			);
@@ -459,12 +324,6 @@ namespace Sttz.Tweener {
 
 	///////////////////
 	// ITween
-
-	public interface ITween<TTarget, TValue> : ITween
-		where TTarget : class
-	{
-
-	}
 
 	/// <summary>
 	/// Individual tween.

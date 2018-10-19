@@ -13,6 +13,14 @@ namespace Sttz.Tweener.Core {
 	}
 
 	/// <summary>
+	/// Plugin load callback, called by the tween on initialization.
+	/// </summary>
+	/// <param name="tween">Tween to load the plugin for</param>
+	/// <param name="weak">Wether to load the plugin weakly or strongly</param>
+	/// <returns>Wether the plugin loader succeeded (not if the plugin was actually loaded)</returns>
+	public delegate bool PluginLoader(ITween tween, bool weak = true);
+
+	/// <summary>
 	/// I tween plugin.
 	/// </summary>
 	public interface ITweenPlugin

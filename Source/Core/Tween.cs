@@ -7,10 +7,6 @@ using Sttz.Tweener.Core.Reflection;
 using Sttz.Tweener.Core.Static;
 using Sttz.Tweener.Plugins;
 
-#if !ENABLE_IL2CPP
-using Sttz.Tweener.Core.Codegen;
-#endif
-
 namespace Sttz.Tweener.Core {
 
 	/// <summary>
@@ -27,7 +23,14 @@ namespace Sttz.Tweener.Core {
 		object Target { get; set; }
 		// Name of property to tween
 		string Property { get; set; }
+		string PropertyOptions { get; }
 
+		ITweenPlugin GetterPlugin { get; }
+		ITweenPlugin SetterPlugin { get; }
+		ITweenPlugin ArithmeticPlugin { get; }
+
+		bool LoadPlugin(ITweenPlugin plugin, bool weak, object userData = null);
+		void PluginError(string pluginName, string format, params object[] args);
 		// Overwrite this tween by another one based on its settings
 		void Overwrite(ITween other);
 
@@ -41,40 +44,6 @@ namespace Sttz.Tweener.Core {
 	public class Tween<TTarget, TValue> : TweenOptionsFluid<Tween<TTarget, TValue>>, ITween, ITweenInternal
 		where TTarget : class
 	{
-		///////////////////
-		// Plugin Configuration
-
-		// TODO: Make this more flexible when IL2CPP allows it
-		protected void LoadPlugins()
-		{
-			// The order matters here, plugins loaded later
-			// can override plugins loaded earlier.
-
-			// Note that if a plugin is loaded strongly, an error
-			// will be triggered. Therefore all plugins loaded here
-			// should be loaded weakly, to avoid situation where
-			// a tween cannot be loaded. Only plugins the user
-			// explicitly loaded should fail with an error.
-
-			// Unity integration for static plugins
-			TweenStaticUnityPlugin.Load();
-
-			// Default Plugins
-			TweenStaticAccessorPlugin.Load(this);
-			TweenStaticArithmeticPlugin.Load(this);
-
-			#if !ENABLE_IL2CPP
-			//TweenCodegenAccessorPlugin.Load(this);
-			//TweenCodegenArithmeticPlugin.Load(this);
-			#else
-			//TweenReflectionAccessorPlugin.Load(this);
-			//TweenReflectionArithmeticPlugin.Load(this);
-			#endif
-
-			// Automatic plugins
-			TweenSlerp.Load(this, automatic: true);
-		}
-
 		///////////////////
 		// Fields
 
@@ -143,51 +112,6 @@ namespace Sttz.Tweener.Core {
 
 		///////////////////
 		// Constructor
-
-		// Constructor, using of the Tween.* static methods
-		// is strongly encouraged.
-		public static Tween<TTarget, TValue> Create(
-			TweenMethod tweenMethod,
-			TTarget target, 
-			float duration,
-			string property, 
-			TValue startValue,
-			TValue endValue,
-			TValue diffValue,
-			ITweenOptions parentOptions = null
-		) {
-			// Basic sanity checks
-			if (target == null) {
-				Animate.Options.Internal.Log(
-					TweenLogLevel.Error, 
-					"Trying to tween {0} on a null object.", property
-				);
-				return null;
-			}
-			if (property == null) {
-				Animate.Options.Internal.Log(
-					TweenLogLevel.Error, 
-					"Property to tween on object {0} is null.", target
-				);
-				return null;
-			}
-
-			// Get instance from pool or create new one
-			Tween<TTarget, TValue> tween = null;
-			if (Animate.Pool != null) {
-				tween = Animate.Pool.GetTween<TTarget, TValue>();
-			} else {
-				tween = new Tween<TTarget, TValue>();
-			}
-
-			// Setup instance
-			tween.Use(
-				tweenMethod, target, duration, property, 
-				startValue, endValue, diffValue, 
-				parentOptions
-			);
-			return tween;
-		}
 
 		// Initialize an instance returned from the pool
 		public void Use(
@@ -267,10 +191,10 @@ namespace Sttz.Tweener.Core {
 		protected override void ReturnToPool()
 		{
 			// Return to pool
-			if (Animate.Pool != null
+			if (_engine.Pool != null
 					&& Options.Recycle != TweenRecycle.None
 					&& (Options.Recycle & TweenRecycle.Tweens) > 0) {
-				Animate.Pool.Return(this);
+				_engine.Pool.Return(this);
 			}
 		}
 
@@ -291,15 +215,15 @@ namespace Sttz.Tweener.Core {
 			}
 
 			// Load plugins
-			// TODO: Make this independent of UnityTweenEngine
-			LoadPlugins();
+			_engine.LoadDynamicPlugins(this);
+			_engine.LoadStaticPlugins(this);
 
 			if (_state == TweenState.Error)
 				return false;
 
 			if (_hookGet == null || _hookSet == null || _hookCalculate == null) {
-				Fail("Missing plugins for tween of {0}  on {1}: Getter = {2}, Setter = {3}, Arithmetic = {4}",
-					_property, _target, _hookGet, _hookSet, _hookCalculate);
+				Fail("Missing plugins for tween of {0} ({1}) on {2} ({3}): Getter = {4}, Setter = {5}, Arithmetic = {6}",
+				    _property, ValueType, _target, TargetType, _hookGet, _hookSet, _hookCalculate);
 				return false;
 			}
 
@@ -350,6 +274,18 @@ namespace Sttz.Tweener.Core {
 			@"^:(?<options>\w+):(?<property>.*)$",
 			RegexOptions.ExplicitCapture
 		);
+
+		public ITweenPlugin GetterPlugin {
+			get { return _hookGet; }
+		}
+
+		public ITweenPlugin SetterPlugin {
+			get { return _hookSet; }
+		}
+
+		public ITweenPlugin ArithmeticPlugin {
+			get { return _hookCalculate; }
+		}
 
 		public string PropertyOptions {
 			get {

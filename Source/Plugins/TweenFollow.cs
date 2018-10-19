@@ -11,30 +11,29 @@ namespace Sttz.Tweener.Plugins
 		///////////////////
 		// Plugin Use
 
-		public static bool Load<TTarget, TValue>(Tween<TTarget, TValue> tween, Transform targetSpace)
-			where TTarget : class
+		public static bool Load(ITween tween, Transform targetSpace)
 		{
 			if (tween == null || targetSpace == null) return false;
 
 			if (tween.ValueType != typeof(Vector3)) {
-				tween.PluginError("TweenFollow", 
-                	"Tween target value needs to be Vector3, {0} on {1} is {2}.",
-	                tween.Property, tween.Target, tween.ValueType.Name
-                );
+				tween.Internal.PluginError("TweenFollow", 
+					"Tween target value needs to be Vector3, {0} on {1} is {2}.",
+					tween.Property, tween.Target, tween.ValueType.Name
+				);
 				return false;
 			}
 
 			if (targetSpace == null) {
-				tween.PluginError("TweenFollow", "targetSpace is null.");
+				tween.Internal.PluginError("TweenFollow", "targetSpace is null.");
 				return false;
 			}
 
 			if (tween.TweenMethod != TweenMethod.To) {
-				tween.PluginError("TweenFollow", "Tween needs to be a To tween.");
+				tween.Internal.PluginError("TweenFollow", "Tween needs to be a To tween.");
 				return false;
 			}
 
-			tween.LoadPlugin(sharedPlugin, weak: false, userData: targetSpace);
+			tween.Internal.LoadPlugin(sharedPlugin, weak: false, userData: targetSpace);
 			return true;
 		}
 

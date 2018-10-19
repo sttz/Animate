@@ -1,5 +1,5 @@
 // TODO: Fix TweenStruct for il2cpp platforms
-#if !ENABLE_IL2CPP
+#if !ENABLE_IL2CPP && !NET_STANDARD_2_0
 
 using System;
 using System.Reflection;

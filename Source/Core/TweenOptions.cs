@@ -483,56 +483,48 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Properites
 
-		// Set duration of tween
 		public TContainer Over(float duration)
 		{
 			Options.Duration = duration;
 			return this as TContainer;
 		}
 
-		// Set easing method
 		public TContainer Ease(EasingMethod easing)
 		{
 			Options.Easing = easing;
 			return this as TContainer;
 		}
 
-		// Set Timing
 		public TContainer Timing(TweenTiming timing)
 		{
 			Options.TweenTiming = timing;
 			return this as TContainer;
 		}
 
-		// Set start delay
 		public TContainer Delay(float seconds)
 		{
 			Options.StartDelay = seconds;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
 		public TContainer Overwrite(TweenOverwrite settings)
 		{
 			Options.OverwriteSettings = settings;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
 		public TContainer Recycle(TweenRecycle recycle)
 		{
 			Options.Recycle = recycle;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
 		public TContainer Retain()
 		{
 			Options.RetainCount += 1;
 			return this as TContainer;
 		}
 
-		// Set overwrite settings
 		public TContainer Release()
 		{
 			Options.RetainCount -= 1;
@@ -635,7 +627,6 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Debug
 
-		// Set overwrite settings
 		public TContainer LogLevel(TweenLogLevel level)
 		{
 			Options.LogLevel = level;
@@ -645,7 +636,6 @@ namespace Sttz.Tweener.Core {
 		///////////////////
 		// Finalizers (end the fluid chain)
 
-		// Return a WaitForSeconds set for the full tween duration (delay + duration)
 		public WaitForSeconds WaitForTweenDuration()
 		{
 			// Check duration is set

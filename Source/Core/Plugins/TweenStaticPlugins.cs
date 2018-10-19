@@ -164,7 +164,9 @@ namespace Sttz.Tweener.Core.Static
 		// Internals
 
 		static Dictionary<Type, ITweenPlugin> supportedTypes = new Dictionary<Type, ITweenPlugin>() {
-			{ typeof(float), new TweenStaticArithmeticPluginFloat() }
+			{ typeof(int),    new TweenStaticArithmeticPluginInt() },
+			{ typeof(float),  new TweenStaticArithmeticPluginFloat() },
+			{ typeof(double), new TweenStaticArithmeticPluginDouble() }
 		};
 
 		public static bool SupportsType(Type type)

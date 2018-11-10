@@ -1,0 +1,6 @@
+- name: Overview
+  href: /
+- name: Api Documentation
+  href: obj/temp/api/ 
+- name: GitHub
+  href: https://github.com/sttz/animate

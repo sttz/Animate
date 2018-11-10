@@ -1,0 +1,1076 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Tween&lt;TTarget, TValue&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Tween&lt;TTarget, TValue&gt;
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.Tween`2">
+  
+  
+  <h1 id="Sttz_Tweener_Tween_2" data-uid="Sttz.Tweener.Tween`2" class="text-break">Class Tween&lt;TTarget, TValue&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Concrete generic implementation of <a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html">TweenOptionsContainer</a></div>
+    <div class="level2"><a class="xref" href="Sttz.Tweener.Tween.html">Tween</a></div>
+    <div class="level3"><span class="xref">Tween&lt;TTarget, TValue&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_State">Tween.State</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Error">Tween.Error</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_CompletedBy">Tween.CompletedBy</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_CreationTime">Tween.CreationTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_StartTime">Tween.StartTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_StartTimeUnscaled">Tween.StartTimeUnscaled</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_DurationUnscaled">Tween.DurationUnscaled</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_TweenTime">Tween.TweenTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_TweenEngine">Tween.TweenEngine</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_TweenMethod">Tween.TweenMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Property">Tween.Property</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Stop">Tween.Stop()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Finish">Tween.Finish()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Cancel">Tween.Cancel()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Overlaps_Sttz_Tweener_Tween_">Tween.Overlaps(Tween)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_WaitForEndOfTween">Tween.WaitForEndOfTween()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_WaitFOrEndOfTWeenCoroutine">Tween.WaitFOrEndOfTWeenCoroutine()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_ReturnToPool">Tween.ReturnToPool()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Validate_System_Boolean_">Tween.Validate(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_PropertyOptions">Tween.PropertyOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__engine">Tween._engine</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__tweenMethod">Tween._tweenMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__property">Tween._property</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__options">Tween._options</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__state">Tween._state</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__error">Tween._error</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__completedBy">Tween._completedBy</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__creationTime">Tween._creationTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__creationTimeUnscaled">Tween._creationTimeUnscaled</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__creationTimeReal">Tween._creationTimeReal</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__startTime">Tween._startTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__validated">Tween._validated</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__valuesPrepared">Tween._valuesPrepared</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__oneOverDuration">Tween._oneOverDuration</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__targetIsUnityObject">Tween._targetIsUnityObject</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__targetUnityObject">Tween._targetUnityObject</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__targetIsUnityRef">Tween._targetIsUnityRef</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__targetUnityReference">Tween._targetUnityReference</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__timing">Tween._timing</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween__triggerUpdate">Tween._triggerUpdate</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Fail_System_String_System_Object___">Tween.Fail(String, Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Fail_Sttz_Tweener_TweenLogLevel_System_String_System_Object___">Tween.Fail(TweenLogLevel, String, Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_DoOverwrite">Tween.DoOverwrite()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_GetPluginOverride_System_Boolean_System_Boolean_">Tween.GetPluginOverride(Boolean, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Initialize">Tween.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Start">Tween.Start()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Complete_Sttz_Tweener_TweenCompletedBy_System_Boolean_">Tween.Complete(TweenCompletedBy, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_Options">TweenOptionsContainer.Options</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_RetainCount">TweenOptionsContainer.RetainCount</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer__retainCount">TweenOptionsContainer._retainCount</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.html">Sttz.Tweener</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_Tween_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Tween&lt;TTarget, TValue&gt; : Tween where TTarget : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTarget</span></td>
+        <td><p>Type of the target object (needs to be a reference type)</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td><p>Type of the target property</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_Tween_2_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>You don&apos;t normally need to interact with this subtype. Refer to <a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>
+or the helper methods on <a class="xref" href="Sttz.Tweener.Animate.html">Animate</a> instead.</p>
+</div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__diffValue" data-uid="Sttz.Tweener.Tween`2._diffValue">_diffValue</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TValue _diffValue</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__endValue" data-uid="Sttz.Tweener.Tween`2._endValue">_endValue</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TValue _endValue</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookCalculate" data-uid="Sttz.Tweener.Tween`2._hookCalculate">_hookCalculate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ITweenArithmeticPlugin&lt;TValue&gt; _hookCalculate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenArithmeticPlugin-1.html">ITweenArithmeticPlugin</a>&lt;TValue&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookCalculateUserData" data-uid="Sttz.Tweener.Tween`2._hookCalculateUserData">_hookCalculateUserData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected object _hookCalculateUserData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookCalculateWeak" data-uid="Sttz.Tweener.Tween`2._hookCalculateWeak">_hookCalculateWeak</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _hookCalculateWeak</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookGet" data-uid="Sttz.Tweener.Tween`2._hookGet">_hookGet</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ITweenGetterPlugin&lt;TTarget, TValue&gt; _hookGet</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenGetterPlugin-2.html">ITweenGetterPlugin</a>&lt;TTarget, TValue&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookGetUserData" data-uid="Sttz.Tweener.Tween`2._hookGetUserData">_hookGetUserData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected object _hookGetUserData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookGetWeak" data-uid="Sttz.Tweener.Tween`2._hookGetWeak">_hookGetWeak</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _hookGetWeak</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookSet" data-uid="Sttz.Tweener.Tween`2._hookSet">_hookSet</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ITweenSetterPlugin&lt;TTarget, TValue&gt; _hookSet</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenSetterPlugin-2.html">ITweenSetterPlugin</a>&lt;TTarget, TValue&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookSetUserData" data-uid="Sttz.Tweener.Tween`2._hookSetUserData">_hookSetUserData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected object _hookSetUserData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__hookSetWeak" data-uid="Sttz.Tweener.Tween`2._hookSetWeak">_hookSetWeak</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _hookSetWeak</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__startValue" data-uid="Sttz.Tweener.Tween`2._startValue">_startValue</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TValue _startValue</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Tween_2__target" data-uid="Sttz.Tweener.Tween`2._target">_target</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TTarget _target</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_ArithmeticPlugin_" data-uid="Sttz.Tweener.Tween`2.ArithmeticPlugin*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_ArithmeticPlugin" data-uid="Sttz.Tweener.Tween`2.ArithmeticPlugin">ArithmeticPlugin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ITweenPlugin ArithmeticPlugin { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenPlugin.html">ITweenPlugin</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_ArithmeticPlugin">Tween.ArithmeticPlugin</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_DiffValue_" data-uid="Sttz.Tweener.Tween`2.DiffValue*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_DiffValue" data-uid="Sttz.Tweener.Tween`2.DiffValue">DiffValue</h4>
+  <div class="markdown level1 summary"><p>Difference between start and end value of the tween (set when the tween is started).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue DiffValue { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_EndValue_" data-uid="Sttz.Tweener.Tween`2.EndValue*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_EndValue" data-uid="Sttz.Tweener.Tween`2.EndValue">EndValue</h4>
+  <div class="markdown level1 summary"><p>End value of the tween (set when the tween is started).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue EndValue { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_GetterPlugin_" data-uid="Sttz.Tweener.Tween`2.GetterPlugin*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_GetterPlugin" data-uid="Sttz.Tweener.Tween`2.GetterPlugin">GetterPlugin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ITweenPlugin GetterPlugin { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenPlugin.html">ITweenPlugin</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_GetterPlugin">Tween.GetterPlugin</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_SetterPlugin_" data-uid="Sttz.Tweener.Tween`2.SetterPlugin*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_SetterPlugin" data-uid="Sttz.Tweener.Tween`2.SetterPlugin">SetterPlugin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ITweenPlugin SetterPlugin { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenPlugin.html">ITweenPlugin</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_SetterPlugin">Tween.SetterPlugin</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_StartValue_" data-uid="Sttz.Tweener.Tween`2.StartValue*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_StartValue" data-uid="Sttz.Tweener.Tween`2.StartValue">StartValue</h4>
+  <div class="markdown level1 summary"><p>Start value of the tween (set when the tween is started).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue StartValue { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_Target_" data-uid="Sttz.Tweener.Tween`2.Target*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_Target" data-uid="Sttz.Tweener.Tween`2.Target">Target</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object Target { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Target">Tween.Target</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_TargetType_" data-uid="Sttz.Tweener.Tween`2.TargetType*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_TargetType" data-uid="Sttz.Tweener.Tween`2.TargetType">TargetType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type TargetType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_TargetType">Tween.TargetType</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_Value_" data-uid="Sttz.Tweener.Tween`2.Value*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_Value" data-uid="Sttz.Tweener.Tween`2.Value">Value</h4>
+  <div class="markdown level1 summary"><p>Current value of the target property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue Value { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_ValueType_" data-uid="Sttz.Tweener.Tween`2.ValueType*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_ValueType" data-uid="Sttz.Tweener.Tween`2.ValueType">ValueType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type ValueType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_ValueType">Tween.ValueType</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_ApplyValue_" data-uid="Sttz.Tweener.Tween`2.ApplyValue*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_ApplyValue_System_Single_" data-uid="Sttz.Tweener.Tween`2.ApplyValue(System.Single)">ApplyValue(Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ApplyValue(float position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_ApplyValue_System_Single_">Tween.ApplyValue(Single)</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_LoadPlugins_" data-uid="Sttz.Tweener.Tween`2.LoadPlugins*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_LoadPlugins" data-uid="Sttz.Tweener.Tween`2.LoadPlugins">LoadPlugins()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override bool LoadPlugins()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_LoadPlugins">Tween.LoadPlugins()</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_PrepareValues_" data-uid="Sttz.Tweener.Tween`2.PrepareValues*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_PrepareValues" data-uid="Sttz.Tweener.Tween`2.PrepareValues">PrepareValues()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void PrepareValues()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_PrepareValues">Tween.PrepareValues()</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_Reset_" data-uid="Sttz.Tweener.Tween`2.Reset*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_Reset" data-uid="Sttz.Tweener.Tween`2.Reset">Reset()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Reset()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Reset">Tween.Reset()</a></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_ToString_" data-uid="Sttz.Tweener.Tween`2.ToString*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_ToString" data-uid="Sttz.Tweener.Tween`2.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  
+  
+  <a id="Sttz_Tweener_Tween_2_Use_" data-uid="Sttz.Tweener.Tween`2.Use*"></a>
+  <h4 id="Sttz_Tweener_Tween_2_Use_Sttz_Tweener_TweenMethod__0_System_Single_System_String__1__1__1_Sttz_Tweener_TweenOptions_" data-uid="Sttz.Tweener.Tween`2.Use(Sttz.Tweener.TweenMethod,`0,System.Single,System.String,`1,`1,`1,Sttz.Tweener.TweenOptions)">Use(TweenMethod, TTarget, Single, String, TValue, TValue, TValue, TweenOptions)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Use(TweenMethod tweenMethod, TTarget target, float duration, string property, TValue startValue, TValue endValue, TValue diffValue, TweenOptions parentOptions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenMethod.html">TweenMethod</a></td>
+        <td><span class="parametername">tweenMethod</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">startValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">endValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">diffValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenOptions.html">TweenOptions</a></td>
+        <td><span class="parametername">parentOptions</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

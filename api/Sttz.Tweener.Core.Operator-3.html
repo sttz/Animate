@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Operator&lt;TLeft, TRight, TResult&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Operator&lt;TLeft, TRight, TResult&gt;
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.Core.Operator`3">
+  
+  
+  <h1 id="Sttz_Tweener_Core_Operator_3" data-uid="Sttz.Tweener.Core.Operator`3" class="text-break">Class Operator&lt;TLeft, TRight, TResult&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Provide efficient generic access to either native or static operators for the given type combination.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Operator&lt;TLeft, TRight, TResult&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.Core.html">Sttz.Tweener.Core</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_Core_Operator_3_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Operator&lt;TLeft, TRight, TResult&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td><p>The type of the left operand.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td><p>The type of the right operand.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the result value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_Core_Operator_3_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Inspired by Keith Farmer&apos;s code on CodeProject:<br><a href="http://www.codeproject.com/KB/cs/genericoperators.aspx">http://www.codeproject.com/KB/cs/genericoperators.aspx</a></p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_Addition_" data-uid="Sttz.Tweener.Core.Operator`3.Addition*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_Addition" data-uid="Sttz.Tweener.Core.Operator`3.Addition">Addition</h4>
+  <div class="markdown level1 summary"><p>Gets the addition operator + (either native or &quot;op_Addition&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; Addition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The addition operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_BitwiseAnd_" data-uid="Sttz.Tweener.Core.Operator`3.BitwiseAnd*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_BitwiseAnd" data-uid="Sttz.Tweener.Core.Operator`3.BitwiseAnd">BitwiseAnd</h4>
+  <div class="markdown level1 summary"><p>Gets the bitwise and operator &amp; (either native or &quot;op_BitwiseAnd&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; BitwiseAnd { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The bitwise and operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_BitwiseOr_" data-uid="Sttz.Tweener.Core.Operator`3.BitwiseOr*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_BitwiseOr" data-uid="Sttz.Tweener.Core.Operator`3.BitwiseOr">BitwiseOr</h4>
+  <div class="markdown level1 summary"><p>Gets the bitwise or operator | (either native or &quot;op_BitwiseOr&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; BitwiseOr { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The bitwise or operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_Division_" data-uid="Sttz.Tweener.Core.Operator`3.Division*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_Division" data-uid="Sttz.Tweener.Core.Operator`3.Division">Division</h4>
+  <div class="markdown level1 summary"><p>Gets the division operator / (either native or &quot;op_Division&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; Division { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The division operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_ExclusiveOr_" data-uid="Sttz.Tweener.Core.Operator`3.ExclusiveOr*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_ExclusiveOr" data-uid="Sttz.Tweener.Core.Operator`3.ExclusiveOr">ExclusiveOr</h4>
+  <div class="markdown level1 summary"><p>Gets the exclusive or operator ^ (either native or &quot;op_ExclusiveOr&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; ExclusiveOr { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The exclusive or operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_LeftShift_" data-uid="Sttz.Tweener.Core.Operator`3.LeftShift*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_LeftShift" data-uid="Sttz.Tweener.Core.Operator`3.LeftShift">LeftShift</h4>
+  <div class="markdown level1 summary"><p>Gets the left shift operator &lt;&lt; (either native or &quot;op_LeftShift&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; LeftShift { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The left shift operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_Modulus_" data-uid="Sttz.Tweener.Core.Operator`3.Modulus*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_Modulus" data-uid="Sttz.Tweener.Core.Operator`3.Modulus">Modulus</h4>
+  <div class="markdown level1 summary"><p>Gets the modulus operator % (either native or &quot;op_Modulus&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; Modulus { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The modulus operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_Multiply_" data-uid="Sttz.Tweener.Core.Operator`3.Multiply*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_Multiply" data-uid="Sttz.Tweener.Core.Operator`3.Multiply">Multiply</h4>
+  <div class="markdown level1 summary"><p>Gets the multiplication operator * (either native or &quot;op_Multiply&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; Multiply { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The multiplication operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_RightShift_" data-uid="Sttz.Tweener.Core.Operator`3.RightShift*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_RightShift" data-uid="Sttz.Tweener.Core.Operator`3.RightShift">RightShift</h4>
+  <div class="markdown level1 summary"><p>Gets the right shift operator &gt;&gt; (either native or &quot;op_RightShift&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; RightShift { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The right shift operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Core_Operator_3_Subtraction_" data-uid="Sttz.Tweener.Core.Operator`3.Subtraction*"></a>
+  <h4 id="Sttz_Tweener_Core_Operator_3_Subtraction" data-uid="Sttz.Tweener.Core.Operator`3.Subtraction">Subtraction</h4>
+  <div class="markdown level1 summary"><p>Gets the subtraction operator - (either native or &quot;op_Addition&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BinaryOperator&lt;TLeft, TRight, TResult&gt; Subtraction { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.BinaryOperator-3.html">BinaryOperator</a>&lt;TLeft, TRight, TResult&gt;</td>
+        <td><p>The subtraction operator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

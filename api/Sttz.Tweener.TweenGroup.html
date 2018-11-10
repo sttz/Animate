@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TweenGroup
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TweenGroup
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.TweenGroup">
+  
+  
+  <h1 id="Sttz_Tweener_TweenGroup" data-uid="Sttz.Tweener.TweenGroup" class="text-break">Class TweenGroup
+  </h1>
+  <div class="markdown level0 summary"><p>Group of tweens that share common options.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html">TweenOptionsContainer</a></div>
+    <div class="level2"><span class="xref">TweenGroup</span></div>
+      <div class="level3"><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup&lt;TTarget&gt;</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_Options">TweenOptionsContainer.Options</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_RetainCount">TweenOptionsContainer.RetainCount</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer__retainCount">TweenOptionsContainer._retainCount</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.html">Sttz.Tweener</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_TweenGroup_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class TweenGroup : TweenOptionsContainer</code></pre>
+  </div>
+  <h5 id="Sttz_Tweener_TweenGroup_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A group can provide defaults for all tween options as well as
+the tween target and allows to control just that group of tweens.</p>
+<p>All the events of the group will be cleared once it&apos;s being recycled,
+you normally don&apos;t have to unregister event handlers you register.</p>
+<p>Every tween needs to be part of a group and every group needs
+to be registered with the engine. When using the methods on
+<a class="xref" href="Sttz.Tweener.Animate.html">Animate</a>, this is automatically taken care of.</p>
+</div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__engine" data-uid="Sttz.Tweener.TweenGroup._engine">_engine</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ITweenEngine _engine</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenEngine.html">ITweenEngine</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__fixedUpdateTweens" data-uid="Sttz.Tweener.TweenGroup._fixedUpdateTweens">_fixedUpdateTweens</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;Tween&gt; _fixedUpdateTweens</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__inUse" data-uid="Sttz.Tweener.TweenGroup._inUse">_inUse</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _inUse</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__lateUpdateTweens" data-uid="Sttz.Tweener.TweenGroup._lateUpdateTweens">_lateUpdateTweens</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;Tween&gt; _lateUpdateTweens</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__newTweens" data-uid="Sttz.Tweener.TweenGroup._newTweens">_newTweens</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;Tween&gt; _newTweens</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup__updateTweens" data-uid="Sttz.Tweener.TweenGroup._updateTweens">_updateTweens</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;Tween&gt; _updateTweens</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_DefaultTarget_" data-uid="Sttz.Tweener.TweenGroup.DefaultTarget*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_DefaultTarget" data-uid="Sttz.Tweener.TweenGroup.DefaultTarget">DefaultTarget</h4>
+  <div class="markdown level1 summary"><p>Default target object of the group (can be overridden by tweens).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract object DefaultTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_DefaultTargetType_" data-uid="Sttz.Tweener.TweenGroup.DefaultTargetType*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_DefaultTargetType" data-uid="Sttz.Tweener.TweenGroup.DefaultTargetType">DefaultTargetType</h4>
+  <div class="markdown level1 summary"><p>Type of the <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_DefaultTarget">DefaultTarget</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Type DefaultTargetType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_TweenGroup_DefaultTargetType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This is the type of the generic parameter used when creating
+the group, not the actual type of the default target object.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_AddInternal_" data-uid="Sttz.Tweener.TweenGroup.AddInternal*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_AddInternal_Sttz_Tweener_Tween_" data-uid="Sttz.Tweener.TweenGroup.AddInternal(Sttz.Tweener.Tween)">AddInternal(Tween)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void AddInternal(Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_AllTweens_" data-uid="Sttz.Tweener.TweenGroup.AllTweens*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_AllTweens_System_Func_Sttz_Tweener_Tween_System_Boolean__" data-uid="Sttz.Tweener.TweenGroup.AllTweens(System.Func{Sttz.Tweener.Tween,System.Boolean})">AllTweens(Func&lt;Tween, Boolean&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void AllTweens(Func&lt;Tween, bool&gt; action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Cancel_" data-uid="Sttz.Tweener.TweenGroup.Cancel*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Cancel_System_Object_System_String_" data-uid="Sttz.Tweener.TweenGroup.Cancel(System.Object,System.String)">Cancel(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Cancel all tweens in the group (setting them to their start value),
+optionally limiting the tweens to a target object and property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Cancel(object target = null, string property = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Only cancel tweens on the target object (set to null to stop all
+tweens on all objects).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>Only cancel tweens with the target property (set to null to stop all
+tweens on the target object).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Finish_" data-uid="Sttz.Tweener.TweenGroup.Finish*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Finish_System_Object_System_String_" data-uid="Sttz.Tweener.TweenGroup.Finish(System.Object,System.String)">Finish(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Finish all tweens in the group (setting them to their end value),
+optionally limiting the tweens to a target object and property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Finish(object target = null, string property = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Only finish tweens on the target object (set to null to stop all
+tweens on all objects).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>Only finish tweens with the target property (set to null to stop all
+tweens on the target object).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Has_" data-uid="Sttz.Tweener.TweenGroup.Has*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Has" data-uid="Sttz.Tweener.TweenGroup.Has">Has()</h4>
+  <div class="markdown level1 summary"><p>Check if the group contains any tweens (waiting or tweening).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Has()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Has_" data-uid="Sttz.Tweener.TweenGroup.Has*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Has_System_Object_System_String_" data-uid="Sttz.Tweener.TweenGroup.Has(System.Object,System.String)">Has(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Check if the group contains specific tweens.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Has(object target, string property = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Target object to look for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>Target property to look for (set to null to look for any property
+on the target object).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Regroup_" data-uid="Sttz.Tweener.TweenGroup.Regroup*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Regroup_Sttz_Tweener_Tween_" data-uid="Sttz.Tweener.TweenGroup.Regroup(Sttz.Tweener.Tween)">Regroup(Tween)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Regroup(Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Reset_" data-uid="Sttz.Tweener.TweenGroup.Reset*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Reset" data-uid="Sttz.Tweener.TweenGroup.Reset">Reset()</h4>
+  <div class="markdown level1 summary"><p>Reset the group so that it can be used again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Reset()</code></pre>
+  </div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_ReturnToPool_" data-uid="Sttz.Tweener.TweenGroup.ReturnToPool*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_ReturnToPool" data-uid="Sttz.Tweener.TweenGroup.ReturnToPool">ReturnToPool()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ReturnToPool()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_ReturnToPool">TweenOptionsContainer.ReturnToPool()</a></div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Stop_" data-uid="Sttz.Tweener.TweenGroup.Stop*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Stop_System_Object_System_String_" data-uid="Sttz.Tweener.TweenGroup.Stop(System.Object,System.String)">Stop(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Stop all tweens in the group (leaving them at their current value),
+optionally limiting the tweens to a target object and property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Stop(object target = null, string property = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Only stop tweens on the target object (set to null to stop all
+tweens on all objects).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>Only stop tweens with the target property (set to null to stop all
+tweens on the target object).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_Validate_" data-uid="Sttz.Tweener.TweenGroup.Validate*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_Validate_System_Boolean_" data-uid="Sttz.Tweener.TweenGroup.Validate(System.Boolean)">Validate(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Trigger the validation of all the tweens in the group 
+and optionally force them to be rendered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Validate(bool forceRender = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">forceRender</span></td>
+        <td><p>Forces all tweens in the group to render (set its target property 
+to the initial value) after they have been validated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_TweenGroup_Validate_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Usually tweens are validated during initialization in the frame
+after they were created. You can call this method to validate
+all tweens in the group right after creating them. This will make
+the stack trace of validation errors more useful as it will point
+to where the group was validated instead of to the where it was 
+initialized.</p>
+<p>Tweens will first render (set their target property) when
+they are started, which is usually during the next frame after they
+were created or after their start delay. Especially when doing a From
+or FromTo tween, you might want the initial value to be set 
+immediately to avoid visual glitches. Validate the tween and 
+set the <code data-dev-comment-type="paramref" class="paramref">forceRender</code> parameter to true in this case.</p>
+</div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_WaitForEndOfGroup_" data-uid="Sttz.Tweener.TweenGroup.WaitForEndOfGroup*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_WaitForEndOfGroup" data-uid="Sttz.Tweener.TweenGroup.WaitForEndOfGroup">WaitForEndOfGroup()</h4>
+  <div class="markdown level1 summary"><p>Create a coroutine that will wait until all tweens in the
+group have completed (the group becomes empty).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Coroutine WaitForEndOfGroup()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Coroutine</span></td>
+        <td><p>A coroutine you can yield in one of your own to wait until
+all tweens in the group have completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_TweenGroup_WaitForEndOfGroup_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Adding new tweens to the group, while not all of its
+tweens have completed, will prolong the time until the
+coroutine returns.</p>
+</div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_WaitForEndOfGroupCoroutine_" data-uid="Sttz.Tweener.TweenGroup.WaitForEndOfGroupCoroutine*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_WaitForEndOfGroupCoroutine" data-uid="Sttz.Tweener.TweenGroup.WaitForEndOfGroupCoroutine">WaitForEndOfGroupCoroutine()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IEnumerator WaitForEndOfGroupCoroutine()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

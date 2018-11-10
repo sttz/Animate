@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface ITweenPlugin
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface ITweenPlugin
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.Core.ITweenPlugin">
+  
+  
+  <h1 id="Sttz_Tweener_Core_ITweenPlugin" data-uid="Sttz.Tweener.Core.ITweenPlugin" class="text-break">Interface ITweenPlugin
+  </h1>
+  <div class="markdown level0 summary"><p>Base interface for Animate plugins.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.Core.html">Sttz.Tweener.Core</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_Core_ITweenPlugin_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ITweenPlugin</code></pre>
+  </div>
+  <h5 id="Sttz_Tweener_Core_ITweenPlugin_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The entry point for a plugin is its <a class="xref" href="Sttz.Tweener.Core.PluginLoader.html">PluginLoader</a> method. The loader
+gets called with a tween and should then check if the plugin applies to the 
+given tween. If everything is fine, it should call <span class="xref">Sttz.Tweener.Tween.LoadPlugin(Sttz.Tweener.Core.ITweenPlugin,System.Boolean,System.Object)</span>
+to actually register itself with the tween.</p>
+<p>In addition to the loader, the plugin should also provide and extension method
+for <a class="xref" href="Sttz.Tweener.Tween-2.html">Tween&lt;TTarget, TValue&gt;</a>, that calls the loader for the current
+tween and requires the plugin.</p>
+<p>All built-in plugins follow these conventions:</p>
+<ul>
+<li>The plugin container is a static class that contains the loader method, the
+tween extension method and private plugin implementation classes.</li>
+<li>If the plugin has options the user can set, it should optionally provide a 
+property inline-syntax via <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_PropertyOptions">PropertyOptions</a>, a <code>CustomLoader</code>
+method that returns a loader with the given options applied (.e.g. see
+<a class="xref" href="Sttz.Tweener.TweenMaterial.html#Sttz_Tweener_TweenMaterial_CustomLoader_Sttz_Tweener_TweenMaterial_PropertyType_">CustomLoader(TweenMaterial.PropertyType)</a>) and an extension method on <code>Tween</code>.
+The extension method can use concrete types to provide type-checking (e.g.
+extend <code>Tween&amp;lt;Transform, TValue&gt;</code> if the plugin only works on transforms).</li>
+<li>The plugin can contain multiple private implementations that are chosen
+by the loader method.</li>
+<li>The error returned by the loader is handled depending on wether the plugin
+is required. If it&apos;s required, the error is fatal and logged as error. If it&apos;s
+not required, the error is silent only only logged as debug message.
+If the plugin wants additional logging, it can call <a class="xref" href="Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_System_Object___">Log(TweenLogLevel, String, Object[])</a>
+on the tween.</li>
+</ul>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_Core_ITweenPlugin_Initialize_" data-uid="Sttz.Tweener.Core.ITweenPlugin.Initialize*"></a>
+  <h4 id="Sttz_Tweener_Core_ITweenPlugin_Initialize_Sttz_Tweener_Tween_Sttz_Tweener_Core_TweenPluginType_System_Object__" data-uid="Sttz.Tweener.Core.ITweenPlugin.Initialize(Sttz.Tweener.Tween,Sttz.Tweener.Core.TweenPluginType,System.Object@)">Initialize(Tween, TweenPluginType, ref Object)</h4>
+  <div class="markdown level1 summary"><p>Initialize the plugin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Initialize(Tween tween, TweenPluginType initForType, ref object userData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td><p>Tween the plugin is loaded for</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.TweenPluginType.html">TweenPluginType</a></td>
+        <td><span class="parametername">initForType</span></td>
+        <td><p>The types the plugin is actually used for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">userData</span></td>
+        <td><p>User data set by the loader</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>null on success or an error on failure</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_Core_ITweenPlugin_Initialize_Sttz_Tweener_Tween_Sttz_Tweener_Core_TweenPluginType_System_Object___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>In contrast to the loader, this method is not called for every tween and only
+if the plugin is actually used. Heavy initialization should be deferred to this
+method.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

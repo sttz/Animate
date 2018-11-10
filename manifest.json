@@ -1,0 +1,777 @@
+{
+  "homepages": [],
+  "source_base_path": "/Users/adrian/dev/Animate/Docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "ldhaF0LJ0I+SKh5340KOmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Animate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Animate.html",
+          "hash": "CRq9p0+UPHnD+3q7rGQ40Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.BinaryOperator-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.BinaryOperator-3.html",
+          "hash": "Y13umT3ZGbzHMmCguV0ZOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.ITweenArithmeticPlugin-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.ITweenArithmeticPlugin-1.html",
+          "hash": "Snd7EGd3HCEPjT2IRa3rmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.ITweenEngine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.ITweenEngine.html",
+          "hash": "pXA2JnYHNkDkQAFCv3D+4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.ITweenGetterPlugin-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.ITweenGetterPlugin-2.html",
+          "hash": "Yljvh3Vxr/K/OxcK5y6uKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.ITweenPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.ITweenPlugin.html",
+          "hash": "0WkbL2qKIQhlOB/72xu5TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.ITweenSetterPlugin-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.ITweenSetterPlugin-2.html",
+          "hash": "6QFfxrL6fK8FfnrXrk/OKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.Operator-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.Operator-3.html",
+          "hash": "xyKT4z+ByVlyDbGdC9AVZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.PluginLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.PluginLoader.html",
+          "hash": "dM2cluoQPiEx4+kkj519yQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.PluginResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.PluginResult.html",
+          "hash": "qvPK5clwiCdTH2vdFEdDUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenCodegen.SetHandler-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenCodegen.SetHandler-2.html",
+          "hash": "ZNVsJ9ujW/RK0KNrGnNZkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenCodegen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenCodegen.html",
+          "hash": "d6ME4ZlM0MdelEXoGcdNuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenCodegenAccessorPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenCodegenAccessorPlugin.html",
+          "hash": "UA1OP01dRr0JRda6Rmf8IQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenCodegenArithmeticPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenCodegenArithmeticPlugin.html",
+          "hash": "NLtlaPHOh9Gr0QnEY+HOaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenPluginType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenPluginType.html",
+          "hash": "ftbEDoLXTecvEiSwDpzepg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenPool.html",
+          "hash": "bpAR2hPG5aAJeMBSzeF32g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenReflection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenReflection.html",
+          "hash": "y15jHWfQiRRS8ipsw7Iq7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenReflectionAccessorPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenReflectionAccessorPlugin.html",
+          "hash": "VD8HroVyxrBkjN3dNKSI/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenReflectionArithmeticPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenReflectionArithmeticPlugin.html",
+          "hash": "/NGR43U44naW1OJTEqg4zA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.GetAccessor-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.GetAccessor-2.html",
+          "hash": "WalBy3oibz085XraxClvOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.SetAccessor-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.SetAccessor-2.html",
+          "hash": "55UAxc/lKkDr7NSwMZhZvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.html",
+          "hash": "LIrcRBjmBvp+TbSL0rfY5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.DiffValue-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.DiffValue-1.html",
+          "hash": "l14wZ3P0fYdnJzv08sA4MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.EndValue-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.EndValue-1.html",
+          "hash": "d0W7IJcdAL2YLWSKD2E2Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.ValueAtPosition-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.ValueAtPosition-1.html",
+          "hash": "cVRnDJvGK0DtJjxkRga1FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.html",
+          "hash": "zD1rV1JvCZz91OqsYjw8KA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenStaticUnitySupport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenStaticUnitySupport.html",
+          "hash": "kIxDSSSzQFU2FipTm5FXDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.UnityTweenEngine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.UnityTweenEngine.html",
+          "hash": "+MmIyGugL8uYKQjnyLUqWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.html",
+          "hash": "fg+wm2LZ6DVSVyMJe6nKww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Easing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Easing.html",
+          "hash": "8seNqtHWJA+/8KktFJP0tw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.EasingDirection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.EasingDirection.html",
+          "hash": "EfTZ2CfvnI3oXmMgsczKaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.EasingMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.EasingMethod.html",
+          "hash": "WuLFop4tAa9/Wa3ba750LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.EasingType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.EasingType.html",
+          "hash": "pHLPBaGKeQoL9LfQZaZajQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Tween-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Tween-2.html",
+          "hash": "ETJLGHwF5/oEXZIZspfA8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Tween.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Tween.html",
+          "hash": "SnYrIESJ+c9m3KX3gmaR7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenCompletedBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenCompletedBy.html",
+          "hash": "aTVrzZBKTc1lNj8+j1szzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenConfigurator-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenConfigurator-2.html",
+          "hash": "RokSyLcBl0egIHIXKj+4hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenEvent.html",
+          "hash": "LM+kexiJuXOnMTDEnfgqLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenEventArgs.html",
+          "hash": "wTmEOPyNWS0Z8ihjqbZWGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenFollow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenFollow.html",
+          "hash": "FFxjM/ItfY9tvrTrjgIahg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenGroup-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenGroup-1.html",
+          "hash": "ZMzzdwU/S8qO+BH9rkGRgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenGroup.html",
+          "hash": "5PbqYFLU0aJEYOZw82FUUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenLogLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenLogLevel.html",
+          "hash": "m4Oflo2FFok6wE1009xSUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenMaterial.PropertyType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenMaterial.PropertyType.html",
+          "hash": "Hn2hAzOFOUSNGtd6p/+Uyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenMaterial.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenMaterial.html",
+          "hash": "z5SvxHMmub3Lh9lnaqw9pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenMethod.html",
+          "hash": "2bOCltus2YSN/hNIxo04Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenOptions.html",
+          "hash": "c4+j/vR4zpxir7zLkZ7TsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenOptionsContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenOptionsContainer.html",
+          "hash": "KSrHsgMhelVE+fXVKNGa/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenOptionsFluid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenOptionsFluid.html",
+          "hash": "+TjyjuExAwXH4aAyVoUX1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenOverwrite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenOverwrite.html",
+          "hash": "4g1oyaoRbfJzfMxHU5xfmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenRecycle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenRecycle.html",
+          "hash": "jnmW/7GHTnOKQFPHGL7lAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenRigidbody.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenRigidbody.html",
+          "hash": "qEpaCJkDwFp+J8QuNZf9+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenSlerp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenSlerp.html",
+          "hash": "+K64ZU4fvPX+T0flY9RwSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenState.html",
+          "hash": "aQmtYv/XnAkHKvdvXksqlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenStruct.html",
+          "hash": "t5tuk7HyHgH2hsXqO7BqZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenTemplate.html",
+          "hash": "zNR5FVwWLi2GRJH1oK8Sqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.TweenTiming.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.TweenTiming.html",
+          "hash": "73U2/k9TxAIM1XDiMvSXaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.html",
+          "hash": "63AmIBemjKAMlh0chP1EOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/temp/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "fHgkE3Jop5KTvRaWURSOYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "DxAVOXfY+xPzJGVwNA7SiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

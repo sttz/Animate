@@ -1,0 +1,1288 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TweenGroup&lt;TTarget&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TweenGroup&lt;TTarget&gt;
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.TweenGroup`1">
+  
+  
+  <h1 id="Sttz_Tweener_TweenGroup_1" data-uid="Sttz.Tweener.TweenGroup`1" class="text-break">Class TweenGroup&lt;TTarget&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Concrete generic implementation of <a class="xref" href="Sttz.Tweener.TweenGroup.html">TweenGroup</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html">TweenOptionsContainer</a></div>
+    <div class="level2"><a class="xref" href="Sttz.Tweener.TweenGroup.html">TweenGroup</a></div>
+    <div class="level3"><span class="xref">TweenGroup&lt;TTarget&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_ReturnToPool">TweenGroup.ReturnToPool()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Validate_System_Boolean_">TweenGroup.Validate(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Has_System_Object_System_String_">TweenGroup.Has(Object, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Has">TweenGroup.Has()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Stop_System_Object_System_String_">TweenGroup.Stop(Object, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Finish_System_Object_System_String_">TweenGroup.Finish(Object, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Cancel_System_Object_System_String_">TweenGroup.Cancel(Object, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_WaitForEndOfGroup">TweenGroup.WaitForEndOfGroup()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_WaitForEndOfGroupCoroutine">TweenGroup.WaitForEndOfGroupCoroutine()</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__newTweens">TweenGroup._newTweens</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__updateTweens">TweenGroup._updateTweens</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__fixedUpdateTweens">TweenGroup._fixedUpdateTweens</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__lateUpdateTweens">TweenGroup._lateUpdateTweens</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__inUse">TweenGroup._inUse</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup__engine">TweenGroup._engine</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_AddInternal_Sttz_Tweener_Tween_">TweenGroup.AddInternal(Tween)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Regroup_Sttz_Tweener_Tween_">TweenGroup.Regroup(Tween)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_AllTweens_System_Func_Sttz_Tweener_Tween_System_Boolean__">TweenGroup.AllTweens(Func&lt;Tween, Boolean&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_Options">TweenOptionsContainer.Options</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_RetainCount">TweenOptionsContainer.RetainCount</a>
+    </div>
+    <div>
+      <a class="xref" href="Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer__retainCount">TweenOptionsContainer._retainCount</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.html">Sttz.Tweener</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_TweenGroup_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TweenGroup&lt;TTarget&gt; : TweenGroup where TTarget : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTarget</span></td>
+        <td><p>Type of the target object (needs to be a reference type)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Sttz_Tweener_TweenGroup_1_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>You don&apos;t normally need to interact with this subtype. Refer to <a class="xref" href="Sttz.Tweener.TweenGroup.html">TweenGroup</a>
+or the helper methods on <a class="xref" href="Sttz.Tweener.Animate.html">Animate</a> instead.</p>
+</div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Sttz_Tweener_TweenGroup_1__defaultTarget" data-uid="Sttz.Tweener.TweenGroup`1._defaultTarget">_defaultTarget</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TTarget _defaultTarget</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_DefaultTarget_" data-uid="Sttz.Tweener.TweenGroup`1.DefaultTarget*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_DefaultTarget" data-uid="Sttz.Tweener.TweenGroup`1.DefaultTarget">DefaultTarget</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object DefaultTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_DefaultTarget">TweenGroup.DefaultTarget</a></div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_DefaultTargetType_" data-uid="Sttz.Tweener.TweenGroup`1.DefaultTargetType*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_DefaultTargetType" data-uid="Sttz.Tweener.TweenGroup`1.DefaultTargetType">DefaultTargetType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type DefaultTargetType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_DefaultTargetType">TweenGroup.DefaultTargetType</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_Add_" data-uid="Sttz.Tweener.TweenGroup`1.Add*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_Add_Sttz_Tweener_Tween_" data-uid="Sttz.Tweener.TweenGroup`1.Add(Sttz.Tweener.Tween)">Add(Tween)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; Add(Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_By_" data-uid="Sttz.Tweener.TweenGroup`1.By*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_By__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.By``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">By&lt;TValue&gt;(TTarget, Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; By&lt;TValue&gt;(TTarget target, float duration, string property, TValue byValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">byValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_By_" data-uid="Sttz.Tweener.TweenGroup`1.By*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_By__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.By``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">By&lt;TValue&gt;(Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; By&lt;TValue&gt;(float duration, string property, TValue byValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">byValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_By_" data-uid="Sttz.Tweener.TweenGroup`1.By*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_By__1_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.By``1(System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">By&lt;TValue&gt;(String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; By&lt;TValue&gt;(string property, TValue byValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">byValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_From_" data-uid="Sttz.Tweener.TweenGroup`1.From*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_From__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.From``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">From&lt;TValue&gt;(TTarget, Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; From&lt;TValue&gt;(TTarget target, float duration, string property, TValue fromValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_From_" data-uid="Sttz.Tweener.TweenGroup`1.From*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_From__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.From``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">From&lt;TValue&gt;(Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; From&lt;TValue&gt;(float duration, string property, TValue fromValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_From_" data-uid="Sttz.Tweener.TweenGroup`1.From*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_From__1_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.From``1(System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">From&lt;TValue&gt;(String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; From&lt;TValue&gt;(string property, TValue fromValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_FromTo_" data-uid="Sttz.Tweener.TweenGroup`1.FromTo*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_FromTo__1__0_System_Single_System_String___0___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.FromTo``1(`0,System.Single,System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">FromTo&lt;TValue&gt;(TTarget, Single, String, TValue, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; FromTo&lt;TValue&gt;(TTarget target, float duration, string property, TValue fromValue, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_FromTo_" data-uid="Sttz.Tweener.TweenGroup`1.FromTo*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_FromTo__1_System_Single_System_String___0___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.FromTo``1(System.Single,System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">FromTo&lt;TValue&gt;(Single, String, TValue, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; FromTo&lt;TValue&gt;(float duration, string property, TValue fromValue, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_FromTo_" data-uid="Sttz.Tweener.TweenGroup`1.FromTo*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_FromTo__1_System_String___0___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.FromTo``1(System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">FromTo&lt;TValue&gt;(String, TValue, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; FromTo&lt;TValue&gt;(string property, TValue fromValue, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">fromValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_Reset_" data-uid="Sttz.Tweener.TweenGroup`1.Reset*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_Reset" data-uid="Sttz.Tweener.TweenGroup`1.Reset">Reset()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Reset()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_Reset">TweenGroup.Reset()</a></div>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_To_" data-uid="Sttz.Tweener.TweenGroup`1.To*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_To__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.To``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">To&lt;TValue&gt;(TTarget, Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; To&lt;TValue&gt;(TTarget target, float duration, string property, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_To_" data-uid="Sttz.Tweener.TweenGroup`1.To*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_To__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.To``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">To&lt;TValue&gt;(Single, String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; To&lt;TValue&gt;(float duration, string property, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_To_" data-uid="Sttz.Tweener.TweenGroup`1.To*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_To__1_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__" data-uid="Sttz.Tweener.TweenGroup`1.To``1(System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})">To&lt;TValue&gt;(String, TValue, TweenConfigurator&lt;TTarget, TValue&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TweenGroup&lt;TTarget&gt; To&lt;TValue&gt;(string property, TValue toValue, TweenConfigurator&lt;TTarget, TValue&gt; configurator = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">toValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenConfigurator-2.html">TweenConfigurator</a>&lt;TTarget, TValue&gt;</td>
+        <td><span class="parametername">configurator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenGroup-1.html">TweenGroup</a>&lt;TTarget&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenGroup_1_Use_" data-uid="Sttz.Tweener.TweenGroup`1.Use*"></a>
+  <h4 id="Sttz_Tweener_TweenGroup_1_Use__0_Sttz_Tweener_TweenOptions_Sttz_Tweener_Core_ITweenEngine_" data-uid="Sttz.Tweener.TweenGroup`1.Use(`0,Sttz.Tweener.TweenOptions,Sttz.Tweener.Core.ITweenEngine)">Use(TTarget, TweenOptions, ITweenEngine)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Use(TTarget target, TweenOptions parentOptions, ITweenEngine engine)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTarget</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenOptions.html">TweenOptions</a></td>
+        <td><span class="parametername">parentOptions</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.ITweenEngine.html">ITweenEngine</a></td>
+        <td><span class="parametername">engine</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1368 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Easing
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Easing
+   ">
+    <meta name="generator" content="docfx 2.40.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Sttz.Tweener.Easing">
+  
+  
+  <h1 id="Sttz_Tweener_Easing" data-uid="Sttz.Tweener.Easing" class="text-break">Class Easing
+  </h1>
+  <div class="markdown level0 summary"><p>Collection of easing methods.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Easing</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Sttz.Tweener.html">Sttz.Tweener</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Sttz_Tweener_Easing_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Easing</code></pre>
+  </div>
+  <h5 id="Sttz_Tweener_Easing_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Easing methods change the speed of the tween over its duration.</p>
+
+<p><a class="xref" href="Sttz.Tweener.Easing.html#Sttz_Tweener_Easing_Linear">Linear</a> is the same as applying no easing:
+the speed of the tween will stay constant over its duration.</p>
+
+<p>The regular set of easing methods will start slow and speed up (In)
+until reaching full speed at the end, start at full speed and slow down
+towards the end (Out) or start and end slow and reach full speed at
+their half-point (InOut).</p>
+
+<p>The regular easing methods, sorted by strength:
+<ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></p>
+
+
+<p>There are also three special easing methods: <a class="xref" href="Sttz.Tweener.Easing.html#Sttz_Tweener_Easing_BackOut">BackOut</a>,
+<a class="xref" href="Sttz.Tweener.Easing.html#Sttz_Tweener_Easing_BounceOut">BounceOut</a> and <a class="xref" href="Sttz.Tweener.Easing.html#Sttz_Tweener_Easing_ElasticOut">ElasticOut</a>. Back first moves
+away from the target before starting to move towards it, Bounce bounces
+off the start or end, reaching the start/end value multiple times and
+Elastic is similar to bounce but moves beyond the start/end values.</p>
+
+<p>These easing methods are based on Robert Penner&apos;s easing
+equations, first published in his Flash programming book in 2002. See 
+<a href="http://www.robertpenner.com/easing/">http://www.robertpenner.com/easing/</a> for more information
+as well as an interactive visualization of these methods.</p>
+</div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BackDefaultSwing" data-uid="Sttz.Tweener.Easing.BackDefaultSwing">BackDefaultSwing</h4>
+  <div class="markdown level1 summary"><p>Default back swing amount.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float BackDefaultSwing = 1.70158F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BackIn" data-uid="Sttz.Tweener.Easing.BackIn">BackIn</h4>
+  <div class="markdown level1 summary"><p>Back easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BackIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BackInOut" data-uid="Sttz.Tweener.Easing.BackInOut">BackInOut</h4>
+  <div class="markdown level1 summary"><p>Back easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BackInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BackOut" data-uid="Sttz.Tweener.Easing.BackOut">BackOut</h4>
+  <div class="markdown level1 summary"><p>Back easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BackOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BounceIn" data-uid="Sttz.Tweener.Easing.BounceIn">BounceIn</h4>
+  <div class="markdown level1 summary"><p>Bounce easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BounceIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BounceInOut" data-uid="Sttz.Tweener.Easing.BounceInOut">BounceInOut</h4>
+  <div class="markdown level1 summary"><p>Bounce easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BounceInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_BounceOut" data-uid="Sttz.Tweener.Easing.BounceOut">BounceOut</h4>
+  <div class="markdown level1 summary"><p>Bounce easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod BounceOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CircularIn" data-uid="Sttz.Tweener.Easing.CircularIn">CircularIn</h4>
+  <div class="markdown level1 summary"><p>Circular easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CircularIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CircularInOut" data-uid="Sttz.Tweener.Easing.CircularInOut">CircularInOut</h4>
+  <div class="markdown level1 summary"><p>Circular easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CircularInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CircularOut" data-uid="Sttz.Tweener.Easing.CircularOut">CircularOut</h4>
+  <div class="markdown level1 summary"><p>Circular easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CircularOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CubicIn" data-uid="Sttz.Tweener.Easing.CubicIn">CubicIn</h4>
+  <div class="markdown level1 summary"><p>Cubic easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CubicIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CubicInOut" data-uid="Sttz.Tweener.Easing.CubicInOut">CubicInOut</h4>
+  <div class="markdown level1 summary"><p>Cubic easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CubicInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_CubicOut" data-uid="Sttz.Tweener.Easing.CubicOut">CubicOut</h4>
+  <div class="markdown level1 summary"><p>Cubic easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod CubicOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ElasticDefaultAmplitude" data-uid="Sttz.Tweener.Easing.ElasticDefaultAmplitude">ElasticDefaultAmplitude</h4>
+  <div class="markdown level1 summary"><p>Default elastic amplitude (1 = full target value, &lt; 1 never reaches target).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float ElasticDefaultAmplitude = 1F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ElasticDefaultPeriod" data-uid="Sttz.Tweener.Easing.ElasticDefaultPeriod">ElasticDefaultPeriod</h4>
+  <div class="markdown level1 summary"><p>Default elastic period (number of swings = 1 / p).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float ElasticDefaultPeriod = 0.3F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ElasticIn" data-uid="Sttz.Tweener.Easing.ElasticIn">ElasticIn</h4>
+  <div class="markdown level1 summary"><p>Elastic easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ElasticIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ElasticInOut" data-uid="Sttz.Tweener.Easing.ElasticInOut">ElasticInOut</h4>
+  <div class="markdown level1 summary"><p>Elastic easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ElasticInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ElasticOut" data-uid="Sttz.Tweener.Easing.ElasticOut">ElasticOut</h4>
+  <div class="markdown level1 summary"><p>Elastic easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ElasticOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ExponentialIn" data-uid="Sttz.Tweener.Easing.ExponentialIn">ExponentialIn</h4>
+  <div class="markdown level1 summary"><p>Exponential easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ExponentialIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ExponentialInOut" data-uid="Sttz.Tweener.Easing.ExponentialInOut">ExponentialInOut</h4>
+  <div class="markdown level1 summary"><p>Exponential easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ExponentialInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_ExponentialOut" data-uid="Sttz.Tweener.Easing.ExponentialOut">ExponentialOut</h4>
+  <div class="markdown level1 summary"><p>Exponential easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod ExponentialOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_Linear" data-uid="Sttz.Tweener.Easing.Linear">Linear</h4>
+  <div class="markdown level1 summary"><p>Linear easing (no easing).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod Linear</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuadraticIn" data-uid="Sttz.Tweener.Easing.QuadraticIn">QuadraticIn</h4>
+  <div class="markdown level1 summary"><p>Quadratic easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuadraticIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuadraticInOut" data-uid="Sttz.Tweener.Easing.QuadraticInOut">QuadraticInOut</h4>
+  <div class="markdown level1 summary"><p>Quadratic easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuadraticInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuadraticOut" data-uid="Sttz.Tweener.Easing.QuadraticOut">QuadraticOut</h4>
+  <div class="markdown level1 summary"><p>Quadratic easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuadraticOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuarticIn" data-uid="Sttz.Tweener.Easing.QuarticIn">QuarticIn</h4>
+  <div class="markdown level1 summary"><p>Quartic easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuarticIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuarticInOut" data-uid="Sttz.Tweener.Easing.QuarticInOut">QuarticInOut</h4>
+  <div class="markdown level1 summary"><p>Quartic easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuarticInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuarticOut" data-uid="Sttz.Tweener.Easing.QuarticOut">QuarticOut</h4>
+  <div class="markdown level1 summary"><p>Quartic easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuarticOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuinticIn" data-uid="Sttz.Tweener.Easing.QuinticIn">QuinticIn</h4>
+  <div class="markdown level1 summary"><p>Quintic easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuinticIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuinticInOut" data-uid="Sttz.Tweener.Easing.QuinticInOut">QuinticInOut</h4>
+  <div class="markdown level1 summary"><p>Quintic easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuinticInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_QuinticOut" data-uid="Sttz.Tweener.Easing.QuinticOut">QuinticOut</h4>
+  <div class="markdown level1 summary"><p>Quintic easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod QuinticOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_SinusoidalIn" data-uid="Sttz.Tweener.Easing.SinusoidalIn">SinusoidalIn</h4>
+  <div class="markdown level1 summary"><p>Sinusoidal easing, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod SinusoidalIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_SinusoidalInOut" data-uid="Sttz.Tweener.Easing.SinusoidalInOut">SinusoidalInOut</h4>
+  <div class="markdown level1 summary"><p>Sinusoidal easing, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod SinusoidalInOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Sttz_Tweener_Easing_SinusoidalOut" data-uid="Sttz.Tweener.Easing.SinusoidalOut">SinusoidalOut</h4>
+  <div class="markdown level1 summary"><p>Sinusoidal easing, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly EasingMethod SinusoidalOut</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Sttz_Tweener_Easing_BackInCustom_" data-uid="Sttz.Tweener.Easing.BackInCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_BackInCustom_System_Single_" data-uid="Sttz.Tweener.Easing.BackInCustom(System.Single)">BackInCustom(Single)</h4>
+  <div class="markdown level1 summary"><p>Back easing with custom swing amount, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod BackInCustom(float swing = 1.70158F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">swing</span></td>
+        <td><p>Swing amount.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_BackInOutCustom_" data-uid="Sttz.Tweener.Easing.BackInOutCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_BackInOutCustom_System_Single_" data-uid="Sttz.Tweener.Easing.BackInOutCustom(System.Single)">BackInOutCustom(Single)</h4>
+  <div class="markdown level1 summary"><p>Back easing with custom swing amount, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod BackInOutCustom(float swing = 1.70158F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">swing</span></td>
+        <td><p>Swing amount.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_BackOutCustom_" data-uid="Sttz.Tweener.Easing.BackOutCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_BackOutCustom_System_Single_" data-uid="Sttz.Tweener.Easing.BackOutCustom(System.Single)">BackOutCustom(Single)</h4>
+  <div class="markdown level1 summary"><p>Back easing with custom swing amount, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod BackOutCustom(float swing = 1.70158F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">swing</span></td>
+        <td><p>Swing amount.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_EasingForType_" data-uid="Sttz.Tweener.Easing.EasingForType*"></a>
+  <h4 id="Sttz_Tweener_Easing_EasingForType_Sttz_Tweener_EasingType_Sttz_Tweener_EasingDirection_" data-uid="Sttz.Tweener.Easing.EasingForType(Sttz.Tweener.EasingType,Sttz.Tweener.EasingDirection)">EasingForType(EasingType, EasingDirection)</h4>
+  <div class="markdown level1 summary"><p>Return the easing method for the given enum values. This allows
+to e.g. choose the easing in the Unity editor using the provided enums.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod EasingForType(EasingType type, EasingDirection direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingType.html">EasingType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>Easing type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingDirection.html">EasingDirection</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>Easing direction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_ElasticInCustom_" data-uid="Sttz.Tweener.Easing.ElasticInCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_ElasticInCustom_System_Single_System_Single_" data-uid="Sttz.Tweener.Easing.ElasticInCustom(System.Single,System.Single)">ElasticInCustom(Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Elastic easing with custom amplitude and period, in direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod ElasticInCustom(float amplitude = 1F, float period = 0.3F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">amplitude</span></td>
+        <td><p>Amplitude of the elasticity (1 = full target value, &lt; 1 never reaches target).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">period</span></td>
+        <td><p>Period of the elasticity (1 / period = number of swings).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_ElasticInOutCustom_" data-uid="Sttz.Tweener.Easing.ElasticInOutCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_ElasticInOutCustom_System_Single_System_Single_" data-uid="Sttz.Tweener.Easing.ElasticInOutCustom(System.Single,System.Single)">ElasticInOutCustom(Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Elastic easing with custom amplitude and period, in-out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod ElasticInOutCustom(float amplitude = 1F, float period = 0.3F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">amplitude</span></td>
+        <td><p>Amplitude of the elasticity (1 = full target value, &lt; 1 never reaches target).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">period</span></td>
+        <td><p>Period of the elasticity (1 / period = number of swings).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_Easing_ElasticOutCustom_" data-uid="Sttz.Tweener.Easing.ElasticOutCustom*"></a>
+  <h4 id="Sttz_Tweener_Easing_ElasticOutCustom_System_Single_System_Single_" data-uid="Sttz.Tweener.Easing.ElasticOutCustom(System.Single,System.Single)">ElasticOutCustom(Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Elastic easing with custom amplitude and period, out direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EasingMethod ElasticOutCustom(float amplitude = 1F, float period = 0.3F)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">amplitude</span></td>
+        <td><p>Amplitude of the elasticity (1 = full target value, &lt; 1 never reaches target).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">period</span></td>
+        <td><p>Period of the elasticity (1 / period = number of swings).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Easing">Easing</a></div>
+      <div><a class="xref" href="Sttz.Tweener.TweenOptionsFluid.html#Sttz_Tweener_TweenOptionsFluid_Ease__1___0_Sttz_Tweener_EasingMethod_">Ease&lt;TContainer&gt;(TContainer, EasingMethod)</a></div>
+      <div><a class="xref" href="Sttz.Tweener.EasingMethod.html">EasingMethod</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © 2018 Adrian Stutz
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

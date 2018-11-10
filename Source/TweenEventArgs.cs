@@ -1,45 +1,46 @@
 using System;
+using Sttz.Tweener.Core;
 
 namespace Sttz.Tweener {
 
+/// <summary>
+/// EventArgs used by <see cref="TweenOptions"/> events.
+/// </summary>
+public class TweenEventArgs : EventArgs
+{
 	/// <summary>
-	/// EventArgs used by <see cref="ITweenOptions"/> events.
+	/// Tween instance that triggered the event.
 	/// </summary>
-	public class TweenEventArgs : EventArgs
-	{
-		/// <summary>
-		/// ITween instance that triggered the event.
-		/// </summary>
-		public ITween Tween { get; protected set; }
+	public Tween Tween { get; protected set; }
 
-		/// <summary>
-		/// Type of the event.
-		/// </summary>
-		public TweenEvent Event { get; protected set; }
+	/// <summary>
+	/// Type of the event.
+	/// </summary>
+	public TweenEvent Event { get; protected set; }
 
-		/// <summary>
-		/// Reason the tween was completed (if <c>Event</c> is 
-		/// <c>EventType.Complete</c>).
-		/// </summary>
-		public TweenCompletedBy CompletedBy { get; protected set; }
+	/// <summary>
+	/// Reason the tween was completed (if <see cref="Event"/> is 
+	/// <see cref="TweenEvent.Complete"/>).
+	/// </summary>
+	public TweenCompletedBy CompletedBy { get; protected set; }
 
-		/// <summary>
-		/// Error description (if <c>Event</c> is <c>EventType.Error</c>).
-		/// </summary>
-		public string Error { get; protected set; }
+	/// <summary>
+	/// Error description (if <see cref="Event"/> is <see cref="TweenEvent.Error"/>).
+	/// </summary>
+	public string Error { get; protected set; }
 
-		// Constructor
-		public TweenEventArgs(
-			ITween tween, 
-			TweenEvent eventType, 
-			string errorDescription = null,
-			TweenCompletedBy completedBy = TweenCompletedBy.Undefined
-		) {
-			Tween = tween;
-			Event = eventType;
-			CompletedBy = completedBy;
-			Error = errorDescription;
-		}
+	// Constructor
+	public TweenEventArgs(
+		Tween tween, 
+		TweenEvent eventType, 
+		string errorDescription = null,
+		TweenCompletedBy completedBy = TweenCompletedBy.Undefined
+	) {
+		Tween = tween;
+		Event = eventType;
+		CompletedBy = completedBy;
+		Error = errorDescription;
 	}
+}
 
 }

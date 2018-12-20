@@ -487,8 +487,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.To, _defaultTarget, float.NaN, property, 
 			default(TValue), toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a To tween to the group
@@ -499,8 +500,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.To, _defaultTarget, duration, property, 
 			default(TValue), toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a To tween to the group
@@ -511,8 +513,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.To, target, duration, property, 
 			default(TValue), toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// -------- From --------
@@ -525,8 +528,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.From, _defaultTarget, float.NaN, property, 
 			fromValue, default(TValue), default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a From tween to the group
@@ -537,8 +541,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.From, _defaultTarget, duration, property, 
 			fromValue, default(TValue), default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a From tween to the group
@@ -549,8 +554,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.From, target, duration, property, 
 			fromValue, default(TValue), default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// -------- FromTo --------
@@ -563,8 +569,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.FromTo, _defaultTarget, float.NaN, property, 
 			fromValue, toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a FromTo tween to the group
@@ -575,8 +582,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.FromTo, _defaultTarget, duration, property, 
 			fromValue, toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a FromTo tween to the group
@@ -587,8 +595,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.FromTo, target, duration, property, 
 			fromValue, toValue, default(TValue)
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// -------- By --------
@@ -601,8 +610,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.By, _defaultTarget, float.NaN, property, 
 			default(TValue), default(TValue), byValue
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a By tween to the group
@@ -613,8 +623,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.By, _defaultTarget, duration, property, 
 			default(TValue), default(TValue), byValue
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// Add a By tween to the group
@@ -625,8 +636,9 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 			TweenMethod.By, target, duration, property, 
 			default(TValue), default(TValue), byValue
 		);
+		Add(tween);
 		if (configurator != null) configurator(tween);
-		return Add(tween);
+		return this;
 	}
 
 	// -------- Fields --------

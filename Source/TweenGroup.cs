@@ -506,9 +506,10 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 	}
 
 	// Add a To tween to the group
-	public TweenGroup<TTarget> To<TValue>(
-		TTarget target, float duration, string property, TValue toValue, TweenConfigurator<TTarget, TValue> configurator = null
-	) {
+	public TweenGroup<TTarget> To<TCustomTarget, TValue>(
+		TCustomTarget target, float duration, string property, TValue toValue, TweenConfigurator<TCustomTarget, TValue> configurator = null
+	) where TCustomTarget : class
+	{
 		var tween = _engine.Create(
 			TweenMethod.To, target, duration, property, 
 			default(TValue), toValue, default(TValue)
@@ -547,9 +548,10 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 	}
 
 	// Add a From tween to the group
-	public TweenGroup<TTarget> From<TValue>(
-		TTarget target, float duration, string property, TValue fromValue, TweenConfigurator<TTarget, TValue> configurator = null
-	) {
+	public TweenGroup<TTarget> From<TCustomTarget, TValue>(
+		TCustomTarget target, float duration, string property, TValue fromValue, TweenConfigurator<TCustomTarget, TValue> configurator = null
+	) where TCustomTarget : class
+	{
 		var tween = _engine.Create(
 			TweenMethod.From, target, duration, property, 
 			fromValue, default(TValue), default(TValue)
@@ -588,9 +590,10 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 	}
 
 	// Add a FromTo tween to the group
-	public TweenGroup<TTarget> FromTo<TValue>(
-		TTarget target, float duration, string property, TValue fromValue, TValue toValue, TweenConfigurator<TTarget, TValue> configurator = null
-	) {
+	public TweenGroup<TTarget> FromTo<TCustomTarget, TValue>(
+		TCustomTarget target, float duration, string property, TValue fromValue, TValue toValue, TweenConfigurator<TCustomTarget, TValue> configurator = null
+	) where TCustomTarget : class
+	{
 		var tween = _engine.Create(
 			TweenMethod.FromTo, target, duration, property, 
 			fromValue, toValue, default(TValue)
@@ -629,9 +632,10 @@ public class TweenGroup<TTarget> : TweenGroup where TTarget : class
 	}
 
 	// Add a By tween to the group
-	public TweenGroup<TTarget> By<TValue>(
-		TTarget target, float duration, string property, TValue byValue, TweenConfigurator<TTarget, TValue> configurator = null
-	) {
+	public TweenGroup<TTarget> By<TCustomTarget, TValue>(
+		TCustomTarget target, float duration, string property, TValue byValue, TweenConfigurator<TCustomTarget, TValue> configurator = null
+	) where TCustomTarget : class
+	{
 		var tween = _engine.Create(
 			TweenMethod.By, target, duration, property, 
 			default(TValue), default(TValue), byValue

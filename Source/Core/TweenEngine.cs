@@ -219,7 +219,7 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 	public void RegisterGroup(TweenGroup tweenGroup)
 	{
 		tweenGroup.RetainCount++;
-		_groups.Add(tweenGroup);
+		_newGroups.Add(tweenGroup);
 	}
 
 	public bool Has(object target, string property)
@@ -297,6 +297,7 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 
 	TweenOptions _options = new TweenOptions();
 	protected List<TweenGroup> _groups = new List<TweenGroup>();
+	protected List<TweenGroup> _newGroups = new List<TweenGroup>();
 	protected TweenGroup<object> _singlesGroup;
 
 	// MonoBehaviour.Update
@@ -320,6 +321,12 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 	// Process tweens
 	protected void ProcessTweens(TweenTiming timing)
 	{
+		// Add newly registered groups
+		if (_newGroups.Count > 0) {
+			_groups.AddRange(_newGroups);
+			_newGroups.Clear();
+		}
+
 		// Update groups and remove invalid ones
 		for (int i = 0; i < _groups.Count; i++) {
 			if (!_groups[i].Update(timing)) {

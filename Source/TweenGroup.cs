@@ -101,10 +101,29 @@ public abstract class TweenGroup : TweenOptionsContainer
 	{
 		bool valid = true;
 
-		AllTweens((tween) => {
-			valid &= tween.Validate(forceRender);
-			return true;
-		});
+		if (_newTweens != null && _newTweens.Count > 0) {
+			foreach (var tween in _newTweens) {
+				valid &= tween.Validate(forceRender);
+			}
+		}
+
+		if (_updateTweens != null && _updateTweens.Count > 0) {
+			foreach (var tween in _updateTweens) {
+				valid &= tween.Validate(forceRender);
+			}
+		}
+
+		if (_fixedUpdateTweens != null && _fixedUpdateTweens.Count > 0) {
+			foreach (var tween in _fixedUpdateTweens) {
+				valid &= tween.Validate(forceRender);
+			}
+		}
+
+		if (_lateUpdateTweens != null && _lateUpdateTweens.Count > 0) {
+			foreach (var tween in _lateUpdateTweens) {
+				valid &= tween.Validate(forceRender);
+			}
+		}
 
 		return valid;
 	}
@@ -121,18 +140,43 @@ public abstract class TweenGroup : TweenOptionsContainer
 	/// </param>
 	public bool Has(object target, string property = null)
 	{
-		bool found = false;
-
-		AllTweens((tween) => {
-			if ((property == null || tween.Property == property)
-					&& (target == null || tween.Target == target)) {
-				found = true;
-				return false;
+		if (_newTweens != null && _newTweens.Count > 0) {
+			foreach (var tween in _newTweens) {
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					return true;
+				}
 			}
-			return true;
-		});
+		}
 
-		return found;
+		if (_updateTweens != null && _updateTweens.Count > 0) {
+			foreach (var tween in _updateTweens) {
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					return true;
+				}
+			}
+		}
+
+		if (_fixedUpdateTweens != null && _fixedUpdateTweens.Count > 0) {
+			foreach (var tween in _fixedUpdateTweens) {
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					return true;
+				}
+			}
+		}
+
+		if (_lateUpdateTweens != null && _lateUpdateTweens.Count > 0) {
+			foreach (var tween in _lateUpdateTweens) {
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/// <summary>
@@ -161,13 +205,7 @@ public abstract class TweenGroup : TweenOptionsContainer
 	/// </param>
 	public void Stop(object target = null, string property = null)
 	{
-		AllTweens((tween) => {
-			if ((property == null || tween.Property == property)
-					&& (target == null || tween.Target == target)) {
-				tween.Stop();
-			}
-			return true;
-		});
+		AllTweens(target, property, t => t.Stop());
 	}
 
 	/// <summary>
@@ -184,13 +222,7 @@ public abstract class TweenGroup : TweenOptionsContainer
 	/// </param>
 	public void Finish(object target = null, string property = null)
 	{
-		AllTweens((tween) => {
-			if ((property == null || tween.Property == property)
-					&& (target == null || tween.Target == target)) {
-				tween.Finish();
-			}
-			return true;
-		});
+		AllTweens(target, property, t => t.Finish());
 	}
 
 	/// <summary>
@@ -207,13 +239,7 @@ public abstract class TweenGroup : TweenOptionsContainer
 	/// </param>
 	public void Cancel(object target = null, string property = null)
 	{
-		AllTweens((tween) => {
-			if ((property == null || tween.Property == property)
-					&& (target == null || tween.Target == target)) {
-				tween.Cancel();
-			}
-			return true;
-		});
+		AllTweens(target, property, t => t.Cancel());
 	}
 
 	/// <summary>
@@ -346,29 +372,41 @@ public abstract class TweenGroup : TweenOptionsContainer
 	}
 
 	// Run an action for all tweens in the group
-	protected void AllTweens(Func<Tween, bool> action)
+	protected void AllTweens(object target, string property, Action<Tween> action)
 	{
 		if (_newTweens != null && _newTweens.Count > 0) {
 			foreach (var tween in _newTweens) {
-				if (!action(tween)) return;
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					action(tween);
+				}
 			}
 		}
 
 		if (_updateTweens != null && _updateTweens.Count > 0) {
 			foreach (var tween in _updateTweens) {
-				if (!action(tween)) return;
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					action(tween);
+				}
 			}
 		}
 
 		if (_fixedUpdateTweens != null && _fixedUpdateTweens.Count > 0) {
 			foreach (var tween in _fixedUpdateTweens) {
-				if (!action(tween)) return;
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					action(tween);
+				}
 			}
 		}
 
 		if (_lateUpdateTweens != null && _lateUpdateTweens.Count > 0) {
 			foreach (var tween in _lateUpdateTweens) {
-				if (!action(tween)) return;
+				if ((property == null || tween.Property == property)
+						&& (target == null || tween.Target == target)) {
+					action(tween);
+				}
 			}
 		}
 	}

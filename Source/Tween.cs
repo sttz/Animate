@@ -541,10 +541,10 @@ public abstract class Tween : TweenOptionsContainer
 	{
 		_state = TweenState.Error;
 
-		_error = message;
-		Options.Log(level, message, args);
+		_error = string.Format(message, args);
+		Options.Log(level, _error);
 
-		Options.TriggerError(this, message);
+		Options.TriggerError(this, _error);
 
 		// Remove all local event listeners
 		Options.ResetEvents();

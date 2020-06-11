@@ -232,6 +232,11 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 			return false;
 		}
 
+		foreach (var tweenGroup in _newGroups) {
+			if (tweenGroup.Has(target, property)) {
+				return true;
+			}
+		}
 		foreach (var tweenGroup in _groups) {
 			if (tweenGroup.Has(target, property)) {
 				return true;
@@ -251,6 +256,9 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 			return;
 		}
 
+		foreach (var tweenGroup in _newGroups) {
+			tweenGroup.Stop(target, property);
+		}
 		foreach (var tweenGroup in _groups) {
 			tweenGroup.Stop(target, property);
 		}
@@ -266,6 +274,9 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 			return;
 		}
 
+		foreach (var tweenGroup in _newGroups) {
+			tweenGroup.Finish(target, property);
+		}
 		foreach (var tweenGroup in _groups) {
 			tweenGroup.Finish(target, property);
 		}
@@ -281,6 +292,9 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 			return;
 		}
 
+		foreach (var tweenGroup in _newGroups) {
+			tweenGroup.Cancel(target, property);
+		}
 		foreach (var tweenGroup in _groups) {
 			tweenGroup.Cancel(target, property);
 		}
@@ -288,6 +302,9 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 
 	public void Overwrite(Tween tween)
 	{
+		foreach (var tweenGroup in _newGroups) {
+			tweenGroup.Overwrite(tween);
+		}
 		foreach (var tweenGroup in _groups) {
 			tweenGroup.Overwrite(tween);
 		}

@@ -54,8 +54,7 @@ public static class TweenRigidbody
 			return PluginResult.Error("TweenRigidbody: Target needs to be a transform, got {0}.".LazyFormat(tween.Target));
 		}
 
-		var targetRb = targetTf.GetComponent<Rigidbody>();
-		if (targetRb == null || !targetRb.isKinematic) {
+		if (!targetTf.TryGetComponent<Rigidbody>(out var targetRb) || !targetRb.isKinematic) {
 			return PluginResult.Error("TweenRigidbody: Target needs to have a kinematic rigidbody attached.");
 		}
 
@@ -121,8 +120,7 @@ public static class TweenRigidbody
 					tween.Target);
 			}
 
-			var targetRb = targetTf.GetComponent<Rigidbody>();
-			if (targetRb == null || !targetRb.isKinematic) {
+			if (!targetTf.TryGetComponent<Rigidbody>(out var targetRb) || !targetRb.isKinematic) {
 				return string.Format(
 					"Target transform {0} must have a kinematic Rigidbody attached.",
 					tween.Target);

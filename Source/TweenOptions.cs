@@ -659,7 +659,7 @@ public class TweenOptions
 
 	internal void LoadPlugins(Tween tween)
 	{
-		// This is a bit complicated because we want to properties:
+		// This is a bit complicated because we want two properties:
 		// 1. Plugins should be loaded in the order they were enabled and parents' 
 		//    plugins before children's plugins
 		// 2. Child plugin enabled/disabled state has priority over parent's
@@ -689,9 +689,16 @@ public class TweenOptions
 		TweenOptions current = this;
 		do {
 			if (current._plugins != null) {
-				foreach (var state in current._plugins) {
-					var index = _pluginList.FindIndex(s => s.loader == state.loader);
-					if (index < 0) {
+				for (int i = 0; i < current._plugins.Count; i++) {
+					var state = current._plugins[i];
+					var exists = false;
+					for (int j = 0; j < _pluginList.Count; j++) {
+						if (_pluginList[j].loader == state.loader) {
+							exists = true;
+							break;
+						}
+					}
+					if (!exists) {
 						_pluginList.Add(state);
 					}
 				}

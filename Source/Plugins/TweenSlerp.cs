@@ -45,10 +45,6 @@ public static class TweenSlerp
 	/// </remarks>
 	public static PluginResult Loader(Tween tween, bool required)
 	{
-		if (tween.TweenMethod == TweenMethod.By) {
-			return PluginResult.Error("TweenSlerp cannot be used for By tweens.");
-		}
-
 		if (tween.ValueType == typeof(Vector3)) {
 			if (required || tween.Property.EndsWith("EulerAngles", StringComparison.OrdinalIgnoreCase)) {
 				return PluginResult.Load(sharedVector3Plugin);

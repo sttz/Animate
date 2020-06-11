@@ -327,44 +327,43 @@ public abstract class TweenGroup : TweenOptionsContainer
 	// Let a tween overwrite others in this group
 	internal void Overwrite(Tween tween)
 	{
-		int i;
+		int i, count;
 		Tween other;
+		
+		var target = tween.Target;
+		var property = tween.Property;
 
 		if (_newTweens != null) {
-			for (i = 0; i < _newTweens.Count; i++) {
+			for (i = 0, count = _newTweens.Count; i < count; i++) {
 				other = _newTweens[i];
-				if (tween.Target == other.Target 
-						&& tween.Property == other.Property) {
+				if (target == other.Target && property == other.Property) {
 					other.Overwrite(tween);
 				}
 			}
 		}
 
 		if (_updateTweens != null) {
-			for (i = 0; i < _updateTweens.Count; i++) {
+			for (i = 0, count = _updateTweens.Count; i < count; i++) {
 				other = _updateTweens[i];
-				if (tween.Target == other.Target 
-						&& tween.Property == other.Property) {
+				if (target == other.Target && property == other.Property) {
 					other.Overwrite(tween);
 				}
 			}
 		}
 
 		if (_fixedUpdateTweens != null) {
-			for (i = 0; i < _fixedUpdateTweens.Count; i++) {
+			for (i = 0, count = _fixedUpdateTweens.Count; i < count; i++) {
 				other = _fixedUpdateTweens[i];
-				if (tween.Target == other.Target 
-						&& tween.Property == other.Property) {
+				if (target == other.Target && property == other.Property) {
 					other.Overwrite(tween);
 				}
 			}
 		}
 
 		if (_lateUpdateTweens != null) {
-			for (i = 0; i < _lateUpdateTweens.Count; i++) {
+			for (i = 0, count = _lateUpdateTweens.Count; i < count; i++) {
 				other = _lateUpdateTweens[i];
-				if (tween.Target == other.Target 
-						&& tween.Property == other.Property) {
+				if (target == other.Target && property == other.Property) {
 					other.Overwrite(tween);
 				}
 			}

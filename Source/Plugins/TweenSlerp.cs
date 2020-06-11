@@ -57,7 +57,7 @@ public static class TweenSlerp
 			return PluginResult.Load(sharedQuaternionPlugin);
 		}
 
-		return PluginResult.Error("TweenSlerp: Can only slerp Vector3 or Quaternion, got {0}.", tween.ValueType);
+		return PluginResult.Error("TweenSlerp: Can only slerp Vector3 or Quaternion, got {0}.".LazyFormat(tween.ValueType));
 	}
 
 	/// <summary>

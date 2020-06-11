@@ -293,13 +293,13 @@ public abstract class Tween : TweenOptionsContainer
 
 		// Call appropriate method
 		if ((settings & TweenOverwrite.Cancel) > 0) {
-			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Cancel.", _property, Target);
+			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Cancel.".LazyFormat(_property, Target));
 			Complete(TweenCompletedBy.Cancel, true);
 		} else if ((settings & TweenOverwrite.Finish) > 0) {
-			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Finish.", _property, Target);
+			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Finish.".LazyFormat(_property, Target));
 			Complete(TweenCompletedBy.Finish, true);
 		} else {
-			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Stop.", _property, Target);
+			Options.Log(TweenLogLevel.Debug, "Overwrite {0} on {1} with Stop.".LazyFormat(_property, Target));
 			Complete(TweenCompletedBy.Stop, true);
 		}
 	}
@@ -317,8 +317,8 @@ public abstract class Tween : TweenOptionsContainer
 		if (_engine == null) {
 			Options.Log(TweenLogLevel.Error, 
 				"Tween of {0} on {1} needs to be added to a group "
-				+ "before WaitForEndOfTween() can be used.",
-				_property, Target);
+				+ "before WaitForEndOfTween() can be used."
+				.LazyFormat(_property, Target));
 			return null;
 		}
 		return (_engine as MonoBehaviour).StartCoroutine(WaitFOrEndOfTWeenCoroutine());
@@ -921,8 +921,8 @@ public class Tween<TTarget, TValue> : Tween where TTarget : class
 		}
 
 		Options.Log(TweenLogLevel.Debug,
-			"Tweening {0} on {1} with {2}, {3} and {4}.",
-			_property, _target, _hookGet, _hookSet, _hookCalculate
+			"Tweening {0} on {1} with {2}, {3} and {4}."
+			.LazyFormat(_property, _target, _hookGet, _hookSet, _hookCalculate)
 		);
 
 		// Initialize plugins

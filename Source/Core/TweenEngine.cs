@@ -150,14 +150,14 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 		if (target == null) {
 			Options.Log(
 				TweenLogLevel.Error, 
-				"Trying to tween {0} on a null object.", property
+				"Trying to tween {0} on a null object.".LazyFormat(property)
 			);
 			return null;
 		}
 		if (property == null) {
 			Options.Log(
 				TweenLogLevel.Error, 
-				"Property to tween on object {0} is null.", target
+				"Property to tween on object {0} is null.".LazyFormat(target)
 			);
 			return null;
 		}

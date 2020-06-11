@@ -51,7 +51,7 @@ public static class TweenRigidbody
 		// Check if target is Transform and has a kinematic rigidbody
 		var targetTf = tween.Target as Transform;
 		if (targetTf == null) {
-			return PluginResult.Error("TweenRigidbody: Target needs to be a transform, got {0}.", tween.Target);
+			return PluginResult.Error("TweenRigidbody: Target needs to be a transform, got {0}.".LazyFormat(tween.Target));
 		}
 
 		var targetRb = targetTf.GetComponent<Rigidbody>();
@@ -69,8 +69,8 @@ public static class TweenRigidbody
 		} else {
 			return PluginResult.Error(
 				"TweenRigidbody: Can only used with properties "
-				+ "'position', 'rotation' or 'eulerAngles', got {0}.",
-				tween.Property
+				+ "'position', 'rotation' or 'eulerAngles', got {0}."
+				.LazyFormat(tween.Property)
 			);
 		}
 

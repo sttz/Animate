@@ -159,7 +159,7 @@ public static class TweenReflectionArithmeticPlugin
 			tween.Options.Log(
 				TweenLogLevel.Debug,
 				"TweenReflectionArithmeticPlugin requires op_Addition, op_Subtraction and op_Multiply "
-				+ "methods on the type {0}.", tween.ValueType
+				+ "methods on the type {0}.".LazyFormat(tween.ValueType)
 			);
 			return;
 		}

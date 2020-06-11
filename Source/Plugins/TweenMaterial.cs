@@ -145,7 +145,7 @@ public static class TweenMaterial
 	{
 		// Check if target is Material
 		if (!(tween.Target is Material)) {
-			return PluginResult.Error("TweenMaterial must be used on a Material, got {0}.", tween.TargetType);
+			return PluginResult.Error("TweenMaterial must be used on a Material, got {0}.".LazyFormat(tween.TargetType));
 		}
 
 		// Since we cannot get the type of a material property
@@ -169,7 +169,7 @@ public static class TweenMaterial
 			// Validate and parse option
 			if (option != string.Empty) {
 				if (!validOptions.Contains(option, StringComparer.OrdinalIgnoreCase)) {
-					return PluginResult.Error("TweenMaterial: Invalid property type option '{0}'.", option);
+					return PluginResult.Error("TweenMaterial: Invalid property type option '{0}'.".LazyFormat(option));
 				}
 				type = (PropertyType)Enum.Parse(typeof(PropertyType), option, true);
 
@@ -190,8 +190,8 @@ public static class TweenMaterial
 		// Check tween value type
 		if (typeToValueType[type] != tween.ValueType) {
 			return PluginResult.Error(
-				"TweenMaterial: Invalid value type '{0}' for property type {1}.",
-				tween.ValueType, type
+				"TweenMaterial: Invalid value type '{0}' for property type {1}."
+				.LazyFormat(tween.ValueType, type)
 			);
 		}
 

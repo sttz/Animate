@@ -333,7 +333,7 @@ public class TweenOptions
 				InitializeEvent(this, args);
 			} catch (Exception e) {
 				Log(TweenLogLevel.Error, 
-					"Exception in Initialize event handler: {0}", e
+					"Exception in Initialize event handler: {0}".LazyFormat(e)
 				);
 			}
 		}
@@ -366,7 +366,7 @@ public class TweenOptions
 				StartEvent(this, args);
 			} catch (Exception e) {
 				Log(TweenLogLevel.Error, 
-					"Exception in Start event handler: {0}", e
+					"Exception in Start event handler: {0}".LazyFormat(e)
 				);
 			}
 		}
@@ -403,7 +403,7 @@ public class TweenOptions
 				UpdateEvent(this, args);
 			} catch (Exception e) {
 				Log(TweenLogLevel.Error, 
-					"Exception in Update event handler: {0}", e
+					"Exception in Update event handler: {0}".LazyFormat(e)
 				);
 			}
 		}
@@ -456,7 +456,7 @@ public class TweenOptions
 				CompleteEvent(this, args);
 			} catch (Exception e) {
 				Log(TweenLogLevel.Error, 
-					"Exception in Complete event handler: {0}", e
+					"Exception in Complete event handler: {0}".LazyFormat(e)
 				);
 			}
 		}
@@ -490,7 +490,7 @@ public class TweenOptions
 				ErrorEvent(this, args);
 			} catch (Exception e) {
 				Log(TweenLogLevel.Error, 
-					"Exception in Error event handler: {0}", e
+					"Exception in Error event handler: {0}".LazyFormat(e)
 				);
 			}
 		}
@@ -590,12 +590,11 @@ public class TweenOptions
 	/// Log a message on the current option instance, taking its
 	/// log level into account.
 	/// </summary>
-	public void Log(TweenLogLevel level, string message, params object[] args)
+	public void Log(TweenLogLevel level, string message)
 	{
-		// Only log messages with appropriate level
 		if (level < LogLevel) return;
 
-		message = string.Format("[{0}] {1}", level, string.Format(message, args));
+		message = string.Format("[{0}] {1}", level, message);
 		if (level == TweenLogLevel.Debug) {
 			Debug.Log(message);
 		} else if (level == TweenLogLevel.Warning) {
@@ -603,6 +602,11 @@ public class TweenOptions
 		} else {
 			Debug.LogError(message);
 		}
+	}
+
+	public void Log(TweenLogLevel level, LazyFormatString message)
+	{
+		if (level >= LogLevel) Log(level, message.ToString());
 	}
 
 	// -------- Fields --------
@@ -705,14 +709,14 @@ public class TweenOptions
 				if (!state.enabled) continue;
 				
 				var result = state.loader(tween, state.required);
-				if (result.error != null) {
+				if (result.isError) {
 					if (state.required) {
 						tween.PluginError(result.GetError());
 						return;
 					} else {
 						tween.Options.Log(
 							TweenLogLevel.Debug, 
-							result.error, result.errorArgs
+							result.error
 						);
 						continue;
 					}
@@ -1054,7 +1058,7 @@ public static class TweenOptionsFluid
 		// Check duration is set
 		if (float.IsNaN(container.Options.Duration)) {
 			container.Options.Log(TweenLogLevel.Error,
-				"No duration set on {0} for WaitForDuration()", container);
+				"No duration set on {0} for WaitForDuration()".LazyFormat(container));
 			return null;
 		}
 

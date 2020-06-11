@@ -22,11 +22,11 @@ public struct PluginResult
 	/// </summary>
 	/// <param name="format">Error string format</param>
 	/// <param name="args">Format string arguments</param>
-	public static PluginResult Error(string format, params object[] args)
+	public static PluginResult Error(LazyFormatString message)
 	{
 		return new PluginResult() {
-			error = format,
-			errorArgs = args
+			isError = true,
+			error = message
 		};
 	}
 
@@ -43,8 +43,8 @@ public struct PluginResult
 		};
 	}
 
-	public string error;
-	public object[] errorArgs;
+	public bool isError;
+	public LazyFormatString error;
 	public ITweenPlugin plugin;
 	public object userData;
 
@@ -53,7 +53,7 @@ public struct PluginResult
 	/// </summary>
 	public string GetError()
 	{
-		return string.Format(error, errorArgs);
+		return error.ToString();
 	}
 }
 

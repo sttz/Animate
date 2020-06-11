@@ -64,8 +64,8 @@ public static class TweenStaticAccessorPlugin
 		ITweenPlugin plugin;
 		if (!plugins.TryGetValue(PluginKey(tween.TargetType, tween.ValueType, tween.Property), out plugin)) {
 			return PluginResult.Error(
-				"TweenStaticAccessorPlugin: No accessor registered for property {0} ({1}) on type {2}.",
-				tween.Property, tween.ValueType, tween.TargetType
+				"TweenStaticAccessorPlugin: No accessor registered for property {0} ({1}) on type {2}."
+				.LazyFormat(tween.Property, tween.ValueType, tween.TargetType)
 			);
 		}
 
@@ -181,8 +181,8 @@ public static class TweenStaticArithmeticPlugin
 		}
 
 		return PluginResult.Error(
-			"TweenStaticArithmeticPlugin: No callbacks registered for calculating type {0}.", 
-			tween.ValueType
+			"TweenStaticArithmeticPlugin: No callbacks registered for calculating type {0}." 
+			.LazyFormat(tween.ValueType)
 		);
 	}
 

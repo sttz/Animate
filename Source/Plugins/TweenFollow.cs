@@ -46,7 +46,7 @@ public static class TweenFollow
 	{
 		return (tween, required) => {
 			if (tween.ValueType != typeof(Vector3)) {
-				return PluginResult.Error("TweenFollow: Tween value needs to be Vector3, got {0}.", tween.ValueType);
+				return PluginResult.Error("TweenFollow: Tween value needs to be Vector3, got {0}.".LazyFormat(tween.ValueType));
 			}
 
 			if (targetSpace == null) {

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 namespace Sttz.Tweener.Core {
 
-using TypePair = KeyValuePair<Type, Type>;
-
 /// <summary>
 /// Tween pool.
 /// </summary>
@@ -20,6 +18,42 @@ public class TweenPool
 		= new Dictionary<TypePair, Queue<Tween>>();
 
 	// -------- Pooling --------
+
+	protected struct TypePair : IEquatable<TypePair>
+	{
+		public Type targetType;
+		public Type valueType;
+
+		public TypePair(Type targetType, Type valueType)
+		{
+			this.targetType = targetType;
+			this.valueType = valueType;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is TypePair other) {
+				return Equals(other);
+			}
+			return false;
+		}
+
+		public bool Equals(TypePair other)
+		{
+			return (
+				other.targetType == targetType
+				&& other.valueType == valueType
+			);
+		}
+
+		public override int GetHashCode()
+		{
+			return (
+				targetType.GetHashCode()
+				^ valueType.GetHashCode()
+			);
+		}
+	}
 
 	// Get a tween from the pool, create a new once if necessary
 	public Tween<TTarget, TValue> GetTween<TTarget, TValue>()

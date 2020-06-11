@@ -48,7 +48,7 @@ public static class TweenStaticAccessorPlugin
 	)
 		where TTarget : class
 	{
-		var key = PluginKey(typeof(TTarget), typeof(TValue), propertyName);
+		var key = new PropertyKey(typeof(TTarget), typeof(TValue), propertyName);
 		plugins[key] = new TweenStaticAccessorPluginImpl<TTarget, TValue>(getter, setter);
 	}
 
@@ -62,7 +62,7 @@ public static class TweenStaticAccessorPlugin
 	public static PluginResult Loader(Tween tween, bool required)
 	{
 		ITweenPlugin plugin;
-		if (!plugins.TryGetValue(PluginKey(tween.TargetType, tween.ValueType, tween.Property), out plugin)) {
+		if (!plugins.TryGetValue(new PropertyKey(tween.TargetType, tween.ValueType, tween.Property), out plugin)) {
 			return PluginResult.Error(
 				"TweenStaticAccessorPlugin: No accessor registered for property {0} ({1}) on type {2}."
 				.LazyFormat(tween.Property, tween.ValueType, tween.TargetType)
@@ -74,12 +74,47 @@ public static class TweenStaticAccessorPlugin
 
 	// -------- Internals --------
 
-	static string PluginKey(Type targetType, Type valueType, string property)
+	struct PropertyKey : IEquatable<PropertyKey>
 	{
-		return targetType.FullName + "/" + valueType.FullName + "/" + property;
+		public string targetType;
+		public string valueType;
+		public string property;
+
+		public PropertyKey(Type targetType, Type valueType, string property)
+		{
+			this.targetType = targetType.FullName;
+			this.valueType = valueType.FullName;
+			this.property = property;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is PropertyKey other) {
+				return Equals(other);
+			}
+			return false;
+		}
+
+		public bool Equals(PropertyKey other)
+		{
+			return (
+				other.targetType == targetType
+				&& other.valueType == valueType
+				&& other.property == property
+			);
+		}
+
+		public override int GetHashCode()
+		{
+			return (
+				targetType.GetHashCode()
+				^ valueType.GetHashCode()
+				^ property.GetHashCode()
+			);
+		}
 	}
 
-	static Dictionary<string, ITweenPlugin> plugins = new Dictionary<string, ITweenPlugin>();
+	static Dictionary<PropertyKey, ITweenPlugin> plugins = new Dictionary<PropertyKey, ITweenPlugin>();
 
 	/// <summary>
 	/// Default accessor plugin using precompiled methods.

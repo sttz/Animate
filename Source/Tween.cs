@@ -627,6 +627,7 @@ public abstract class Tween : TweenOptionsContainer
 	{
 		_state = TweenState.Tweening;
 
+		DoOverwrite();
 		PrepareValues();
 
 		// Cache most frequently used options
@@ -640,7 +641,6 @@ public abstract class Tween : TweenOptionsContainer
 		_targetUnityReference = (Target as UnityEngine.TrackedReference);
 		_targetIsUnityRef = (_targetUnityReference != null);
 
-		DoOverwrite();
 		Options.TriggerStart(this);
 	}
 

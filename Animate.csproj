@@ -18,11 +18,11 @@
 
   <ItemGroup>
     <Reference Include="UnityEditor">
-      <HintPath>\Applications\Unity 2018.2\Unity.app\Contents\Managed\UnityEditor.dll</HintPath>
+      <HintPath>\Applications\Unity 2019.4\Unity.app\Contents\Managed\UnityEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>\Applications\Unity 2018.2\Unity.app\Contents\Managed\UnityEngine.dll</HintPath>
+      <HintPath>\Applications\Unity 2019.4\Unity.app\Contents\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

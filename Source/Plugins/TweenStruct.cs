@@ -118,7 +118,7 @@ public static class TweenStruct
 			// Split path, e.g. "struct.property"
 			var parts = tween.Property.Split('.');
 			if (parts.Length != 2) {
-				return PluginResult.Error("TweenStruct: Property doesn't contain a single dot: {0}", tween.Property);
+				return PluginResult.Error("TweenStruct: Property doesn't contain a single dot: {0}".LazyFormat(tween.Property));
 			}
 			structProperty = parts[0];
 			nestedProperty = parts[1];
@@ -127,19 +127,19 @@ public static class TweenStruct
 		// Look for struct
 		member = TweenReflection.FindMember(tween.TargetType, structProperty);
 		if (member == null) {
-			return PluginResult.Error("TweenStruct: Member {0} not found on target type {1}", structProperty, tween.TargetType);
+			return PluginResult.Error("TweenStruct: Member {0} not found on target type {1}".LazyFormat(structProperty, tween.TargetType));
 		}
 
 		// Check type
 		var memberType = TweenReflection.MemberType(member);
 		if (!memberType.IsValueType) {
-			return PluginResult.Error("TweenStruct: Member {0} is not a value type.", structProperty);
+			return PluginResult.Error("TweenStruct: Member {0} is not a value type.".LazyFormat(structProperty));
 		}
 
 		// Look for struct value
 		var nestedMember = TweenReflection.FindMember(memberType, nestedProperty);
 		if (nestedMember == null) {
-			return PluginResult.Error("TweenStruct: Member {0} not found on struct {1}", nestedProperty, memberType);
+			return PluginResult.Error("TweenStruct: Member {0} not found on struct {1}".LazyFormat(nestedProperty, memberType));
 		}
 
 		// So far ok!

@@ -135,7 +135,7 @@ public static class TweenCodegenArithmeticPlugin
 			Operator<TValue, float, TValue>.Multiply(default (TValue), 0.5f);
 		} catch (Exception e) {
 			tween.Options.Log(TweenLogLevel.Debug, 
-				"TweenCodegenArithmeticPlugin encountered exception: {0}", e
+				"TweenCodegenArithmeticPlugin encountered exception: {0}".LazyFormat(e)
 			);
 			return;
 		}

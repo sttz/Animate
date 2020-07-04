@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Enum TweenCompletedBy
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,10 +90,10 @@ canceled, the value can also contain the <code>Overwrite</code> flag
 to indicate the completion was caused by the tween being overwritten.</p>
 <p>To properly check for a flag in the <code>CompletedBy</code> value
 you need to use binary-and:</p></p>
-<pre><code>if ((tween.CompletedBy &amp; TweenCompletedBy.Stop) > 0) {
+<pre><code>if ((tween.CompletedBy & TweenCompletedBy.Stop) > 0) {
     // Tween was stopped (overwritten or not)
 }
-if ((tween.CompletedBy &amp; TweenCompletedBy.Overwrite) > 0) {
+if ((tween.CompletedBy & TweenCompletedBy.Overwrite) > 0) {
     // Tween was overwritten (stopped, finished or cancelled)
 }</code></pre>
 </div>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenGroup
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -125,8 +125,8 @@
   <h5 id="Sttz_Tweener_TweenGroup_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>A group can provide defaults for all tween options as well as
 the tween target and allows to control just that group of tweens.</p>
-<p>All the events of the group will be cleared once it&apos;s being recycled,
-you normally don&apos;t have to unregister event handlers you register.</p>
+<p>All the events of the group will be cleared once it&#39;s being recycled,
+you normally don&#39;t have to unregister event handlers you register.</p>
 <p>Every tween needs to be part of a group and every group needs
 to be registered with the engine. When using the methods on
 <a class="xref" href="Sttz.Tweener.Animate.html">Animate</a>, this is automatically taken care of.</p>
@@ -367,12 +367,12 @@ the group, not the actual type of the default target object.</p>
   
   
   <a id="Sttz_Tweener_TweenGroup_AllTweens_" data-uid="Sttz.Tweener.TweenGroup.AllTweens*"></a>
-  <h4 id="Sttz_Tweener_TweenGroup_AllTweens_System_Func_Sttz_Tweener_Tween_System_Boolean__" data-uid="Sttz.Tweener.TweenGroup.AllTweens(System.Func{Sttz.Tweener.Tween,System.Boolean})">AllTweens(Func&lt;Tween, Boolean&gt;)</h4>
+  <h4 id="Sttz_Tweener_TweenGroup_AllTweens_System_Object_System_String_System_Action_Sttz_Tweener_Tween__" data-uid="Sttz.Tweener.TweenGroup.AllTweens(System.Object,System.String,System.Action{Sttz.Tweener.Tween})">AllTweens(Object, String, Action&lt;Tween&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected void AllTweens(Func&lt;Tween, bool&gt; action)</code></pre>
+    <pre><code class="lang-csharp hljs">protected void AllTweens(object target, string property, Action&lt;Tween&gt; action)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -385,7 +385,17 @@ the group, not the actual type of the default target object.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Sttz.Tweener.Tween.html">Tween</a>&gt;</td>
         <td><span class="parametername">action</span></td>
         <td></td>
       </tr>

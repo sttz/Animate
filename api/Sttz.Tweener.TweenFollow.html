@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenFollow
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,7 +73,7 @@
   
   <h1 id="Sttz_Tweener_TweenFollow" data-uid="Sttz.Tweener.TweenFollow" class="text-break">Class TweenFollow
   </h1>
-  <div class="markdown level0 summary"><p>Plugin to tween a global position to a moving transform&apos;s local position.</p>
+  <div class="markdown level0 summary"><p>Plugin to tween a global position to a moving transform&#39;s local position.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -115,14 +115,15 @@
   <div class="markdown level0 remarks"><p>This plugin can only be used with <a class="xref" href="Sttz.Tweener.TweenFollow.html#Sttz_Tweener_TweenFollow_CustomLoader_Transform_">CustomLoader(Transform)</a> or the 
 <a class="xref" href="Sttz.Tweener.TweenFollow.html#Sttz_Tweener_TweenFollow_Follow__1_Sttz_Tweener_Tween___0_Vector3__Transform_">Follow&lt;TTarget&gt;(Tween&lt;TTarget, Vector3&gt;, Transform)</a> extension method because it always requires an 
 argument.</p>
-<p>To use this plugin, tween a global position to a local position and
-set the target transform as argument. The property will always be 
-set to a global position and the local position transformed each frame.</p>
+<p>To use this plugin, tween &quot;position&quot; on a Transform but use a local
+position as target value and specify a Transform to follow. The tween
+will then target the position in the local space of the followed 
+Transform as it moves around.</p>
 <pre><code class="lang-cs">otherTransform.rotation = Quaternion.identity;
 otherTransform.position = new Vector3(10, 0, 10);
 
 // Require TweenFollow for a single tween
-Animate.To(transform, 2f, &amp;quot;position&amp;quot;, new Vector3(0, 10, 0))
+Animate.To(transform, 2f, &quot;position&quot;, new Vector3(0, 10, 0))
     .Follow(otherTransform);
 
 // transform will end up at (10, 10, 10) at the end of the tween.

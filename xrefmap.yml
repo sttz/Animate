@@ -275,6 +275,55 @@ references:
   fullName.vb: Sttz.Tweener.Core.BinaryOperator(Of TLeft, TRight, TResult)
   nameWithType: BinaryOperator<TLeft, TRight, TResult>
   nameWithType.vb: BinaryOperator(Of TLeft, TRight, TResult)
+- uid: Sttz.Tweener.Core.FormatStringExtension
+  name: FormatStringExtension
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html
+  commentId: T:Sttz.Tweener.Core.FormatStringExtension
+  fullName: Sttz.Tweener.Core.FormatStringExtension
+  nameWithType: FormatStringExtension
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String)
+  name: LazyFormat(String)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String)
+  nameWithType: FormatStringExtension.LazyFormat(String)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object)
+  name: LazyFormat(String, Object)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_System_Object_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String, System.Object)
+  nameWithType: FormatStringExtension.LazyFormat(String, Object)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object)
+  name: LazyFormat(String, Object, Object)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String, System.Object, System.Object)
+  nameWithType: FormatStringExtension.LazyFormat(String, Object, Object)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object)
+  name: LazyFormat(String, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String, System.Object, System.Object, System.Object)
+  nameWithType: FormatStringExtension.LazyFormat(String, Object, Object, Object)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object,System.Object)
+  name: LazyFormat(String, Object, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_System_Object_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String, System.Object, System.Object, System.Object, System.Object)
+  nameWithType: FormatStringExtension.LazyFormat(String, Object, Object, Object, Object)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object,System.Object,System.Object)
+  name: LazyFormat(String, Object, Object, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_System_String_System_Object_System_Object_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String,System.Object,System.Object,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat(System.String, System.Object, System.Object, System.Object, System.Object, System.Object)
+  nameWithType: FormatStringExtension.LazyFormat(String, Object, Object, Object, Object, Object)
+- uid: Sttz.Tweener.Core.FormatStringExtension.LazyFormat*
+  name: LazyFormat
+  href: api/Sttz.Tweener.Core.FormatStringExtension.html#Sttz_Tweener_Core_FormatStringExtension_LazyFormat_
+  commentId: Overload:Sttz.Tweener.Core.FormatStringExtension.LazyFormat
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.FormatStringExtension.LazyFormat
+  nameWithType: FormatStringExtension.LazyFormat
 - uid: Sttz.Tweener.Core.ITweenArithmeticPlugin`1
   name: ITweenArithmeticPlugin<TValue>
   href: api/Sttz.Tweener.Core.ITweenArithmeticPlugin-1.html
@@ -569,6 +618,129 @@ references:
   fullName.vb: Sttz.Tweener.Core.ITweenSetterPlugin(Of TTarget, TValue).SetValue
   nameWithType: ITweenSetterPlugin<TTarget, TValue>.SetValue
   nameWithType.vb: ITweenSetterPlugin(Of TTarget, TValue).SetValue
+- uid: Sttz.Tweener.Core.LazyFormatString
+  name: LazyFormatString
+  href: api/Sttz.Tweener.Core.LazyFormatString.html
+  commentId: T:Sttz.Tweener.Core.LazyFormatString
+  fullName: Sttz.Tweener.Core.LazyFormatString
+  nameWithType: LazyFormatString
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String)
+  name: LazyFormatString(String)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String)
+  nameWithType: LazyFormatString.LazyFormatString(String)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object)
+  name: LazyFormatString(String, Object)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_System_Object_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String, System.Object)
+  nameWithType: LazyFormatString.LazyFormatString(String, Object)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object)
+  name: LazyFormatString(String, Object, Object)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String, System.Object, System.Object)
+  nameWithType: LazyFormatString.LazyFormatString(String, Object, Object)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object)
+  name: LazyFormatString(String, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String, System.Object, System.Object, System.Object)
+  nameWithType: LazyFormatString.LazyFormatString(String, Object, Object, Object)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object,System.Object)
+  name: LazyFormatString(String, Object, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_System_Object_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String, System.Object, System.Object, System.Object, System.Object)
+  nameWithType: LazyFormatString.LazyFormatString(String, Object, Object, Object, Object)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object,System.Object,System.Object)
+  name: LazyFormatString(String, Object, Object, Object, Object, Object)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_System_String_System_Object_System_Object_System_Object_System_Object_System_Object_
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.#ctor(System.String,System.Object,System.Object,System.Object,System.Object,System.Object)
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString(System.String, System.Object, System.Object, System.Object, System.Object, System.Object)
+  nameWithType: LazyFormatString.LazyFormatString(String, Object, Object, Object, Object, Object)
+- uid: Sttz.Tweener.Core.LazyFormatString.#ctor*
+  name: LazyFormatString
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString__ctor_
+  commentId: Overload:Sttz.Tweener.Core.LazyFormatString.#ctor
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.LazyFormatString.LazyFormatString
+  nameWithType: LazyFormatString.LazyFormatString
+- uid: Sttz.Tweener.Core.LazyFormatString.arg1
+  name: arg1
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_arg1
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.arg1
+  fullName: Sttz.Tweener.Core.LazyFormatString.arg1
+  nameWithType: LazyFormatString.arg1
+- uid: Sttz.Tweener.Core.LazyFormatString.arg2
+  name: arg2
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_arg2
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.arg2
+  fullName: Sttz.Tweener.Core.LazyFormatString.arg2
+  nameWithType: LazyFormatString.arg2
+- uid: Sttz.Tweener.Core.LazyFormatString.arg3
+  name: arg3
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_arg3
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.arg3
+  fullName: Sttz.Tweener.Core.LazyFormatString.arg3
+  nameWithType: LazyFormatString.arg3
+- uid: Sttz.Tweener.Core.LazyFormatString.arg4
+  name: arg4
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_arg4
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.arg4
+  fullName: Sttz.Tweener.Core.LazyFormatString.arg4
+  nameWithType: LazyFormatString.arg4
+- uid: Sttz.Tweener.Core.LazyFormatString.arg5
+  name: arg5
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_arg5
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.arg5
+  fullName: Sttz.Tweener.Core.LazyFormatString.arg5
+  nameWithType: LazyFormatString.arg5
+- uid: Sttz.Tweener.Core.LazyFormatString.args
+  name: args
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_args
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.args
+  fullName: Sttz.Tweener.Core.LazyFormatString.args
+  nameWithType: LazyFormatString.args
+- uid: Sttz.Tweener.Core.LazyFormatString.format
+  name: format
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_format
+  commentId: F:Sttz.Tweener.Core.LazyFormatString.format
+  fullName: Sttz.Tweener.Core.LazyFormatString.format
+  nameWithType: LazyFormatString.format
+- uid: Sttz.Tweener.Core.LazyFormatString.op_Implicit(System.String)~Sttz.Tweener.Core.LazyFormatString
+  name: Implicit(String to LazyFormatString)
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_op_Implicit_System_String__Sttz_Tweener_Core_LazyFormatString
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.op_Implicit(System.String)~Sttz.Tweener.Core.LazyFormatString
+  name.vb: Widening(String to LazyFormatString)
+  fullName: Sttz.Tweener.Core.LazyFormatString.Implicit(System.String to Sttz.Tweener.Core.LazyFormatString)
+  fullName.vb: Sttz.Tweener.Core.LazyFormatString.Widening(System.String to Sttz.Tweener.Core.LazyFormatString)
+  nameWithType: LazyFormatString.Implicit(String to LazyFormatString)
+  nameWithType.vb: LazyFormatString.Widening(String to LazyFormatString)
+- uid: Sttz.Tweener.Core.LazyFormatString.op_Implicit*
+  name: Implicit
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_op_Implicit_
+  commentId: Overload:Sttz.Tweener.Core.LazyFormatString.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Sttz.Tweener.Core.LazyFormatString.Implicit
+  fullName.vb: Sttz.Tweener.Core.LazyFormatString.Widening
+  nameWithType: LazyFormatString.Implicit
+  nameWithType.vb: LazyFormatString.Widening
+- uid: Sttz.Tweener.Core.LazyFormatString.ToString
+  name: ToString()
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_ToString
+  commentId: M:Sttz.Tweener.Core.LazyFormatString.ToString
+  fullName: Sttz.Tweener.Core.LazyFormatString.ToString()
+  nameWithType: LazyFormatString.ToString()
+- uid: Sttz.Tweener.Core.LazyFormatString.ToString*
+  name: ToString
+  href: api/Sttz.Tweener.Core.LazyFormatString.html#Sttz_Tweener_Core_LazyFormatString_ToString_
+  commentId: Overload:Sttz.Tweener.Core.LazyFormatString.ToString
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.LazyFormatString.ToString
+  nameWithType: LazyFormatString.ToString
 - uid: Sttz.Tweener.Core.Operator`3
   name: Operator<TLeft, TRight, TResult>
   href: api/Sttz.Tweener.Core.Operator-3.html
@@ -766,15 +938,12 @@ references:
   commentId: F:Sttz.Tweener.Core.PluginResult.error
   fullName: Sttz.Tweener.Core.PluginResult.error
   nameWithType: PluginResult.error
-- uid: Sttz.Tweener.Core.PluginResult.Error(System.String,System.Object[])
-  name: Error(String, Object[])
-  href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_Error_System_String_System_Object___
-  commentId: M:Sttz.Tweener.Core.PluginResult.Error(System.String,System.Object[])
-  name.vb: Error(String, Object())
-  fullName: Sttz.Tweener.Core.PluginResult.Error(System.String, System.Object[])
-  fullName.vb: Sttz.Tweener.Core.PluginResult.Error(System.String, System.Object())
-  nameWithType: PluginResult.Error(String, Object[])
-  nameWithType.vb: PluginResult.Error(String, Object())
+- uid: Sttz.Tweener.Core.PluginResult.Error(Sttz.Tweener.Core.LazyFormatString)
+  name: Error(LazyFormatString)
+  href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_Error_Sttz_Tweener_Core_LazyFormatString_
+  commentId: M:Sttz.Tweener.Core.PluginResult.Error(Sttz.Tweener.Core.LazyFormatString)
+  fullName: Sttz.Tweener.Core.PluginResult.Error(Sttz.Tweener.Core.LazyFormatString)
+  nameWithType: PluginResult.Error(LazyFormatString)
 - uid: Sttz.Tweener.Core.PluginResult.Error*
   name: Error
   href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_Error_
@@ -782,12 +951,6 @@ references:
   isSpec: "True"
   fullName: Sttz.Tweener.Core.PluginResult.Error
   nameWithType: PluginResult.Error
-- uid: Sttz.Tweener.Core.PluginResult.errorArgs
-  name: errorArgs
-  href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_errorArgs
-  commentId: F:Sttz.Tweener.Core.PluginResult.errorArgs
-  fullName: Sttz.Tweener.Core.PluginResult.errorArgs
-  nameWithType: PluginResult.errorArgs
 - uid: Sttz.Tweener.Core.PluginResult.GetError
   name: GetError()
   href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_GetError
@@ -801,6 +964,12 @@ references:
   isSpec: "True"
   fullName: Sttz.Tweener.Core.PluginResult.GetError
   nameWithType: PluginResult.GetError
+- uid: Sttz.Tweener.Core.PluginResult.isError
+  name: isError
+  href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_isError
+  commentId: F:Sttz.Tweener.Core.PluginResult.isError
+  fullName: Sttz.Tweener.Core.PluginResult.isError
+  nameWithType: PluginResult.isError
 - uid: Sttz.Tweener.Core.PluginResult.Load(Sttz.Tweener.Core.ITweenPlugin,System.Object)
   name: Load(ITweenPlugin, Object)
   href: api/Sttz.Tweener.Core.PluginResult.html#Sttz_Tweener_Core_PluginResult_Load_Sttz_Tweener_Core_ITweenPlugin_System_Object_
@@ -1006,6 +1175,69 @@ references:
   isSpec: "True"
   fullName: Sttz.Tweener.Core.TweenPool.Return
   nameWithType: TweenPool.Return
+- uid: Sttz.Tweener.Core.TweenPool.TypePair
+  name: TweenPool.TypePair
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html
+  commentId: T:Sttz.Tweener.Core.TweenPool.TypePair
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair
+  nameWithType: TweenPool.TypePair
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.#ctor(System.Type,System.Type)
+  name: TypePair(Type, Type)
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair__ctor_System_Type_System_Type_
+  commentId: M:Sttz.Tweener.Core.TweenPool.TypePair.#ctor(System.Type,System.Type)
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.TypePair(System.Type, System.Type)
+  nameWithType: TweenPool.TypePair.TypePair(Type, Type)
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.#ctor*
+  name: TypePair
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair__ctor_
+  commentId: Overload:Sttz.Tweener.Core.TweenPool.TypePair.#ctor
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.TypePair
+  nameWithType: TweenPool.TypePair.TypePair
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.Equals(Sttz.Tweener.Core.TweenPool.TypePair)
+  name: Equals(TweenPool.TypePair)
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_Equals_Sttz_Tweener_Core_TweenPool_TypePair_
+  commentId: M:Sttz.Tweener.Core.TweenPool.TypePair.Equals(Sttz.Tweener.Core.TweenPool.TypePair)
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.Equals(Sttz.Tweener.Core.TweenPool.TypePair)
+  nameWithType: TweenPool.TypePair.Equals(TweenPool.TypePair)
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_Equals_System_Object_
+  commentId: M:Sttz.Tweener.Core.TweenPool.TypePair.Equals(System.Object)
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.Equals(System.Object)
+  nameWithType: TweenPool.TypePair.Equals(Object)
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.Equals*
+  name: Equals
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_Equals_
+  commentId: Overload:Sttz.Tweener.Core.TweenPool.TypePair.Equals
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.Equals
+  nameWithType: TweenPool.TypePair.Equals
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode
+  name: GetHashCode()
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_GetHashCode
+  commentId: M:Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode()
+  nameWithType: TweenPool.TypePair.GetHashCode()
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode*
+  name: GetHashCode
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_GetHashCode_
+  commentId: Overload:Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode
+  isSpec: "True"
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.GetHashCode
+  nameWithType: TweenPool.TypePair.GetHashCode
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.targetType
+  name: targetType
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_targetType
+  commentId: F:Sttz.Tweener.Core.TweenPool.TypePair.targetType
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.targetType
+  nameWithType: TweenPool.TypePair.targetType
+- uid: Sttz.Tweener.Core.TweenPool.TypePair.valueType
+  name: valueType
+  href: api/Sttz.Tweener.Core.TweenPool.TypePair.html#Sttz_Tweener_Core_TweenPool_TypePair_valueType
+  commentId: F:Sttz.Tweener.Core.TweenPool.TypePair.valueType
+  fullName: Sttz.Tweener.Core.TweenPool.TypePair.valueType
+  nameWithType: TweenPool.TypePair.valueType
 - uid: Sttz.Tweener.Core.TweenReflection
   name: TweenReflection
   href: api/Sttz.Tweener.Core.TweenReflection.html
@@ -1257,6 +1489,12 @@ references:
   commentId: F:Sttz.Tweener.Core.UnityTweenEngine._groups
   fullName: Sttz.Tweener.Core.UnityTweenEngine._groups
   nameWithType: UnityTweenEngine._groups
+- uid: Sttz.Tweener.Core.UnityTweenEngine._newGroups
+  name: _newGroups
+  href: api/Sttz.Tweener.Core.UnityTweenEngine.html#Sttz_Tweener_Core_UnityTweenEngine__newGroups
+  commentId: F:Sttz.Tweener.Core.UnityTweenEngine._newGroups
+  fullName: Sttz.Tweener.Core.UnityTweenEngine._newGroups
+  nameWithType: UnityTweenEngine._newGroups
 - uid: Sttz.Tweener.Core.UnityTweenEngine._singlesGroup
   name: _singlesGroup
   href: api/Sttz.Tweener.Core.UnityTweenEngine.html#Sttz_Tweener_Core_UnityTweenEngine__singlesGroup
@@ -3112,15 +3350,15 @@ references:
   isSpec: "True"
   fullName: Sttz.Tweener.TweenGroup.AddInternal
   nameWithType: TweenGroup.AddInternal
-- uid: Sttz.Tweener.TweenGroup.AllTweens(System.Func{Sttz.Tweener.Tween,System.Boolean})
-  name: AllTweens(Func<Tween, Boolean>)
-  href: api/Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_AllTweens_System_Func_Sttz_Tweener_Tween_System_Boolean__
-  commentId: M:Sttz.Tweener.TweenGroup.AllTweens(System.Func{Sttz.Tweener.Tween,System.Boolean})
-  name.vb: AllTweens(Func(Of Tween, Boolean))
-  fullName: Sttz.Tweener.TweenGroup.AllTweens(System.Func<Sttz.Tweener.Tween, System.Boolean>)
-  fullName.vb: Sttz.Tweener.TweenGroup.AllTweens(System.Func(Of Sttz.Tweener.Tween, System.Boolean))
-  nameWithType: TweenGroup.AllTweens(Func<Tween, Boolean>)
-  nameWithType.vb: TweenGroup.AllTweens(Func(Of Tween, Boolean))
+- uid: Sttz.Tweener.TweenGroup.AllTweens(System.Object,System.String,System.Action{Sttz.Tweener.Tween})
+  name: AllTweens(Object, String, Action<Tween>)
+  href: api/Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_AllTweens_System_Object_System_String_System_Action_Sttz_Tweener_Tween__
+  commentId: M:Sttz.Tweener.TweenGroup.AllTweens(System.Object,System.String,System.Action{Sttz.Tweener.Tween})
+  name.vb: AllTweens(Object, String, Action(Of Tween))
+  fullName: Sttz.Tweener.TweenGroup.AllTweens(System.Object, System.String, System.Action<Sttz.Tweener.Tween>)
+  fullName.vb: Sttz.Tweener.TweenGroup.AllTweens(System.Object, System.String, System.Action(Of Sttz.Tweener.Tween))
+  nameWithType: TweenGroup.AllTweens(Object, String, Action<Tween>)
+  nameWithType.vb: TweenGroup.AllTweens(Object, String, Action(Of Tween))
 - uid: Sttz.Tweener.TweenGroup.AllTweens*
   name: AllTweens
   href: api/Sttz.Tweener.TweenGroup.html#Sttz_Tweener_TweenGroup_AllTweens_
@@ -3333,15 +3571,6 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).By
   nameWithType: TweenGroup<TTarget>.By
   nameWithType.vb: TweenGroup(Of TTarget).By
-- uid: Sttz.Tweener.TweenGroup`1.By``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name: By<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_By__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
-  commentId: M:Sttz.Tweener.TweenGroup`1.By``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name.vb: By(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
-  fullName: Sttz.Tweener.TweenGroup<TTarget>.By<TValue>(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TTarget, TValue>)
-  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).By(Of TValue)(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
-  nameWithType: TweenGroup<TTarget>.By<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  nameWithType.vb: TweenGroup(Of TTarget).By(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.By``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
   name: By<TValue>(Single, String, TValue, TweenConfigurator<TTarget, TValue>)
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_By__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
@@ -3360,6 +3589,15 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).By(Of TValue)(System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
   nameWithType: TweenGroup<TTarget>.By<TValue>(String, TValue, TweenConfigurator<TTarget, TValue>)
   nameWithType.vb: TweenGroup(Of TTarget).By(Of TValue)(String, TValue, TweenConfigurator(Of TTarget, TValue))
+- uid: Sttz.Tweener.TweenGroup`1.By``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name: By<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_By__2___0_System_Single_System_String___1_Sttz_Tweener_TweenConfigurator___0___1__
+  commentId: M:Sttz.Tweener.TweenGroup`1.By``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name.vb: By(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
+  fullName: Sttz.Tweener.TweenGroup<TTarget>.By<TCustomTarget, TValue>(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TCustomTarget, TValue>)
+  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).By(Of TCustomTarget, TValue)(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TCustomTarget, TValue))
+  nameWithType: TweenGroup<TTarget>.By<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  nameWithType.vb: TweenGroup(Of TTarget).By(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.DefaultTarget
   name: DefaultTarget
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_DefaultTarget
@@ -3403,15 +3641,6 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).From
   nameWithType: TweenGroup<TTarget>.From
   nameWithType.vb: TweenGroup(Of TTarget).From
-- uid: Sttz.Tweener.TweenGroup`1.From``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name: From<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_From__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
-  commentId: M:Sttz.Tweener.TweenGroup`1.From``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name.vb: From(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
-  fullName: Sttz.Tweener.TweenGroup<TTarget>.From<TValue>(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TTarget, TValue>)
-  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).From(Of TValue)(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
-  nameWithType: TweenGroup<TTarget>.From<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  nameWithType.vb: TweenGroup(Of TTarget).From(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.From``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
   name: From<TValue>(Single, String, TValue, TweenConfigurator<TTarget, TValue>)
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_From__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
@@ -3430,6 +3659,15 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).From(Of TValue)(System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
   nameWithType: TweenGroup<TTarget>.From<TValue>(String, TValue, TweenConfigurator<TTarget, TValue>)
   nameWithType.vb: TweenGroup(Of TTarget).From(Of TValue)(String, TValue, TweenConfigurator(Of TTarget, TValue))
+- uid: Sttz.Tweener.TweenGroup`1.From``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name: From<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_From__2___0_System_Single_System_String___1_Sttz_Tweener_TweenConfigurator___0___1__
+  commentId: M:Sttz.Tweener.TweenGroup`1.From``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name.vb: From(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
+  fullName: Sttz.Tweener.TweenGroup<TTarget>.From<TCustomTarget, TValue>(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TCustomTarget, TValue>)
+  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).From(Of TCustomTarget, TValue)(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TCustomTarget, TValue))
+  nameWithType: TweenGroup<TTarget>.From<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  nameWithType.vb: TweenGroup(Of TTarget).From(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.FromTo*
   name: FromTo
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_FromTo_
@@ -3439,15 +3677,6 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).FromTo
   nameWithType: TweenGroup<TTarget>.FromTo
   nameWithType.vb: TweenGroup(Of TTarget).FromTo
-- uid: Sttz.Tweener.TweenGroup`1.FromTo``1(`0,System.Single,System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name: FromTo<TValue>(TTarget, Single, String, TValue, TValue, TweenConfigurator<TTarget, TValue>)
-  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_FromTo__1__0_System_Single_System_String___0___0_Sttz_Tweener_TweenConfigurator__0___0__
-  commentId: M:Sttz.Tweener.TweenGroup`1.FromTo``1(`0,System.Single,System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name.vb: FromTo(Of TValue)(TTarget, Single, String, TValue, TValue, TweenConfigurator(Of TTarget, TValue))
-  fullName: Sttz.Tweener.TweenGroup<TTarget>.FromTo<TValue>(TTarget, System.Single, System.String, TValue, TValue, Sttz.Tweener.TweenConfigurator<TTarget, TValue>)
-  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).FromTo(Of TValue)(TTarget, System.Single, System.String, TValue, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
-  nameWithType: TweenGroup<TTarget>.FromTo<TValue>(TTarget, Single, String, TValue, TValue, TweenConfigurator<TTarget, TValue>)
-  nameWithType.vb: TweenGroup(Of TTarget).FromTo(Of TValue)(TTarget, Single, String, TValue, TValue, TweenConfigurator(Of TTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.FromTo``1(System.Single,System.String,``0,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
   name: FromTo<TValue>(Single, String, TValue, TValue, TweenConfigurator<TTarget, TValue>)
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_FromTo__1_System_Single_System_String___0___0_Sttz_Tweener_TweenConfigurator__0___0__
@@ -3466,6 +3695,15 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).FromTo(Of TValue)(System.String, TValue, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
   nameWithType: TweenGroup<TTarget>.FromTo<TValue>(String, TValue, TValue, TweenConfigurator<TTarget, TValue>)
   nameWithType.vb: TweenGroup(Of TTarget).FromTo(Of TValue)(String, TValue, TValue, TweenConfigurator(Of TTarget, TValue))
+- uid: Sttz.Tweener.TweenGroup`1.FromTo``2(``0,System.Single,System.String,``1,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name: FromTo<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_FromTo__2___0_System_Single_System_String___1___1_Sttz_Tweener_TweenConfigurator___0___1__
+  commentId: M:Sttz.Tweener.TweenGroup`1.FromTo``2(``0,System.Single,System.String,``1,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name.vb: FromTo(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TValue, TweenConfigurator(Of TCustomTarget, TValue))
+  fullName: Sttz.Tweener.TweenGroup<TTarget>.FromTo<TCustomTarget, TValue>(TCustomTarget, System.Single, System.String, TValue, TValue, Sttz.Tweener.TweenConfigurator<TCustomTarget, TValue>)
+  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).FromTo(Of TCustomTarget, TValue)(TCustomTarget, System.Single, System.String, TValue, TValue, Sttz.Tweener.TweenConfigurator(Of TCustomTarget, TValue))
+  nameWithType: TweenGroup<TTarget>.FromTo<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  nameWithType.vb: TweenGroup(Of TTarget).FromTo(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TValue, TweenConfigurator(Of TCustomTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.Reset
   name: Reset()
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_Reset
@@ -3492,15 +3730,6 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).To
   nameWithType: TweenGroup<TTarget>.To
   nameWithType.vb: TweenGroup(Of TTarget).To
-- uid: Sttz.Tweener.TweenGroup`1.To``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name: To<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_To__1__0_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
-  commentId: M:Sttz.Tweener.TweenGroup`1.To``1(`0,System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
-  name.vb: To(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
-  fullName: Sttz.Tweener.TweenGroup<TTarget>.To<TValue>(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TTarget, TValue>)
-  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).To(Of TValue)(TTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
-  nameWithType: TweenGroup<TTarget>.To<TValue>(TTarget, Single, String, TValue, TweenConfigurator<TTarget, TValue>)
-  nameWithType.vb: TweenGroup(Of TTarget).To(Of TValue)(TTarget, Single, String, TValue, TweenConfigurator(Of TTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.To``1(System.Single,System.String,``0,Sttz.Tweener.TweenConfigurator{`0,``0})
   name: To<TValue>(Single, String, TValue, TweenConfigurator<TTarget, TValue>)
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_To__1_System_Single_System_String___0_Sttz_Tweener_TweenConfigurator__0___0__
@@ -3519,6 +3748,15 @@ references:
   fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).To(Of TValue)(System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TTarget, TValue))
   nameWithType: TweenGroup<TTarget>.To<TValue>(String, TValue, TweenConfigurator<TTarget, TValue>)
   nameWithType.vb: TweenGroup(Of TTarget).To(Of TValue)(String, TValue, TweenConfigurator(Of TTarget, TValue))
+- uid: Sttz.Tweener.TweenGroup`1.To``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name: To<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_To__2___0_System_Single_System_String___1_Sttz_Tweener_TweenConfigurator___0___1__
+  commentId: M:Sttz.Tweener.TweenGroup`1.To``2(``0,System.Single,System.String,``1,Sttz.Tweener.TweenConfigurator{``0,``1})
+  name.vb: To(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
+  fullName: Sttz.Tweener.TweenGroup<TTarget>.To<TCustomTarget, TValue>(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator<TCustomTarget, TValue>)
+  fullName.vb: Sttz.Tweener.TweenGroup(Of TTarget).To(Of TCustomTarget, TValue)(TCustomTarget, System.Single, System.String, TValue, Sttz.Tweener.TweenConfigurator(Of TCustomTarget, TValue))
+  nameWithType: TweenGroup<TTarget>.To<TCustomTarget, TValue>(TCustomTarget, Single, String, TValue, TweenConfigurator<TCustomTarget, TValue>)
+  nameWithType.vb: TweenGroup(Of TTarget).To(Of TCustomTarget, TValue)(TCustomTarget, Single, String, TValue, TweenConfigurator(Of TCustomTarget, TValue))
 - uid: Sttz.Tweener.TweenGroup`1.Use(`0,Sttz.Tweener.TweenOptions,Sttz.Tweener.Core.ITweenEngine)
   name: Use(TTarget, TweenOptions, ITweenEngine)
   href: api/Sttz.Tweener.TweenGroup-1.html#Sttz_Tweener_TweenGroup_1_Use__0_Sttz_Tweener_TweenOptions_Sttz_Tweener_Core_ITweenEngine_
@@ -3798,15 +4036,18 @@ references:
   commentId: E:Sttz.Tweener.TweenOptions.InitializeEvent
   fullName: Sttz.Tweener.TweenOptions.InitializeEvent
   nameWithType: TweenOptions.InitializeEvent
-- uid: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String,System.Object[])
-  name: Log(TweenLogLevel, String, Object[])
-  href: api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_System_Object___
-  commentId: M:Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String,System.Object[])
-  name.vb: Log(TweenLogLevel, String, Object())
-  fullName: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel, System.String, System.Object[])
-  fullName.vb: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel, System.String, System.Object())
-  nameWithType: TweenOptions.Log(TweenLogLevel, String, Object[])
-  nameWithType.vb: TweenOptions.Log(TweenLogLevel, String, Object())
+- uid: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,Sttz.Tweener.Core.LazyFormatString)
+  name: Log(TweenLogLevel, LazyFormatString)
+  href: api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_Sttz_Tweener_Core_LazyFormatString_
+  commentId: M:Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,Sttz.Tweener.Core.LazyFormatString)
+  fullName: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel, Sttz.Tweener.Core.LazyFormatString)
+  nameWithType: TweenOptions.Log(TweenLogLevel, LazyFormatString)
+- uid: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String)
+  name: Log(TweenLogLevel, String)
+  href: api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_
+  commentId: M:Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String)
+  fullName: Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel, System.String)
+  nameWithType: TweenOptions.Log(TweenLogLevel, String)
 - uid: Sttz.Tweener.TweenOptions.Log*
   name: Log
   href: api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_

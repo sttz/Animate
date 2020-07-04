@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenStruct
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -112,33 +112,38 @@
     <pre><code class="lang-csharp hljs">public static class TweenStruct</code></pre>
   </div>
   <h5 id="Sttz_Tweener_TweenStruct_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>TweenStruct uses codegen and is therefore not available with
+  <div class="markdown level0 remarks"><div class="NOTE"><h5>Note</h5><p>TweenStruct uses codegen and is therefore not available with
 AOT/IL2CPP or .Net Standard.</p>
+<p>Instead, you can use a virtual property to tween a struct member:</p>
+<pre><code class="lang-cs">Animate.EnableAccess(&quot;field.x&quot;,
+    (Example t) =&gt; t.field.x,
+    (t, v) =&gt; { var field = t.field; field.x = v; t.field = field; });
+</code></pre></div>
 <p>Structs or Value Types are special types in .Net that are copied
-when used and therefore aren&apos;t referenced and don&apos;t need to be
+when used and therefore aren&#39;t referenced and don&#39;t need to be
 garbage collected. This can speed up some operations but comes with
-the downside that it&apos;s not easily possible to tween a single member
+the downside that it&#39;s not easily possible to tween a single member
 of a struct while leaving the other members alone.</p>
-<p>E.g. Unity&apos;s Vector3 and Quaternion types are value types. Trying to
+<p>E.g. Unity&#39;s Vector3 and Quaternion types are value types. Trying to
 tween a property on Vector3 or Quaternion will produce an error in
 Animate. If it proceeded, Animate would only update its copy but would
 never actually update the value on the target object.</p>
-<p>Generally, it&apos;s faster to tween the whole value type instead of
+<p>Generally, it&#39;s faster to tween the whole value type instead of
 tweening a single of its properties using TweenStruct. E.g. instead of 
 tweening <code>transform.position.x</code>, tween <code>transform.position</code>
-instead. Sometimes it&apos;s necessary to tween only a single property
+instead. Sometimes it&#39;s necessary to tween only a single property
 of a value type and allow the other properties to be modified during
 the tween. In this case, the TweenStruct plugin can be used.</p>
 <pre><code class="lang-cs">// If possible, tween the whole struct:
-Animate.To(transform, 2f, &amp;quot;position&amp;quot;, Vector3.zero);
+Animate.To(transform, 2f, &quot;position&quot;, Vector3.zero);
 
 // Explicit usage, only tween the x value:
-Animate.To(transform, 2f, &amp;quot;position&amp;quot;, Vector3.zero)
+Animate.To(transform, 2f, &quot;position.x&quot;, Vector3.zero)
 .Struct();
 
-// Automatic usage, plugin auto-detects when it&amp;apos;s needed:
+// Automatic usage, plugin auto-detects when it&#39;s needed:
 Animate.Options.EnablePlugin(TweenStruct.Loader);
-Animate.To(transform, 2f, &amp;quot;position.x&amp;quot;, Vector3.zero);
+Animate.To(transform, 2f, &quot;position.x&quot;, Vector3.zero);
 </code></pre></div>
   <h3 id="methods">Methods
   </h3>

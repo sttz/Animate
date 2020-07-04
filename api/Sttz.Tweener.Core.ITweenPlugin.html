@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface ITweenPlugin
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -99,13 +99,13 @@ property inline-syntax via <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tw
 method that returns a loader with the given options applied (.e.g. see
 <a class="xref" href="Sttz.Tweener.TweenMaterial.html#Sttz_Tweener_TweenMaterial_CustomLoader_Sttz_Tweener_TweenMaterial_PropertyType_">CustomLoader(TweenMaterial.PropertyType)</a>) and an extension method on <code>Tween</code>.
 The extension method can use concrete types to provide type-checking (e.g.
-extend <code>Tween&amp;lt;Transform, TValue&gt;</code> if the plugin only works on transforms).</li>
+extend <code>Tween&lt;Transform, TValue&gt;</code> if the plugin only works on transforms).</li>
 <li>The plugin can contain multiple private implementations that are chosen
 by the loader method.</li>
 <li>The error returned by the loader is handled depending on wether the plugin
-is required. If it&apos;s required, the error is fatal and logged as error. If it&apos;s
+is required. If it&#39;s required, the error is fatal and logged as error. If it&#39;s
 not required, the error is silent only only logged as debug message.
-If the plugin wants additional logging, it can call <a class="xref" href="Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_System_Object___">Log(TweenLogLevel, String, Object[])</a>
+If the plugin wants additional logging, it can call <a class="xref" href="Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_">Log(TweenLogLevel, String)</a>
 on the tween.</li>
 </ul>
 </div>

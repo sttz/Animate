@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenOptions
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -240,7 +240,7 @@ or higher level will be logged to the console.</p>
     </tbody>
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_LogLevel_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Since the log level is also part of the options stack, it&apos;s
+  <div class="markdown level1 remarks"><p>Since the log level is also part of the options stack, it&#39;s
 possible to raise the log level for only a single group
 or tween.</p>
 </div>
@@ -360,7 +360,7 @@ is not set in this instance.</p>
   <h4 id="Sttz_Tweener_TweenOptions_TweenTiming" data-uid="Sttz.Tweener.TweenOptions.TweenTiming">TweenTiming</h4>
   <div class="markdown level1 summary"><p>Timing options of the tween. This sets if the tween is
 updated during <code>Update</code>, <code>FixedUpdate</code> or <code>LateUpdate</code>
-and which game time it&apos;s based on.</p>
+and which game time it&#39;s based on.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -412,13 +412,13 @@ and which game time it&apos;s based on.</p>
       <tr>
         <td><a class="xref" href="Sttz.Tweener.Core.PluginLoader.html">PluginLoader</a></td>
         <td><span class="parametername">loader</span></td>
-        <td><p>Plugin&apos;s loader callback</p>
+        <td><p>Plugin&#39;s loader callback</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">enabled</span></td>
-        <td><p>Wether to enable or disable the plugin (null = use parent&apos;s state)</p>
+        <td><p>Wether to enable or disable the plugin (null = use parent&#39;s state)</p>
 </td>
       </tr>
       <tr>
@@ -432,11 +432,11 @@ and which game time it&apos;s based on.</p>
   <h5 id="Sttz_Tweener_TweenOptions_EnablePlugin_Sttz_Tweener_Core_PluginLoader_System_Nullable_System_Boolean__System_Nullable_System_Boolean___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The order in which plugins are enabled matters. Plugins that are
 enabled later can override plugins enabled earlier.</p>
-<p>Also, the options level they are defined it matters. Plugins that
+<p>Also, the options level they are defined in matters. Plugins that
 are loaded in child levels can override plugins in parent levels.</p>
 <p>Finally, plugins can be re-enabled or re-disabled on lower
 levels, e.g. a plugin enabled at the global options level can be
-disabled in a group&apos;s options and then re-enabled in a tween&apos;s
+disabled in a group&#39;s options and then re-enabled in a tween&#39;s
 options.</p>
 </div>
   <h5 id="Sttz_Tweener_TweenOptions_EnablePlugin_Sttz_Tweener_Core_PluginLoader_System_Nullable_System_Boolean__System_Nullable_System_Boolean___seealso">See Also</h5>
@@ -446,14 +446,46 @@ options.</p>
   
   
   <a id="Sttz_Tweener_TweenOptions_Log_" data-uid="Sttz.Tweener.TweenOptions.Log*"></a>
-  <h4 id="Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_System_Object___" data-uid="Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String,System.Object[])">Log(TweenLogLevel, String, Object[])</h4>
+  <h4 id="Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_Sttz_Tweener_Core_LazyFormatString_" data-uid="Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,Sttz.Tweener.Core.LazyFormatString)">Log(TweenLogLevel, LazyFormatString)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Log(TweenLogLevel level, LazyFormatString message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.TweenLogLevel.html">TweenLogLevel</a></td>
+        <td><span class="parametername">level</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Sttz.Tweener.Core.LazyFormatString.html">LazyFormatString</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Sttz_Tweener_TweenOptions_Log_" data-uid="Sttz.Tweener.TweenOptions.Log*"></a>
+  <h4 id="Sttz_Tweener_TweenOptions_Log_Sttz_Tweener_TweenLogLevel_System_String_" data-uid="Sttz.Tweener.TweenOptions.Log(Sttz.Tweener.TweenLogLevel,System.String)">Log(TweenLogLevel, String)</h4>
   <div class="markdown level1 summary"><p>Log a message on the current option instance, taking its
 log level into account.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Log(TweenLogLevel level, string message, params object[] args)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Log(TweenLogLevel level, string message)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -473,11 +505,6 @@ log level into account.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">message</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Object</span>[]</td>
-        <td><span class="parametername">args</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -525,8 +552,8 @@ what completed the tween.</p>
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_CompleteEvent_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Events bubble up the options instances, i.e. registering for a 
-group&apos;s complete event will trigger for each tween in the group.</p>
-<p>Listeners don&apos;t need to be removed. Once a tween completes or a
+group&#39;s complete event will trigger for each tween in the group.</p>
+<p>Listeners don&#39;t need to be removed. Once a tween completes or a
 group is recycled, all of its listeners will be removed.</p>
 </div>
   
@@ -557,8 +584,8 @@ or <a class="xref" href="Sttz.Tweener.Tween.html#Sttz_Tweener_Tween_Error">Error
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_ErrorEvent_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Events bubble up the options instances, i.e. registering for a 
-group&apos;s error event will trigger for each tween in the group.</p>
-<p>Listeners don&apos;t need to be removed. Once a tween completes or a
+group&#39;s error event will trigger for each tween in the group.</p>
+<p>Listeners don&#39;t need to be removed. Once a tween completes or a
 group is recycled, all of its listeners will be removed.</p>
 </div>
   
@@ -589,8 +616,8 @@ after it was created or when calling <a class="xref" href="Sttz.Tweener.Tween.ht
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_InitializeEvent_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Events bubble up the options instances, i.e. registering for a 
-group&apos;s initialize event will trigger for each tween in the group.</p>
-<p>Listeners don&apos;t need to be removed. Once a tween completes or a
+group&#39;s initialize event will trigger for each tween in the group.</p>
+<p>Listeners don&#39;t need to be removed. Once a tween completes or a
 group is recycled, all of its listeners will be removed.</p>
 </div>
   
@@ -620,8 +647,8 @@ group is recycled, all of its listeners will be removed.</p>
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_StartEvent_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Events bubble up the options instances, i.e. registering for a 
-group&apos;s start event will trigger for each tween in the group.</p>
-<p>Listeners don&apos;t need to be removed. Once a tween completes or a
+group&#39;s start event will trigger for each tween in the group.</p>
+<p>Listeners don&#39;t need to be removed. Once a tween completes or a
 group is recycled, all of its listeners will be removed.</p>
 </div>
   
@@ -651,8 +678,8 @@ group is recycled, all of its listeners will be removed.</p>
   </table>
   <h5 id="Sttz_Tweener_TweenOptions_UpdateEvent_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Events bubble up the options instances, i.e. registering for a 
-group&apos;s update event will trigger for each tween in the group.</p>
-<p>Listeners don&apos;t need to be removed. Once a tween completes or a
+group&#39;s update event will trigger for each tween in the group.</p>
+<p>Listeners don&#39;t need to be removed. Once a tween completes or a
 group is recycled, all of its listeners will be removed.</p>
 <p>Note that the Update event is only triggered if there are
 listeners registered when the tween starts. If you register

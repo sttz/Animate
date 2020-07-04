@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenRigidbody
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,7 +73,7 @@
   
   <h1 id="Sttz_Tweener_TweenRigidbody" data-uid="Sttz.Tweener.TweenRigidbody" class="text-break">Class TweenRigidbody
   </h1>
-  <div class="markdown level0 summary"><p>Tween a kinematic Rigidbody&apos;s position or rotation with properly
+  <div class="markdown level0 summary"><p>Tween a kinematic Rigidbody&#39;s position or rotation with properly
 applying physics.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -117,21 +117,21 @@ applying physics.</p>
 other physics objects, there are two requirements:</p>
 <ul>
 <li>Use <code>Rigidbody.MovePosition</code> and <code>Rigidbody.MoveRotation</code> to
-update the rigidbody&apos;s position (instead of <code>Transform</code>).</li>
+update the rigidbody&#39;s position (instead of <code>Transform</code>).</li>
 <li>Update the rigidbody in <code>FixedUpdate</code> (instead of <code>Update</code>).</li>
 </ul>
 <p>TweenRigidbody ensures both. It updates the Rigidbody with the
 proper methods and ensures the tween is set to update in
 <code>FixedUpdate</code>.</p>
-<p>TweenRigidbody requires tweening &apos;position&apos;, &apos;rotation&apos; or 
-&apos;eulerAngles&apos; on the transform the kinematic rigidbody is 
-attached to. It&apos;s not possible to TweenRigidbody with local
+<p>TweenRigidbody requires tweening &#39;position&#39;, &#39;rotation&#39; or 
+&#39;eulerAngles&#39; on the transform the kinematic rigidbody is 
+attached to. It&#39;s not possible to use TweenRigidbody with local
 position or rotation.</p>
 <pre><code class="lang-cs">// Enable TweenRigidbody globally
 Animate.Options.EnablePlugin(TweenRigidbody.Loader);
 
 // Enable TweenRigidbody for a specific tween
-Animate.To(transform, 5f, &amp;quot;position&amp;quot;, Vector3(0, 0, 50))
+Animate.To(transform, 5f, &quot;position&quot;, Vector3(0, 0, 50))
 .Rigidbody();
 </code></pre></div>
   <h3 id="methods">Methods

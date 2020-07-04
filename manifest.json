@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ldhaF0LJ0I+SKh5340KOmw=="
+          "hash": "t097o0YZ85OuyVU0WvNtyQ=="
         }
       },
       "is_incremental": false,
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Animate.html",
-          "hash": "CRq9p0+UPHnD+3q7rGQ40Q=="
+          "hash": "Z26otbVKgw+K58jL/xjmsQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -33,10 +33,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.BinaryOperator-3.html",
-          "hash": "Y13umT3ZGbzHMmCguV0ZOQ=="
+          "hash": "fopEN+hrMrJtspMLvPrR7Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.FormatStringExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.FormatStringExtension.html",
+          "hash": "ft+SLv0z8cAh6KHUCATLpw=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.ITweenArithmeticPlugin-1.html",
-          "hash": "Snd7EGd3HCEPjT2IRa3rmw=="
+          "hash": "ceFT/Tr/id8HIlxGbUTjyQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.ITweenEngine.html",
-          "hash": "pXA2JnYHNkDkQAFCv3D+4A=="
+          "hash": "eEJqrYwRtg0KxznWgAStng=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -69,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.ITweenGetterPlugin-2.html",
-          "hash": "Yljvh3Vxr/K/OxcK5y6uKw=="
+          "hash": "d3hvy0y7EbZ5B+B4OtH/EA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -81,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.ITweenPlugin.html",
-          "hash": "0WkbL2qKIQhlOB/72xu5TQ=="
+          "hash": "Oc3NwJgVUpLzduGBo95MYw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,10 +105,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.ITweenSetterPlugin-2.html",
-          "hash": "6QFfxrL6fK8FfnrXrk/OKw=="
+          "hash": "DPZl6iuTrQR2+Lxp7ssfdw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.LazyFormatString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.LazyFormatString.html",
+          "hash": "kz3LbWjfNTxBOgBExA2Gdw=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -105,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.Operator-3.html",
-          "hash": "xyKT4z+ByVlyDbGdC9AVZA=="
+          "hash": "dPwWnJdBW3mX6fS5KpV2aQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -117,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.PluginLoader.html",
-          "hash": "dM2cluoQPiEx4+kkj519yQ=="
+          "hash": "xOn4hdImuHGUGllKRXxMMg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -129,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.PluginResult.html",
-          "hash": "qvPK5clwiCdTH2vdFEdDUg=="
+          "hash": "2FRMAHj/AULjIfNuV1XQGg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -141,10 +165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenCodegen.SetHandler-2.html",
-          "hash": "ZNVsJ9ujW/RK0KNrGnNZkQ=="
+          "hash": "QROg54FNGI2WhCsLD0WB6g=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -153,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenCodegen.html",
-          "hash": "d6ME4ZlM0MdelEXoGcdNuw=="
+          "hash": "NCuC9mm4cRLkpD99vaRcrw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -165,10 +189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenCodegenAccessorPlugin.html",
-          "hash": "UA1OP01dRr0JRda6Rmf8IQ=="
+          "hash": "gz5uzBwvzdkkMfO3/n65KQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -177,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenCodegenArithmeticPlugin.html",
-          "hash": "NLtlaPHOh9Gr0QnEY+HOaA=="
+          "hash": "aX7VRHdEUSCvbaLHPNMhlg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -189,10 +213,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenPluginType.html",
-          "hash": "ftbEDoLXTecvEiSwDpzepg=="
+          "hash": "UTpGELDLXxbY+GAN1mxnwg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/temp/api/Sttz.Tweener.Core.TweenPool.TypePair.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Sttz.Tweener.Core.TweenPool.TypePair.html",
+          "hash": "zwqK2Ge83uabPNlQ7iGCqQ=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -201,10 +237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenPool.html",
-          "hash": "bpAR2hPG5aAJeMBSzeF32g=="
+          "hash": "BoU63AAmfDdUgqNw/fSfTw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -213,10 +249,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenReflection.html",
-          "hash": "y15jHWfQiRRS8ipsw7Iq7A=="
+          "hash": "Fn2NaZJenepL+B21WF7bAg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -225,10 +261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenReflectionAccessorPlugin.html",
-          "hash": "VD8HroVyxrBkjN3dNKSI/A=="
+          "hash": "4gxL0z2o5D42hx3yw+MpXg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -237,10 +273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenReflectionArithmeticPlugin.html",
-          "hash": "/NGR43U44naW1OJTEqg4zA=="
+          "hash": "UuAp/K1rONg224tqgYpUlA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -249,10 +285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.GetAccessor-2.html",
-          "hash": "WalBy3oibz085XraxClvOw=="
+          "hash": "CcLy7KU5tMf4DXIldMlUHg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -261,10 +297,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.SetAccessor-2.html",
-          "hash": "55UAxc/lKkDr7NSwMZhZvQ=="
+          "hash": "b+mnvXJ9rkpm2vP83je8ag=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -273,10 +309,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticAccessorPlugin.html",
-          "hash": "LIrcRBjmBvp+TbSL0rfY5w=="
+          "hash": "uXdtIOOfaWfDsMnyt+8/Kw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -285,10 +321,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.DiffValue-1.html",
-          "hash": "l14wZ3P0fYdnJzv08sA4MA=="
+          "hash": "PwAMzz5qgeqFz2YqQfjYnA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -297,10 +333,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.EndValue-1.html",
-          "hash": "d0W7IJcdAL2YLWSKD2E2Nw=="
+          "hash": "STgG5130WcsJxxrphZ2u1Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -309,10 +345,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.ValueAtPosition-1.html",
-          "hash": "cVRnDJvGK0DtJjxkRga1FA=="
+          "hash": "dAALSdc4cWe7BH2HFf1AyA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -321,10 +357,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticArithmeticPlugin.html",
-          "hash": "zD1rV1JvCZz91OqsYjw8KA=="
+          "hash": "x3D5BuPJ4niQ78242dvgUA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -333,10 +369,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.TweenStaticUnitySupport.html",
-          "hash": "kIxDSSSzQFU2FipTm5FXDw=="
+          "hash": "RLMxLyUba1jxnIuod9JKdQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -345,10 +381,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.UnityTweenEngine.html",
-          "hash": "+MmIyGugL8uYKQjnyLUqWA=="
+          "hash": "DCPJmnkNDdPWXHUclo+N1Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -357,10 +393,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Core.html",
-          "hash": "fg+wm2LZ6DVSVyMJe6nKww=="
+          "hash": "VrC6qZunrJ1D0QA4E5wLWA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -369,10 +405,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Easing.html",
-          "hash": "8seNqtHWJA+/8KktFJP0tw=="
+          "hash": "Ag7lDxBRbsVPFGAt2FTDnQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -381,10 +417,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.EasingDirection.html",
-          "hash": "EfTZ2CfvnI3oXmMgsczKaQ=="
+          "hash": "dyL6l5lFh55P711CKGRIXA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -393,10 +429,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.EasingMethod.html",
-          "hash": "WuLFop4tAa9/Wa3ba750LA=="
+          "hash": "5w4/U5+zhC2W7lO95C6ZTw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -405,10 +441,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.EasingType.html",
-          "hash": "pHLPBaGKeQoL9LfQZaZajQ=="
+          "hash": "TcPWzRpMqfRiPLTflrlWjA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -417,10 +453,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Tween-2.html",
-          "hash": "ETJLGHwF5/oEXZIZspfA8g=="
+          "hash": "zx9pPsM6KJsUPPf71j1iqQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -429,10 +465,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.Tween.html",
-          "hash": "SnYrIESJ+c9m3KX3gmaR7w=="
+          "hash": "inmAqlaTnmkBqzq+TvkLpg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -441,10 +477,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenCompletedBy.html",
-          "hash": "aTVrzZBKTc1lNj8+j1szzA=="
+          "hash": "Ca6LuhicvuhOOQDX89k3Yg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -453,10 +489,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenConfigurator-2.html",
-          "hash": "RokSyLcBl0egIHIXKj+4hQ=="
+          "hash": "moVqC6IoAyX1BkfBbwMr2Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -465,10 +501,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenEvent.html",
-          "hash": "LM+kexiJuXOnMTDEnfgqLg=="
+          "hash": "PR+3oHQ4b6vHbRjViMmb8Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -477,10 +513,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenEventArgs.html",
-          "hash": "wTmEOPyNWS0Z8ihjqbZWGQ=="
+          "hash": "rMlSBdEtIXfIv1T8aRMlTQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -489,10 +525,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenFollow.html",
-          "hash": "FFxjM/ItfY9tvrTrjgIahg=="
+          "hash": "K50y8eb/ecO+eSC05KmGnQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -501,10 +537,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenGroup-1.html",
-          "hash": "ZMzzdwU/S8qO+BH9rkGRgg=="
+          "hash": "ErTZHs1woY3Vf10a5aXU2Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -513,10 +549,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenGroup.html",
-          "hash": "5PbqYFLU0aJEYOZw82FUUw=="
+          "hash": "vZA/iiALjvviqH/SNXKsVg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -525,10 +561,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenLogLevel.html",
-          "hash": "m4Oflo2FFok6wE1009xSUw=="
+          "hash": "Di9sABg0oPVnOMWxQYJdgg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -537,10 +573,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenMaterial.PropertyType.html",
-          "hash": "Hn2hAzOFOUSNGtd6p/+Uyg=="
+          "hash": "KCn2axXCBDwL/zaVWDasFQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -549,10 +585,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenMaterial.html",
-          "hash": "z5SvxHMmub3Lh9lnaqw9pw=="
+          "hash": "lA+U/fck4ch82PNt+PNgbQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -561,10 +597,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenMethod.html",
-          "hash": "2bOCltus2YSN/hNIxo04Eg=="
+          "hash": "manVCcJNekvQq1k+YuLIGA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -573,10 +609,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenOptions.html",
-          "hash": "c4+j/vR4zpxir7zLkZ7TsA=="
+          "hash": "ShJ4hC4rn3TuSevCYOCmjQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -585,10 +621,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenOptionsContainer.html",
-          "hash": "KSrHsgMhelVE+fXVKNGa/Q=="
+          "hash": "AeZlYwVX6tQJ/TKBlKpypg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -597,10 +633,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenOptionsFluid.html",
-          "hash": "+TjyjuExAwXH4aAyVoUX1g=="
+          "hash": "6dT1qjMox4y1nTvXHRUKzw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -609,10 +645,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenOverwrite.html",
-          "hash": "4g1oyaoRbfJzfMxHU5xfmA=="
+          "hash": "lgMB77IMWxPcBJLNqiFNJw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -621,10 +657,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenRecycle.html",
-          "hash": "jnmW/7GHTnOKQFPHGL7lAg=="
+          "hash": "0ccvQJpCu+3f6tIySOf2BQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -633,7 +669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenRigidbody.html",
-          "hash": "qEpaCJkDwFp+J8QuNZf9+g=="
+          "hash": "8vzv9To9avmsKy2se1hYFQ=="
         }
       },
       "is_incremental": false,
@@ -645,10 +681,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenSlerp.html",
-          "hash": "+K64ZU4fvPX+T0flY9RwSg=="
+          "hash": "S/cNi69H7nmcacnmuT77zQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -657,10 +693,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenState.html",
-          "hash": "aQmtYv/XnAkHKvdvXksqlg=="
+          "hash": "96cElHNIzc6tkYJTb3fRew=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -669,10 +705,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenStruct.html",
-          "hash": "t5tuk7HyHgH2hsXqO7BqZA=="
+          "hash": "N5HxQDbS002Fd74OANmIgA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -681,10 +717,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenTemplate.html",
-          "hash": "zNR5FVwWLi2GRJH1oK8Sqg=="
+          "hash": "AtiSmltt0UqJeAK3cFIGiw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -693,10 +729,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.TweenTiming.html",
-          "hash": "73U2/k9TxAIM1XDiMvSXaw=="
+          "hash": "ddeNhCIhyYKqQxX7q+yAbA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -705,7 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Sttz.Tweener.html",
-          "hash": "63AmIBemjKAMlh0chP1EOA=="
+          "hash": "MRhXV0DydidYXvlHUI3fPA=="
         }
       },
       "is_incremental": false,
@@ -717,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "fHgkE3Jop5KTvRaWURSOYA=="
+          "hash": "HaRsa2qKllqkbWvgF3sH9g=="
         }
       },
       "is_incremental": false,
@@ -729,7 +765,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "DxAVOXfY+xPzJGVwNA7SiQ=="
+          "hash": "zmK8RU/h2aLNjED4TOPK2A=="
         }
       },
       "is_incremental": false,
@@ -739,23 +775,30 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
-        "incrementalPhase": "build"
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 1
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 61,
+          "skipped_file_count": 60
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },
@@ -763,7 +806,9 @@
       "status": {
         "can_incremental": true,
         "details": "Can support incremental post processing.",
-        "incrementalPhase": "postProcessing"
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
       },
       "processors": {}
     }

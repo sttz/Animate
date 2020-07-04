@@ -8,7 +8,7 @@
     <title>Animate </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Animate ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -87,11 +87,11 @@ of set up per property and arithmetic type.</li>
 the modes described above are implemented as plugins as well.</p>
 <h3 id="usage">Usage</h3>
 <p>The quickest way to create a tween using Animate are the 
-<see cref="Animate.To"></see>, <see cref="Animate.From"></see>, 
-<see cref="Animate.FromTo"></see> and <see cref="Animate.By"></see> 
+<a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_To_">Animate.To</a>, <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_From_">Animate.From</a>, 
+<a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_FromTo_">Animate.FromTo</a> and <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_By_">Animate.By</a> 
 methods. Those methods create a single tween that will inherit the global
 options.</p>
-<p>The most flexible way to create a tween is the <see cref="Animate.On"></see>
+<p>The most flexible way to create a tween is the <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_On_">Animate.On</a>
 method. It returns a group with a default target, allows to create
 multiple tweens in one go and define options that apply to all of those tweens.</p>
 <pre><code class="lang-cs">// Shortest tween invocation, using global options:
@@ -100,7 +100,7 @@ Animate.To(transform, 5f, &quot;position&quot;, Vector3.one);
 // Override options for that tween:
 Animate.To(transform, 5f, &quot;position&quot;, Vector3.one)
     .Ease(Easing.QuadraticOut)
-    .OnComplete((sender, args) =&gt; {
+    .OnComplete((args) =&gt; {
         Debug.Log(&quot;Tween completed!&quot;);
     });
 
@@ -119,50 +119,51 @@ Animate.On(transform).Over(5f)
     )
     .Ease(Easing.QuinticInOut);
 </code></pre><h3 id="options">Options</h3>
-<p>A tween&#39;s options can be set on the <see cref="TweenOptions"></see> class. Options
+<p>A tween&#39;s options can be set on the <a class="xref" href="api/Sttz.Tweener.TweenOptions.html">TweenOptions</a> class. Options
 are stacked, allowing to set an option on a global, template, group or tween&#39;s
 level. Options in a lower level override their parent&#39;s options.</p>
 <ul>
-<li><strong>Global options</strong>: <see cref="ITweenEngine.Options"></see> (available via 
-<see cref="Animate.Engine"></see>)</li>
-<li><strong>Template options</strong>: Create a template using <see cref="Animate.Template"></see> 
-and then use it with <see cref="Animate.On"></see> and <see cref="Animate.Group"></see>.</li>
-<li><strong>Group options</strong>: Groups extend <see cref="TweenOptionsContainer.Options"></see>.</li>
-<li><strong>Tween options</strong>: Tweens extend <see cref="TweenOptionsContainer.Options"></see>.</li>
+<li><strong>Global options</strong>: <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_Options">Animate.Options</a></li>
+<li><strong>Template options</strong>: Create a template using <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_Template">Animate.Template</a>
+and then use it with <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_On_">Animate.On</a> and <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_Group_">Animate.Group</a>.</li>
+<li><strong>Group options</strong>: Groups extend <a class="xref" href="api/Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_Options">TweenOptionsContainer.Options</a>.</li>
+<li><strong>Tween options</strong>: Tweens extend <a class="xref" href="api/Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_Options">TweenOptionsContainer.Options</a>.</li>
 </ul>
-<p>For Templates, Groups and Tweens, <see cref="TweenOptionsFluid"></see> implements
+<p>For Templates, Groups and Tweens, <a class="xref" href="api/Sttz.Tweener.TweenOptionsFluid.html">TweenOptionsFluid</a> implements
 the fluid interface for setting options.</p>
 <p>Events are also part of the options stack, meaning that events bubble up the stack
-and e.g. listening for global or a group&#39;s <see cref="TweenOptions.ErrorEvent"></see>
+and e.g. listening for global or a group&#39;s <a class="xref" href="api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_ErrorEvent">TweenOptions.ErrorEvent</a>
 will trigger for any tween error globally or inside the group.</p>
 <p>Events for groups and tweens are reset once the group is recycled or the tween
-completes. Therefore it&#39;s typically not necessary to unregister event handlers.</p>
-<p>A lot of Animate&#39;s options use flags that can be combined to define
+completes. Therefore, it&#39;s typically not necessary to unregister event handlers.</p>
+<div class="TIP"><h5>Tip</h5><p>A lot of Animate&#39;s options use flags that can be combined to define
 the exact behavior. Most of those options also provide default combinations
 that should cover most use cases. To combine different flags to create
 your own combination, use the binary-or operator, e.g:
 <code>Animate.Options.OverwriteSettings = 
     TweenOverwrite.OnStart | TweenOverwrite.Finish | TweenOverwrite.Overlapping;</code></p>
+</div>
 <h3 id="recycling">Recycling</h3>
 <p>Groups and tweens will be recycled by default to reduce heap memory pressure.
 This means you can&#39;t reuse groups or tweens and should typically just create
 new groups or tweens (which will use recycled instances).</p>
-<p>Note that groups from <see cref="Animate.Group"></see> and templates are not 
-recycled (<see cref="TweenRecycle.Groups"></see> is unset on 
-<see cref="TweenOptions.Recycle"></see>) to allow creating and reusing groups with
+<p>Note that groups from <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_Group_">Animate.Group</a> and templates are not 
+recycled (<a class="xref" href="api/Sttz.Tweener.TweenRecycle.html#Sttz_Tweener_TweenRecycle_Groups">TweenRecycle.Groups</a> is unset on 
+<a class="xref" href="api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Recycle">TweenOptions.Recycle</a>) to allow creating and reusing groups with
 custom settings.</p>
 <p>If you want to hold on to a tween or group, there are two main options:</p>
 <ul>
-<li>Increase the group&#39;s or tween&#39;s <see cref="TweenOptionsContainer.RetainCount"></see>
+<li>Increase the group&#39;s or tween&#39;s <a class="xref" href="api/Sttz.Tweener.TweenOptionsContainer.html#Sttz_Tweener_TweenOptionsContainer_RetainCount">TweenOptionsContainer.RetainCount</a>
 until you don&#39;t need it anymore and then decrease it again. This will
 prevent it from being recycled for that duration.</li>
-<li>Set <see cref="TweenOptions.Recycle"></see>. This allows to disable recycling for 
+<li>Set <a class="xref" href="api/Sttz.Tweener.TweenOptions.html#Sttz_Tweener_TweenOptions_Recycle">TweenOptions.Recycle</a>. This allows to disable recycling for 
 groups and/or tweens on any level (global, group, tween).</li>
-<li>Set <see cref="ITweenEngine.Pool"></see> to <code>null</code> to disable recycling completely.</li>
+<li>Set <a class="xref" href="api/Sttz.Tweener.Core.ITweenEngine.html#Sttz_Tweener_Core_ITweenEngine_Pool">ITweenEngine.Pool</a> to <code>null</code> to disable recycling completely.</li>
 </ul>
-<p>You need to increase the retain count when you e.g. wait for a tween to
+<div class="WARNING"><h5>Warning</h5><p>You need to increase the retain count when you e.g. wait for a tween to
 complete by checking it repeatedly. If not retained, the tween will be 
 recycled immediately on completion and the check will return invalid information.</p>
+</div>
 <h3 id="default-plugins">Default Plugins</h3>
 <p>Animate provides three sets of default plugins, each with different convenience,
 speed and compatibility tradeoff:</p>
@@ -179,10 +180,10 @@ comes with static support for many Unity properties and types built-in but
 will have to enable support for custom properties, types or ones not covered
 by the default support.</p>
 <p>To enable reflection, set the <code>ANIMATE_REFLECTION</code> compilation define (.e.g. 
-in Unity&#39;s player settings). This will enable codegen where enable and fall
+in Unity&#39;s player settings). This will enable codegen where possible and fall
 back to plain reflection on other platforms.</p>
-<p>To extend support of the static plugin, use the <see cref="Animate.EnableAccess"></see>
-and <see cref="Animate.EnableArithmetic"></see> methods to enable access to a
+<p>To extend support of the static plugin, use the <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_EnableAccess_">Animate.EnableAccess</a>
+and <a class="xref" href="api/Sttz.Tweener.Animate.html#Sttz_Tweener_Animate_EnableArithmetic_">Animate.EnableArithmetic</a> methods to enable access to a
 property or tweening a type respectively.</p>
 <pre><code class="lang-cs">class Example {
     public float field;
@@ -194,7 +195,7 @@ Animate.EnableAccess(&quot;field&quot;,
     (t, v) =&gt; t.field = v);
 
 // Add support for tweening long
-Animate.EnableArithmetic&amp;lt;long&amp;gt;(
+Animate.EnableArithmetic&lt;long&gt;(
     (start, end) =&gt; end - start,
     (start, diff) =&gt; start + diff,
     (start, end, diff, position) =&gt; start + (long)(diff * (double)position)
@@ -222,6 +223,14 @@ could be used. In case of conflict, the plugin loaded last will be
 used.</p>
 <p>Plugins can also be re-enabled or re-disabled on the different options levels,
 i.e. a plugin can be enabled globally but disabled for a specific group.</p>
+<p><strong>Bundled Plugins:</strong></p>
+<ul>
+<li><a class="xref" href="api/Sttz.Tweener.TweenFollow.html">TweenFollow</a>: Tween position relative to another moving Transform</li>
+<li><a class="xref" href="api/Sttz.Tweener.TweenMaterial.html">TweenMaterial</a>: Tween properties of materials</li>
+<li><a class="xref" href="api/Sttz.Tweener.TweenRigidbody.html">TweenRigidbody</a>: Properly tween Rigidbodies to avoid physics instabilities</li>
+<li><a class="xref" href="api/Sttz.Tweener.TweenSlerp.html">TweenSlerp</a>: Tween rotations using Slerp (shortest distance)</li>
+<li><a class="xref" href="api/Sttz.Tweener.TweenStruct.html">TweenStruct</a>: Tween members of structs (uses codegen)</li>
+</ul>
 </article>
           </div>
           

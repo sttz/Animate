@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenSlerp
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -112,7 +112,7 @@
     <pre><code class="lang-csharp hljs">public static class TweenSlerp</code></pre>
   </div>
   <h5 id="Sttz_Tweener_TweenSlerp_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>TweenSlerp is enabled by default when tweening Quaternions, it&apos;s 
+  <div class="markdown level0 remarks"><p>TweenSlerp is enabled by default when tweening Quaternions, it&#39;s 
 also used automatically when tweening a Vector3 where the property
 ends in &quot;eulerAngles&quot;.</p>
 <p>Vector3 can represent positions as well as rotations but tweening
@@ -127,7 +127,7 @@ shortest possible path between two rotations.</p>
 Animate.Options.EnablePlugin(TweenSlerp.Loader, false);
 
 // Require TweenSlerp for a single tween
-Animate.To(transform, 2f, &amp;quot;eulerAngles&amp;quot;, new Vector3(0, 180, 0))
+Animate.To(transform, 2f, &quot;eulerAngles&quot;, new Vector3(0, 180, 0))
 .Slerp();
 </code></pre></div>
   <h3 id="methods">Methods

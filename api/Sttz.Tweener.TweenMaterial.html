@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TweenMaterial
    ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 1.0.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -112,9 +112,9 @@
     <pre><code class="lang-csharp hljs">public static class TweenMaterial</code></pre>
   </div>
   <h5 id="Sttz_Tweener_TweenMaterial_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>This plugin enables to tweening of any custom property on a Material.</p>
-<p>Since Unity doesn&apos;t expose a property&apos;s type at runtime, it&apos;s up
-to the user to make sure the tween type matches the property&apos;s type.</p>
+  <div class="markdown level0 remarks"><p>This plugin enables tweening of any custom property on a Material.</p>
+<p>Since Unity doesn&#39;t expose a property&#39;s type at runtime, it&#39;s up
+to the user to make sure the tween type matches the property&#39;s type.</p>
 <p>When not specifying a property type with <a class="xref" href="Sttz.Tweener.TweenMaterial.html#Sttz_Tweener_TweenMaterial_CustomLoader_Sttz_Tweener_TweenMaterial_PropertyType_">CustomLoader(TweenMaterial.PropertyType)</a>
 or using one of the <a class="xref" href="Sttz.Tweener.TweenMaterial.html#Sttz_Tweener_TweenMaterial_Material_Sttz_Tweener_Tween_Material_Color__Sttz_Tweener_TweenMaterial_PropertyType_">Material(Tween&lt;Material, Color&gt;, TweenMaterial.PropertyType)</a> extension methods, following
 types are inferred from the tween type:</p>
@@ -122,9 +122,9 @@ types are inferred from the tween type:</p>
 <li>Color: Color</li>
 <li>Vector2: TextureOffset</li>
 <li>Vector4: Vector</li>
-<li>Float: Float
-Note that TextureScale always requires specifying the type.</li>
+<li>Float: Float</li>
 </ul>
+<p>Note that TextureScale always requires specifying the type.</p>
 <p>When the plugin is enabled globally or for a group, it also requires
 properties to be prefixed with an underscore (.e.g. &quot;_Color&quot;, which
 is also the Unity convention for all material properties).</p>
@@ -132,11 +132,11 @@ is also the Unity convention for all material properties).</p>
 Animate.Options.EnablePlugin(TweenMaterial.Load);
 
 // Enable for a specific tween
-Animate.To(material, 2f, &amp;quot;_Color&amp;quot;, Color.white)
+Animate.To(material, 2f, &quot;_Color&quot;, Color.white)
 .Material();
 
 // Specifying a property type
-Animate.To(material, 2f, &amp;quot;_MainTex&amp;quot;, Vector2.one)
+Animate.To(material, 2f, &quot;_MainTex&quot;, Vector2.one)
 .Material(TweenMaterial.PropertyType.TextureScale);
 </code></pre></div>
   <h3 id="methods">Methods

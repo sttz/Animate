@@ -29,7 +29,7 @@ namespace Sttz.Tweener {
 /// 
 /// // Require TweenSlerp for a single tween
 /// Animate.To(transform, 2f, "eulerAngles", new Vector3(0, 180, 0))
-/// 	.Slerp();
+///     .Slerp();
 /// ```
 /// </remarks>
 public static class TweenSlerp

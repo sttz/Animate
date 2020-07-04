@@ -23,7 +23,7 @@ namespace Sttz.Tweener {
 /// 
 /// TweenRigidbody requires tweening 'position', 'rotation' or 
 /// 'eulerAngles' on the transform the kinematic rigidbody is 
-/// attached to. It's not possible to TweenRigidbody with local
+/// attached to. It's not possible to use TweenRigidbody with local
 /// position or rotation.
 /// 
 /// ```cs
@@ -32,7 +32,7 @@ namespace Sttz.Tweener {
 /// 
 /// // Enable TweenRigidbody for a specific tween
 /// Animate.To(transform, 5f, "position", Vector3(0, 0, 50))
-/// 	.Rigidbody();
+///     .Rigidbody();
 /// ```
 /// </remarks>
 public static class TweenRigidbody

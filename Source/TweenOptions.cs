@@ -532,7 +532,7 @@ public class TweenOptions
 	/// The order in which plugins are enabled matters. Plugins that are
 	/// enabled later can override plugins enabled earlier.
 	/// 
-	/// Also, the options level they are defined it matters. Plugins that
+	/// Also, the options level they are defined in matters. Plugins that
 	/// are loaded in child levels can override plugins in parent levels.
 	/// 
 	/// Finally, plugins can be re-enabled or re-disabled on lower

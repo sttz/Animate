@@ -270,7 +270,7 @@ public enum TweenLogLevel
 public enum TweenState
 {
 	/// <summary>
-	/// The tween has not yet been set up using it's <see cref="M:Tween{T}.Use"/> 
+	/// The tween has not yet been set up using it's <see cref="Tween{TTarget,TValue}.Use"/> 
 	/// method. You should only see tweens in this state if you create an
 	/// instance or load one from the <see cref="TweenPool"/>. Usually,
 	/// you want to use the methods on <see cref="Animate"/>, 

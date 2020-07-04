@@ -12,8 +12,16 @@ namespace Sttz.Tweener {
 /// Tween a single member in a struct (value type).
 /// </summary>
 /// <remarks>
-/// TweenStruct uses codegen and is therefore not available with
-/// AOT/IL2CPP or .Net Standard.
+/// > [!NOTE]
+/// > TweenStruct uses codegen and is therefore not available with
+/// > AOT/IL2CPP or .Net Standard.
+/// >
+/// > Instead, you can use a virtual property to tween a struct member:
+/// > ```cs
+/// > Animate.EnableAccess("field.x",
+/// >     (Example t) => t.field.x,
+/// >     (t, v) => { var field = t.field; field.x = v; t.field = field; });
+/// > ```
 /// 
 /// Structs or Value Types are special types in .Net that are copied
 /// when used and therefore aren't referenced and don't need to be
@@ -38,7 +46,7 @@ namespace Sttz.Tweener {
 /// Animate.To(transform, 2f, "position", Vector3.zero);
 /// 
 /// // Explicit usage, only tween the x value:
-/// Animate.To(transform, 2f, "position", Vector3.zero)
+/// Animate.To(transform, 2f, "position.x", Vector3.zero)
 /// 	.Struct();
 /// 
 /// // Automatic usage, plugin auto-detects when it's needed:

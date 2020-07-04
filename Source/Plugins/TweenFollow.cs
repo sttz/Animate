@@ -13,9 +13,10 @@ namespace Sttz.Tweener {
 /// <see cref="Follow"/> extension method because it always requires an 
 /// argument.
 /// 
-/// To use this plugin, tween a global position to a local position and
-/// set the target transform as argument. The property will always be 
-/// set to a global position and the local position transformed each frame.
+/// To use this plugin, tween "position" on a Transform but use a local
+/// position as target value and specify a Transform to follow. The tween
+/// will then target the position in the local space of the followed 
+/// Transform as it moves around.
 /// 
 /// ```cs
 /// otherTransform.rotation = Quaternion.identity;

@@ -10,7 +10,7 @@ namespace Sttz.Tweener {
 /// Tween a material property.
 /// </summary>
 /// <remarks>
-/// This plugin enables to tweening of any custom property on a Material.
+/// This plugin enables tweening of any custom property on a Material.
 /// 
 /// Since Unity doesn't expose a property's type at runtime, it's up
 /// to the user to make sure the tween type matches the property's type.
@@ -22,6 +22,7 @@ namespace Sttz.Tweener {
 /// - Vector2: TextureOffset
 /// - Vector4: Vector
 /// - Float: Float
+/// 
 /// Note that TextureScale always requires specifying the type.
 /// 
 /// When the plugin is enabled globally or for a group, it also requires
@@ -34,11 +35,11 @@ namespace Sttz.Tweener {
 /// 
 /// // Enable for a specific tween
 /// Animate.To(material, 2f, "_Color", Color.white)
-/// 	.Material();
+///     .Material();
 /// 
 /// // Specifying a property type
 /// Animate.To(material, 2f, "_MainTex", Vector2.one)
-/// 	.Material(TweenMaterial.PropertyType.TextureScale);
+///     .Material(TweenMaterial.PropertyType.TextureScale);
 /// ```
 /// </remarks>
 public static class TweenMaterial

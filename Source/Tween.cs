@@ -620,6 +620,9 @@ public abstract class Tween : TweenOptionsContainer
 
 		DoOverwrite();
 		Options.TriggerInitialize(this);
+
+		// Cache start time
+		_startTime = StartTime;
 	}
 
 	// Start the tween
@@ -631,7 +634,6 @@ public abstract class Tween : TweenOptionsContainer
 		PrepareValues();
 
 		// Cache most frequently used options
-		_startTime = StartTime;
 		_oneOverDuration = 1f / Options.Duration;
 		_timing = Options.TweenTiming;
 		_triggerUpdate = Options.HasUpdateListeners();

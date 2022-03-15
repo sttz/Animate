@@ -263,7 +263,7 @@ public abstract class Tween : TweenOptionsContainer
 		}
 
 		endTime = startTime + duration;
-		otherEndTime = otherStartTime + duration;
+		otherEndTime = otherStartTime + otherDuration;
 
 		return (
 			(startTime >= otherStartTime && startTime < otherEndTime)

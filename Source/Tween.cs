@@ -701,7 +701,9 @@ public abstract class Tween : TweenOptionsContainer
 		float time = TweenTime;
 
 		// Handle non-tweening state
-		if (_state != TweenState.Tweening) {
+		if (_state == TweenState.Error) {
+			return false;
+		} else if (_state != TweenState.Tweening) {
 			// Already over
 			if (_state >= TweenState.Complete) {
 				return false;
@@ -716,19 +718,22 @@ public abstract class Tween : TweenOptionsContainer
 				// Initialize tween
 				if (_state == TweenState.Uninitialized) {
 					Initialize();
+					if (_state == TweenState.Error) {
+						return false;
+					}
 				}
 
 				// Wait to start tween
 				if (_state == TweenState.Waiting) {
-					if (time >= _startTime) {
+					if (time < _startTime) {
+						return true;
+					} else {
 						Start();
+						if (_state == TweenState.Error) {
+							return false;
+						}
 					}
 				}
-			}
-
-			// Check for error during init/start
-			if (_state == TweenState.Error) {
-				return false;
 			}
 		}
 

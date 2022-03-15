@@ -3,4 +3,4 @@ Animate
 
 Animate tweening engine for Unity
 
-Documentation: https://sttz.github.com/Animate/
+Documentation: https://sttz.github.io/Animate/

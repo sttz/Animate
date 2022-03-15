@@ -179,7 +179,7 @@ public abstract class Tween : TweenOptionsContainer
 	/// <exception cref="System.InvalidCastException">
 	/// Thrown when the object's type does not match the tween's target type.
 	/// </exception>
-	public abstract object Target { get; set; }
+	public abstract object Target { get; set; }
 
 	/// <summary>
 	/// Name of the target property on the target object.

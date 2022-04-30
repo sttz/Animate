@@ -638,11 +638,6 @@ public abstract class Tween : TweenOptionsContainer
 		_timing = Options.TweenTiming;
 		_triggerUpdate = Options.HasUpdateListeners();
 
-		_targetUnityObject = (Target as UnityEngine.Object);
-		_targetIsUnityObject = (_targetUnityObject != null);
-		_targetUnityReference = (Target as UnityEngine.TrackedReference);
-		_targetIsUnityRef = (_targetUnityReference != null);
-
 		Options.TriggerStart(this);
 	}
 
@@ -883,6 +878,14 @@ public class Tween<TTarget, TValue> : Tween where TTarget : class
 		_diffValue = diffValue;
 		Options.ParentOptions = parentOptions;
 		Options.DefaultPluginRequired = true;
+
+		if (target is UnityEngine.Object) {
+			_targetIsUnityObject = true;
+			_targetUnityObject = target as UnityEngine.Object;
+		} else if (target is UnityEngine.TrackedReference) {
+			_targetIsUnityRef = true;
+			_targetUnityReference = target as UnityEngine.TrackedReference;
+		}
 
 		// Set creation time
 		_creationTime = Time.time;

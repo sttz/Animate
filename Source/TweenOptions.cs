@@ -1054,12 +1054,15 @@ public static class TweenOptionsFluid
 	// -------- Chain Finalizers --------
 
 	/// <summary>
-	/// Return a <c>WaitForSeconds</c> instruction that can be used
-	/// in Unity coroutines to wait for the duration of the tween
-	/// (delay + duration).
+	/// Return a yield instruction that can be used in Unity coroutines to wait 
+	/// for the duration of the tween (delay + duration).
+	/// This does not check the state of the tween, i.e. won't waiting if the
+	/// tween is overwritten or aborted, and will always wait for its full duration.
 	/// </summary>
 	/// <seealso cref="Tween.WaitForEndOfTween"/>
-	public static WaitForSeconds WaitForTweenDuration<TContainer>(this TContainer container)
+	/// <returns>A <see cref="WaitForSeconds"/> instance for tweens running in regular time
+	/// and a <see cref="CustomYieldInstruction"/> for tweens running in unscaled or real time.</returns>
+	public static object WaitForTweenDuration<TContainer>(this TContainer container)
 		where TContainer : TweenOptionsContainer
 	{
 		// Check duration is set
@@ -1075,8 +1078,61 @@ public static class TweenOptionsFluid
 			duration += container.Options.StartDelay;
 		}
 
-		// Return yield instruction for the duration
-		return new WaitForSeconds(duration);
+		var timing = container.Options.TweenTiming;
+		var isUnscaledTime = timing.HasFlag(TweenTiming.UnscaledTime);
+		var isRealTime = timing.HasFlag(TweenTiming.RealTime);
+
+		if (!isUnscaledTime && !isRealTime) {
+			// Normal game time, return native wait instruction 
+			// that doesn't need to check each frame
+			return new WaitForSeconds(duration);
+		}
+
+		// There are no native instructions for unscaled or real time,
+		// return a custom yield instruction instead.
+		return new WaitForTweenDurationInstruction(duration, isUnscaledTime);
+	}
+
+	/// <summary>
+	/// Yield instruction used to wait for tweens durations running in
+	/// unscaled or real time.
+	/// (Unity has <see cref="UnityEngine.WaitForSecondsRealtime"/> but nothing
+	/// for unscaled time and it's also just a CustomYieldInstruction.)
+	/// </summary>
+	class WaitForTweenDurationInstruction : CustomYieldInstruction
+	{
+		public bool isUnscaledTime;
+		public float waitTime;
+
+		float waitUntilTime = -1f;
+
+		public WaitForTweenDurationInstruction(float waitTime, bool isUnscaledTime)
+		{
+			this.waitTime = waitTime;
+			this.isUnscaledTime = isUnscaledTime;
+		}
+
+		public override bool keepWaiting { get {
+			var currentTime = isUnscaledTime
+				? Time.unscaledTime
+				: Time.realtimeSinceStartup;
+
+			if (waitUntilTime < 0) {
+				waitUntilTime = currentTime + waitTime;
+			}
+
+			var wait = currentTime < waitUntilTime;
+			if (!wait) {
+				Reset();
+			}
+
+			return wait;
+		} }
+
+		public override void Reset()
+		{
+			waitUntilTime = -1;
+		}
 	}
 }
 

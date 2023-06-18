@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.4 (2023-06-18)
+* Fix `WaitForTweenDuration` not respecting the tween's timing
+
 ### 3.0.2 (2022-04-30)
 * Fix tweens failing with Error when target Unity Object is destroyed
   before the tween is initialized, instead of only logging a Debug message

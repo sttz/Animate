@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
+
+#if ANIMATE_HAS_UNITY_UI
 using UnityEngine.UI;
+#endif
 
 namespace Sttz.Tweener.Core {
 
@@ -23,45 +26,78 @@ public static class TweenStaticUnitySupport
 		// ------ Accessors -------
 
 		// Transform
-		TweenStaticAccessorPlugin.EnableAccess("rotation",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.rotation),
 			(Transform tf) => tf.rotation,
 			(tf, value) => tf.rotation = value);
-		TweenStaticAccessorPlugin.EnableAccess("localRotation",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.localRotation),
 			(Transform tf) => tf.localRotation,
 			(tf, value) => tf.localRotation = value);
-		TweenStaticAccessorPlugin.EnableAccess("eulerAngles",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.eulerAngles),
 			(Transform tf) => tf.eulerAngles,
 			(tf, value) => tf.eulerAngles = value);
-		TweenStaticAccessorPlugin.EnableAccess("localEulerAngles",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.localEulerAngles),
 			(Transform tf) => tf.localEulerAngles,
 			(tf, value) => tf.localEulerAngles = value);
-		TweenStaticAccessorPlugin.EnableAccess("localScale",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.localScale),
 			(Transform tf) => tf.localScale,
 			(tf, value) => tf.localScale = value);
-		TweenStaticAccessorPlugin.EnableAccess("position",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.position),
 			(Transform tf) => tf.position,
 			(tf, value) => tf.position = value);
-		TweenStaticAccessorPlugin.EnableAccess("localPosition",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Transform.localPosition),
 			(Transform tf) => tf.localPosition,
 			(tf, value) => tf.localPosition = value);
 
-		TweenStaticAccessorPlugin.EnableAccess("anchoredPosition",
-			(RectTransform tf) => tf.anchoredPosition,
-			(tf, value) => tf.anchoredPosition = value);
-
-		TweenStaticAccessorPlugin.EnableAccess("color",
-			(Graphic t) => t.color,
-			(t, value) => t.color = value);
-		TweenStaticAccessorPlugin.EnableAccess("color",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Material.color),
 			(Material t) => t.color,
 			(t, value) => t.color = value);
-
-		TweenStaticAccessorPlugin.EnableAccess("weight",
+		TweenStaticAccessorPlugin.EnableAccess(nameof(SpriteRenderer.color),
+			(SpriteRenderer t) => t.color,
+			(t, v) => t.color = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(AnimationState.weight),
 			(AnimationState tf) => tf.weight,
 			(tf, value) => tf.weight = value);
-		TweenStaticAccessorPlugin.EnableAccess("alpha",
-			(CanvasGroup tf) => tf.alpha,
-			(tf, value) => tf.alpha = value);
+
+	#if ANIMATE_HAS_UNITY_UI
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.anchoredPosition),
+			(RectTransform t) => t.anchoredPosition,
+			(t, v) => t.anchoredPosition = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.anchorMin),
+			(RectTransform t) => t.anchorMin,
+			(t, v) => t.anchorMin = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.anchorMax),
+			(RectTransform t) => t.anchorMax,
+			(t, v) => t.anchorMax = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.sizeDelta),
+			(RectTransform t) => t.sizeDelta,
+			(t, v) => t.sizeDelta = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.pivot),
+			(RectTransform t) => t.pivot,
+			(t, v) => t.pivot = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.localRotation),
+			(RectTransform t) => t.localRotation,
+			(t, v) => t.localRotation = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.localScale),
+			(RectTransform t) => t.localScale,
+			(t, v) => t.localScale = v);
+		
+		TweenStaticAccessorPlugin.EnableAccess(nameof(ScrollRect.horizontalNormalizedPosition),
+			(ScrollRect t) => t.horizontalNormalizedPosition,
+			(t, v) => t.horizontalNormalizedPosition = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(ScrollRect.verticalNormalizedPosition),
+			(ScrollRect t) => t.verticalNormalizedPosition,
+			(t, v) => t.verticalNormalizedPosition = v);
+
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Graphic.color),
+			(Graphic t) => t.color,
+			(t, value) => t.color = value);
+		Animate.EnableAccess(nameof(Image.color),
+			(Image t) => t.color,
+			(t, v) => t.color = v);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(CanvasGroup.alpha),
+			(CanvasGroup t) => t.alpha,
+			(t, value) => t.alpha = value);
+	#endif
 
 		// ------ Arithmetic -------
 

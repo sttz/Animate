@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.5 (2024-05-11)
+* Add a few more built-in accessors for the static plugin
+* Fix compilation without "com.unity.ugui" package installed
+
 ### 3.0.4 (2023-06-18)
 * Fix `WaitForTweenDuration` not respecting the tween's timing
 

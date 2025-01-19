@@ -7,7 +7,7 @@ namespace Sttz.Tweener {
 /// Animate Tweening Engine.
 /// </summary>
 /// <remarks>
-/// version 3.0.5
+/// version 3.1.0
 /// 
 /// Animate is a high-performance generic tweening engine written in C#
 /// and optimized to use in the Unity game engine.
@@ -17,11 +17,11 @@ public static class Animate
 	/// <summary>
 	/// Animate version string.
 	/// </summary>
-	public const string Version = "3.0.5";
+	public const string Version = "3.1.0";
 	/// <summary>
 	/// Animate version number.
 	/// </summary>
-	public const int VersionNumber = 3015;
+	public const int VersionNumber = 3100;
 
 	// -------- Configuration --------
 

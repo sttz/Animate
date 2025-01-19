@@ -1,7 +1,7 @@
 {
   "name": "ch.sttz.animate",
   "displayName": "sttz/Animate",
-  "version": "3.0.5",
+  "version": "3.1.0",
   "unity": "2018.4",
   "description": "Animate tweening engine for Unity.",
   "keywords": [

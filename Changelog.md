@@ -1,5 +1,11 @@
 # Changelog
 
+### 3.1.0 (2025-01-19)
+* Add async methods using Awaitable on Unity 2023.1+
+* Add TweenGroup overloads with custom target but using the group's duration
+* Add built-in accessor for Time.timeScale to the static plugin
+* Fix tween not overwritten if overwriting tween is started in the same frame as it ends
+
 ### 3.0.5 (2024-05-11)
 * Add a few more built-in accessors for the static plugin
 * Fix compilation without "com.unity.ugui" package installed

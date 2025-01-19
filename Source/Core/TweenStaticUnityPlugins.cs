@@ -57,6 +57,9 @@ public static class TweenStaticUnitySupport
 		TweenStaticAccessorPlugin.EnableAccess(nameof(AnimationState.weight),
 			(AnimationState tf) => tf.weight,
 			(tf, value) => tf.weight = value);
+		TweenStaticAccessorPlugin.EnableAccess(nameof(Time.timeScale),
+			(Type t) => Time.timeScale,
+			(tf, value) => Time.timeScale = value);
 
 	#if ANIMATE_HAS_UNITY_UI
 		TweenStaticAccessorPlugin.EnableAccess(nameof(RectTransform.anchoredPosition),

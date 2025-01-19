@@ -242,16 +242,18 @@ public abstract class Tween : TweenOptionsContainer
 	{
 		if (_state >= TweenState.Complete) return false;
 
-		float startTime, duration, endTime, otherStartTime, otherDuration, otherEndTime;
+		float currentTime, startTime, duration, endTime, otherStartTime, otherDuration, otherEndTime;
 
 		// Calculate in unscaled time if one tween is running in unscaled or real time
 		if (((Options.TweenTiming | other.Options.TweenTiming) & (TweenTiming.UnscaledTime | TweenTiming.RealTime)) > 0) {
+			currentTime = Time.unscaledTime;
 			startTime = StartTimeUnscaled;
 			duration = DurationUnscaled;
 			otherStartTime = other.StartTimeUnscaled;
 			otherDuration = other.DurationUnscaled;
 
 		} else {
+			currentTime = TweenTime;
 			startTime = StartTime;
 			duration = Options.Duration;
 			otherStartTime = other.StartTime;
@@ -267,10 +269,29 @@ public abstract class Tween : TweenOptionsContainer
 		endTime = startTime + duration;
 		otherEndTime = otherStartTime + otherDuration;
 
-		return (
-			(startTime >= otherStartTime && startTime < otherEndTime)
-			|| (endTime >= otherStartTime && endTime < otherEndTime)
+		// In case the end time is in the past, the overlap check might fail
+		// but the tween will still only complete later in this frame.
+		// This can cause issues with OnComplete, where it doesn't see
+		// a tween started earlier in the same frame that would have overwritten.
+		// Adjust the end time to the current frame time, to ensure ending
+		// tweens are overwritten if another tween is started in the same frame.
+		if (endTime < currentTime) {
+			endTime = currentTime;
+		}
+		if (otherEndTime < currentTime) {
+			endTime = currentTime;
+		}
+
+		// If either our start or end time falls within the other tween's duration, we overlap.
+		// This does not cover the case when the other tween starts and ends within our duration,
+		// so we also need to check either their start or end time against our duration.
+		var overlap = (
+			(startTime >= otherStartTime && startTime <= otherEndTime)
+			|| (endTime >= otherStartTime && endTime <= otherEndTime)
+			|| (otherStartTime >= startTime && otherStartTime <= endTime)
 		);
+
+		return overlap;
 	}
 
 	/// <summary>

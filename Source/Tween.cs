@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
+using UnityEngine;
 
 using Sttz.Tweener.Core;
 
@@ -342,6 +344,60 @@ public abstract class Tween : TweenOptionsContainer
 		RetainCount--;
 	}
 
+#if UNITY_2023_1_OR_NEWER
+	/// <summary>
+	/// Return an `Awaitable` that will trigger when the tween completes.
+	/// Cancel the wait if the given behaviour is destroyed.
+	/// </summary>
+	public Awaitable WaitForEndOfTweenAsync(MonoBehaviour host)
+	{
+		return WaitForEndOfTweenAsync(host.destroyCancellationToken);
+	}
+
+	/// <summary>
+	/// Return an `Awaitable` that will trigger when the tween completes.
+	/// </summary>
+	public Awaitable WaitForEndOfTweenAsync(CancellationToken cancellationToken = default)
+	{
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var source = _engine.Pool?.GetAwaitableCompletionSource() ?? new();
+
+		if (_state >= TweenState.Complete) {
+			source.SetResult();
+		} else {
+			_completionSources ??= new();
+			_completionSources.Add(new AwaitableCompletionPair() {
+				source = source,
+				cancellationToken = cancellationToken
+			});
+		}
+
+		return source.Awaitable;
+	}
+
+	/// <summary>
+	/// Trigger the Awaitables waiting for the tween to complete.
+	/// </summary>
+	protected void TriggerCompletionSources()
+	{
+		if (_completionSources == null || _completionSources.Count == 0)
+			return;
+
+		foreach (var pair in _completionSources) {
+			if (pair.cancellationToken.IsCancellationRequested) {
+				pair.source.SetCanceled();
+			} else {
+				pair.source.SetResult();
+			}
+
+			_engine.Pool?.Return(pair.source);
+		}
+
+		_completionSources.Clear();
+	}
+#endif
+
 	// -------- Lifecycle --------
 
 	/// <summary>
@@ -530,6 +586,16 @@ public abstract class Tween : TweenOptionsContainer
 	protected TweenTiming _timing;
 	protected bool _triggerUpdate;
 
+#if UNITY_2023_1_OR_NEWER
+	protected struct AwaitableCompletionPair
+	{
+		public AwaitableCompletionSource source;
+		public CancellationToken cancellationToken;
+	}
+
+	protected List<AwaitableCompletionPair> _completionSources;
+#endif
+
 	// Trigger an error and abort the tween
 	protected void Fail(string message, params object[] args)
 	{
@@ -548,6 +614,10 @@ public abstract class Tween : TweenOptionsContainer
 
 		// Remove all local event listeners
 		Options.ResetEvents();
+
+	#if UNITY_2023_1_OR_NEWER
+		TriggerCompletionSources();
+	#endif
 	}
 
 	// Overwrite existing tweens
@@ -674,6 +744,10 @@ public abstract class Tween : TweenOptionsContainer
 
 		// Remove all local event listeners
 		Options.ResetEvents();
+
+	#if UNITY_2023_1_OR_NEWER
+		TriggerCompletionSources();
+	#endif
 	}
 
 	protected abstract void ApplyValue(float position);

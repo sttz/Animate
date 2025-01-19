@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Sttz.Tweener.Core;
 using System.ComponentModel;
+using System.Threading;
 
 namespace Sttz.Tweener {
 
@@ -1056,7 +1057,7 @@ public static class TweenOptionsFluid
 	/// <summary>
 	/// Return a yield instruction that can be used in Unity coroutines to wait 
 	/// for the duration of the tween (delay + duration).
-	/// This does not check the state of the tween, i.e. won't waiting if the
+	/// This does not check the state of the tween, i.e. won't stop waiting if the
 	/// tween is overwritten or aborted, and will always wait for its full duration.
 	/// </summary>
 	/// <seealso cref="Tween.WaitForEndOfTween"/>
@@ -1134,6 +1135,69 @@ public static class TweenOptionsFluid
 			waitUntilTime = -1;
 		}
 	}
+
+#if UNITY_2023_1_OR_NEWER
+	/// <summary>
+	/// Same as <see cref="WaitForTweenDurationAsync{TContainer}(TContainer, CancellationToken)"/>
+	/// but set the cancellation token to the behaviour's destroy token. 
+	/// </summary>
+	public static Awaitable WaitForTweenDurationAsync<TContainer>(this TContainer container, MonoBehaviour host)
+		where TContainer : TweenOptionsContainer
+	{
+		return WaitForTweenDurationAsync(container, host.destroyCancellationToken);
+	}
+
+	/// <summary>
+	/// Return an Awaitable that can be used to wait for the duration of the tween (delay + duration).
+	/// This does not check the state of the tween, i.e. won't stop waiting if the
+	/// tween is overwritten or aborted, and will always wait for its full duration.
+	/// </summary>
+	/// <seealso cref="Tween.WaitForEndOfTweenAsync"/>
+	public static Awaitable WaitForTweenDurationAsync<TContainer>(this TContainer container, CancellationToken cancellationToken = default)
+		where TContainer : TweenOptionsContainer
+	{
+		// Check duration is set
+		if (float.IsNaN(container.Options.Duration)) {
+			container.Options.Log(TweenLogLevel.Error,
+				"No duration set on {0} for WaitForDuration()".LazyFormat(container));
+			return null;
+		}
+
+		// Add delay to duration
+		var duration = container.Options.Duration;
+		if (!float.IsNaN(container.Options.StartDelay)) {
+			duration += container.Options.StartDelay;
+		}
+
+		var timing = container.Options.TweenTiming;
+		var isUnscaledTime = timing.HasFlag(TweenTiming.UnscaledTime);
+		var isRealTime = timing.HasFlag(TweenTiming.RealTime);
+
+		if (!isUnscaledTime && !isRealTime) {
+			// Normal game time, return native wait instruction 
+			// that doesn't need to check each frame
+			return Awaitable.WaitForSecondsAsync(duration, cancellationToken);
+		}
+
+		// There are no native instructions for unscaled or real time,
+		// use a custom method to wait instead.
+		return WaitForTweenDurationAsync(duration, isUnscaledTime, cancellationToken);
+	}
+
+	static async Awaitable WaitForTweenDurationAsync(float duration, bool isUnscaledTime, CancellationToken cancellationToken)
+	{
+		var currentTime = isUnscaledTime
+			? Time.unscaledTime
+			: Time.realtimeSinceStartup;
+		var waitUntilTime = currentTime + duration;
+		do {
+			await Awaitable.NextFrameAsync(cancellationToken);
+			currentTime = isUnscaledTime
+				? Time.unscaledTime
+				: Time.realtimeSinceStartup;
+		} while (currentTime < waitUntilTime);
+	}
+#endif
 }
 
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Sttz.Tweener.Core {
 
@@ -16,6 +17,11 @@ public class TweenPool
 	// Pooled Tween<T> instances by type
 	protected Dictionary<TypePair, Queue<Tween>> _tweens
 		= new Dictionary<TypePair, Queue<Tween>>();
+
+#if UNITY_2023_1_OR_NEWER
+	// Pooled AwaitableCompletionSource instances
+	protected Queue<AwaitableCompletionSource> _completionSources;
+#endif
 
 	// -------- Pooling --------
 
@@ -110,6 +116,26 @@ public class TweenPool
 
 		queue.Enqueue(tweenGroup);
 	}
+
+#if UNITY_2023_1_OR_NEWER
+	// Get a completion source from the pool, create a new one if necessary
+	public AwaitableCompletionSource GetAwaitableCompletionSource()
+	{
+		if (_completionSources == null || _completionSources.Count == 0) {
+			return new AwaitableCompletionSource();
+		}
+
+		return _completionSources.Dequeue();
+	}
+
+	// Return a completion source
+	public void Return(AwaitableCompletionSource source)
+	{
+		source.Reset();
+		_completionSources ??= new();
+		_completionSources.Enqueue(source);
+	}
+#endif
 }
 
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Sttz.Tweener.Core;
 using UnityEngine;
 
@@ -274,6 +275,66 @@ public abstract class TweenGroup : TweenOptionsContainer
 		}
 	}
 
+#if UNITY_2023_1_OR_NEWER
+	/// <summary>
+	/// Same as <see cref="WaitForEndOfGroupAsync(CancellationToken)"/> but
+	/// set the cancellation token to the behaviour's destroy token.
+	/// </summary>
+	public Awaitable WaitForEndOfGroupAsync(MonoBehaviour host)
+	{
+		return WaitForEndOfGroupAsync(host.destroyCancellationToken);
+	}
+
+	/// <summary>
+	/// Return an Awaitable that will trigger when all tweens
+	/// in the group have completed. 
+	/// </summary>
+	/// <remarks>
+	/// Adding new tweens to the group, while not all of its
+	/// tweens have completed, will prolong the time until the
+	/// Awaitable triggers.
+	/// </remarks>
+	public Awaitable WaitForEndOfGroupAsync(CancellationToken cancellationToken = default)
+	{
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var source = _engine.Pool?.GetAwaitableCompletionSource() ?? new();
+
+		if (!Has()) {
+			source.SetResult();
+		} else {
+			_completionSources ??= new();
+			_completionSources.Add(new AwaitableCompletionPair() {
+				source = source,
+				cancellationToken = cancellationToken
+			});
+		}
+
+		return source.Awaitable;
+	}
+
+	/// <summary>
+	/// Trigger the Awaitables waiting for the tween to complete.
+	/// </summary>
+	protected void TriggerCompletionSources()
+	{
+		if (_completionSources == null || _completionSources.Count == 0)
+			return;
+
+		foreach (var pair in _completionSources) {
+			if (pair.cancellationToken.IsCancellationRequested) {
+				pair.source.SetCanceled();
+			} else {
+				pair.source.SetResult();
+			}
+
+			_engine.Pool?.Return(pair.source);
+		}
+
+		_completionSources.Clear();
+	}
+#endif
+
 	// -------- Fields --------
 
 	protected List<Tween> _newTweens;
@@ -283,6 +344,16 @@ public abstract class TweenGroup : TweenOptionsContainer
 
 	protected bool _inUse;
 	protected ITweenEngine _engine;
+
+#if UNITY_2023_1_OR_NEWER
+	protected struct AwaitableCompletionPair
+	{
+		public AwaitableCompletionSource source;
+		public CancellationToken cancellationToken;
+	}
+
+	protected List<AwaitableCompletionPair> _completionSources;
+#endif
 
 	// -------- Internals --------
 
@@ -447,7 +518,15 @@ public abstract class TweenGroup : TweenOptionsContainer
 		}
 
 		// We turn invalid if there are no tweens left
-		return Has();
+		var active = Has();
+
+	#if UNITY_2023_1_OR_NEWER
+		if (!active) {
+			TriggerCompletionSources();
+		}
+	#endif
+
+		return active;
 	}
 }
 

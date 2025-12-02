@@ -1,5 +1,4 @@
 using System;
-using Sttz.Tweener.Core;
 using UnityEngine;
 
 namespace Sttz.Tweener {
@@ -7,11 +6,7 @@ namespace Sttz.Tweener {
 /// <summary>
 /// Delegate for easing methods.
 /// </summary>
-/// <remarks>
-/// You can create custom easing methods simply by implementing
-/// a method with this delegate signature.
-/// </remarks>
-public delegate float EasingMethod(float position);
+using EasingMethod = Func<float, float>;
 
 /// <summary>
 /// Collection of easing methods.
@@ -52,7 +47,6 @@ public delegate float EasingMethod(float position);
 /// </remarks>
 /// <seealso cref="TweenOptions.Easing"/>
 /// <seealso cref="TweenOptionsFluid.Ease"/>
-/// <seealso cref="EasingMethod"/>
 public static class Easing
 {
 	// -------- Easings --------

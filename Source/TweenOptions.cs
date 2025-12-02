@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 using Sttz.Tweener.Core;
-using System.ComponentModel;
 using System.Threading;
 
 namespace Sttz.Tweener {
+
+// Simplify referencing the easing delegate
+using EasingMethod = Func<float, float>;
 
 /// <summary>
 /// Set of options that can be used when creating a tween or group.

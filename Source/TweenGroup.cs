@@ -314,7 +314,7 @@ public abstract class TweenGroup : TweenOptionsContainer
 	}
 
 	/// <summary>
-	/// Trigger the Awaitables waiting for the tween to complete.
+	/// Trigger the Awaitables waiting for the group to complete.
 	/// </summary>
 	protected void TriggerCompletionSources()
 	{
@@ -481,21 +481,64 @@ public abstract class TweenGroup : TweenOptionsContainer
 		}
 	}
 
-	// Update tween group
-	internal bool Update(TweenTiming timing)
+	// Engine calls prepare at the beginning of the frame
+	internal bool PrepareFrame()
 	{
 		// Sort in new tweens
-		if (_newTweens != null && _newTweens.Count > 0) {
-			// Send first update in reverse order to let
-			// tweens created later overwrite those created earlier
-			for (int i = _newTweens.Count - 1; i >= 0; i--) {
-				if (_newTweens[i].Update()) {
-					Regroup(_newTweens[i]);
-				}
+		int count = 0;
+		if (_newTweens != null) {
+			count = _newTweens.Count;
+			for (int i = 0; i < count; i++) {
+				Regroup(_newTweens[i]);
 			}
 			_newTweens.Clear();
 		}
 
+		// Prepare individual tweens
+		count = 0;
+		if (_updateTweens != null && _updateTweens.Count > 0) {
+			count += Prepare(_updateTweens);
+		}
+		if (_fixedUpdateTweens != null && _fixedUpdateTweens.Count > 0) {
+			count += Prepare(_fixedUpdateTweens);
+		}
+		if (_lateUpdateTweens != null && _lateUpdateTweens.Count > 0) {
+			count += Prepare(_lateUpdateTweens);
+		}
+
+		// We complete if there are no tweens left
+		var active = count > 0;
+
+	#if UNITY_2023_1_OR_NEWER
+		if (!active) {
+			TriggerCompletionSources();
+		}
+	#endif
+
+		return active;
+	}
+
+	int Prepare(List<Tween> tweens)
+	{
+		var count = tweens.Count;
+		for (int i = 0; i < count; i++) {
+			var tween = tweens[i];
+			var result = tween.PrepareFrame();
+			if (result.HasFlag(Tween.PrepareResult.Complete)) {
+				// Release & remove from list
+				tween.RetainCount--;
+				tweens.RemoveAt(i); i--; count--;
+			} else if (result.HasFlag(Tween.PrepareResult.Overwrite)) {
+				// Register for overwriting
+				_engine.QueueOverwrite(tween);
+			}
+		}
+		return count;
+	}
+
+	// Engine calls update for each type of update message
+	internal bool Update(TweenTiming timing)
+	{
 		// Select tween list
 		var tweens = _updateTweens;
 		if (timing == TweenTiming.FixedUpdate) {
@@ -504,21 +547,22 @@ public abstract class TweenGroup : TweenOptionsContainer
 			tweens = _lateUpdateTweens;
 		}
 
+		int count = 0;
 		if (tweens != null && tweens.Count > 0) {
 			// Update tweens
-			var count = tweens.Count;
+			count = tweens.Count;
 			for (int i = 0; i < count; i++) {
-				// Update tween
-				if (!tweens[i].Update()) {
+				var tween = tweens[i];
+				if (tween.State == TweenState.Tweening && !tween.Update()) {
 					// Release & remove from list
-					tweens[i].RetainCount--;
+					tween.RetainCount--;
 					tweens.RemoveAt(i); i--; count--;
 				}
 			}
 		}
 
-		// We turn invalid if there are no tweens left
-		var active = Has();
+		// We complete if there are no tweens left
+		var active = count > 0 || Has();
 
 	#if UNITY_2023_1_OR_NEWER
 		if (!active) {

@@ -21,11 +21,6 @@ namespace Sttz.Tweener {
 /// allows to set options on the group, which will then apply to all 
 /// tweens in that group.
 /// 
-/// You can also create tweens using the static methods on <see cref="Tween"/>.
-/// Note that those tweens are not automatically registered with Animate,
-/// you'll have to add them to a group using <see cref="TweenGroup{TTarget}.Add"/>.
-/// This allows to set individual tween options for tweens in a group.
-/// 
 /// All the events of the tween will be cleared once it's being recycled,
 /// you normally don't have to unregister event handlers you register.
 /// </remarks>
@@ -163,6 +158,25 @@ public abstract class Tween : TweenOptionsContainer
 		}
 		set {
 			_engine = value;
+		}
+	}
+
+	/// <summary>
+	/// Counter indicating the order in which tweens were created.
+	/// </summary>
+	/// <remarks>
+	/// This is used to enforce override order, where newer tweens
+	/// override older ones.
+	/// This is tracked by the tween engine and using a `ulong` means
+	/// millions of tweens could be created each frame and it would
+	/// still take hundreds of years for the counter to overflow.
+	/// </remarks>
+	public ulong TweenSerial {
+		get {
+			return _serial;
+		}
+		set {
+			_serial = value;
 		}
 	}
 
@@ -429,6 +443,7 @@ public abstract class Tween : TweenOptionsContainer
 		Options.Reset();
 
 		_engine = null;
+		_serial = 0;
 		_retainCount = 0;
 		_tweenMethod = TweenMethod.To;
 		_property = null;
@@ -585,6 +600,7 @@ public abstract class Tween : TweenOptionsContainer
 	// -------- Internals --------
 
 	protected ITweenEngine _engine;
+	protected ulong _serial;
 	protected TweenMethod _tweenMethod;
 	protected string _property;
 	protected string _options;
@@ -641,27 +657,27 @@ public abstract class Tween : TweenOptionsContainer
 	#endif
 	}
 
-	// Overwrite existing tweens
-	protected void DoOverwrite()
+	// Check if tween wants to do overwrite this frame
+	protected bool WantsOverwrite()
 	{
 		var settings = Options.OverwriteSettings;
 
 		// Check if enabled
-		if (settings == TweenOverwrite.Undefined 
-				|| settings == TweenOverwrite.None) return;
+		if (settings == TweenOverwrite.Undefined || settings == TweenOverwrite.None)
+			return false;
 
 		// OnInitialize only if state == Waiting
 		if ((settings & TweenOverwrite.OnInitialize) > 0
 				&& _state != TweenState.Waiting) {
-			return;
+			return false;
 		
 		// Default OnStart only if state == Tweening
 		} else if ((settings & TweenOverwrite.OnInitialize) == 0
 				&& _state != TweenState.Tweening) {
-			return;
+			return false;
 		}
 
-		_engine.Overwrite(this);
+		return true;
 	}
 
 	/// <summary>
@@ -700,28 +716,31 @@ public abstract class Tween : TweenOptionsContainer
 	protected abstract void PrepareValues();
 
 	// Initialize the tween
-	protected void Initialize()
+	protected PrepareResult Initialize()
 	{
 		_state = TweenState.Waiting;
 
 		// Validate tween
-		if (!_validated && !Validate()) {
-			return;
-		}
+		if (!_validated && !Validate())
+			return PrepareResult.Complete;
 
-		DoOverwrite();
 		Options.TriggerInitialize(this);
+		if (_state == TweenState.Error)
+			return PrepareResult.Complete;
 
 		// Cache start time
 		_startTime = StartTime;
+		
+		return WantsOverwrite() 
+			? PrepareResult.Overwrite 
+			: PrepareResult.Running;
 	}
 
 	// Start the tween
-	protected void Start()
+	protected PrepareResult Start()
 	{
 		_state = TweenState.Tweening;
 
-		DoOverwrite();
 		PrepareValues();
 
 		// Cache most frequently used options
@@ -730,6 +749,12 @@ public abstract class Tween : TweenOptionsContainer
 		_triggerUpdate = Options.HasUpdateListeners();
 
 		Options.TriggerStart(this);
+		if (_state == TweenState.Error)
+			return PrepareResult.Complete;
+
+		return WantsOverwrite() 
+			? PrepareResult.Overwrite 
+			: PrepareResult.Running;
 	}
 
 	// Complete the tween
@@ -773,62 +798,94 @@ public abstract class Tween : TweenOptionsContainer
 
 	protected abstract void ApplyValue(float position);
 
+	// Check if unity object was destroyed
+	// In this case we get == null only if the target is typed
+	// to UnityEngine.Object, otherwise it will never be null.
+	protected bool CheckDestroyedAndFail()
+	{
+		if (_targetIsUnityObject) {
+			if (_targetUnityObject != null) return false;
+		} else if (_targetIsUnityRef) {
+			if (_targetUnityReference != null) return false;
+		} else {
+			// Regular managed object cannot be destroyed
+			return false;
+		}
+
+		Fail(TweenLogLevel.Debug,
+			"Tween of {0} on {1} stopped because unity object was destroyed.",
+			_property, Target);
+		return true;
+	}
+
+	/// <summary>
+	/// Result of preparing the tween frame.
+	/// </summary>
+	[Flags]
+	internal protected enum PrepareResult
+	{
+		/// <summary>
+		/// Tween is waiting or running.
+		/// </summary>
+		Running = 0,
+		/// <summary>
+		/// Tween is waiting or running and wants do to overwrite this frame.
+		/// </summary>
+		Overwrite = 1<<0,
+		/// <summary>
+		/// Tween has completed and can be removed.
+		/// </summary>
+		Complete = 1<<1,
+	}
+
+	// Prepare the tween's frame, returning if the tween wants to
+	// overwriting or if it's completed.
+	internal PrepareResult PrepareFrame()
+	{
+		if (CheckDestroyedAndFail())
+			return PrepareResult.Complete;
+
+		var fallthroughResult = PrepareResult.Running;
+		switch (_state) {
+			case TweenState.Unused:
+			case TweenState.Complete:
+			case TweenState.Error:
+				// Already over or pooled instance
+				return PrepareResult.Complete;
+
+			case TweenState.Tweening:
+				// Running tween, will signal complete from Update()
+				return PrepareResult.Running;
+
+			case TweenState.Uninitialized:
+				fallthroughResult = Initialize();
+				if (fallthroughResult.HasFlag(PrepareResult.Complete))
+					return PrepareResult.Complete;
+				// Fall-through to allow tween to initialize and start in the same frame
+				goto case TweenState.Waiting;
+
+			case TweenState.Waiting:
+				if (TweenTime < _startTime) {
+					// Delayed tween
+					return fallthroughResult;
+				}
+				return Start() | fallthroughResult;
+
+			default:
+				// Invalid TweenState value
+				Fail("Invalid TweenState value '{0}'", _state);
+				return PrepareResult.Complete;
+		}
+	}
+
 	// Update tween
 	internal bool Update()
 	{
-		// Check if unity object was destroyed
-		// In this case we get == null only if the target is typed
-		// to UnityEngine.Object, otherwise it will never be null.
-		if ((_targetIsUnityObject && _targetUnityObject == null)
-				|| (_targetIsUnityRef && _targetUnityReference == null)) {
-			Fail(TweenLogLevel.Debug,
-				"Tween of {0} on {1} stopped because unity object was destroyed.",
-				_property, Target);
+		if (_state != TweenState.Tweening || CheckDestroyedAndFail())
 			return false;
-		}
-
-		// Current time
-		float time = TweenTime;
-
-		// Handle non-tweening state
-		if (_state == TweenState.Error) {
-			return false;
-		} else if (_state != TweenState.Tweening) {
-			// Already over
-			if (_state >= TweenState.Complete) {
-				return false;
-			
-			// Prepare for tweening
-			} else if (_state < TweenState.Tweening) {
-				// Already completed, error or pooled instance
-				if (_state == TweenState.Unused) {
-					return false;
-				}
-
-				// Initialize tween
-				if (_state == TweenState.Uninitialized) {
-					Initialize();
-					if (_state == TweenState.Error) {
-						return false;
-					}
-				}
-
-				// Wait to start tween
-				if (_state == TweenState.Waiting) {
-					if (time < _startTime) {
-						return true;
-					} else {
-						Start();
-						if (_state == TweenState.Error) {
-							return false;
-						}
-					}
-				}
-			}
-		}
 
 		// Update tween
-		var position = Mathf.Clamp01((time - _startTime) * _oneOverDuration);
+		var position = Mathf.Clamp01((TweenTime - _startTime) * _oneOverDuration);
 		var easedPosition = position;
 		if (Options.Easing != null) {
 			easedPosition = Options.Easing(position);
@@ -948,6 +1005,7 @@ public class Tween<TTarget, TValue> : Tween where TTarget : class
 	// -------- Lifecycle --------
 
 	public void Use(
+		ulong tweenSerial,
 		TweenMethod tweenMethod,
 		TTarget target, 
 		float duration,
@@ -964,6 +1022,7 @@ public class Tween<TTarget, TValue> : Tween where TTarget : class
 		_state = TweenState.Uninitialized;
 
 		// Initialize values
+		_serial = tweenSerial;
 		_tweenMethod = tweenMethod;
 		_target = target;
 		Options.Duration = duration;

@@ -81,6 +81,15 @@ public interface ITweenEngine
 	/// </summary>
 	void LoadDynamicPlugins<TTarget, TValue>(Tween<TTarget, TValue> tween) where TTarget : class;
 
+	/// <summary>
+	/// Queue a tween to execute overwriting.
+	/// </summary>
+	/// <remarks>
+	/// This can be called during a tween's <see cref="Tween.PrepareFrame">, the engine then
+	/// calls the tweens' <see cref="Tween.Overwrite"/> in the right order across all groups.
+	/// </remarks>
+	void QueueOverwrite(Tween tween);
+
 	/// <seealso cref="Animate.Has"/>
 	bool Has(object target, string property = null);
 	/// <seealso cref="Animate.Stop"/>
@@ -172,6 +181,7 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 
 		// Setup instance
 		tween.Use(
+			unchecked(nextTweenSerial++),
 			tweenMethod, target, duration, property, 
 			startValue, endValue, diffValue, 
 			parentOptions
@@ -214,6 +224,14 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 				TweenReflectionArithmeticPlugin.Load(tween, false);
 			#endif
 		#endif
+	}
+
+	public void QueueOverwrite(Tween tween)
+	{
+		if (_overwriteQueue == null)
+			_overwriteQueue = new List<Tween>();
+
+		_overwriteQueue.Add(tween);
 	}
 
 	public void RegisterGroup(TweenGroup tweenGroup)
@@ -312,31 +330,52 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 
 	// -------- Internals --------
 
+	protected ulong nextTweenSerial;
+
 	TweenOptions _options = new TweenOptions();
 	protected List<TweenGroup> _groups = new List<TweenGroup>();
 	protected List<TweenGroup> _newGroups = new List<TweenGroup>();
 	protected TweenGroup<object> _singlesGroup;
 
-	// MonoBehaviour.Update
-	protected void Update()
-	{
-		ProcessTweens(TweenTiming.Update);
-	}
+	protected bool preparedFrame;
+	protected List<Tween> _overwriteQueue;
 
 	// MonoBehaviour.FixedUpdate
 	protected void FixedUpdate()
 	{
+		// FixedUpdate is called first during the frame
+		// So we potentially need to prepare the frame here
+		if (!preparedFrame) {
+			preparedFrame = true;
+			PrepareFrame();
+		}
+
 		ProcessTweens(TweenTiming.FixedUpdate);
+	}
+
+	// MonoBehaviour.Update
+	protected void Update()
+	{
+		// FixedUpdate might not be called during a frame
+		// So we potentially also need to prepare the frame here
+		if (!preparedFrame) {
+			preparedFrame = true;
+			PrepareFrame();
+		}
+
+		ProcessTweens(TweenTiming.Update);
 	}
 
 	// MonoBehaviour.FixedUpdate
 	protected void LateUpdate()
 	{
 		ProcessTweens(TweenTiming.LateUpdate);
+
+		// Frame is done, reset prepared flag
+		preparedFrame = false;
 	}
 
-	// Process tweens
-	protected void ProcessTweens(TweenTiming timing)
+	protected void PrepareFrame()
 	{
 		// Add newly registered groups
 		if (_newGroups.Count > 0) {
@@ -344,15 +383,47 @@ public class UnityTweenEngine : MonoBehaviour, ITweenEngine
 			_newGroups.Clear();
 		}
 
+		// Prepare all groups for the frame
+		for (int i = 0, count = _groups.Count; i < count; i++) {
+			if (!_groups[i].PrepareFrame()) {
+				// Return group to the pool
+				_groups[i].RetainCount--;
+				_groups.RemoveAt(i); i--; count--;
+			}
+		}
+
+		// Process tween overwriting
+		if (_overwriteQueue != null && _overwriteQueue.Count > 0) {
+			_overwriteQueue.Sort(TweenSerialDescendingComparison);
+			for (int i = 0, count = _overwriteQueue.Count; i < count; i++) {
+				var tween = _overwriteQueue[i];
+
+				// Tween might have been completed by other tween or some event
+				if (tween.State >= TweenState.Complete)
+					continue;
+
+				Overwrite(tween);
+			}
+			_overwriteQueue.Clear();
+		}
+	}
+
+	// Process tweens
+	protected void ProcessTweens(TweenTiming timing)
+	{
 		// Update groups and remove invalid ones
-		for (int i = 0; i < _groups.Count; i++) {
+		for (int i = 0, count = _groups.Count; i < count; i++) {
 			if (!_groups[i].Update(timing)) {
 				// Return group to the pool
 				_groups[i].RetainCount--;
-				_groups.RemoveAt(i); i--;
+				_groups.RemoveAt(i); i--; count--;
 			}
 		}
 	}
+
+	protected static Comparison<Tween> TweenSerialDescendingComparison = (a, b) => {
+		return b.TweenSerial.CompareTo(a.TweenSerial);
+	};
 }
 
 }

@@ -592,6 +592,7 @@ public class TweenOptions
 	/// Log a message on the current option instance, taking its
 	/// log level into account.
 	/// </summary>
+	[HideInCallstack]
 	public void Log(TweenLogLevel level, string message)
 	{
 		if (level < LogLevel) return;
@@ -606,6 +607,7 @@ public class TweenOptions
 		}
 	}
 
+	[HideInCallstack]
 	public void Log(TweenLogLevel level, LazyFormatString message)
 	{
 		if (level >= LogLevel) Log(level, message.ToString());

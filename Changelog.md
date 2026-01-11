@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.1.1 (2026-01-11)
+* Use `Func<float, float>` for easing methods instead of custom delegate type
+* Add `[HideInCallstack]` to logging methods
+* Fix tweens not following creation order for overwriting, when in different groups and created in the same frame
+
 ### 3.1.0 (2025-01-19)
 * Add async methods using Awaitable on Unity 2023.1+
 * Add TweenGroup overloads with custom target but using the group's duration
